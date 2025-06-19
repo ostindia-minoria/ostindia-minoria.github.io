@@ -1,3 +1,2 @@
 <?php
-$admin_password = '07125873';
-?>
+$admin_password = '0712';

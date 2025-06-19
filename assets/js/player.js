@@ -1,51 +1,35 @@
 
-const audio = document.getElementById('audio');
-const playBtn = document.getElementById('play');
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-const progress = document.getElementById('progress');
-const trackName = document.getElementById('track-name');
+const tracks = [
+  { title: "Track 1", file: "../assets/music/track1.mp3" }
+];
+let currentTrack = 0;
+const audio = new Audio(tracks[currentTrack].file);
+const playBtn = document.getElementById("play");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const trackTitle = document.getElementById("track-title");
+const progress = document.querySelector("progress");
 
-const tracks = ['track1.mp3'];
-let current = 0;
-
-function loadTrack(index) {
-  audio.src = 'assets/music/' + tracks[index];
-  trackName.textContent = tracks[index];
-}
-function playTrack() {
+function updateTrack() {
+  audio.src = tracks[currentTrack].file;
+  trackTitle.textContent = tracks[currentTrack].title;
   audio.play();
-  playBtn.textContent = '⏸';
-}
-function pauseTrack() {
-  audio.pause();
-  playBtn.textContent = '▶️';
-}
-function togglePlay() {
-  if (audio.paused) playTrack();
-  else pauseTrack();
-}
-function nextTrack() {
-  current = (current + 1) % tracks.length;
-  loadTrack(current);
-  playTrack();
-}
-function prevTrack() {
-  current = (current - 1 + tracks.length) % tracks.length;
-  loadTrack(current);
-  playTrack();
 }
 
-playBtn.addEventListener('click', togglePlay);
-nextBtn.addEventListener('click', nextTrack);
-prevBtn.addEventListener('click', prevTrack);
-
-audio.addEventListener('timeupdate', () => {
-  progress.value = (audio.currentTime / audio.duration) * 100 || 0;
-});
-
-progress.addEventListener('input', () => {
-  audio.currentTime = (progress.value / 100) * audio.duration;
-});
-
-loadTrack(current);
+playBtn.onclick = () => audio.paused ? audio.play() : audio.pause();
+prevBtn.onclick = () => {
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  updateTrack();
+};
+nextBtn.onclick = () => {
+  currentTrack = (currentTrack + 1) % tracks.length;
+  updateTrack();
+};
+audio.ontimeupdate = () => progress.value = audio.currentTime / audio.duration;
+progress.onclick = e => {
+  const clickX = e.offsetX;
+  const width = progress.offsetWidth;
+  audio.currentTime = (clickX / width) * audio.duration;
+};
+audio.onended = () => nextBtn.onclick();
+updateTrack();

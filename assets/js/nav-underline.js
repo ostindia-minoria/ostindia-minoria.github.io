@@ -1,9 +1,7 @@
 
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('mouseenter', () => {
-    link.classList.add('active');
-  });
-  link.addEventListener('mouseleave', () => {
-    link.classList.remove('active');
+document.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+    link.classList.add("active");
   });
 });

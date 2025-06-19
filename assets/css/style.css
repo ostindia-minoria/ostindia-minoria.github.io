@@ -1,155 +1,90 @@
 
 @font-face {
   font-family: 'DrukCyr';
-  src: url('../fonts/DrukCyr-Medium.woff2') format('woff2');
-  font-weight: normal;
+  src: url('../fonts/DrukCyr-Medium.ttf') format('truetype');
 }
 @font-face {
   font-family: 'RoadRadio';
-  src: url('../fonts/RoadRadio.woff2') format('woff2');
-  font-weight: normal;
+  src: url('../fonts/RoadRadio.ttf') format('truetype');
 }
-
 body {
   margin: 0;
+  padding: 0;
   font-family: 'RoadRadio', sans-serif;
   transition: background 0.3s, color 0.3s;
 }
 body.dark {
-  background: url('../images/bg-main.jpg') center/cover no-repeat;
+  background: url('../images/bg-main.jpg') center/cover no-repeat fixed;
   color: #fff;
 }
 body.light {
   background: #f4f4f4;
   color: #111;
 }
-.hero, .radio-player {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 10vh 2rem;
-  opacity: 0;
-  animation: fade-in 1s forwards;
-}
-h1 {
-  font-family: 'DrukCyr', sans-serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-p {
-  max-width: 700px;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-.site-header {
+header, footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+}
+footer {
+  justify-content: center;
+  opacity: 0.4;
 }
 .nav-link {
   margin: 0 1rem;
   text-decoration: none;
   color: inherit;
   position: relative;
-  transition: transform 0.2s;
 }
-.nav-link:hover {
-  transform: scale(1.05);
-}
-.nav-link.active::after,
-.nav-link:hover::after {
+.nav-link:hover::after, .nav-link.active::after {
   content: '';
   position: absolute;
+  left: 0;
+  bottom: -4px;
   width: 100%;
   height: 2px;
   background: currentColor;
-  left: 0;
-  bottom: -4px;
+  transition: all 0.3s ease;
 }
 .contact-button {
-  background: #2196f3;
-  color: white;
   padding: 0.5rem 1rem;
+  background: #0088cc;
+  color: #fff;
   text-decoration: none;
   border-radius: 6px;
-  transition: transform 0.3s;
 }
-.contact-button:hover {
-  transform: scale(1.05);
-}
-button {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  margin: 0 0.3rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-button:hover {
-  transform: scale(1.1);
-}
-.player {
-  margin-top: 2rem;
-}
-.track-title {
-  margin-bottom: 1rem;
-}
-input[type=range] {
-  width: 300px;
-  height: 4px;
-  background: #888;
-  border-radius: 5px;
-  outline: none;
-}
-footer {
+.hero {
   text-align: center;
-  padding: 2rem;
+  margin-top: 3rem;
+  animation: fade-in 1s ease-out forwards;
 }
-.made-by {
-  opacity: 0.4;
-}
-
-/* Animation */
 @keyframes fade-in {
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-footer {
-  text-align: center;
-  margin-top: 4rem;
-  opacity: 0.4;
-  font-size: 14px;
-}
-
-.made-by {
-  margin-bottom: 2rem;
-}
-
-.chat-history {
-  margin: 3rem auto;
-  max-width: 800px;
-  text-align: left;
-  padding: 0 1rem;
-}
-
 .chat-image {
-  width: 100%;
   max-width: 300px;
-  border-radius: 16px;
+  width: 100%;
+  border-radius: 20px;
   margin-bottom: 1rem;
-  display: block;
 }
-
-ul {
-  margin-left: 1.2rem;
-  padding-left: 1rem;
+.audio-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.audio-controls button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+progress {
+  width: 80%;
+  height: 6px;
 }
