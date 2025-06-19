@@ -1,0 +1,17 @@
+body { margin:0; font-family:sans-serif; background:url('../img/bg.jpg') center/cover no-repeat; color:#fff; transition:background 0.3s,color 0.3s;}
+body.light { background:#f4f4f4; color:#111;}
+header { display:flex; align-items:center; padding:1rem; background:rgba(0,0,0,0.5);}
+nav { display:flex; gap:1rem;}
+.nav-link { color:inherit; text-decoration:none; position:relative; transition:transform 0.2s;}
+.nav-link:hover { transform:scale(1.05);}
+.nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#fff; transition:width 0.3s;}
+.nav-link:hover::after, .nav-link.active::after { width:100%;}
+#theme-toggle { background:none; border:none; font-size:1.2rem; color:inherit; cursor:pointer;}
+.telegram-button { margin-left:auto; background:#229ED9; padding:.5rem 1rem; border-radius:5px; display:flex; align-items:center; text-decoration:none; color:#fff;}
+.telegram-button img { width:1rem; margin-right:.5rem;}
+.hero, .radio { padding:4rem 2rem; max-width:800px; margin:auto; opacity:0; animation:fade 1s forwards;}
+@keyframes fade { from{opacity:0;} to{opacity:1;}}
+.player-container { display:flex; align-items:center; gap:1rem; margin-top:2rem;}
+button { background:none; border:none; font-size:1.5rem; color:inherit; cursor:pointer; transition:transform 0.2s;}
+button:hover { transform:scale(1.2);}
+.footer-text { text-align:center; margin:2rem 0; opacity:0.4;}

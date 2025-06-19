@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Радио</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script defer src="assets/js/theme-toggle.js"></script>
+<script defer src="assets/js/nav-underline.js"></script>
+<script defer src="assets/js/player.js"></script>
+</head>
+<body class="dark">
+<header>
+  <button id="theme-toggle">🌓</button>
+  <nav>
+    <a href="index.html" class="nav-link">Главная</a>
+    <a href="radio.html" class="nav-link active">Радио</a>
+  </nav>
+  <a href="https://t.me/Maydesk" target="_blank" class="telegram-button">
+    <img src="assets/img/telegram.svg" alt="Telegram"> Связь с создателем
+  </a>
+</header>
+<main>
+  <div class="radio">
+    <h1>Радио от участников</h1>
+    <p>На этой странице вы можете послушать песни от участников. Вы также можете предложить их.</p>
+    <div class="player-container">
+      <button id="prev">⏮️</button>
+      <button id="play">▶️</button>
+      <button id="next">⏭️</button>
+      <audio id="audio" src="assets/audio/relaxing.mp3"></audio>
+      <div id="track-info">Track: Relaxing Jazz Music in the Rain</div>
+    </div>
+  </div>
+</main>
+<footer>
+  <p class="footer-text">Made by @Maydesk</p>
+</footer>
+</body>
+</html>
