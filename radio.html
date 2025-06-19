@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Радио — Ost-India / Minoria</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="dark">
+  <header class="site-header">
+    <div class="header-left">
+      <button id="theme-toggle">🌗</button>
+    </div>
+    <nav class="header-center">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="radio.html" class="nav-link active">Радио</a>
+    </nav>
+    <div class="header-right">
+      <a href="https://t.me/Maydesk" class="contact-button">Связь с создателем</a>
+    </div>
+  </header>
+
+  <main class="radio-player">
+    <h1>Радио</h1>
+    <p>На этой странице вы можете послушать песни от участников. Вы также можете предложить их, нажав на кнопку связи с создателем.</p>
+
+    <div class="player">
+      <div class="track-title">Трек: <span id="track-name">track1.mp3</span></div>
+      <audio id="audio" src="assets/music/track1.mp3"></audio>
+      <div class="controls">
+        <button id="prev">⏮</button>
+        <button id="play">▶️</button>
+        <button id="next">⏭</button>
+      </div>
+      <input type="range" id="progress" value="0" max="100" />
+    </div>
+  </main>
+
+  <footer>
+    <p class="made-by">Made by @Maydesk</p>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script src="assets/js/nav-underline.js"></script>
+  <script src="assets/js/player.js"></script>
+</body>
+</html>
