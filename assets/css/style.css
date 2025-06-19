@@ -116,3 +116,40 @@ footer {
     opacity: 1;
   }
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+footer {
+  text-align: center;
+  margin-top: 4rem;
+  opacity: 0.4;
+  font-size: 14px;
+}
+
+.made-by {
+  margin-bottom: 2rem;
+}
+
+.chat-history {
+  margin: 3rem auto;
+  max-width: 800px;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.chat-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+ul {
+  margin-left: 1.2rem;
+  padding-left: 1rem;
+}
