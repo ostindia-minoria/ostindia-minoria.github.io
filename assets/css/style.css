@@ -1,0 +1,188 @@
+/* Добавленные стили для главной страницы */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    animation: fadeIn 1s ease;
+}
+
+.communities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.community-card {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(30, 30, 50, 0.7);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.community-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.community-icon {
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.community-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.community-content {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.ostindia .community-content {
+    border-left: 5px solid #4a6fa5;
+}
+
+.minoria .community-content {
+    border-left: 5px solid #6b93d6;
+}
+
+.community-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 8px 20px;
+    background: var(--accent-color-dark);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.community-btn:hover {
+    background: #5a7db9;
+    transform: scale(1.05);
+}
+
+.coming-soon {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: rgba(107, 147, 214, 0.2);
+    border-radius: 8px;
+    text-align: center;
+    font-style: italic;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem auto;
+    max-width: 1200px;
+}
+
+.feature {
+    background: rgba(30, 30, 50, 0.7);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 8px 20px;
+    background: var(--accent-color-dark);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.feature-btn:hover {
+    background: #5a7db9;
+    transform: scale(1.05);
+}
+
+.quote {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2rem;
+    background: rgba(30, 30, 50, 0.7);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    border-left: 5px solid var(--accent-color-dark);
+}
+
+.quote-author {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .community-card {
+        flex-direction: column;
+    }
+    
+    .community-icon {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+.nav-underline {
+    position: absolute;
+    bottom: -5px;
+    height: 3px;
+    background-color: var(--accent-color-dark);
+    border-radius: 2px; /* Закругленные края */
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none; /* Чтобы не мешало кликам */
+}
+
+/* Для светлой темы */
+.light-theme .nav-underline {
+    background-color: var(--accent-color-light);
+}
+
+nav ul {
+    position: relative; /* Необходимо для позиционирования подчеркивания */
+}
