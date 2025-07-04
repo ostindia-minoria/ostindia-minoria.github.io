@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ost-India / Minoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'DrukCyr';
+            src: url('fonts/DrukCyr-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'RoadRadio';
+            src: url('fonts/RoadRadio.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'RoadRadio', sans-serif;
+            background-color: #0a0a0a;
+            color: #f3f3f3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .druk-font {
+            font-family: 'DrukCyr', sans-serif;
+        }
+        
+        .hero-bg {
+            background-image: url('images/bg-main.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .radio-bg {
+            background-image: url('images/bg-radio.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .radio-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .history-bg {
+            background-image: url('images/bg-main.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .history-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f3f3f3;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .history-image {
+            border-radius: 20px;
+            filter: grayscale(80%) contrast(110%);
+            transition: filter 0.3s ease;
+        }
+        
+        .history-image:hover {
+            filter: grayscale(30%) contrast(110%);
+        }
+        
+        /* Audio player styles */
+        .audio-player {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-container {
+            background: #444;
+            border-radius: 5px;
+            height: 8px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            background: #f3f3f3;
+            border-radius: 5px;
+            height: 100%;
+            width: 0%;
+        }
+        
+        .player-btn {
+            background: transparent;
+            border: none;
+            color: #f3f3f3;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        
+        .player-btn:hover {
+            transform: scale(1.1);
+            color: #ccc;
+        }
+        
+        .playlist-item {
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .playlist-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .playlist-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            background: #444;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f3f3f3;
+            transition: transform 0.3s;
+        }
+        
+        .light .theme-toggle {
+            background: #888;
+        }
+        
+        .light .theme-toggle::after {
+            transform: translateX(24px);
+        }
+        
+        /* Light theme */
+        .light {
+            background-color: #f3f3f3;
+            color: #333;
+        }
+        
+        .light .hero-bg::before,
+        .light .radio-bg::before,
+        .light .history-bg::before {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .light .nav-link::after {
+            background-color: #333;
+        }
+        
+        .light .audio-player {
+            background: rgba(240, 240, 240, 0.9);
+            color: #333;
+        }
+        
+        .light .progress-container {
+            background: #ddd;
+        }
+        
+        .light .progress-bar {
+            background: #333;
+        }
+        
+        .light .player-btn {
+            color: #333;
+        }
+        
+        .light .player-btn:hover {
+            color: #555;
+        }
+        
+        .light .playlist-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .light .playlist-item.active {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Theme toggle -->
+                <div class="flex items-center">
+                    <button id="themeToggle" class="theme-toggle mr-4"></button>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white hover:text-gray-300 transition">Главная</a>
+                    <a href="radio.html" class="nav-link text-white hover:text-gray-300 transition">Радио</a>
+                    <a href="history.html" class="nav-link text-white hover:text-gray-300 transition">История</a>
+                </nav>
+                
+                <!-- Contact button -->
+                <a href="https://t.me/maydesk" target="_blank" class="hidden md:block px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition">
+                    Связь с создателем
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="flex flex-col space-y-4 mt-4">
+                    <a href="index.html" class="nav-link text-white hover:text-gray-300 transition">Главная</a>
+                    <a href="radio.html" class="nav-link text-white hover:text-gray-300 transition">Радио</a>
+                    <a href="history.html" class="nav-link text-white hover:text-gray-300 transition">История</a>
+                    <a href="https://t.me/maydesk" target="_blank" class="px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition text-center">
+                        Связь с создателем
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative">
+            <div class="container mx-auto px-4 py-20 text-center z-10">
+                <h1 class="druk-font text-4xl md:text-6xl lg:text-7xl font-bold mb-6 fade-in">
+                    Ost-India / Minoria
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 fade-in" style="animation-delay: 0.3s;">
+                    На этом сайте вы сможете узнать краткую историю чатов, послушать радио от участников, предожить свои песни и так далее.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4 fade-in" style="animation-delay: 0.6s;">
+                    <a href="radio.html" class="px-8 py-3 bg-white text-black rounded hover:bg-gray-200 transition hover-scale">
+                        Слушать радио
+                    </a>
+                    <a href="history.html" class="px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition hover-scale">
+                        Узнать историю
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="druk-font text-3xl md:text-4xl mb-6">О проекте</h2>
+                    <p class="text-lg md:text-xl opacity-90">
+                        Ost-India / Minoria — это сайт, посвящённый истории двух чатов Ост-Индии и Минории.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-8 rounded-lg hover-scale">
+                        <div class="text-4xl mb-4">📻</div>
+                        <h3 class="druk-font text-xl mb-3">Радио</h3>
+                        <p class="opacity-80">
+                            Радио от участников чата, вы также можете предложить песню.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg hover-scale">
+                        <div class="text-4xl mb-4">📜</div>
+                        <h3 class="druk-font text-xl mb-3">История</h3>
+                        <p class="opacity-80">
+                            История двух чатов.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg hover-scale">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="druk-font text-xl mb-3">Архив</h3>
+                        <p class="opacity-80">
+                            Коллекция редких фото, документов, видео из чатов.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Content -->
+        <section class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h2 class="druk-font text-3xl md:text-4xl mb-12 text-center">Избранное</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="slide-up" style="animation-delay: 0.2s;">
+                        <div class="bg-black p-6 rounded-lg flex flex-col md:flex-row items-center">
+                            <img src="images/ostindia.jpg" alt="Ost-India" class="history-image w-full md:w-48 h-48 object-cover mb-4 md:mb-0 md:mr-6">
+                            <div>
+                                <h3 class="druk-font text-xl mb-2">Ost-India</h3>
+                                <p class="opacity-80">
+                                    Исследование культурного феномена Ост-Индии.
+                                </p>
+                                <a href="history.html" class="inline-block mt-4 text-white border-b border-white hover:border-transparent transition">
+                                    Узнать больше →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-up" style="animation-delay: 0.4s;">
+                        <div class="bg-black p-6 rounded-lg flex flex-col md:flex-row items-center">
+                            <img src="images/minoria.jpg" alt="Minoria" class="history-image w-full md:w-48 h-48 object-cover mb-4 md:mb-0 md:mr-6">
+                            <div>
+                                <h3 class="druk-font text-xl mb-2">Minoria</h3>
+                                <p class="opacity-80">
+                                    Исследование феномена Минории.
+                                </p>
+                                <a href="history.html" class="inline-block mt-4 text-white border-b border-white hover:border-transparent transition">
+                                    Узнать больше →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center slide-up" style="animation-delay: 0.6s;">
+                    <a href="history.html" class="px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition inline-block hover-scale">
+                        Исследовать все материалы
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-4 text-center opacity-60">
+            <p>Made by @Maydesk</p>
+            <p class="mt-2 text-sm">© 2025 Ost-India / Minoria Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            
+            // Save preference to localStorage
+            const isLight = html.classList.contains('light');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            html.classList.add('light');
+            html.classList.remove('dark');
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.slide-up').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

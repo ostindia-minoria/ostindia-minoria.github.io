@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История чатов | Ост-Индия и Минория</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 1s ease-out;
+        }
+        
+        .vintage-img {
+            filter: grayscale(60%) contrast(110%) sepia(20%);
+            transition: all 0.5s ease;
+        }
+        
+        .vintage-img:hover {
+            filter: grayscale(30%) contrast(120%) sepia(10%);
+        }
+        
+        .admin-card {
+            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.7);
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.9);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 2px solid #4f46e5;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-stack {
+                flex-direction: column !important;
+            }
+            
+            .mobile-order-1 {
+                order: 1;
+            }
+            
+            .mobile-order-2 {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
+                <a href="radio.html" class="text-gray-300 hover:text-white transition">Радио</a>
+                <a href="history.html" class="text-indigo-400 font-medium">История</a>
+            </div>
+            <a href="https://t.me/Maydesk" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Page Title -->
+        <div class="text-center mb-16 fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">История чатов</h1>
+            <div class="w-24 h-1 bg-indigo-500 mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">Хроники цифрового сообщества Ост-Индия и его ответвления Минория</p>
+        </div>
+
+        <!-- Ost-India Section -->
+        <section class="mb-24 slide-up">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 mobile-order-1">
+                    <img src="assets/images/ostindia.png" 
+                         alt="Ost-India Chat" 
+                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
+                </div>
+                
+                <!-- Content -->
+                <div class="w-full md:w-1/2 mobile-order-2">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="w-3 h-8 bg-indigo-500 mr-3"></span>
+                        Ост-Индия
+                    </h2>
+                    
+                    <!-- Foundation -->
+                    <div class="mb-8 relative pl-8 timeline-item">
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Основание и ранние дни</h3>
+                        <p class="text-gray-300 mb-4">
+                            Чат "Ост-Индия" был создан 3 августа 2024 года Маратием, который стал его основателем и первым админом. 
+                            Первым участником стал Roman, впоследствии — один из главных символов сообщества.
+                        </p>
+                        <p class="text-gray-300">
+                            Изначально чат был просто местом для общения в телеге, но очень быстро перерос в нечто большее — в живое цифровое пространство со своими традициями, внутренними приколами и настоящей атмосферой.
+                        </p>
+                    </div>
+                    
+                    <!-- Bloody Thursday -->
+                    <div class="mb-8 relative pl-8 timeline-item">
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Кровавый четверг</h3>
+                        <p class="text-gray-300">
+                            Один из самых жёстких моментов в истории Ост-Индии. Админ Тавас выступил против управления Маратия и публично потребовал «революции». Несколько часов в чате шёл открытый конфликт. Все участники были в шоке от происходящего. Это событие до сих пор вспоминают как «Кровавый четверг».
+                        </p>
+                    </div>
+                    
+                    <!-- Jew Purge -->
+                    <div class="mb-8 relative pl-8 timeline-item">
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Чистка Еврея 31 декабря</h3>
+                        <p class="text-gray-300 mb-2">
+                            В ночь на 31 декабря 2024 года, пока все админы были оффлайн, админ по имени Еврей провёл самую масштабную чистку в истории чата. Он выкинул из чата почти всех — около 200 человек, оставив только себя и модераторов.
+                        </p>
+                        <p class="text-gray-300 mb-2">
+                            Когда остальные админы вернулись, чат был пуст. Еврей назвал это "сюрпризом" и "давним планом". В итоге он был снят с прав, позже помилован, но в админы не вернулся.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admins Section -->
+            <div class="mt-16 slide-up">
+                <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация</h3>
+                <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
+                    Все, кто держал чат — по очереди или вместе. Без них Ост-Индия не была бы такой:
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Admin Cards -->
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Маратий</h4>
+                        <p class="text-gray-400 text-sm">Основатель чата, создал основу, спокойный стиль управления.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Roman</h4>
+                        <p class="text-gray-400 text-sm">Первый участник, легенда с самого старта.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Даннил @danyabz</h4>
+                        <p class="text-gray-400 text-sm">Стал админом после выборов, активный участник.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Иван Гойда @Ivan_Goida</h4>
+                        <p class="text-gray-400 text-sm">Админ из той же волны выборов.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Амир Комаров @Aloearner</h4>
+                        <p class="text-gray-400 text-sm">Добрый, спокойный, "голос разума" в чате.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">SoTaRk @HoiPlayed</h4>
+                        <p class="text-gray-400 text-sm">Часто в видеочатах, один из самых активных.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">milan4ik @milan4ik65</h4>
+                        <p class="text-gray-400 text-sm">Создатель клана и ботов.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Shel1done @Shel1done</h4>
+                        <p class="text-gray-400 text-sm">Старичок чата, не всегда активен, но уважаемый.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Минор @estonia78</h4>
+                        <p class="text-gray-400 text-sm">В чате с самого начала, доброжелательный, "чистый олд".</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Финн @dkinnnccc</h4>
+                        <p class="text-gray-400 text-sm">Занимался безопасностью, защита от рейдов и спама.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Hiomrat @Hiomrat</h4>
+                        <p class="text-gray-400 text-sm">Посол чата, связывался с другими сообществами.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evolution -->
+            <div class="mt-16 slide-up relative pl-8 timeline-item">
+                <h3 class="text-2xl font-semibold text-indigo-300 mb-4">Эволюция сообщества</h3>
+                <p class="text-gray-300">
+                    После событий 2024 года Ост-Индия вошла в стабильную фазу. Многие старички ушли, пришли новые, но дух остался. В 2025 году стартовали разные активности — игры, дискуссии, эфиры. Чат жив, хоть и меняется.
+                </p>
+            </div>
+        </section>
+        
+        <div class="section-divider my-16"></div>
+        
+        <!-- Minoria Section -->
+        <section class="slide-up">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
+                <!-- Content -->
+                <div class="w-full md:w-1/2 mobile-order-2 md:mobile-order-1">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="w-3 h-8 bg-red-500 mr-3"></span>
+                        Минория
+                    </h2>
+                    
+                    <div class="bg-gray-800/50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <h3 class="text-xl font-semibold text-red-300 mb-3">Coming soon...</h3>
+                        <p class="text-gray-300">
+                            Раздел о Минории появится позже. История этого ответвления Ост-Индии ещё пишется, и мы обязательно расскажем её, когда придет время.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Image -->
+                <div class="w-full md:w-1/2 mobile-order-1 md:mobile-order-2">
+                    <img src="assets/images/minoria.png" 
+                         alt="Minoria Chat" 
+                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">
+                Made by <a href="https://t.me/Maydesk" target="_blank" class="text-indigo-400 hover:text-indigo-300">@Maydesk</a>
+            </p>
+            <div class="flex justify-center space-x-4 mt-4">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animation trigger
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
