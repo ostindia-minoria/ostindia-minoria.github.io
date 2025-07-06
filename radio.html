@@ -265,68 +265,251 @@
             const volumeSlider = document.getElementById('volume-slider');
             
             // Track data
-            const tracks = [
-                {
-                    title: "Я ГИДРОЦЕФАЛ",
-                    artist: "KAMZ0NER",
-                    src: "assets/music/track1.mp3",
-                    cover: "assets/images/radio-1.png"
-                },
-                {
-                    title: "НАВАЛЬНЫЙ ЛЁХА УУУ",
-                    artist: "MORGENSHTERN",
-                    src: "assets/music/track2.mp3",
-                    cover: "assets/images/radio-3.png"
-                },
-                {
-                    title: "Арбитраж",
-                    artist: "KAMZ0NER",
-                    src: "assets/music/track3.mp3",
-                    cover: "assets/images/radio-2.png"
-                },
-                {
-                    title: "ЕСЛИ ХОЧЕШЬ ДЕПНУТЬ",
-                    artist: "MD76 (пред. Дельфин)",
-                    src: "assets/music/track4.mp3",
-                    cover: "assets/images/radio-4.png"
-                },
-                {
-                    title: "ГРАТАТАТА",
-                    artist: "KAMZ0NER",
-                    src: "assets/music/track5.mp3",
-                    cover: "assets/images/radio-5.png"
-                },
-                {
-                    title: "Саддам Хусейн",
-                    artist: "Мистер Кредо (пред. Дельфин)",
-                    src: "assets/music/track6.mp3",
-                    cover: "assets/images/radio-6.png"
-                },
-                {
-                    title: "ООО ААА СВО",
-                    artist: "Ebanat508 (пред. Дельфин)",
-                    src: "assets/music/track7.mp3",
-                    cover: "assets/images/radio-7.png"
-                },
-                {
-                    title: "Serbia Strong",
-                    artist: "Unknown (пред. Дельфин)",
-                    src: "assets/music/track8.mp3",
-                    cover: "assets/images/radio-8.png"
-                },
-                {
-                    title: "Я люблю",
-                    artist: "Anacondaz (пред. Парус)",
-                    src: "assets/music/track9.mp3",
-                    cover: "assets/images/radio-9.png"
-                },
-                {
-                    title: "Гимн Ост-Индии",
-                    artist: "History Music (пред. Судья Холден)",
-                    src: "assets/music/track10.mp3",
-                    cover: "assets/images/radio-10.png"
-                }
-            ];
+    const tracks = [
+    // Первые 10 треков остаются как были
+    {
+        title: "Я ГИДРОЦЕФАЛ",
+        artist: "KAMZ0NER",
+        src: "assets/music/track1.mp3",
+        cover: "assets/images/radio-1.png"
+    },
+    {
+        title: "НАВАЛЬНЫЙ ЛЁХА УУУ",
+        artist: "MORGENSHTERN",
+        src: "assets/music/track2.mp3",
+        cover: "assets/images/radio-3.png"
+    },
+    {
+        title: "Арбитраж",
+        artist: "KAMZ0NER",
+        src: "assets/music/track3.mp3",
+        cover: "assets/images/radio-2.png"
+    },
+    {
+        title: "ЕСЛИ ХОЧЕШЬ ДЕПНУТЬ",
+        artist: "MD76 (пред. Дельфин)",
+        src: "assets/music/track4.mp3",
+        cover: "assets/images/radio-4.png"
+    },
+    {
+        title: "ГРАТАТАТА",
+        artist: "KAMZ0NER",
+        src: "assets/music/track5.mp3",
+        cover: "assets/images/radio-5.png"
+    },
+    {
+        title: "Саддам Хусейн",
+        artist: "Мистер Кредо (пред. Дельфин)",
+        src: "assets/music/track6.mp3",
+        cover: "assets/images/radio-6.png"
+    },
+    {
+        title: "ООО ААА СВО",
+        artist: "Ebanat508 (пред. Дельфин)",
+        src: "assets/music/track7.mp3",
+        cover: "assets/images/radio-7.png"
+    },
+    {
+        title: "Serbia Strong",
+        artist: "Unknown (пред. Дельфин)",
+        src: "assets/music/track8.mp3",
+        cover: "assets/images/radio-8.png"
+    },
+    {
+        title: "Я люблю",
+        artist: "Anacondaz (пред. Парус)",
+        src: "assets/music/track9.mp3",
+        cover: "assets/images/radio-9.png"
+    },
+    {
+        title: "Гимн Ост-Индии",
+        artist: "History Music (пред. Судья Холден)",
+        src: "assets/music/track10.mp3",
+        cover: "assets/images/radio-10.png"
+    },
+
+    // Начиная с 11-го трека - только указанный текст в artist
+    {
+        title: "План убийства Лукашенко",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track11.mp3",
+        cover: "assets/images/radio-11.png"
+    },
+    {
+        title: "MOSKAU",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track12.mp3",
+        cover: "assets/images/radio-12.png"
+    },
+    {
+        title: "Рулетка",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track13.mp3",
+        cover: "assets/images/radio-13.png"
+    },
+    {
+        title: "70 лет октября",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track14.mp3",
+        cover: "assets/images/radio-14.png"
+    },
+    {
+        title: "Русское поле экспериментов",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track15.mp3",
+        cover: "assets/images/radio-15.png"
+    },
+    {
+        title: "Бам бам бам, мы стреляем по хохлам",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track16.mp3",
+        cover: "assets/images/radio-18.png"
+    },
+    {
+        title: "Россия Вперёд",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track17.mp3",
+        cover: "assets/images/radio-20.png"
+    },
+    {
+        title: "Рыцари чести и долга",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track18.mp3",
+        cover: "assets/images/radio-16.png"
+    },
+    {
+        title: "Burgundian Lullaby",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track19.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Вставай Донбасс",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track20.mp3",
+        cover: "assets/images/radio-17.png"
+    },
+    {
+        title: "Лето и арбалеты",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track21.mp3",
+        cover: "assets/images/radio-19.png"
+    },
+    {
+        title: "juice (СВО Remix)",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track22.mp3",
+        cover: "assets/images/radio-22.png"
+    },
+    {
+        title: "Я РУССКИЙ",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track23.mp3",
+        cover: "assets/images/radio-23.png"
+    },
+    {
+        title: "Heil Adolf Hitler",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track24.mp3",
+        cover: "assets/images/radio-21.png"
+    },
+    {
+        title: "FREE PALESTINE PETARDA V JOPE",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track25.mp3",
+        cover: "assets/images/radio-24.png"
+    },
+    {
+        title: "Такого, как Путин",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track26.mp3",
+        cover: "assets/images/radio-23.png"
+    },
+    {
+        title: "ALLA SVO",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track27.mp3",
+        cover: "assets/images/radio-24.png"
+    },
+    {
+        title: "Я ебу собак",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track28.mp3",
+        cover: "assets/images/radio-25.png"
+    },
+    {
+        title: "Скибиби Алла",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track29.mp3",
+        cover: "assets/images/radio-22.png"
+    },
+    {
+        title: "Свобода",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track30.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Порвал штаны freestyle",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track31.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Водка, шлюхи и кальян",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track32.mp3",
+        cover: "assets/images/radio-34.png"
+    },
+    {
+        title: "Руны и свастики",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track33.mp3",
+        cover: "assets/images/radio-28.png"
+    },
+    {
+        title: "Nigger Nigger",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track34.mp3",
+        cover: "assets/images/radio-30.png"
+    },
+    {
+        title: "Verify Your Clock (часеке)",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track35.mp3",
+        cover: "assets/images/radio-31.png"
+    },
+    {
+        title: "Боже, отдай нам царя",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track36.mp3",
+        cover: "assets/images/radio-36.png"
+    },
+    {
+        title: "Teufelslied",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track37.mp3",
+        cover: "assets/images/radio-33.png"
+    },
+    {
+        title: "13:56",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track38.mp3",
+        cover: "assets/images/radio-38.png"
+    },
+    {
+        title: "Мы Америку догоним",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track39.mp3",
+        cover: "assets/images/radio-36.png"
+    },
+    {
+        title: "ARE YOU READY FOR THE NEW WORLD ORDER?",
+        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
+        src: "assets/music/track40.mp3",
+        cover: "assets/images/radio-40.png"
+    }
+];
             
             let currentTrackIndex = 0;
             let isPlaying = false;
