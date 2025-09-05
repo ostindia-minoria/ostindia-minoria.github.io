@@ -3,108 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История чатов | Ост-Индия и Минория</title>
+    <title>История чатов</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #e2e8f0;
-            min-height: 100vh;
-            position: relative;
-        }
-        
-        .video-container {
-            position: fixed;
-            top: 0;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-        
-        .video-bg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .video-overlay {
-            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* 64% затемнение */
-            z-index: -1;
-        }
-        
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-        
-        .slide-up {
-            animation: slideUp 1s ease-out;
-        }
-        
-        .vintage-img {
-            filter: grayscale(60%) contrast(110%) sepia(20%);
-            transition: all 0.5s ease;
-        }
-        
-        .vintage-img:hover {
-            filter: grayscale(30%) contrast(120%) sepia(10%);
+            width: 2px;
+            background: linear-gradient(to bottom, #4f46e5, #6366f1, #818cf8);
         }
         
         .admin-card {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(76, 81, 109, 0.5);
             transition: all 0.3s ease;
-            background: rgba(30, 41, 59, 0.7);
         }
         
         .admin-card:hover {
             transform: translateY(-5px);
-            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 10px 25px -5px rgba(76, 81, 109, 0.5);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .vintage-img {
+            filter: sepia(0.3) contrast(1.1);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.5), transparent);
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to { 
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.5rem;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #6366f1;
-            border: 2px solid #4f46e5;
-        }
-        
         @media (max-width: 768px) {
             .mobile-stack {
-                flex-direction: column !important;
+                flex-direction: column;
             }
             
             .mobile-order-1 {
@@ -117,45 +64,14 @@
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Video Background with 64% dark overlay -->
-    <div class="video-container">
-        <video class="video-bg" autoplay loop muted playsinline>
-            <source src="assets/video/bg-history.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div class="video-overlay"></div>
-    
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-8">
-                <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
-                <a href="radio.html" class="text-gray-300 hover:text-white transition">Радио</a>
-                <a href="history.html" class="text-indigo-400 font-medium">История</a>
-            </div>
-            <a href="https://t.me/Maydesk" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition">
-                <i class="fab fa-telegram"></i>
-                <span>Telegram</span>
-            </a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-12 relative z-10">
-        <!-- Page Title -->
-        <div class="text-center mb-16 fade-in">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">История чатов</h1>
-            <div class="w-24 h-1 bg-indigo-500 mx-auto mb-6"></div>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto">Хроники цифрового сообщества Ост-Индия и его ответвления Минория</p>
-        </div>
-
+<body class="bg-gray-900 min-h-screen text-white">
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
         <!-- Ost-India Section -->
-        <section class="mb-24 slide-up">
+        <section class="slide-up">
             <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 mobile-order-1">
-                    <img src="assets/images/ostindia.png" 
+                    <img src="assets/images/ost-india.png" 
                          alt="Ost-India Chat" 
                          class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
                 </div>
@@ -229,7 +145,7 @@
                     </div>
                     
                     <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">SoTaRk @HoiPlayed</h4>
+                        <h4 class="font-bold text-white text-lg">SoTaRk @TheGreatTrialMarshal</h4>
                         <p class="text-gray-400 text-sm">Часто в видеочатах, один из самых активных.</p>
                     </div>
                     
@@ -244,13 +160,18 @@
                     </div>
                     
                     <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Минор @estonia78</h4>
-                        <p class="text-gray-400 text-sm">В чате с самого начала, доброжелательный, "чистый олд".</p>
+                        <h4 class="font-bold text-white text-lg">Роман @AlexeyAndreychenko</h4>
+                        <p class="text-gray-400 text-sm">Самый первый участник Ост-Индии, один из самых уважаемых участников чата.</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg">
+                        <h4 class="font-bold text-white text-lg">Kurtuko @OneKurtuko</h4>
+                        <p class="text-gray-400 text-sm">Не доживет до 12, зеленая тля и просто хороший человек.</p>
                     </div>
                     
                     <div class="admin-card rounded-lg p-4 shadow-lg">
                         <h4 class="font-bold text-white text-lg">Hiomrat @Hiomrat</h4>
-                        <p class="text-gray-400 text-sm">Посол чата, связывался с другими сообществами.</p>
+                        <p class="text-gray-400 text-sm">Админ, который также сидит в чате почти с его создания. Имеет 5 ранг.</p>
                     </div>
                 </div>
             </div>
@@ -269,69 +190,96 @@
         <!-- Minoria Section -->
         <section class="slide-up">
             <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 mobile-order-1">
+                    <img src="assets/images/minoria.png" 
+                         alt="Minoria Chat" 
+                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
+                </div>
+                
                 <!-- Content -->
-                <div class="w-full md:w-1/2 mobile-order-2 md:mobile-order-1">
+                <div class="w-full md:w-1/2 mobile-order-2">
                     <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
                         <span class="w-3 h-8 bg-red-500 mr-3"></span>
                         Минория
                     </h2>
                     
-                    <div class="bg-gray-800/50 border-l-4 border-red-500 p-6 rounded-r-lg">
-                        <h3 class="text-xl font-semibold text-red-300 mb-3">Coming soon...</h3>
+                    <!-- Foundation -->
+                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                        <h3 class="text-xl font-semibold text-red-300 mb-3">Основание и ранние дни</h3>
                         <p class="text-gray-300">
-                            Раздел о Минории появится позже. История этого ответвления Ост-Индии ещё пишется, и мы обязательно расскажем её, когда придет время.
+                            Минория была создана раньше Ост-Индии - в марте 2024 года. Изначально активность была очень низкой, сообщений было мало. Позже чат стал ответвлением Ост-Индии, развивая собственную идентичность.
+                        </p>
+                    </div>
+                    
+                    <!-- Tomato Purge -->
+                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                        <h3 class="text-xl font-semibold text-red-300 mb-3">Чистка канала Минорным Помидором</h3>
+                        <p class="text-gray-300">
+                            Ключевое событие в истории Минории - чистка канала, проведенная Минорным Помидором. Из-за личных обид он удалил многих участников из канала. После этого долгое время сообщество восстанавливалось и набирало новых подписчиков.
+                        </p>
+                    </div>
+                    
+                    <!-- WhatsApp Event -->
+                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                        <h3 class="text-xl font-semibold text-red-300 mb-3">Ватсап мемы</h3>
+                        <p class="text-gray-300 mb-2">
+                            Второе ключевое событие - появление ватсап-мемов. Скорее всего, инициаторами были Майдеск или Кайзер, которые начали распространять мемы про WhatsApp. Сообщество подхватило эту тему, и мемы стали популярны.
+                        </p>
+                        <p class="text-gray-300">
+                            Рупл создал стикерпак против Ватсапа, но он не получил широкой поддержки в сообществе.
+                        </p>
+                    </div>
+                    
+                    <!-- Minor's Departure -->
+                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                        <h3 class="text-xl font-semibold text-red-300 mb-3">Уход и возвращение Минора</h3>
+                        <p class="text-gray-300">
+                            Третье значимое событие - уход основателя Минора. Владельцем канала и чата стал Кайзер. Позже Минор вернулся под именем Маяковский, но теперь он просто админ, а не владелец.
                         </p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Admins Section -->
+            <div class="mt-16 slide-up">
+                <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация Минории</h3>
+                <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
+                    Административный состав Минории находится в разработке. Информация будет обновлена позже.
+                </p>
                 
-                <!-- Image -->
-                <div class="w-full md:w-1/2 mobile-order-1 md:mobile-order-2">
-                    <img src="assets/images/minoria.png" 
-                         alt="Minoria Chat" 
-                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Placeholder Admin Cards -->
+                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
+                        <h4 class="font-bold text-white text-lg">Информация</h4>
+                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
+                        <h4 class="font-bold text-white text-lg">Информация</h4>
+                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
+                        <h4 class="font-bold text-white text-lg">Информация</h4>
+                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
+                        <h4 class="font-bold text-white text-lg">Информация</h4>
+                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- Evolution -->
+            <div class="mt-16 slide-up relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                <h3 class="text-2xl font-semibold text-red-300 mb-4">Эволюция сообщества</h3>
+                <p class="text-gray-300">
+                    В настоящее время Минория переживает период низкой активности, и Ост-Индия доминирует в этом противостоянии. Многие участники либо не активны в Минории, либо предпочитают оставаться нейтральными, не выбирая сторону в противостоянии между чатами. Сообщество стремится к мирному сосуществованию и равноправию.
+                </p>
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900/80 py-8 mt-16">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">
-                Made by <a href="https://t.me/Maydesk" target="_blank" class="text-indigo-400 hover:text-indigo-300">@Maydesk</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Simple scroll animation trigger
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('slide-up');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            document.querySelectorAll('section').forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Ensure video plays on mobile
-            const video = document.querySelector('.video-bg');
-            if (video) {
-                video.play().catch(e => {
-                    // Fallback for autoplay restrictions
-                    document.addEventListener('click', function() {
-                        video.play();
-                    }, { once: true });
-                });
-            }
-        });
-    </script>
 </body>
 </html>
