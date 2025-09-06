@@ -1,285 +1,384 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История чатов</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>История чатов | Ост-Индия и Минория</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            background-color: #111827; /* fallback bg */
+        }
+        
+        /* Video Background */
+        .video-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.64); /* 64% dark overlay */
+            z-index: -1;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 0 15px #4f46e5;
+        }
+        header a {
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: #a5b4fc;
+        }
+        .active-link {
+            color: #818cf8;
+            font-weight: 600;
+        }
+        
+        /* Heading block on main */
+        .page-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .page-title .underline {
+            width: 6rem;
+            height: 4px;
+            background-color: #6366f1;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 2px;
+        }
+        .page-title p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 36rem;
+            margin: 0 auto;
+        }
+        
+        /* Timeline styling */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: linear-gradient(to bottom, #4f46e5, #6366f1, #818cf8);
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #6366f1;
+            border: 2px solid #4f46e5;
+            border-radius: 50%;
         }
         
+        /* Admin cards */
         .admin-card {
             background: rgba(31, 41, 55, 0.7);
             border: 1px solid rgba(76, 81, 109, 0.5);
+            border-radius: 0.5rem;
+            padding: 1rem;
             transition: all 0.3s ease;
+            box-shadow: 0 0 8px transparent;
         }
-        
         .admin-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(76, 81, 109, 0.5);
+            background: rgba(31, 41, 55, 0.9);
         }
         
+        /* Vintage image style */
         .vintage-img {
-            filter: sepia(0.3) contrast(1.1);
+            filter: grayscale(60%) contrast(110%) sepia(20%);
+            transition: filter 0.5s ease;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+        .vintage-img:hover {
+            filter: grayscale(30%) contrast(120%) sepia(10%);
         }
         
+        /* Section divider */
         .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.5), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+            margin: 4rem 0;
         }
         
-        .slide-up {
-            animation: slideUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
         @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+        .slide-up {
+            animation: slideUp 1s ease forwards;
+        }
         
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .mobile-stack {
-                flex-direction: column;
+                flex-direction: column !important;
             }
             
             .mobile-order-1 {
                 order: 1;
             }
-            
             .mobile-order-2 {
                 order: 2;
+            }
+            
+            .page-title h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
 </head>
-<body class="bg-gray-900 min-h-screen text-white">
-    <main class="container mx-auto px-4 py-12 max-w-6xl">
+<body class="min-h-screen">
+    <!-- Video Background -->
+    <div class="video-container">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="assets/video/bg-history.mp4" type="video/mp4" />
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+    
+    <!-- Header Navigation -->
+    <header>
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <nav class="flex space-x-10">
+                <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Главная</a>
+                <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
+                <a href="history.html" class="active-link transition duration-300">История</a>
+            </nav>
+            <a href="https://t.me/Maydesk" target="_blank" 
+               class="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-white transition duration-300">
+               <i class="fab fa-telegram"></i>
+               <span>Telegram</span>
+            </a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-14 relative z-10 max-w-6xl">
+        <!-- Page Title and Subtitle -->
+        <div class="page-title">
+            <h1>Главная история радио</h1>
+            <div class="underline"></div>
+            <p>Хроники цифрового сообщества Ост-Индия и его ответвления Минория</p>
+        </div>
+        
         <!-- Ost-India Section -->
-        <section class="slide-up">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
-                <!-- Image -->
-                <div class="w-full md:w-1/2 mobile-order-1">
-                    <img src="assets/images/ostindia.png" 
-                         alt="Ost-India Chat" 
-                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
-                </div>
-                
-                <!-- Content -->
-                <div class="w-full md:w-1/2 mobile-order-2">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
-                        <span class="w-3 h-8 bg-indigo-500 mr-3"></span>
-                        Ост-Индия
-                    </h2>
-                    
-                    <!-- Foundation -->
-                    <div class="mb-8 relative pl-8 timeline-item">
-                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Основание и ранние дни</h3>
-                        <p class="text-gray-300 mb-4">
-                            Чат "Ост-Индия" был создан 3 августа 2024 года Маратием, который стал его основателем и первым админом.
-                        </p>
-                        <p class="text-gray-300">
-                            Изначально чат был просто местом для общения в телеге, но очень быстро перерос в нечто большее — в живое цифровое пространство со своими традициями, внутренними приколами и настоящей атмосферой.
-                        </p>
-                    </div>
-                    
-                    <!-- Bloody Thursday -->
-                    <div class="mb-8 relative pl-8 timeline-item">
-                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Кровавый четверг</h3>
-                        <p class="text-gray-300">
-                            Один из самых жёстких моментов в истории Ост-Индии. Админ Тавас выступил против управления Маратия и публично потребовал «революции». Несколько часов в чате шёл открытый конфликт. Все участники были в шоке от происходящего. Это событие до сих пор вспоминают как «Кровавый четверг».
-                        </p>
-                    </div>
-                    
-                    <!-- Jew Purge -->
-                    <div class="mb-8 relative pl-8 timeline-item">
-                        <h3 class="text-xl font-semibold text-indigo-300 mb-3">Чистка Еврея 31 декабря</h3>
-                        <p class="text-gray-300 mb-2">
-                            В ночь на 31 декабря 2024 года, пока все админы были оффлайн, админ по имени Еврей провёл самую масштабную чистку в истории чата. Он выкинул из чата почти всех — около 200 человек, оставив только себя и модераторов.
-                        </p>
-                        <p class="text-gray-300 mb-2">
-                            Когда остальные админы вернулись, чат был пуст. Еврей назвал это "сюрпризом" и "давним планом". В итоге он был снят с прав, позже помилован, но в админы не вернулся.
-                        </p>
-                    </div>
-                </div>
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1">
+                <img src="assets/images/ostindia.png" alt="Ost-India Chat" 
+                     class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover" />
             </div>
-            
-            <!-- Admins Section -->
-            <div class="mt-16 slide-up">
-                <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация</h3>
-                <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
-                    Все, кто держал чат — по очереди или вместе. Без них Ост-Индия не была бы такой:
-                </p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Admin Cards -->
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Маратий</h4>
-                        <p class="text-gray-400 text-sm">Основатель чата, создал основу, спокойный стиль управления.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Даннил @danyabz</h4>
-                        <p class="text-gray-400 text-sm">Стал админом после выборов, активный участник.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Иван Гойда @Ivan_Goida</h4>
-                        <p class="text-gray-400 text-sm">Админ из той же волны выборов.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Амир Комаров @Aloearner</h4>
-                        <p class="text-gray-400 text-sm">Добрый, спокойный, "голос разума" в чате.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">SoTaRk @TheGreatTrialMarshal</h4>
-                        <p class="text-gray-400 text-sm">Часто в видеочатах, один из самых активных.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">milan4ik @milan4ik65</h4>
-                        <p class="text-gray-400 text-sm">Создатель клана и ботов.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Shel1done @Shel1done</h4>
-                        <p class="text-gray-400 text-sm">Старичок чата, не всегда активен, но уважаемый.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Роман @AlexeyAndreychenko</h4>
-                        <p class="text-gray-400 text-sm">Самый первый участник Ост-Индии, один из самых уважаемых участников чата.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Kurtuko @OneKurtuko</h4>
-                        <p class="text-gray-400 text-sm">Не доживет до 12, зеленая тля и просто хороший человек.</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg">
-                        <h4 class="font-bold text-white text-lg">Hiomrat @Hiomrat</h4>
-                        <p class="text-gray-400 text-sm">Админ, который также сидит в чате почти с его создания. Имеет 5 ранг.</p>
-                    </div>
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-indigo-500 mr-3"></span>
+                    Ост-Индия
+                </h2>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-3">Основание и ранние дни</h3>
+                    <p class="text-gray-300 mb-4">Чат "Ост-Индия" был создан 3 августа 2024 года Маратием, который стал его основателем и первым админом.</p>
+                    <p class="text-gray-300">Изначально чат был просто местом для общения в телеге, но очень быстро перерос в нечто большее — в живое цифровое пространство со своими традициями, внутренними приколами и настоящей атмосферой.</p>
                 </div>
-            </div>
-            
-            <!-- Evolution -->
-            <div class="mt-16 slide-up relative pl-8 timeline-item">
-                <h3 class="text-2xl font-semibold text-indigo-300 mb-4">Эволюция сообщества</h3>
-                <p class="text-gray-300">
-                    После событий 2024 года Ост-Индия вошла в стабильную фазу. Многие старички ушли, пришли новые, но дух остался. В 2025 году стартовали разные активности — игры, дискуссии, эфиры. Чат жив, хоть и меняется.
-                </p>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-3">Кровавый четверг</h3>
+                    <p class="text-gray-300">Один из самых жёстких моментов в истории Ост-Индии. Админ Тавас выступил против управления Маратия и публично потребовал «революции». Несколько часов в чате шёл открытый конфликт. Все участники были в шоке от происходящего. Это событие до сих пор вспоминают как «Кровавый четверг».</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-3">Чистка Еврея 31 декабря</h3>
+                    <p class="text-gray-300 mb-2">В ночь на 31 декабря 2024 года, пока все админы были оффлайн, админ по имени Еврей провёл самую масштабную чистку в истории чата. Он выкинул из чата почти всех — около 200 человек, оставив только себя и модераторов.</p>
+                    <p class="text-gray-300 mb-2">Когда остальные админы вернулись, чат был пуст. Еврей назвал это "сюрпризом" и "давним планом". В итоге он был снят с прав, позже помилован, но в админы не вернулся.</p>
+                </div>
             </div>
         </section>
         
-        <div class="section-divider my-16"></div>
+        <!-- Admins Section -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация</h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Все, кто держал чат — по очереди или вместе. Без них Ост-Индия не была бы такой:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Маратий</h4>
+                    <p class="text-gray-400 text-sm">Основатель чата, создал основу, спокойный стиль управления.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Даннил @danyabz</h4>
+                    <p class="text-gray-400 text-sm">Стал админом после выборов, активный участник.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Иван Гойда @Ivan_Goida</h4>
+                    <p class="text-gray-400 text-sm">Админ из той же волны выборов.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Амир Комаров @Aloearner</h4>
+                    <p class="text-gray-400 text-sm">Добрый, спокойный, "голос разума" в чате.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">SoTaRk @TheGreatTrialMarshal</h4>
+                    <p class="text-gray-400 text-sm">Часто в видеочатах, один из самых активных.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">milan4ik @milan4ik65</h4>
+                    <p class="text-gray-400 text-sm">Создатель клана и ботов.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Shel1done @Shel1done</h4>
+                    <p class="text-gray-400 text-sm">Старичок чата, не всегда активен, но уважаемый.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Роман @AlexeyAndreychenko</h4>
+                    <p class="text-gray-400 text-sm">Самый первый участник Ост-Индии, один из самых уважаемых участников чата.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Kurtuko @OneKurtuko</h4>
+                    <p class="text-gray-400 text-sm">Не доживет до 12, зеленая тля и просто хороший человек.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Hiomrat @Hiomrat</h4>
+                    <p class="text-gray-400 text-sm">Админ, который также сидит в чате почти с его создания. Имеет 5 ранг.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Evolution Section -->
+        <div class="slide-up mt-16 timeline-item relative pl-8">
+            <h3 class="text-2xl font-semibold text-indigo-300 mb-4">Эволюция сообщества</h3>
+            <p class="text-gray-300">После событий 2024 года Ост-Индия вошла в стабильную фазу. Многие старички ушли, пришли новые, но дух остался. В 2025 году стартовали разные активности — игры, дискуссии, эфиры. Чат жив, хоть и меняется.</p>
+        </div>
+        
+        <div class="section-divider"></div>
         
         <!-- Minoria Section -->
-        <section class="slide-up">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mobile-stack">
-                <!-- Image -->
-                <div class="w-full md:w-1/2 mobile-order-1">
-                    <img src="assets/images/minoria.png" 
-                         alt="Minoria Chat" 
-                         class="w-full h-auto rounded-xl shadow-2xl vintage-img object-cover">
-                </div>
-                
-                <!-- Content -->
-                <div class="w-full md:w-1/2 mobile-order-2">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
-                        <span class="w-3 h-8 bg-red-500 mr-3"></span>
-                        Минория
-                    </h2>
-                    
-                    <!-- Foundation -->
-                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
-                        <h3 class="text-xl font-semibold text-red-300 mb-3">Основание и ранние дни</h3>
-                        <p class="text-gray-300">
-                            Минория была создана раньше Ост-Индии - в марте 2024 года. Изначально активность была очень низкой, сообщений было мало. Позже чат стал ответвлением Ост-Индии, развивая собственную идентичность.
-                        </p>
-                    </div>
-                    
-                    <!-- Tomato Purge -->
-                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
-                        <h3 class="text-xl font-semibold text-red-300 mb-3">Чистка канала Минорным Помидором</h3>
-                        <p class="text-gray-300">
-                            Ключевое событие в истории Минории - чистка канала, проведенная Минорным Помидором. Из-за личных обид он удалил многих участников из канала. После этого долгое время сообщество восстанавливалось и набирало новых подписчиков.
-                        </p>
-                    </div>
-                    
-                    <!-- WhatsApp Event -->
-                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
-                        <h3 class="text-xl font-semibold text-red-300 mb-3">Ватсап мемы</h3>
-                        <p class="text-gray-300 mb-2">
-                            Второе ключевое событие - появление ватсап-мемов. Скорее всего, инициаторами были Майдеск или Кайзер, которые начали распространять мемы про WhatsApp. Сообщество подхватило эту тему, и мемы стали популярны.
-                        </p>
-                        <p class="text-gray-300">
-                            Рупл создал стикерпак против Ватсапа, но он не получил широкой поддержки в сообществе.
-                        </p>
-                    </div>
-                    
-                    <!-- Minor's Departure -->
-                    <div class="mb-8 relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
-                        <h3 class="text-xl font-semibold text-red-300 mb-3">Уход и возвращение Минора</h3>
-                        <p class="text-gray-300">
-                            Третье значимое событие - уход основателя Минора. Владельцем канала и чата стал Кайзер. Позже Минор вернулся под именем Маяковский, но теперь он просто админ, а не владелец.
-                        </p>
-                    </div>
-                </div>
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1">
+                <img src="assets/images/minoria.png" alt="Minoria Chat" 
+                     class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover" />
             </div>
-            
-            <!-- Admins Section -->
-            <div class="mt-16 slide-up">
-                <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация Минории</h3>
-                <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
-                    Административный состав Минории находится в разработке. Информация будет обновлена позже.
-                </p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Placeholder Admin Cards -->
-                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
-                        <h4 class="font-bold text-white text-lg">Информация</h4>
-                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
-                        <h4 class="font-bold text-white text-lg">Информация</h4>
-                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
-                        <h4 class="font-bold text-white text-lg">Информация</h4>
-                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
-                    </div>
-                    
-                    <div class="admin-card rounded-lg p-4 shadow-lg opacity-70">
-                        <h4 class="font-bold text-white text-lg">Информация</h4>
-                        <p class="text-gray-400 text-sm">Список администраторов готовится</p>
-                    </div>
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-red-500 mr-3"></span>
+                    Минория
+                </h2>
+                <div class="timeline-item mb-8 relative pl-8" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                    <h3 class="text-xl font-semibold text-red-300 mb-3">Основание и ранние дни</h3>
+                    <p class="text-gray-300">Минория была создана раньше Ост-Индии - в марте 2024 года. Изначально активность была очень низкой, сообщений было мало. Позже чат стал ответвлением Ост-Индии, развивая собственную идентичность.</p>
                 </div>
-            </div>
-            
-            <!-- Evolution -->
-            <div class="mt-16 slide-up relative pl-8 timeline-item" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
-                <h3 class="text-2xl font-semibold text-red-300 mb-4">Эволюция сообщества</h3>
-                <p class="text-gray-300">
-                    В настоящее время Минория переживает период низкой активности, и Ост-Индия доминирует в этом противостоянии. Многие участники либо не активны в Минории, либо предпочитают оставаться нейтральными, не выбирая сторону в противостоянии между чатами. Сообщество стремится к мирному сосуществованию и равноправию.
-                </p>
+                <div class="timeline-item mb-8 relative pl-8" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                    <h3 class="text-xl font-semibold text-red-300 mb-3">Чистка канала Минорным Помидором</h3>
+                    <p class="text-gray-300">Ключевое событие в истории Минории - чистка канала, проведенная Минорным Помидором. Из-за личных обид он удалил многих участников из канала. После этого долгое время сообщество восстанавливалось и набирало новых подписчиков.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                    <h3 class="text-xl font-semibold text-red-300 mb-3">Ватсап мемы</h3>
+                    <p class="text-gray-300 mb-2">Второе ключевое событие - появление ватсап-мемов. Скорее всего, инициаторами были Майдеск или Кайзер, которые начали распространять мемы про WhatsApp. Сообщество подхватило эту тему, и мемы стали популярны.</p>
+                    <p class="text-gray-300">Рупл создал стикерпак против Ватсапа, но он не получил широкой поддержки в сообществе.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+                    <h3 class="text-xl font-semibold text-red-300 mb-3">Уход и возвращение Минора</h3>
+                    <p class="text-gray-300">Третье значимое событие - уход основателя Минора. Владельцем канала и чата стал Кайзер. Позже Минор вернулся под именем Маяковский, но теперь он просто админ, а не владелец.</p>
+                </div>
             </div>
         </section>
+        
+        <!-- Admins Section for Minoria -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center">Администрация Минории</h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Административный состав Минории находится в разработке. Информация будет обновлена позже.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Минор (Маяковский) @mayakovsky123</h4>
+                    <p class="text-gray-400 text-sm">Создатель канала и создатель Минории.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Кайзер @Kaizer_reich</h4>
+                    <p class="text-gray-400 text-sm">Именно Кайзеру Минор передал 5 ранг (владельца). Пытается часто активить в чате.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Амир Камаров @Aloearner</h4>
+                    <p class="text-gray-400 text-sm">Получил 5 ранг в ходе чистки админов в июне 2025.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Antonin Artaud (Киндер) @Adolf_kinder1871</h4>
+                    <p class="text-gray-400 text-sm">Довольно добрый и хороший админ и человек, в Минории он часто банит шлюхоботов, но также закрепляет музыку и опросы (@Adolf_kinder1871) (пидорас заебал своими опросами в жопу себе их засунь и вены вскрой собака плешивая Ещё раз хуйню твою увижу в жопу выебу и в канаву выкину)</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Nilita 990IQ (@forsakenlil)</h4>
+                    <p class="text-gray-400 text-sm">Стал админом после выборов в августе 2025, создатель известного бота "Хуесось маму Маратия".</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Anneallianna (@Ania1875)</h4>
+                    <p class="text-gray-400 text-sm">Аня стала админом в Минории только в феврале 2025, после долгого ухода. Помогала в устранении червей (постучал)</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Молодой Шутерок (@Ktotoparalonow)</h4>
+                    <p class="text-gray-400 text-sm">Шутерок выиграл на выборах в июле, с небольшим отрывом против агереса.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Maydesk (@Maydesk)</h4>
+                    <p class="text-gray-400 text-sm">Выиграл на выборах в мае - июне. Также является админом в ТГК.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">Куртуко (@OneKurtuko)</h4>
+                    <p class="text-gray-400 text-sm">Обычно Куртуко никогда не активит в Минории, потому что умирает в свои 11 лет.</p>
+                </div>
+                <div class="admin-card opacity-70 rounded-lg p-4 shadow-lg">
+                    <h4 class="font-bold text-white text-lg">John Smith (@SomeOrdinaryJohn)</h4>
+                    <p class="text-gray-400 text-sm">Является админом чата и ТГК, делает много приколов видео/фото.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Evolution Section Minoria -->
+        <div class="slide-up mt-16 timeline-item relative pl-8" style="--tw-border-opacity: 0.5; border-left-color: rgba(239, 68, 68, var(--tw-border-opacity));">
+            <h3 class="text-2xl font-semibold text-red-300 mb-4">Эволюция сообщества</h3>
+            <p class="text-gray-300">В настоящее время Минория переживает период низкой активности, и Ост-Индия доминирует в этом противостоянии. Многие участники либо не активны в Минории, либо предпочитают оставаться нейтральными, не выбирая сторону в противостоянии между чатами. Сообщество стремится к мирному сосуществованию и равноправию.</p>
+        </div>
     </main>
 </body>
 </html>
