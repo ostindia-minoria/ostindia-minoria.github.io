@@ -3,708 +3,735 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Радио Ost-India / Minoria</title>
+    <title>Радио | Ost-India / Minoria</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preload локальных шрифтов -->
+    <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Manrope-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <style>
+        /* ЛОКАЛЬНЫЕ ШРИФТЫ */
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-ExtraBold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Manrope';src:url('fonts/Manrope-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Manrope';src:url('fonts/Manrope-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+        
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #0a0a0a;
-            color: #f8f8f8;
-            overflow-x: hidden;
-        }
-        
-        .title-font {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .bg-radio {
-            position: relative;
-            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #e2e8f0;
             min-height: 100vh;
+            position: relative;
+            background-color: #111827;
+            margin: 0;
+            padding: 0;
         }
         
-        .bg-video {
-            position: absolute;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Manrope', 'Inter', sans-serif;
+        }
+        
+        /* Video Background */
+        .video-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: 0;
-            transition: opacity 1s ease;
+            z-index: -2;
+            overflow: hidden;
         }
-        
-        .bg-overlay {
-            position: absolute;
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-        }
-        
-        .content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background-color: #333;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        
-        .progress {
+            width: 100%;
             height: 100%;
-            background-color: #8b5cf6;
+            background-color: rgba(0, 0, 0, 0.64);
+            z-index: -1;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 0 15px #4f46e5;
+        }
+        header a {
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: #a5b4fc;
+        }
+        .active-link {
+            color: #818cf8;
+            font-weight: 600;
+        }
+        
+        /* Page animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease forwards;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .page-title .underline {
+            width: 6rem;
+            height: 4px;
+            background-color: #6366f1;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 2px;
+        }
+        .page-title p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 36rem;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+        
+        /* Player container */
+        .player-container {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.2);
+            animation: fadeIn 1.2s ease forwards;
+        }
+        
+        /* Track info */
+        .track-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .track-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .track-artist {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 3px;
-            transition: width 0.1s;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #818cf8);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 3px;
+        }
+        
+        /* Time display */
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .control-btn {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #e2e8f0;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .control-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .play-btn {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        .play-btn:hover {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .repeat-active {
+            background: rgba(99, 102, 241, 0.4);
+            color: #818cf8;
+        }
+        
+        /* Volume control */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
         
         .volume-slider {
-            -webkit-appearance: none;
             width: 100px;
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
             outline: none;
         }
         
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #8b5cf6;
+            width: 16px;
+            height: 16px;
+            background: #6366f1;
             border-radius: 50%;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
         
-        .track-item:hover {
-            background-color: rgba(139, 92, 246, 0.1);
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: #818cf8;
+            transform: scale(1.2);
         }
         
-        .track-item.active {
-            background-color: rgba(139, 92, 246, 0.2);
-            border-left: 3px solid #8b5cf6;
+        /* Playlist */
+        .playlist-container {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.2);
+            animation: fadeIn 1.4s ease forwards;
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        .playlist-container h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .btn-hover {
+        .track-item {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .btn-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .track-item:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateX(5px);
         }
         
-        .rotate {
-            animation: rotate 10s linear infinite;
+        .track-item.active {
+            background: rgba(99, 102, 241, 0.3);
+            border-color: #6366f1;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .track-item-title {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .track-item-artist {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.7);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            .controls {
+                gap: 1rem;
+            }
+            .track-title {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+    <!-- Video Background -->
+    <div class="video-container">
+        <video class="video-bg" autoplay loop muted playsinline>
+            <source src="assets/video/bg-radio.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
     <!-- Header -->
-    <header class="bg-black bg-opacity-80 text-white py-4 px-6 fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold title-font">Ost-India / Minoria</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="index.html" class="hover:text-purple-500 transition">Главная</a>
-                <a href="radio.html" class="text-purple-500 font-bold">Радио</a>
-                <a href="#" class="hover:text-purple-500 transition">История</a>
-            </nav>
-            <button class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+    <header class="py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold text-white">Ost-India / Minoria</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
+                    <a href="radio.html" class="active-link">Радио</a>
+                    <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
+                </nav>
+                <button class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow">
-        <!-- Hero Section with Video Background -->
-        <section class="bg-radio flex items-center justify-center pt-16">
-            <!-- Video Background -->
-            <video class="bg-video" autoplay loop muted playsinline>
-                <source src="assets/video/bg-radio.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-            <div class="bg-overlay"></div>
-            
-            <div class="container mx-auto px-6 py-20 text-center content">
-                <h1 class="title-font text-4xl md:text-6xl font-bold mb-4 fade-in">Радио Ost-India / Minoria</h1>
-                <p class="text-xl md:text-2xl mb-12 max-w-2xl mx-auto fade-in" style="animation-delay: 0.2s;">Предложенные треки участников.</p>
-                
-                <!-- Player -->
-                <div class="bg-black bg-opacity-60 rounded-xl p-6 max-w-2xl mx-auto fade-in" style="animation-delay: 0.4s;">
-                    <!-- Album Art -->
-                    <div class="flex flex-col md:flex-row items-center mb-8">
-                        <div class="w-40 h-40 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-6 border-4 border-purple-500 rotate">
-                            <img id="album-art" src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Album Art" class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-center md:text-left">
-                            <h2 id="current-track" class="text-2xl font-bold mb-1">Загрузка...</h2>
-                        </div>
-                    </div>
-                    
-                    <!-- Progress Bar -->
-                    <div class="progress-bar mb-4">
-                        <div id="progress" class="progress w-0"></div>
-                    </div>
-                    
-                    <!-- Time Display -->
-                    <div class="flex justify-between text-sm text-gray-400 mb-6">
-                        <span id="current-time">0:00</span>
-                        <span id="duration">0:00</span>
-                    </div>
-                    
-                    <!-- Controls -->
-                    <div class="flex justify-center items-center space-x-8 mb-6">
-                        <button id="prev-btn" class="text-2xl hover:text-purple-500 transition btn-hover">
-                            <i class="fas fa-step-backward"></i>
-                        </button>
-                        <button id="play-btn" class="bg-purple-600 hover:bg-purple-700 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl transition btn-hover">
-                            <i class="fas fa-play" id="play-icon"></i>
-                        </button>
-                        <button id="next-btn" class="text-2xl hover:text-purple-500 transition btn-hover">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Additional Controls -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-2">
-                            <button id="repeat-btn" class="text-gray-400 hover:text-purple-500 transition">
-                                <i class="fas fa-redo"></i>
-                            </button>
-                            <span id="repeat-text" class="text-xs text-gray-400">Повтор</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-volume-up text-gray-400"></i>
-                            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.7">
-                        </div>
-                    </div>
+    <main class="container mx-auto px-6 py-12">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Радио Ost-India / Minoria</h1>
+            <div class="underline"></div>
+            <p>Предложенные треки участников нашего сообщества</p>
+        </div>
+
+        <!-- Player Section -->
+        <div class="max-w-3xl mx-auto mb-8">
+            <div class="player-container">
+                <!-- Track Info -->
+                <div class="track-info">
+                    <div class="track-title" id="trackTitle">Загрузка...</div>
+                    <div class="track-artist" id="trackArtist">Unknown</div>
                 </div>
-                
-                <!-- Track List -->
-                <div class="max-w-2xl mx-auto mt-12 fade-in" style="animation-delay: 0.6s;">
-                    <h3 class="text-xl font-bold mb-4">Плейлист</h3>
-                    <div class="bg-black bg-opacity-60 rounded-xl overflow-hidden">
-                        <div id="track-list" class="max-h-80 overflow-y-auto">
-                            <!-- Tracks will be added here by JavaScript -->
-                        </div>
-                    </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
                 </div>
-                
-                <!-- Suggest Track Button -->
-                <div class="mt-8 fade-in" style="animation-delay: 0.8s;">
-                    <a href="https://t.me/Maydesk" target="_blank" class="inline-block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full font-bold transition btn-hover">
-                        <i class="fas fa-plus mr-2"></i> Предложить трек
-                    </a>
+
+                <!-- Time Display -->
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn" title="Предыдущая">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn" title="Воспроизвести">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn" title="Следующая">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control-btn" id="repeatBtn" title="Повтор">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up" style="color: #94a3b8;"></i>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Playlist Section -->
+        <div class="max-w-3xl mx-auto">
+            <div class="playlist-container">
+                <h2><i class="fas fa-list-ul mr-2"></i>Плейлист</h2>
+                <div id="playlist"></div>
+            </div>
+        </div>
+
+        <!-- Suggest Track Section -->
+        <div class="text-center mt-8 fade-in" style="animation-delay: 0.5s;">
+            <p class="text-gray-300 mb-4">Хотите добавить свою песню?</p>
+            <a href="https://t.me/Maydesk" target="_blank" class="inline-block bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                <i class="fas fa-paper-plane mr-2"></i>Написать @Maydesk
+            </a>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-8">
+    <footer class="py-8">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <h3 class="text-2xl font-bold title-font mb-2">Ost-India / Minoria</h3>
-                </div>
-                <div class="flex space-x-6">
-                    <!-- Social icons can be added here -->
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Ost-India / Minoria. Права на треки принадлежат их законным владельцам. 
-                Использование материалов без разрешения правообладателя запрещено и преследуется по закону.</p>
+            <div class="text-center text-gray-400">
+                <p>&copy; 2026 Ost-India / Minoria. Все права защищены.</p>
+                <p class="text-sm mt-2">Права на треки принадлежат их законным владельцам.</p>
             </div>
         </div>
     </footer>
 
     <!-- Audio Element -->
-    <audio id="audio-player"></audio>
+    <audio id="audio"></audio>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Player elements
-            const audioPlayer = document.getElementById('audio-player');
-            const playBtn = document.getElementById('play-btn');
-            const playIcon = document.getElementById('play-icon');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const progressBar = document.getElementById('progress');
-            const currentTimeDisplay = document.getElementById('current-time');
-            const durationDisplay = document.getElementById('duration');
-            const currentTrackDisplay = document.getElementById('current-track');
-            const albumArt = document.getElementById('album-art');
-            const trackList = document.getElementById('track-list');
-            const repeatBtn = document.getElementById('repeat-btn');
-            const repeatText = document.getElementById('repeat-text');
-            const volumeSlider = document.getElementById('volume-slider');
-            
-            // Track data
-    const tracks = [
-    // Первые 10 треков остаются как были
-    {
-        title: "Я ГИДРОЦЕФАЛ",
-        artist: "KAMZ0NER",
-        src: "assets/music/track1.mp3",
-        cover: "assets/images/radio-1.png"
-    },
-    {
-        title: "НАВАЛЬНЫЙ ЛЁХА УУУ",
-        artist: "MORGENSHTERN",
-        src: "assets/music/track2.mp3",
-        cover: "assets/images/radio-3.png"
-    },
-    {
-        title: "Арбитраж",
-        artist: "KAMZ0NER",
-        src: "assets/music/track3.mp3",
-        cover: "assets/images/radio-2.png"
-    },
-    {
-        title: "ЕСЛИ ХОЧЕШЬ ДЕПНУТЬ",
-        artist: "MD76 (пред. Дельфин)",
-        src: "assets/music/track4.mp3",
-        cover: "assets/images/radio-4.png"
-    },
-    {
-        title: "ГРАТАТАТА",
-        artist: "KAMZ0NER",
-        src: "assets/music/track5.mp3",
-        cover: "assets/images/radio-5.png"
-    },
-    {
-        title: "Саддам Хусейн",
-        artist: "Мистер Кредо (пред. Дельфин)",
-        src: "assets/music/track6.mp3",
-        cover: "assets/images/radio-6.png"
-    },
-    {
-        title: "ООО ААА СВО",
-        artist: "Ebanat508 (пред. Дельфин)",
-        src: "assets/music/track7.mp3",
-        cover: "assets/images/radio-7.png"
-    },
-    {
-        title: "Serbia Strong",
-        artist: "Unknown (пред. Дельфин)",
-        src: "assets/music/track8.mp3",
-        cover: "assets/images/radio-8.png"
-    },
-    {
-        title: "Я люблю",
-        artist: "Anacondaz (пред. Парус)",
-        src: "assets/music/track9.mp3",
-        cover: "assets/images/radio-9.png"
-    },
-    {
-        title: "Гимн Ост-Индии",
-        artist: "History Music (пред. Судья Холден)",
-        src: "assets/music/track10.mp3",
-        cover: "assets/images/radio-10.png"
-    },
+        const tracks = [
+            {
+                title: "Я ГИДРОЦЕФАЛ",
+                artist: "KAMZ0NER",
+                src: "assets/music/track1.mp3"
+            },
+            {
+                title: "Арбитраж",
+                artist: "KAMZ0NER",
+                src: "assets/music/track3.mp3"
+            },
+            {
+                title: "ГРАТАТАТА",
+                artist: "KAMZ0NER",
+                src: "assets/music/track5.mp3"
+            },
+            {
+                title: "Саддам Хусейн",
+                artist: "Мистер Кредо (пред. Дельфин)",
+                src: "assets/music/track6.mp3"
+            },
+            {
+                title: "Serbia Strong",
+                artist: "Unknown (пред. Дельфин)",
+                src: "assets/music/track8.mp3"
+            },
+            {
+                title: "Я люблю",
+                artist: "Anacondaz (пред. Парус)",
+                src: "assets/music/track9.mp3"
+            },
+            {
+                title: "Гимн Ост-Индии",
+                artist: "History Music (пред. Судья Холден)",
+                src: "assets/music/track10.mp3"
+            },
+            {
+                title: "План убийства Лукашенко",
+                artist: "Unknown",
+                src: "assets/music/track11.mp3"
+            },
+            {
+                title: "MOSKAU",
+                artist: "Unknown",
+                src: "assets/music/track12.mp3"
+            },
+            {
+                title: "Рулетка",
+                artist: "Unknown",
+                src: "assets/music/track13.mp3"
+            },
+            {
+                title: "70 лет октября",
+                artist: "Unknown",
+                src: "assets/music/track14.mp3"
+            },
+            {
+                title: "Русское поле экспериментов",
+                artist: "Unknown",
+                src: "assets/music/track15.mp3"
+            },
+            {
+                title: "Рыцари чести и долга",
+                artist: "Unknown",
+                src: "assets/music/track18.mp3"
+            },
+            {
+                title: "Burgundian Lullaby",
+                artist: "Unknown",
+                src: "assets/music/track19.mp3"
+            },
+            {
+                title: "Лето и арбалеты",
+                artist: "Unknown",
+                src: "assets/music/track21.mp3"
+            },
+            {
+                title: "juice (СВО Remix)",
+                artist: "Unknown",
+                src: "assets/music/track22.mp3"
+            },
+            {
+                title: "Свобода",
+                artist: "Unknown",
+                src: "assets/music/track30.mp3"
+            },
+            {
+                title: "Порвал штаны freestyle",
+                artist: "Unknown",
+                src: "assets/music/track31.mp3"
+            },
+            {
+                title: "Руны и свастики",
+                artist: "Unknown",
+                src: "assets/music/track33.mp3"
+            },
+            {
+                title: "Verify Your Clock",
+                artist: "Unknown",
+                src: "assets/music/track35.mp3"
+            },
+            {
+                title: "Боже, отдай нам царя",
+                artist: "Unknown",
+                src: "assets/music/track36.mp3"
+            },
+            {
+                title: "Teufelslied",
+                artist: "Unknown",
+                src: "assets/music/track37.mp3"
+            },
+            {
+                title: "13:56",
+                artist: "Unknown",
+                src: "assets/music/track38.mp3"
+            },
+            {
+                title: "New World Order",
+                artist: "Michaelanthony",
+                src: "assets/music/track40.mp3"
+            }
+        ];
 
-    // Начиная с 11-го трека - только указанный текст в artist
-    {
-        title: "План убийства Лукашенко",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track11.mp3",
-        cover: "assets/images/radio-11.png"
-    },
-    {
-        title: "MOSKAU",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track12.mp3",
-        cover: "assets/images/radio-12.png"
-    },
-    {
-        title: "Рулетка",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track13.mp3",
-        cover: "assets/images/radio-13.png"
-    },
-    {
-        title: "70 лет октября",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track14.mp3",
-        cover: "assets/images/radio-14.png"
-    },
-    {
-        title: "Русское поле экспериментов",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track15.mp3",
-        cover: "assets/images/radio-15.png"
-    },
-    {
-        title: "Бам бам бам, мы стреляем по хохлам",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track16.mp3",
-        cover: "assets/images/radio-18.png"
-    },
-    {
-        title: "Россия Вперёд",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track17.mp3",
-        cover: "assets/images/radio-20.png"
-    },
-    {
-        title: "Рыцари чести и долга",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track18.mp3",
-        cover: "assets/images/radio-16.png"
-    },
-    {
-        title: "Burgundian Lullaby",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track19.mp3",
-        cover: "assets/images/.png"
-    },
-    {
-        title: "Вставай Донбасс",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track20.mp3",
-        cover: "assets/images/radio-17.png"
-    },
-    {
-        title: "Лето и арбалеты",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track21.mp3",
-        cover: "assets/images/radio-19.png"
-    },
-    {
-        title: "juice (СВО Remix)",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track22.mp3",
-        cover: "assets/images/radio-22.png"
-    },
-    {
-        title: "Я РУССКИЙ",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track23.mp3",
-        cover: "assets/images/radio-23.png"
-    },
-    {
-        title: "Heil Adolf Hitler",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track24.mp3",
-        cover: "assets/images/radio-21.png"
-    },
-    {
-        title: "FREE PALESTINE PETARDA V JOPE",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track25.mp3",
-        cover: "assets/images/radio-24.png"
-    },
-    {
-        title: "Такого, как Путин",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track26.mp3",
-        cover: "assets/images/radio-23.png"
-    },
-    {
-        title: "ALLA SVO",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track27.mp3",
-        cover: "assets/images/radio-24.png"
-    },
-    {
-        title: "Я ебу собак",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track28.mp3",
-        cover: "assets/images/radio-25.png"
-    },
-    {
-        title: "Скибиби Алла",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track29.mp3",
-        cover: "assets/images/radio-22.png"
-    },
-    {
-        title: "Свобода",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track30.mp3",
-        cover: "assets/images/.png"
-    },
-    {
-        title: "Порвал штаны freestyle",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track31.mp3",
-        cover: "assets/images/.png"
-    },
-    {
-        title: "Водка, шлюхи и кальян",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track32.mp3",
-        cover: "assets/images/radio-34.png"
-    },
-    {
-        title: "Руны и свастики",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track33.mp3",
-        cover: "assets/images/radio-28.png"
-    },
-    {
-        title: "Nigger Nigger",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track34.mp3",
-        cover: "assets/images/radio-30.png"
-    },
-    {
-        title: "Verify Your Clock (часеке)",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track35.mp3",
-        cover: "assets/images/radio-31.png"
-    },
-    {
-        title: "Боже, отдай нам царя",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track36.mp3",
-        cover: "assets/images/radio-36.png"
-    },
-    {
-        title: "Teufelslied",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track37.mp3",
-        cover: "assets/images/radio-33.png"
-    },
-    {
-        title: "13:56",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track38.mp3",
-        cover: "assets/images/radio-38.png"
-    },
-    {
-        title: "Мы Америку догоним",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track39.mp3",
-        cover: "assets/images/radio-36.png"
-    },
-    {
-        title: "ARE YOU READY FOR THE NEW WORLD ORDER?",
-        artist: "(пред. @Bochonokbismarka, Шутняра, @Ania1875, @GigaClown, @syclefot, @the_cblp)",
-        src: "assets/music/track40.mp3",
-        cover: "assets/images/radio-40.png"
-    },
-    {
-        title: "4Q",
-        artist: "ilyhiryu",
-        src: "assets/music/20260207_220112_4Q.mp3",
-        cover: "assets/images/.png"
-    }
-];
-            
-            let currentTrackIndex = 0;
-            let isPlaying = false;
-            let isRepeat = false;
-            
-            // Initialize player
-            function loadTrack(index) {
-                const track = tracks[index];
-                audioPlayer.src = track.src;
-                currentTrackDisplay.textContent = track.title;
-                albumArt.src = track.cover;
-                
-                // Update active track in playlist
-                const trackItems = document.querySelectorAll('.track-item');
-                trackItems.forEach((item, i) => {
-                    if (i === index) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-                
-                // Reset progress bar
-                progressBar.style.width = '0%';
-                currentTimeDisplay.textContent = '0:00';
-                durationDisplay.textContent = '0:00';
-                
-                // Load metadata for duration
-                audioPlayer.addEventListener('loadedmetadata', function() {
-                    durationDisplay.textContent = formatTime(audioPlayer.duration);
-                });
-                
-                // If player was playing, continue playing
-                if (isPlaying) {
-                    audioPlayer.play();
-                    playIcon.classList.replace('fa-play', 'fa-pause');
-                }
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const repeatBtn = document.getElementById('repeatBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const trackTitle = document.getElementById('trackTitle');
+        const trackArtist = document.getElementById('trackArtist');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playlistEl = document.getElementById('playlist');
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let isRepeat = false;
+
+        function loadTrack(index) {
+            const track = tracks[index];
+            audio.src = track.src;
+            trackTitle.textContent = track.title;
+            trackArtist.textContent = track.artist;
+            updatePlaylist();
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
-            
-            // Format time (seconds to MM:SS)
-            function formatTime(seconds) {
-                const minutes = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-            }
-            
-            // Play/pause toggle
-            function togglePlay() {
-                if (isPlaying) {
-                    audioPlayer.pause();
-                    playIcon.classList.replace('fa-pause', 'fa-play');
-                    albumArt.classList.remove('rotate');
-                } else {
-                    audioPlayer.play();
-                    playIcon.classList.replace('fa-play', 'fa-pause');
-                    albumArt.classList.add('rotate');
-                }
-                isPlaying = !isPlaying;
-            }
-            
-            // Next track
-            function nextTrack() {
-                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                loadTrack(currentTrackIndex);
-            }
-            
-            // Previous track
-            function prevTrack() {
-                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-                loadTrack(currentTrackIndex);
-            }
-            
-            // Update progress bar
-            function updateProgress() {
-                const { currentTime, duration } = audioPlayer;
-                if (duration > 0) {
-                    const progressPercent = (currentTime / duration) * 100;
-                    progressBar.style.width = `${progressPercent}%`;
-                    currentTimeDisplay.textContent = formatTime(currentTime);
-                    durationDisplay.textContent = formatTime(duration);
-                }
-            }
-            
-            // Set progress bar on click
-            function setProgress(e) {
-                const width = this.clientWidth;
-                const clickX = e.offsetX;
-                const duration = audioPlayer.duration;
-                
-                if (!isNaN(duration)) {
-                    audioPlayer.currentTime = (clickX / width) * duration;
-                }
-            }
-            
-            // Toggle repeat
-            function toggleRepeat() {
-                isRepeat = !isRepeat;
-                if (isRepeat) {
-                    repeatBtn.classList.remove('text-gray-400');
-                    repeatBtn.classList.add('text-purple-500');
-                    repeatText.textContent = 'Повтор: Вкл';
-                } else {
-                    repeatBtn.classList.remove('text-purple-500');
-                    repeatBtn.classList.add('text-gray-400');
-                    repeatText.textContent = 'Повтор: Выкл';
-                }
-            }
-            
-            // Populate track list
-            function populateTrackList() {
-                trackList.innerHTML = '';
-                tracks.forEach((track, index) => {
-                    const trackItem = document.createElement('div');
-                    trackItem.className = 'track-item p-4 border-b border-gray-800 cursor-pointer transition flex items-center';
-                    if (index === currentTrackIndex) {
-                        trackItem.classList.add('active');
-                    }
-                    
-                    trackItem.innerHTML = `
-                        <div class="w-10 h-10 rounded overflow-hidden mr-4">
-                            <img src="${track.cover}" alt="${track.title}" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-medium">${track.title}</h4>
-                            <p class="text-sm text-gray-400">${track.artist}</p>
-                        </div>
-                    `;
-                    
-                    trackItem.addEventListener('click', () => {
-                        currentTrackIndex = index;
-                        loadTrack(currentTrackIndex);
-                        if (!isPlaying) {
-                            togglePlay();
-                        }
-                    });
-                    
-                    trackList.appendChild(trackItem);
-                });
-            }
-            
-            // Event listeners
-            playBtn.addEventListener('click', togglePlay);
-            nextBtn.addEventListener('click', nextTrack);
-            prevBtn.addEventListener('click', prevTrack);
-            audioPlayer.addEventListener('timeupdate', updateProgress);
-            audioPlayer.addEventListener('ended', () => {
-                if (isRepeat) {
-                    audioPlayer.currentTime = 0;
-                    audioPlayer.play();
-                } else {
-                    nextTrack();
-                }
-            });
-            document.querySelector('.progress-bar').addEventListener('click', setProgress);
-            repeatBtn.addEventListener('click', toggleRepeat);
-            volumeSlider.addEventListener('input', () => {
-                audioPlayer.volume = volumeSlider.value;
-            });
-            
-            // Initialize
-            populateTrackList();
+            isPlaying = !isPlaying;
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
             loadTrack(currentTrackIndex);
-            
-            // Animation on scroll
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            function checkScroll() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight - 100) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', checkScroll);
-            window.addEventListener('load', checkScroll);
+            if (isPlaying) audio.play();
+        }
 
-            // Ensure video plays on mobile
-            document.addEventListener('click', function() {
-                const video = document.querySelector('.bg-video');
-                if (video && video.paused) {
-                    video.play().catch(e => console.log(e));
-                }
-            }, { once: true });
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) audio.play();
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            if (isRepeat) {
+                repeatBtn.classList.add('repeat-active');
+            } else {
+                repeatBtn.classList.remove('repeat-active');
+            }
+        }
+
+        function updateProgress() {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = percent + '%';
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function setProgress(e) {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function updatePlaylist() {
+            playlistEl.innerHTML = '';
+            tracks.forEach((track, index) => {
+                const item = document.createElement('div');
+                item.className = 'track-item' + (index === currentTrackIndex ? ' active' : '');
+                item.innerHTML = `
+                    <div class="track-item-title">${track.title}</div>
+                    <div class="track-item-artist">${track.artist}</div>
+                `;
+                item.onclick = () => {
+                    currentTrackIndex = index;
+                    loadTrack(index);
+                    if (!isPlaying) togglePlay();
+                };
+                playlistEl.appendChild(item);
+            });
+        }
+
+        // Event listeners
+        playBtn.addEventListener('click', togglePlay);
+        prevBtn.addEventListener('click', prevTrack);
+        nextBtn.addEventListener('click', nextTrack);
+        repeatBtn.addEventListener('click', toggleRepeat);
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('ended', () => {
+            if (isRepeat) {
+                audio.currentTime = 0;
+                audio.play();
+            } else {
+                nextTrack();
+            }
         });
+        progressContainer.addEventListener('click', setProgress);
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+        });
+
+        // Initialize
+        audio.volume = 0.7;
+        loadTrack(currentTrackIndex);
+        updatePlaylist();
+
+        // Ensure video plays on mobile
+        document.addEventListener('click', function() {
+            const video = document.querySelector('.video-bg');
+            if (video && video.paused) {
+                video.play().catch(e => console.log(e));
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
