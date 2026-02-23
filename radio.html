@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Радио | Ost-India / Minoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preload локальных шрифтов -->
+    <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Manrope-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        /* ЛОКАЛЬНЫЕ ШРИФТЫ */
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Inter';src:url('fonts/Inter-ExtraBold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Manrope';src:url('fonts/Manrope-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+        @font-face{font-family:'Manrope';src:url('fonts/Manrope-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            background-color: #111827;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Manrope', 'Inter', sans-serif;
+        }
+        
+        /* Video Background */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.64);
+            z-index: -1;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 0 15px #4f46e5;
+        }
+        header a {
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: #a5b4fc;
+        }
+        .active-link {
+            color: #818cf8;
+            font-weight: 600;
+        }
+        
+        /* Page animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease forwards;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .page-title .underline {
+            width: 6rem;
+            height: 4px;
+            background-color: #6366f1;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 2px;
+        }
+        .page-title p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 36rem;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+        
+        /* Player container */
+        .player-container {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.2);
+            animation: fadeIn 1.2s ease forwards;
+        }
+        
+        /* Track info */
+        .track-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .track-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .track-artist {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #818cf8);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 3px;
+        }
+        
+        /* Time display */
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .control-btn {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #e2e8f0;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .control-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .play-btn {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        .play-btn:hover {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .repeat-active {
+            background: rgba(99, 102, 241, 0.4);
+            color: #818cf8;
+        }
+        
+        /* Volume control */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #6366f1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: #818cf8;
+            transform: scale(1.2);
+        }
+        
+        /* Playlist */
+        .playlist-container {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.2);
+            animation: fadeIn 1.4s ease forwards;
+        }
+        
+        .playlist-container h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .track-item {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .track-item:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateX(5px);
+        }
+        
+        .track-item.active {
+            background: rgba(99, 102, 241, 0.3);
+            border-color: #6366f1;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .track-item-title {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .track-item-artist {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.7);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            .controls {
+                gap: 1rem;
+            }
+            .track-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-container">
+        <video class="video-bg" autoplay loop muted playsinline>
+            <source src="assets/video/bg-radio.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <!-- Header -->
+    <header class="py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold text-white">Ost-India / Minoria</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
+                    <a href="radio.html" class="active-link">Радио</a>
+                    <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
+                </nav>
+                <button class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Радио Ost-India / Minoria</h1>
+            <div class="underline"></div>
+            <p>Предложенные треки участников нашего сообщества</p>
+        </div>
+
+        <!-- Player Section -->
+        <div class="max-w-3xl mx-auto mb-8">
+            <div class="player-container">
+                <!-- Track Info -->
+                <div class="track-info">
+                    <div class="track-title" id="trackTitle">Загрузка...</div>
+                    <div class="track-artist" id="trackArtist">Unknown</div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <!-- Time Display -->
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn" title="Предыдущая">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn" title="Воспроизвести">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn" title="Следующая">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control-btn" id="repeatBtn" title="Повтор">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up" style="color: #94a3b8;"></i>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Playlist Section -->
+        <div class="max-w-3xl mx-auto">
+            <div class="playlist-container">
+                <h2><i class="fas fa-list-ul mr-2"></i>Плейлист</h2>
+                <div id="playlist"></div>
+            </div>
+        </div>
+
+        <!-- Suggest Track Section -->
+        <div class="text-center mt-8 fade-in" style="animation-delay: 0.5s;">
+            <p class="text-gray-300 mb-4">Хотите добавить свою песню?</p>
+            <a href="https://t.me/sitemedia71_bot" target="_blank" class="inline-block bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                <i class="fas fa-paper-plane mr-2"></i>Используйте бота для хранилища медиа
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2026 Ost-India / Minoria. Все права защищены.</p>
+                <p class="text-sm mt-2">Права на треки принадлежат их законным владельцам.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="audio"></audio>
+
+    <!-- ========================================== -->
+    <!-- МОДУЛЬ НАСТРОЕК (КНОПКА, ПОДСКАЗКА, МОДАЛКА) -->
+    <!-- ========================================== -->
+
+    <!-- Плавающая кнопка настроек -->
+    <button id="settingsBtn" class="fixed bottom-6 right-6 w-14 h-14 bg-[#1a1a1a] border border-[#333] rounded-2xl flex items-center justify-center text-white hover:bg-[#252525] hover:border-[#555] transition-all duration-300 z-40 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:-translate-y-1">
+        <svg class="w-7 h-7 text-gray-300 group-hover:text-white transition-all duration-500 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </button>
+
+    <!-- Всплывающая подсказка "Новое!" -->
+    <div id="settingsTooltip" class="fixed bottom-24 right-6 w-72 bg-[#1a1a1a] border border-[#333] rounded-xl p-5 text-sm text-white shadow-[0_10px_25px_rgba(0,0,0,0.8)] z-40 transform translate-y-8 opacity-0 pointer-events-none transition-all duration-500 ease-out">
+        <div class="flex justify-between items-start mb-3">
+            <span class="bg-[#8b5cf6] text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded">Новое!</span>
+            <button id="closeTooltipBtn" class="text-gray-400 hover:text-white transition-colors cursor-pointer p-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <h4 class="font-bold text-base mb-2">Настройки сайта</h4>
+        <p class="text-gray-400 leading-relaxed text-xs">Здесь вы можете установить фоновую музыку, звуковые эффекты и много другого (в будущем). Попробуйте!</p>
+        <!-- Треугольник-указатель -->
+        <div class="absolute -bottom-2 right-5 w-4 h-4 bg-[#1a1a1a] border-b border-r border-[#333] transform rotate-45"></div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div id="settingsModalContent" class="bg-[#111] border border-[#333] w-full max-w-md rounded-2xl p-8 transform scale-95 opacity-0 transition-all duration-400 relative shadow-2xl mx-4">
+            
+            <button id="closeModalBtn" class="absolute top-5 right-5 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300 p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <h2 class="druk-font text-3xl mb-8 text-white text-center">Настройки</h2>
+
+            <!-- Блок: Фоновая музыка -->
+            <div class="mb-6 p-5 bg-[#1a1a1a] rounded-xl border border-[#222] hover:border-[#444] transition-colors group">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-10 h-10 rounded-lg bg-[#252525] flex items-center justify-center text-xl group-hover:bg-[#8b5cf6]/20 transition-colors">🎵</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm">Фоновая музыка</h3>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Трек Evolve (Opera GX)</p>
+                        </div>
+                    </div>
+                    <!-- Toggle -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="bgMusicToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-[#333] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8b5cf6]"></div>
+                    </label>
+                </div>
+                <!-- Ползунок -->
+                <div class="flex items-center gap-3 px-1">
+                    <span class="text-xs text-gray-500 opacity-50">🔈</span>
+                    <input type="range" id="bgMusicVolume" min="0" max="100" value="30" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#8b5cf6] hover:accent-[#a78bfa] transition-all focus:outline-none">
+                    <span class="text-xs text-gray-500 opacity-50">🔊</span>
+                </div>
+            </div>
+
+            <!-- Блок: Звуки интерфейса -->
+            <div class="mb-4 p-5 bg-[#1a1a1a] rounded-xl border border-[#222] hover:border-[#444] transition-colors group">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-10 h-10 rounded-lg bg-[#252525] flex items-center justify-center text-xl group-hover:bg-[#8b5cf6]/20 transition-colors">⌨️</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm">Звуки интерфейса</h3>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Клики, наведение, печать</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="uiSoundsToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-[#333] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8b5cf6]"></div>
+                    </label>
+                </div>
+            </div>
+
+                        <!-- Кнопки действий -->
+            <div class="flex gap-3 mt-6 mb-1">
+                <button id="resetSettingsBtn" class="flex-1 py-2.5 px-4 bg-[#1a1a1a] border border-[#333] hover:border-red-700 hover:text-red-400 text-gray-500 text-[11px] rounded-xl transition-all duration-300 uppercase tracking-widest">
+                    Сбросить настройки
+                </button>
+                <button id="muteAllBtn" class="flex-1 py-2.5 px-4 bg-[#1a1a1a] border border-[#333] hover:border-[#555] hover:text-white text-gray-500 text-[11px] rounded-xl transition-all duration-300 uppercase tracking-widest">
+                    Выкл. всё
+                </button>
+            </div>
+
+            <p class="text-center text-[10px] text-gray-600 mt-4 uppercase tracking-widest">Сохраняется автоматически</p>
+        </div>
+    </div>
+
+    <script>
+        const tracks = [
+            {
+                title: "Я ГИДРОЦЕФАЛ",
+                artist: "KAMZ0NER",
+                src: "assets/music/track1.mp3"
+            },
+            {
+                title: "Арбитраж",
+                artist: "KAMZ0NER",
+                src: "assets/music/track3.mp3"
+            },
+            {
+                title: "ГРАТАТАТА",
+                artist: "KAMZ0NER",
+                src: "assets/music/track5.mp3"
+            },
+            {
+                title: "Саддам Хусейн",
+                artist: "Мистер Кредо",
+                src: "assets/music/track6.mp3"
+            },
+            {
+                title: "Serbia Strong",
+                artist: "Unknown",
+                src: "assets/music/track8.mp3"
+            },
+            {
+                title: "Я люблю",
+                artist: "Anacondaz",
+                src: "assets/music/track9.mp3"
+            },
+            {
+                title: "Гимн Ост-Индии",
+                artist: "History Music",
+                src: "assets/music/track10.mp3"
+            },
+            {
+                title: "План убийства Лукашенко",
+                artist: "Unknown",
+                src: "assets/music/track11.mp3"
+            },
+            {
+                title: "MOSKAU",
+                artist: "Unknown",
+                src: "assets/music/track12.mp3"
+            },
+            {
+                title: "Рулетка",
+                artist: "Unknown",
+                src: "assets/music/track13.mp3"
+            },
+            {
+                title: "70 лет октября",
+                artist: "Unknown",
+                src: "assets/music/track14.mp3"
+            },
+            {
+                title: "Рыцари чести и долга",
+                artist: "Unknown",
+                src: "assets/music/track18.mp3"
+            },
+            {
+                title: "Burgundian Lullaby",
+                artist: "Unknown",
+                src: "assets/music/track19.mp3"
+            },
+            {
+                title: "Лето и арбалеты",
+                artist: "Unknown",
+                src: "assets/music/track21.mp3"
+            },
+            {
+                title: "juice (СВО Remix)",
+                artist: "Unknown",
+                src: "assets/music/track22.mp3"
+            },
+            {
+                title: "Свобода",
+                artist: "Unknown",
+                src: "assets/music/track30.mp3"
+            },
+            {
+                title: "Порвал штаны freestyle",
+                artist: "Unknown",
+                src: "assets/music/track31.mp3"
+            },
+            {
+                title: "Руны и свастики",
+                artist: "Unknown",
+                src: "assets/music/track33.mp3"
+            },
+            {
+                title: "Verify Your Clock",
+                artist: "Unknown",
+                src: "assets/music/track35.mp3"
+            },
+            {
+                title: "Боже, отдай нам царя",
+                artist: "Unknown",
+                src: "assets/music/track36.mp3"
+            },
+            {
+                title: "Teufelslied",
+                artist: "Unknown",
+                src: "assets/music/track37.mp3"
+            },
+            {
+                title: "13:56",
+                artist: "Unknown",
+                src: "assets/music/track38.mp3"
+            },
+            {
+                title: "New World Order",
+                artist: "Michaelanthony",
+                src: "assets/music/track40.mp3"
+            },
+    {
+        title: "Замай",
+        artist: "Замай",
+        src: "assets/music/20260207_222530_Замай.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "ТВИЧ",
+        artist: "KAMZ0NER",
+        src: "assets/music/20260208_124853_ТВИЧ.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Новый Год",
+        artist: "Д///ИХАД",
+        src: "assets/music/20260208_130936_Новый_Год.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Барабан",
+        artist: "Poнни, Spttchhouse",
+        src: "assets/music/20260208_152412_Барабан.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Rumble",
+        artist: "Rumble",
+        src: "assets/music/20260210_200551_Rumble.mp3",
+        cover: "assets/images/.png"
+    }
+];
+
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const repeatBtn = document.getElementById('repeatBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const trackTitle = document.getElementById('trackTitle');
+        const trackArtist = document.getElementById('trackArtist');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playlistEl = document.getElementById('playlist');
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let isRepeat = false;
+
+        function loadTrack(index) {
+            const track = tracks[index];
+            audio.src = track.src;
+            trackTitle.textContent = track.title;
+            trackArtist.textContent = track.artist;
+            updatePlaylist();
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) audio.play();
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) audio.play();
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            if (isRepeat) {
+                repeatBtn.classList.add('repeat-active');
+            } else {
+                repeatBtn.classList.remove('repeat-active');
+            }
+        }
+
+        function updateProgress() {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = percent + '%';
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function setProgress(e) {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function updatePlaylist() {
+            playlistEl.innerHTML = '';
+            tracks.forEach((track, index) => {
+                const item = document.createElement('div');
+                item.className = 'track-item' + (index === currentTrackIndex ? ' active' : '');
+                item.innerHTML = `
+                    <div class="track-item-title">${track.title}</div>
+                    <div class="track-item-artist">${track.artist}</div>
+                `;
+                item.onclick = () => {
+                    currentTrackIndex = index;
+                    loadTrack(index);
+                    if (!isPlaying) togglePlay();
+                };
+                playlistEl.appendChild(item);
+            });
+        }
+
+        // Event listeners
+        playBtn.addEventListener('click', togglePlay);
+        prevBtn.addEventListener('click', prevTrack);
+        nextBtn.addEventListener('click', nextTrack);
+        repeatBtn.addEventListener('click', toggleRepeat);
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('ended', () => {
+            if (isRepeat) {
+                audio.currentTime = 0;
+                audio.play();
+            } else {
+                nextTrack();
+            }
+        });
+        progressContainer.addEventListener('click', setProgress);
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+        });
+
+        // Initialize
+        audio.volume = 0.7;
+        loadTrack(currentTrackIndex);
+        updatePlaylist();
+
+        // Ensure video plays on mobile
+        document.addEventListener('click', function() {
+            const video = document.querySelector('.video-bg');
+            if (video && video.paused) {
+                video.play().catch(e => console.log(e));
+            }
+        }, { once: true });
+
+        // ==========================================
+        // ЛОГИКА НАСТРОЕК (UI, АНИМАЦИИ, LOCALSTORAGE)
+        // ==========================================
+
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        const settingsModalContent = document.getElementById('settingsModalContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const settingsTooltip = document.getElementById('settingsTooltip');
+        const closeTooltipBtn = document.getElementById('closeTooltipBtn');
+        
+        let tooltipTimeout;
+
+        // 1. Плавное открытие/закрытие модалки
+        function openSettings() {
+            settingsModal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                settingsModalContent.classList.remove('scale-95', 'opacity-0');
+                settingsModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            hideTooltip();
+        }
+
+        function closeSettings() {
+            settingsModalContent.classList.remove('scale-100', 'opacity-100');
+            settingsModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                settingsModal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', openSettings);
+            closeModalBtn.addEventListener('click', closeSettings);
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) closeSettings();
+            });
+        }
+
+        // 2. Логика подсказки "Новое!"
+        function showTooltip() {
+            if (settingsTooltip) {
+                settingsTooltip.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+                settingsTooltip.classList.add('opacity-100', 'translate-y-0');
+                tooltipTimeout = setTimeout(hideTooltip, 7000);
+            }
+        }
+
+        function hideTooltip() {
+            if (settingsTooltip) {
+                settingsTooltip.classList.remove('opacity-100', 'translate-y-0');
+                settingsTooltip.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+                clearTimeout(tooltipTimeout);
+            }
+        }
+
+        if (closeTooltipBtn) {
+            closeTooltipBtn.addEventListener('click', hideTooltip);
+        }
+
+        // Проверка первого визита
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasSeenTooltip = localStorage.getItem('om_settings_tooltip_seen');
+            
+            if (!hasSeenTooltip) {
+                setTimeout(() => {
+                    showTooltip();
+                    localStorage.setItem('om_settings_tooltip_seen', 'true');
+                }, 2000);
+            }
+        });
+
+        // 3. Сохранение настроек в браузере (Подготовка для аудио)
+        const bgMusicToggle = document.getElementById('bgMusicToggle');
+        const uiSoundsToggle = document.getElementById('uiSoundsToggle');
+        const bgMusicVolume = document.getElementById('bgMusicVolume');
+
+        if (bgMusicToggle && uiSoundsToggle && bgMusicVolume) {
+            // Читаем из памяти
+            bgMusicToggle.checked = localStorage.getItem('om_bg_music') === 'true';
+            uiSoundsToggle.checked = localStorage.getItem('om_ui_sounds') === 'true';
+            bgMusicVolume.value = localStorage.getItem('om_bg_volume') || '30';
+
+            // Сохраняем при клике
+            bgMusicToggle.addEventListener('change', (e) => {
+                localStorage.setItem('om_bg_music', e.target.checked);
+            });
+
+            uiSoundsToggle.addEventListener('change', (e) => {
+                localStorage.setItem('om_ui_sounds', e.target.checked);
+                console.log('Звуки интерфейса:', e.target.checked);
+            });
+
+            bgMusicVolume.addEventListener('input', (e) => {
+                localStorage.setItem('om_bg_volume', e.target.value);
+                applyVolume();
+            });
+        }
+    
+        // =============================================
+        // ЗВУКИ И МУЗЫКА
+        // =============================================
+        const bgAudio = new Audio('assets/music/evolve-bg.mp3');
+        bgAudio.loop = true;
+
+        const hoverSound = new Audio('assets/sounds/whoosh.mp3');
+        hoverSound.volume = 0.2;
+        const clickSound = new Audio('assets/sounds/click.mp3');
+        clickSound.volume = 0.5;
+
+        let bgFadeInterval;
+        function fadeInMusic(targetVolume) {
+            clearInterval(bgFadeInterval);
+            bgAudio.play().catch(() => {});
+            bgFadeInterval = setInterval(() => {
+                if (bgAudio.volume < targetVolume - 0.04) {
+                    bgAudio.volume = Math.min(targetVolume, +(bgAudio.volume + 0.05).toFixed(2));
+                } else { bgAudio.volume = targetVolume; clearInterval(bgFadeInterval); }
+            }, 50);
+        }
+        function fadeOutMusic() {
+            clearInterval(bgFadeInterval);
+            bgFadeInterval = setInterval(() => {
+                if (bgAudio.volume > 0.05) {
+                    bgAudio.volume = Math.max(0, +(bgAudio.volume - 0.05).toFixed(2));
+                } else { bgAudio.volume = 0; bgAudio.pause(); clearInterval(bgFadeInterval); }
+            }, 50);
+        }
+        function applyVolume() {
+            if (bgMusicToggle && bgMusicToggle.checked)
+                bgAudio.volume = (bgMusicVolume ? bgMusicVolume.value : 30) / 100;
+        }
+        function toggleMusic() {
+            if (bgMusicToggle && bgMusicToggle.checked) {
+                bgAudio.volume = 0;
+                fadeInMusic((bgMusicVolume ? bgMusicVolume.value : 30) / 100);
+            } else { fadeOutMusic(); }
+        }
+
+        // Автоплей при первом клике
+        document.body.addEventListener('click', () => {
+            if (bgMusicToggle && bgMusicToggle.checked && bgAudio.paused) toggleMusic();
+        }, { once: true });
+
+        // Воспроизведение звука (клон — параллельно)
+        function playSound(audioTemplate) {
+            if (!uiSoundsToggle || !uiSoundsToggle.checked) return;
+            const clone = audioTemplate.cloneNode(true);
+            clone.volume = audioTemplate.volume;
+            clone.play().catch(() => {});
+        }
+
+        // click — на любой клик по странице
+        document.addEventListener('click', () => { playSound(clickSound); });
+
+        // whoosh — только на кнопку бота
+        document.querySelectorAll('a[href*="t.me"]').forEach(el => {
+            el.addEventListener('mouseenter', () => playSound(hoverSound));
+        });
+
+        // Подключаем toggleMusic к переключателю (поверх существующего listener)
+        if (bgMusicToggle) {
+            bgMusicToggle.addEventListener('change', () => toggleMusic());
+        }
+        if (bgMusicVolume) {
+            bgMusicVolume.addEventListener('input', () => applyVolume());
+        }
+
+        // =============================================
+        // СБРОС НАСТРОЕК
+        // =============================================
+        const resetSettingsBtn = document.getElementById('resetSettingsBtn');
+        if (resetSettingsBtn) {
+            resetSettingsBtn.addEventListener('click', () => {
+                localStorage.clear();
+                if (bgMusicToggle) bgMusicToggle.checked = false;
+                if (uiSoundsToggle) uiSoundsToggle.checked = false;
+                if (bgMusicVolume) bgMusicVolume.value = '30';
+                fadeOutMusic();
+                resetSettingsBtn.textContent = '✓ Сброшено';
+                resetSettingsBtn.classList.add('text-green-400', 'border-green-700');
+                setTimeout(() => {
+                    resetSettingsBtn.textContent = 'Сбросить настройки';
+                    resetSettingsBtn.classList.remove('text-green-400', 'border-green-700');
+                }, 1500);
+            });
+        }
+
+        // =============================================
+        // ВЫКЛЮЧИТЬ ВСЁ
+        // =============================================
+        const muteAllBtn = document.getElementById('muteAllBtn');
+        if (muteAllBtn) {
+            muteAllBtn.addEventListener('click', () => {
+                if (bgMusicToggle) { bgMusicToggle.checked = false; localStorage.setItem('om_bg_music', 'false'); }
+                if (uiSoundsToggle) { uiSoundsToggle.checked = false; localStorage.setItem('om_ui_sounds', 'false'); }
+                fadeOutMusic();
+                muteAllBtn.textContent = '✓ Выключено';
+                muteAllBtn.classList.add('text-green-400', 'border-green-700');
+                setTimeout(() => {
+                    muteAllBtn.textContent = 'Выкл. всё';
+                    muteAllBtn.classList.remove('text-green-400', 'border-green-700');
+                }, 1500);
+            });
+        }
+
+    </script>
+</body>
+</html>

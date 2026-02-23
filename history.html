@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История чатов | Ост-Индия и Минория</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Local Fonts */
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            background-color: #111827;
+        }
+
+        /* Video Background */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.64);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 0 15px #a855f7;
+        }
+
+        header a {
+            transition: color 0.3s ease;
+        }
+
+        header a:hover {
+            color: #c084fc;
+        }
+
+        .active-link {
+            color: #d8b4fe;
+            font-weight: 600;
+        }
+
+        /* Heading block on main */
+        .page-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .page-title h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-title .underline {
+            width: 6rem;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #a855f7, #d8b4fe, #a855f7, transparent);
+            margin: 0 auto 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .page-title p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 36rem;
+            margin: 0 auto;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #a855f7;
+            border: 2px solid #a855f7;
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            color: #d8b4fe;
+        }
+
+        /* Admin cards */
+        .admin-card {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px transparent;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        /* Vintage image style */
+        .vintage-img {
+            filter: grayscale(60%) contrast(110%) sepia(20%);
+            transition: filter 0.5s ease;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .vintage-img:hover {
+            filter: grayscale(30%) contrast(120%) sepia(10%);
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
+            margin: 4rem 0;
+        }
+
+        /* Section headers with accent */
+        section h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            font-size: 1.875rem;
+        }
+
+        section h2 span {
+            width: 3px;
+            height: 32px;
+            display: inline-block;
+            margin-right: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 1s ease forwards;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-stack {
+                flex-direction: column !important;
+            }
+            .mobile-order-1 { order: 1; }
+            .mobile-order-2 { order: 2; }
+            .page-title h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-container">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="assets/video/bg-history.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <nav class="flex space-x-10">
+                <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Главная</a>
+                <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
+                <a href="history.html" class="active-link transition duration-300">История</a>
+            </nav>
+            <a href="https://t.me/Maydesk" target="_blank" class="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white transition duration-300">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-14 relative z-10 max-w-6xl">
+        <!-- Page Title and Subtitle -->
+        <div class="page-title">
+            <h1>История чатов</h1>
+            <div class="underline"></div>
+            <p>Хроники цифрового сообщества Ост-Индия и его ответвлений</p>
+        </div>
+
+        <!-- Ost-India Section -->
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1">
+                <img src="assets/images/ostindia.png" alt="Ost-India Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+            </div>
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-blue-500 mr-3"></span>
+                    Ост-Индия
+                </h2>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Основание и ранние дни</h3>
+                    <p class="text-gray-300 mb-4">Чат "Ост-Индия" был создан 3 августа 2024 года Маратием, который стал его основателем и первым админом.</p>
+                    <p class="text-gray-300">Изначально чат был просто местом для общения в телеге, но очень быстро перерос в нечто большее — в живое цифровое пространство со своими традициями, внутренними приколами и настоящей атмосферой.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Кровавый четверг</h3>
+                    <p class="text-gray-300">Один из самых жёстких моментов в истории Ост-Индии. Админ Тавас выступил против управления Маратия и публично потребовал «революции». Несколько часов в чате шёл открытый конфликт. Все участники были в шоке от происходящего. Это событие до сих пор вспоминают как «Кровавый четверг».</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Чистка Еврея 31 декабря</h3>
+                    <p class="text-gray-300 mb-2">В ночь на 31 декабря 2024 года, пока все админы были оффлайн, админ по имени Еврей провёл самую масштабную чистку в истории чата. Он выкинул из чата почти всех — около 200 человек, оставив только себя и модераторов.</p>
+                    <p class="text-gray-300 mb-2">Когда остальные админы вернулись, чат был пуст. Еврей назвал это "сюрпризом" и "давним планом". В итоге он был снят с прав, позже помилован, но в админы не вернулся.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admins Section -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center" style="font-family: 'Exo 2', sans-serif;">Администрация</h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Все, кто держал чат — по очереди или вместе. Без них Ост-Индия не была бы такой:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Маратий</h4>
+                    <p class="text-gray-400 text-sm">Основатель чата, создал основу, спокойный стиль управления.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Даннил @danyabz</h4>
+                    <p class="text-gray-400 text-sm">Стал админом после выборов, активный участник.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Иван Гойда @Ivan_Goida</h4>
+                    <p class="text-gray-400 text-sm">Админ из той же волны выборов.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">БЕЛЫЙ АВАТТ @baaltik</h4>
+                    <p class="text-gray-400 text-sm">Друг Марата, его также называют Тавасом.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Devastator @MavteMorzo</h4>
+                    <p class="text-gray-400 text-sm">Один из создателей мода на Ост-Индию. Выиграл на выборах на 4 ранг.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">бочонок Бисмарка @Bochonokbismarka</h4>
+                    <p class="text-gray-400 text-sm">Быстро реагирует на шлюхоботов, беспорядок в чате. Стал админом недавно.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Shel1done @Shel1done</h4>
+                    <p class="text-gray-400 text-sm">Старичок чата, не всегда активен, но уважаемый (нет).</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Роман @AlexeyAndreychenko</h4>
+                    <p class="text-gray-400 text-sm">Самый первый участник Ост-Индии, один из самых уважаемых участников чата.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Kurtuko @OneKurtuko</h4>
+                    <p class="text-gray-400 text-sm">Не доживет до 12, зеленая тля и просто хороший человек.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Hiomrat @Hiomrat</h4>
+                    <p class="text-gray-400 text-sm">Админ, который также сидит в чате почти с его создания. Имеет 5 ранг.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Minoria Section -->
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1">
+                <img src="assets/images/minoria.png" alt="Minoria Chat"
+                     class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+            </div>
+
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-red-500 mr-3"></span>
+                    Минория
+                </h2>
+
+                <div class="space-y-8">
+                    <!-- Основание и ранние дни -->
+                    <div class="relative pl-10">
+                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                        <h3 class="text-xl font-semibold text-purple-300 mb-3">Основание и ранние дни</h3>
+                        <p class="text-gray-300">
+                            Минория была создана раньше Ост-Индии - в марте 2024 года. Изначально активность была очень низкой, сообщений было мало. Позже чат стал ответвлением Ост-Индии, развивая собственную идентичность.
+                        </p>
+                    </div>
+
+                    <!-- Чистка канала Минорным Помидором -->
+                    <div class="relative pl-10">
+                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                        <h3 class="text-xl font-semibold text-purple-300 mb-3">Чистка канала Минорным Помидором</h3>
+                        <p class="text-gray-300">
+                            Ключевое событие в истории Минории - чистка канала, проведенная Минорным Помидором. Из-за личных обид он удалил многих участников из канала. После этого долгое время сообщество восстанавливалось и набирало новых подписчиков.
+                        </p>
+                    </div>
+
+                    <!-- Ватсап мемы -->
+                    <div class="relative pl-10">
+                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                        <h3 class="text-xl font-semibold text-purple-300 mb-3">Ватсап мемы</h3>
+                        <p class="text-gray-300 mb-2">
+                            Второе ключевое событие - появление ватсап-мемов. Скорее всего, инициаторами были Майдеск или Кайзер, которые начали распространять мемы про WhatsApp. Сообщество подхватило эту тему, и мемы стали популярны.
+                        </p>
+                        <p class="text-gray-300">
+                            Рупл создал стикерпак против Ватсапа, но он не получил широкой поддержки в сообществе.
+                        </p>
+                    </div>
+
+                    <!-- Уход и возвращение Минора -->
+                    <div class="relative pl-10">
+                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                        <h3 class="text-xl font-semibold text-purple-300 mb-3">Уход и возвращение Минора</h3>
+                        <p class="text-gray-300">
+                            Третье значимое событие - уход основателя Минора. Владельцем канала и чата стал Кайзер. Позже Минор вернулся под именем Маяковский, но теперь он просто админ, а не владелец.
+                        </p>
+                    </div>
+
+                    <!-- Конец Минории -->
+                    <div class="relative pl-10">
+                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                        <h3 class="text-xl font-semibold text-purple-300 mb-3">Конец Минории</h3>
+                        <p class="text-gray-300">
+                            Из-за агрессии Минории в сторону Ост-Индии и открытия в ней портала в ад ост-индийцы начали войну с Минорией. 8 января ночью Не Лама устроил чистку в Минории и удалил всех, кроме 17 ботов и 10 админов. После этого Минория умерла и скатилась до 60 сообщений в сутки.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minoria Admins Section -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center" style="font-family: 'Exo 2', sans-serif;">Администрация Минории</h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Именно они побеждают на выборах, делают актив в чате, и защищают чат от революций и переворотов.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Илья @finger_king</h4>
+                    <p class="text-gray-400 text-sm">Рофельный и активный, также получил четвертый ранг в процессе выборов.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Артёмка @HellToYou</h4>
+                    <p class="text-gray-400 text-sm">Получил 4 ранг после победы на выборах Шутерка.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Lolik @forsakenlil</h4>
+                    <p class="text-gray-400 text-sm">Стал админом после выборов в августе 2025, создатель известного бота.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Молодой Шутерок @Ktotoparalonow</h4>
+                    <p class="text-gray-400 text-sm">Шутерок получил 5 ранг в ходе демократических выборов в Минории и поставил людей, которые также были выбраны демократическим путем в админы.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Wes-India Section -->
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2 md:order-1">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-purple-500 mr-3"></span>
+                    Вест-Индия
+                </h2>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Раннее время</h3>
+                    <p class="text-gray-300">Чат был создан 14 апреля 2025 года, и до конца августа в нём был низкий актив. В конце августа-сентября в чат массово переходили Ост-Индийцы и сделали этот чат ответвлением.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Передача владельца Сотарку</h3>
+                    <p class="text-gray-300">С каждым днём олды чата вместе с ними и Окт активили всё меньше, и в итоге ушли в свой чат или ассимилировались и стали Ост-Индийцами. Окт решил уйти с поста владельца и перестать управлять чатом, и получил 5 ранг за заслуги в развитии чата.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">СВО в Ла Короне</h3>
+                    <p class="text-gray-300 mb-2">28 ноября, около 20 Ост-Индийцев зашли в чат и начали общаться с местными. Владелец чата и администрация очень негативно отнеслись к приходу "мигрантов" и массово выдавали пожизненные муты, баны, варны.</p>
+                    <p class="text-gray-300">На следующих выборах админа победил Хиомрат, но его сняли.</p>
+                    <p class="text-gray-300 mb-2">28 декабря, СВО было официально завершено победой, Вест-Индийцы добились отмены правила про оскорбление родственников, и им навсегда разрешили находиться в Ла Короне.</p>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1 md:order-2">
+                <img src="assets/images/PH.png" alt="West-India Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+            </div>
+        </section>
+
+        <!-- Wes-India Admins Section -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center" style="font-family: 'Exo 2', sans-serif;">
+                Администрация Вест-Индии
+            </h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">
+                Ниже представлены администраторы высокого ранга и их коллеги. Большинство админов 4 ранга являются назначаемыми и могут быть сняты в любой момент.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Сотарк @TheGreatTrialMarshal</h4>
+                    <p class="text-gray-400 text-sm">Владелец чата, привёл в чат ост индийцев, ранее был 5 рангом.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Окт @OkTirrrs</h4>
+                    <p class="text-gray-400 text-sm">Предыдущий владелец чата, один из олдов, 5 ранг.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Бочонок Бисмарка @Bochonokbismarka</h4>
+                    <p class="text-gray-400 text-sm">Победил на выборах 5 ранга, делает мемы с сотарком.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Джон Смит @SomeOrdinaryJohn</h4>
+                    <p class="text-gray-400 text-sm">Админ после победы на выборах, уважаемый человек.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Кайзер</h4>
+                    <p class="text-gray-400 text-sm">Админ за особые заслуги, сделал чистку в ост индии.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Подвал @Kurkuma61</h4>
+                    <p class="text-gray-400 text-sm">Стал админом, потому что мечтал об этом с детства.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Не Лама @Nolamach</h4>
+                    <p class="text-gray-400 text-sm">Сделал чистку в Минории, герой СВО в Ла Короне </p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Maydesk</h4>
+                    <p class="text-gray-400 text-sm">Стал админом на выборах в конце 2025 года</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Австропаффинз @Austriakkk</h4>
+                    <p class="text-gray-400 text-sm"></p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Амир Камаров @Aloearner</h4>
+                    <p class="text-gray-400 text-sm">Легенда и очень культурный человек, часто сидит в чате</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- История Ля Корона Section -->
+        <section class="slide-up mb-24 mobile-stack flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Image -->
+            <div class="w-full md:w-1/2 mobile-order-1">
+                <img src="assets/images/LK.png" alt="Ля Корона Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+            </div>
+            <!-- Content -->
+            <div class="w-full md:w-1/2 mobile-order-2">
+                <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-yellow-500 mr-3"></span>
+                    Ля Корона
+                </h2>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Основание</h3>
+                    <p class="text-gray-300">Чат был основан 12 августа 2025 года как политическая партия чата Блеквуда и оставался мёртв до начала революции.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Революция и война против Блеквуда</h3>
+                    <p class="text-gray-300">30 августа Егор начал восстание против чата Блеквуда, а затем вёл войну против него. Чат Блеквуда окончательно погиб, а Ля Корона продолжала расширяться.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Восстания Махновца</h3>
+                    <p class="text-gray-300">Из-за личной неприязни Махновца к Егору он создавал многочисленные чаты, куда переманивал участников из Ля Короны и заставлял их быть активными. Также он платил деньги за снос и докс Егора.</p>
+                </div>
+                <div class="timeline-item mb-8 relative pl-8">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-3">Трудные времена</h3>
+                    <p class="text-gray-300">Из-за провалов Егора во внешней и внутренней политике, повлекших волнения среди участников и администраторов, некоторые админы перешли на сторону Вест-Индии, а некоторые добровольно покинули свои должности. Оставшиеся предлагали Егору передать овнера чата другому человеку. Егор отказался, но назначил Рика маршалом и дал ему независимость в действиях как компромисс.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ля Корона Admins Section -->
+        <div class="slide-up mt-16">
+            <h3 class="text-2xl font-semibold text-white mb-8 text-center" style="font-family: 'Exo 2', sans-serif;">Администрация Ля Короны</h3>
+            <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Администраторы, которые управляли и управляют чатом Ля Корона:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Солевая Шишка</h4>
+                    <p class="text-gray-400 text-sm">Дипломат чата.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Рик</h4>
+                    <p class="text-gray-400 text-sm">Лучший друг Егора, маршал.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Датчан</h4>
+                    <p class="text-gray-400 text-sm">Олд и активный участник.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Скала</h4>
+                    <p class="text-gray-400 text-sm">Следит за порядком.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Бочонок Бисмарка</h4>
+                    <p class="text-gray-400 text-sm">Ост-индиец, генератор событий.</p>
+                </div>
+                <div class="admin-card">
+                    <h4 class="font-bold text-white text-lg">Не Лама</h4>
+                    <p class="text-gray-400 text-sm">Олд, позже стал ост-индийцем.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evolution Section -->
+        <div class="slide-up mt-16 timeline-item relative pl-8" style="border-left-color: rgba(168, 85, 247, 0.5)">
+            <h3 class="text-2xl font-semibold text-purple-300 mb-4">Эволюция сообществ</h3>
+            <p class="text-gray-300">В настоящее время Минория переживает период низкой активности из-за большой чистки Не Ламы. Ост-Индия переживает период стагнации. Вест-Индия также стагнирует, но в ней больше актива. Ла Корона сейчас страдает от последствий накрутки участников в канале и деаноне админов. Будущее четырёх чатов неизвестно.</p>
+        </div>
+
+        <!-- Footer -->
+    </main>
+
+    <footer class="bg-gray-900/80 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">
+                Made by <a href="https://t.me/Maydesk" target="_blank" class="text-purple-400 hover:text-purple-300">@Maydesk</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- МОДУЛЬ НАСТРОЕК (КНОПКА, ПОДСКАЗКА, МОДАЛКА) -->
+    <!-- ========================================== -->
+
+    <!-- Плавающая кнопка настроек -->
+    <button id="settingsBtn" class="fixed bottom-6 right-6 w-14 h-14 bg-[#1a1a1a] border border-[#333] rounded-2xl flex items-center justify-center text-white hover:bg-[#252525] hover:border-[#555] transition-all duration-300 z-40 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:-translate-y-1">
+        <svg class="w-7 h-7 text-gray-300 group-hover:text-white transition-all duration-500 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </button>
+
+    <!-- Всплывающая подсказка "Новое!" -->
+    <div id="settingsTooltip" class="fixed bottom-24 right-6 w-72 bg-[#1a1a1a] border border-[#333] rounded-xl p-5 text-sm text-white shadow-[0_10px_25px_rgba(0,0,0,0.8)] z-40 transform translate-y-8 opacity-0 pointer-events-none transition-all duration-500 ease-out">
+        <div class="flex justify-between items-start mb-3">
+            <span class="bg-[#8b5cf6] text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded">Новое!</span>
+            <button id="closeTooltipBtn" class="text-gray-400 hover:text-white transition-colors cursor-pointer p-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <h4 class="font-bold text-base mb-2">Настройки сайта</h4>
+        <p class="text-gray-400 leading-relaxed text-xs">Здесь вы можете установить фоновую музыку, звуковые эффекты и много другого (в будущем). Попробуйте!</p>
+        <!-- Треугольник-указатель -->
+        <div class="absolute -bottom-2 right-5 w-4 h-4 bg-[#1a1a1a] border-b border-r border-[#333] transform rotate-45"></div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div id="settingsModalContent" class="bg-[#111] border border-[#333] w-full max-w-md rounded-2xl p-8 transform scale-95 opacity-0 transition-all duration-400 relative shadow-2xl mx-4">
+            
+            <button id="closeModalBtn" class="absolute top-5 right-5 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300 p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <h2 class="druk-font text-3xl mb-8 text-white text-center">Настройки</h2>
+
+            <!-- Блок: Фоновая музыка -->
+            <div class="mb-6 p-5 bg-[#1a1a1a] rounded-xl border border-[#222] hover:border-[#444] transition-colors group">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-10 h-10 rounded-lg bg-[#252525] flex items-center justify-center text-xl group-hover:bg-[#8b5cf6]/20 transition-colors">🎵</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm">Фоновая музыка</h3>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Трек Evolve (Opera GX)</p>
+                        </div>
+                    </div>
+                    <!-- Toggle -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="bgMusicToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-[#333] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8b5cf6]"></div>
+                    </label>
+                </div>
+                <!-- Ползунок -->
+                <div class="flex items-center gap-3 px-1">
+                    <span class="text-xs text-gray-500 opacity-50">🔈</span>
+                    <input type="range" id="bgMusicVolume" min="0" max="100" value="30" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#8b5cf6] hover:accent-[#a78bfa] transition-all focus:outline-none">
+                    <span class="text-xs text-gray-500 opacity-50">🔊</span>
+                </div>
+            </div>
+
+            <!-- Блок: Звуки интерфейса -->
+            <div class="mb-4 p-5 bg-[#1a1a1a] rounded-xl border border-[#222] hover:border-[#444] transition-colors group">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-3 items-center">
+                        <div class="w-10 h-10 rounded-lg bg-[#252525] flex items-center justify-center text-xl group-hover:bg-[#8b5cf6]/20 transition-colors">⌨️</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm">Звуки интерфейса</h3>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Клики, наведение, печать</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="uiSoundsToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-[#333] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8b5cf6]"></div>
+                    </label>
+                </div>
+            </div>
+
+                        <!-- Кнопки действий -->
+            <div class="flex gap-3 mt-6 mb-1">
+                <button id="resetSettingsBtn" class="flex-1 py-2.5 px-4 bg-[#1a1a1a] border border-[#333] hover:border-red-700 hover:text-red-400 text-gray-500 text-[11px] rounded-xl transition-all duration-300 uppercase tracking-widest">
+                    Сбросить настройки
+                </button>
+                <button id="muteAllBtn" class="flex-1 py-2.5 px-4 bg-[#1a1a1a] border border-[#333] hover:border-[#555] hover:text-white text-gray-500 text-[11px] rounded-xl transition-all duration-300 uppercase tracking-widest">
+                    Выкл. всё
+                </button>
+            </div>
+
+            <p class="text-center text-[10px] text-gray-600 mt-4 uppercase tracking-widest">Сохраняется автоматически</p>
+        </div>
+    </div>
+    <!-- ========================================== -->
+
+    <script>
+        // Simple scroll animation trigger
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach((section) => {
+                observer.observe(section);
+            });
+
+            // Ensure video plays on mobile
+            const video = document.querySelector('.video-bg');
+            if (video) {
+                video.play().catch(e => {
+                    // Fallback for autoplay restrictions
+                    document.addEventListener('click', function() {
+                        video.play();
+                    }, { once: true });
+                });
+            }
+        });
+
+        // ==========================================
+        // ЛОГИКА НАСТРОЕК (UI, АНИМАЦИИ, LOCALSTORAGE)
+        // ==========================================
+
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        const settingsModalContent = document.getElementById('settingsModalContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const settingsTooltip = document.getElementById('settingsTooltip');
+        const closeTooltipBtn = document.getElementById('closeTooltipBtn');
+        
+        let tooltipTimeout;
+
+        // 1. Плавное открытие/закрытие модалки
+        function openSettings() {
+            settingsModal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                settingsModalContent.classList.remove('scale-95', 'opacity-0');
+                settingsModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            hideTooltip();
+        }
+
+        function closeSettings() {
+            settingsModalContent.classList.remove('scale-100', 'opacity-100');
+            settingsModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                settingsModal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', openSettings);
+            closeModalBtn.addEventListener('click', closeSettings);
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) closeSettings();
+            });
+        }
+
+        // 2. Логика подсказки "Новое!"
+        function showTooltip() {
+            if (settingsTooltip) {
+                settingsTooltip.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+                settingsTooltip.classList.add('opacity-100', 'translate-y-0');
+                tooltipTimeout = setTimeout(hideTooltip, 7000);
+            }
+        }
+
+        function hideTooltip() {
+            if (settingsTooltip) {
+                settingsTooltip.classList.remove('opacity-100', 'translate-y-0');
+                settingsTooltip.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+                clearTimeout(tooltipTimeout);
+            }
+        }
+
+        if (closeTooltipBtn) {
+            closeTooltipBtn.addEventListener('click', hideTooltip);
+        }
+
+        // Проверка первого визита
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasSeenTooltip = localStorage.getItem('om_settings_tooltip_seen');
+            
+            if (!hasSeenTooltip) {
+                setTimeout(() => {
+                    showTooltip();
+                    localStorage.setItem('om_settings_tooltip_seen', 'true');
+                }, 2000);
+            }
+        });
+
+        // 3. Сохранение настроек в браузере (Подготовка для аудио)
+        const bgMusicToggle = document.getElementById('bgMusicToggle');
+        const uiSoundsToggle = document.getElementById('uiSoundsToggle');
+        const bgMusicVolume = document.getElementById('bgMusicVolume');
+
+        if (bgMusicToggle && uiSoundsToggle && bgMusicVolume) {
+            // Читаем из памяти
+            bgMusicToggle.checked = localStorage.getItem('om_bg_music') === 'true';
+            uiSoundsToggle.checked = localStorage.getItem('om_ui_sounds') === 'true';
+            bgMusicVolume.value = localStorage.getItem('om_bg_volume') || '30';
+
+            // Сохраняем при клике
+            bgMusicToggle.addEventListener('change', (e) => {
+                localStorage.setItem('om_bg_music', e.target.checked);
+            });
+
+            uiSoundsToggle.addEventListener('change', (e) => {
+                localStorage.setItem('om_ui_sounds', e.target.checked);
+                console.log('Звуки интерфейса:', e.target.checked);
+            });
+
+            bgMusicVolume.addEventListener('input', (e) => {
+                localStorage.setItem('om_bg_volume', e.target.value);
+                applyVolume();
+            });
+        }
+    
+        // =============================================
+        // ЗВУКИ И МУЗЫКА
+        // =============================================
+        const bgAudio = new Audio('assets/music/evolve-bg.mp3');
+        bgAudio.loop = true;
+
+        const hoverSound = new Audio('assets/sounds/whoosh.mp3');
+        hoverSound.volume = 0.2;
+        const clickSound = new Audio('assets/sounds/click.mp3');
+        clickSound.volume = 0.5;
+
+        let bgFadeInterval;
+        function fadeInMusic(targetVolume) {
+            clearInterval(bgFadeInterval);
+            bgAudio.play().catch(() => {});
+            bgFadeInterval = setInterval(() => {
+                if (bgAudio.volume < targetVolume - 0.04) {
+                    bgAudio.volume = Math.min(targetVolume, +(bgAudio.volume + 0.05).toFixed(2));
+                } else { bgAudio.volume = targetVolume; clearInterval(bgFadeInterval); }
+            }, 50);
+        }
+        function fadeOutMusic() {
+            clearInterval(bgFadeInterval);
+            bgFadeInterval = setInterval(() => {
+                if (bgAudio.volume > 0.05) {
+                    bgAudio.volume = Math.max(0, +(bgAudio.volume - 0.05).toFixed(2));
+                } else { bgAudio.volume = 0; bgAudio.pause(); clearInterval(bgFadeInterval); }
+            }, 50);
+        }
+        function applyVolume() {
+            if (bgMusicToggle && bgMusicToggle.checked)
+                bgAudio.volume = (bgMusicVolume ? bgMusicVolume.value : 30) / 100;
+        }
+        function toggleMusic() {
+            if (bgMusicToggle && bgMusicToggle.checked) {
+                bgAudio.volume = 0;
+                fadeInMusic((bgMusicVolume ? bgMusicVolume.value : 30) / 100);
+            } else { fadeOutMusic(); }
+        }
+
+        // Автоплей при первом клике
+        document.body.addEventListener('click', () => {
+            if (bgMusicToggle && bgMusicToggle.checked && bgAudio.paused) toggleMusic();
+        }, { once: true });
+
+        // Воспроизведение звука (клон — параллельно)
+        function playSound(audioTemplate) {
+            if (!uiSoundsToggle || !uiSoundsToggle.checked) return;
+            const clone = audioTemplate.cloneNode(true);
+            clone.volume = audioTemplate.volume;
+            clone.play().catch(() => {});
+        }
+
+        // click — на любой клик по странице
+        document.addEventListener('click', () => { playSound(clickSound); });
+
+        // whoosh — на карточки администраторов
+        document.querySelectorAll('.admin-card').forEach(el => {
+            el.addEventListener('mouseenter', () => playSound(hoverSound));
+        });
+
+        // Подключаем toggleMusic к переключателю (поверх существующего listener)
+        if (bgMusicToggle) {
+            bgMusicToggle.addEventListener('change', () => toggleMusic());
+        }
+        if (bgMusicVolume) {
+            bgMusicVolume.addEventListener('input', () => applyVolume());
+        }
+
+        // =============================================
+        // СБРОС НАСТРОЕК
+        // =============================================
+        const resetSettingsBtn = document.getElementById('resetSettingsBtn');
+        if (resetSettingsBtn) {
+            resetSettingsBtn.addEventListener('click', () => {
+                localStorage.clear();
+                if (bgMusicToggle) bgMusicToggle.checked = false;
+                if (uiSoundsToggle) uiSoundsToggle.checked = false;
+                if (bgMusicVolume) bgMusicVolume.value = '30';
+                fadeOutMusic();
+                resetSettingsBtn.textContent = '✓ Сброшено';
+                resetSettingsBtn.classList.add('text-green-400', 'border-green-700');
+                setTimeout(() => {
+                    resetSettingsBtn.textContent = 'Сбросить настройки';
+                    resetSettingsBtn.classList.remove('text-green-400', 'border-green-700');
+                }, 1500);
+            });
+        }
+
+        // =============================================
+        // ВЫКЛЮЧИТЬ ВСЁ
+        // =============================================
+        const muteAllBtn = document.getElementById('muteAllBtn');
+        if (muteAllBtn) {
+            muteAllBtn.addEventListener('click', () => {
+                if (bgMusicToggle) { bgMusicToggle.checked = false; localStorage.setItem('om_bg_music', 'false'); }
+                if (uiSoundsToggle) { uiSoundsToggle.checked = false; localStorage.setItem('om_ui_sounds', 'false'); }
+                fadeOutMusic();
+                muteAllBtn.textContent = '✓ Выключено';
+                muteAllBtn.classList.add('text-green-400', 'border-green-700');
+                setTimeout(() => {
+                    muteAllBtn.textContent = 'Выкл. всё';
+                    muteAllBtn.classList.remove('text-green-400', 'border-green-700');
+                }, 1500);
+            });
+        }
+
+    </script>
+</body>
+</html>
