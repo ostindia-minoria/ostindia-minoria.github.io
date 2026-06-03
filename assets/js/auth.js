@@ -194,20 +194,21 @@ window.checkAuthState = function() {
 };
 
 // Dynamically inject retro auth modal markup
+// Dynamically inject retro auth modal markup
 function injectAuthModal() {
     if (document.getElementById('auth-modal-overlay')) return;
     
     const modalHtml = `
-    <div id="auth-modal-overlay" class="auth-modal-overlay">
+    <div id="auth-modal-overlay" class="auth-modal-overlay" style="display: none;">
         <div class="auth-modal-box">
-            <div class="flex justify-between items-center mb-5 pb-3 border-b border-white/5">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2 font-sans tracking-wider uppercase">
-                    <i class="fab fa-telegram text-sky-400 text-base"></i>
-                    <span>Единый аккаунт O-W-M</span>
-                </h3>
-                <button class="auth-close-btn text-slate-400 hover:text-white transition" onclick="closeAuthModal()">✕</button>
+            <!-- Modal Header -->
+            <div class="app-header z-10 !p-0 !bg-transparent !border-0 mb-4 flex justify-between items-center">
+                <div class="app-title !text-lg !font-bold flex items-center gap-2 text-white">
+                    <i class="fab fa-telegram text-sky-400"></i> Единый аккаунт сайта
+                </div>
+                <button class="app-menu-btn" onclick="closeAuthModal()">✕</button>
             </div>
-            <div id="auth-modal-content" class="flex flex-col gap-4 text-slate-300 text-sm leading-relaxed">
+            <div id="auth-modal-content" class="z-10 flex flex-col gap-4 text-slate-300 text-sm leading-relaxed">
                 <!-- Loaded dynamically -->
             </div>
         </div>
@@ -223,6 +224,9 @@ function injectAuthModal() {
 window.openAuthModal = function() {
     const modal = document.getElementById('auth-modal-overlay');
     if (modal) {
+        modal.style.display = 'flex';
+        // Force reflow to ensure transitions trigger correctly
+        modal.offsetHeight;
         modal.classList.add('active');
         renderAuthModalContent();
     }
@@ -232,6 +236,12 @@ window.closeAuthModal = function() {
     const modal = document.getElementById('auth-modal-overlay');
     if (modal) {
         modal.classList.remove('active');
+        // Fully hide from DOM after transition completes to prevent click intercept issues
+        setTimeout(() => {
+            if (!modal.classList.contains('active')) {
+                modal.style.display = 'none';
+            }
+        }, 350);
     }
 };
 
@@ -267,7 +277,7 @@ function renderAuthModalContent() {
                 <p class="text-center text-xs text-slate-400 leading-relaxed font-sans">
                     Авторизуйтесь через Telegram, чтобы объединить разделы сайта, синхронизировать настройки профиля и прогресс Ocean TV.
                 </p>
-                <div id="modal-telegram-widget-container" class="flex justify-center w-full py-4 bg-slate-900/40 border border-white/5 rounded-2xl min-h-[80px]">
+                <div id="modal-telegram-widget-container" class="flex justify-center items-center w-full py-4 bg-slate-900/40 border border-white/5 rounded-2xl min-h-[80px]">
                     <!-- script is dynamically loaded -->
                 </div>
             </div>
@@ -279,7 +289,7 @@ function renderAuthModalContent() {
             const script = document.createElement('script');
             script.async = true;
             script.src = 'https://telegram.org/js/telegram-widget.js?22';
-            script.setAttribute('data-telegram-login', BOT_USERNAME);
+            script.setAttribute('data-telegram-login', BOT_USERNAME.replace(/^@/, ''));
             script.setAttribute('data-size', 'large');
             script.setAttribute('data-onauth', 'onTelegramAuth(user)');
             script.setAttribute('data-request-access', 'write');
@@ -326,7 +336,7 @@ function updateCtaBlock() {
             <p class="text-sm text-slate-400 mb-6 leading-relaxed max-w-md font-sans">
                 Единый аккаунт проекта O-W-M связывает все разделы сайта. Он автоматически резервирует и синхронизирует ваши настройки профиля, плейлисты, а также игровой прогресс приставки Ocean TV в облачном хранилище.
             </p>
-            <div id="cta-telegram-widget-wrapper" class="flex justify-center w-full min-h-[40px]">
+            <div id="cta-telegram-widget-wrapper" class="flex justify-center items-center w-full min-h-[40px]">
                 <!-- Widget loaded dynamically -->
             </div>
         `;
@@ -336,7 +346,7 @@ function updateCtaBlock() {
             const script = document.createElement('script');
             script.async = true;
             script.src = 'https://telegram.org/js/telegram-widget.js?22';
-            script.setAttribute('data-telegram-login', BOT_USERNAME);
+            script.setAttribute('data-telegram-login', BOT_USERNAME.replace(/^@/, ''));
             script.setAttribute('data-size', 'large');
             script.setAttribute('data-onauth', 'onTelegramAuth(user)');
             script.setAttribute('data-request-access', 'write');
@@ -394,6 +404,41 @@ const modalStyles = `
 .auth-close-btn:hover {
     color: #ffffff;
     transform: rotate(90deg);
+}
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.app-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.app-menu-btn {
+    padding: 0.5rem 1.8rem;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: all 0.2s ease;
+}
+.app-menu-btn:hover {
+    background: #ffffff;
+    color: #08090c;
+    border-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.25);
+    transform: translateY(-1px);
 }
 `;
 
