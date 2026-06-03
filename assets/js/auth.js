@@ -135,58 +135,47 @@ localStorage.setItem = function(key, value) {
 
 // Update profile indicators in site headers
 window.checkAuthState = function() {
-    const telegramId = localStorage.getItem('telegram_id');
-    const userStr = localStorage.getItem('telegram_user');
-    
     const desktopHeader = document.getElementById('headerProfileBlock');
     const mobileHeader = document.getElementById('mobileHeaderProfileBlock');
     const tvHeaderProfile = document.getElementById('tv-user-profile');
     
-    if (telegramId && userStr) {
-        const user = JSON.parse(userStr);
-        const name = user.first_name || user.username || "Профиль";
-        const avatarHtml = `
-            <img src="${user.photo_url || 'assets/images/default-avatar.png'}" class="w-6 h-6 rounded-full border border-sky-400 object-cover" onerror="this.src='https://telegram.org/img/t_logo.png'">
-            <span class="text-xs text-white font-semibold font-sans">${name}</span>
-        `;
-        
-        if (desktopHeader) {
-            desktopHeader.innerHTML = avatarHtml;
-            desktopHeader.classList.remove('bg-white/5');
-            desktopHeader.classList.add('bg-sky-500/10', 'border-sky-500/25');
-        }
-        if (mobileHeader) {
-            mobileHeader.innerHTML = avatarHtml;
-            mobileHeader.classList.remove('hidden');
-            mobileHeader.classList.add('flex');
-        }
-        if (tvHeaderProfile) {
-            tvHeaderProfile.innerHTML = `
-                <img src="${user.photo_url || 'assets/images/default-avatar.png'}" class="w-6 h-6 rounded-full border border-sky-400 object-cover" onerror="this.src='https://telegram.org/img/t_logo.png'">
-                <span class="tv-user-name text-xs text-white font-semibold font-sans">${name}</span>
-            `;
-        }
-    } else {
-        const defaultHeaderHtml = `
+    const lockOverlayHtml = `
+        <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+        </div>
+    `;
+
+    const defaultHeaderHtml = `
+        <i class="fab fa-telegram text-sky-400 text-lg"></i>
+        <span class="text-xs text-white font-semibold font-sans">Войти</span>
+        ${lockOverlayHtml}
+    `;
+    
+    if (desktopHeader) {
+        desktopHeader.innerHTML = defaultHeaderHtml;
+        desktopHeader.className = "relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed";
+    }
+    if (mobileHeader) {
+        mobileHeader.innerHTML = `
             <i class="fab fa-telegram text-sky-400 text-lg"></i>
-            <span class="text-xs text-white font-semibold font-sans">Войти</span>
+            <span class="text-xs text-white font-medium font-sans">Войти</span>
+            <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+            </div>
         `;
-        
-        if (desktopHeader) {
-            desktopHeader.innerHTML = defaultHeaderHtml;
-            desktopHeader.classList.add('bg-white/5');
-            desktopHeader.classList.remove('bg-sky-500/10', 'border-sky-500/25');
-        }
-        if (mobileHeader) {
-            mobileHeader.innerHTML = defaultHeaderHtml;
-            mobileHeader.classList.add('hidden');
-        }
-        if (tvHeaderProfile) {
-            tvHeaderProfile.innerHTML = `
-                <i class="fab fa-telegram text-sky-400 text-lg"></i>
-                <span class="tv-user-name text-xs text-white font-semibold font-sans">Войти</span>
-            `;
-        }
+        mobileHeader.className = "hidden relative flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded hover:bg-white/10 transition pointer-events-none cursor-not-allowed";
+    }
+    if (tvHeaderProfile) {
+        tvHeaderProfile.innerHTML = `
+            <i class="fab fa-telegram text-sky-400 text-lg"></i>
+            <span class="tv-user-name text-xs text-white font-semibold font-sans">Войти</span>
+            ${lockOverlayHtml}
+        `;
+        tvHeaderProfile.className = "tv-user-profile !static relative pointer-events-none cursor-not-allowed";
     }
     
     // Adapt index CTA card if present
@@ -305,56 +294,32 @@ function updateCtaBlock() {
     const cta = document.getElementById('indexAccountCtaBlock');
     if (!cta) return;
     
-    const telegramId = localStorage.getItem('telegram_id');
-    const userStr = localStorage.getItem('telegram_user');
-    
     const container = cta.querySelector('.flex');
     if (!container) return;
     
-    if (telegramId && userStr) {
-        const user = JSON.parse(userStr);
-        container.innerHTML = `
-            <div class="w-20 h-20 bg-sky-500/10 rounded-full flex items-center justify-center border border-sky-500/30 shadow-lg shadow-sky-500/5 mb-6 hover:scale-105 transition-transform duration-300">
-                <img src="${user.photo_url || 'assets/images/default-avatar.png'}" alt="Avatar" class="w-16 h-16 rounded-full border border-sky-400 object-cover" onerror="this.src='https://telegram.org/img/t_logo.png'">
-            </div>
-            <h3 class="text-2xl font-bold mb-1 text-white druk-font tracking-wide">Единый аккаунт подключен</h3>
-            <div class="text-xs text-sky-400 font-mono mb-4">@${user.username || ''}</div>
-            <p class="text-sm text-slate-400 mb-6 leading-relaxed max-w-md font-sans">
-                Привет, ${user.first_name || 'пользователь'}! Ваши настройки и игровой прогресс Ocean TV синхронизируются с облаком автоматически в фоновом режиме.
-            </p>
-            <button onclick="handleLogout()" class="px-6 py-2.5 bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-200 text-xs rounded-xl font-bold transition font-sans uppercase tracking-wider">
-                Выйти из аккаунта
-            </button>
-        `;
-    } else {
-        container.innerHTML = `
-            <div class="w-20 h-20 bg-slate-800/40 rounded-full flex items-center justify-center border border-slate-700/60 shadow-inner mb-6 hover:scale-105 transition-transform duration-300">
-                <svg width="48" height="48" viewBox="0 0 100 100" class="mac-flash-icon">
-                    <circle cx="50" cy="38" r="18" fill="#38bdf8" fill-opacity="0.8"/>
-                    <path d="M25,78 C25,60 35,56 50,56 C65,56 75,60 75,78 C75,82 75,82 75,82 H25 C25,82 25,82 25,82 Z" fill="#38bdf8" fill-opacity="0.8"/>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-white druk-font tracking-wide">Единый аккаунт O-W-M</h3>
-            <p class="text-sm text-slate-400 mb-6 leading-relaxed max-w-md font-sans">
-                Единый аккаунт проекта O-W-M связывает все разделы сайта. Он автоматически резервирует и синхронизирует ваши настройки профиля, плейлисты, а также игровой прогресс приставки Ocean TV в облачном хранилище.
-            </p>
-            <div id="cta-telegram-widget-wrapper" class="flex justify-center items-center w-full min-h-[40px]">
-                <!-- Widget loaded dynamically -->
-            </div>
-        `;
-        
-        const wrapper = document.getElementById('cta-telegram-widget-wrapper');
-        if (wrapper) {
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://telegram.org/js/telegram-widget.js?22';
-            script.setAttribute('data-telegram-login', BOT_USERNAME.replace(/^@/, ''));
-            script.setAttribute('data-size', 'large');
-            script.setAttribute('data-onauth', 'onTelegramAuth(user)');
-            script.setAttribute('data-request-access', 'write');
-            wrapper.appendChild(script);
-        }
-    }
+    container.innerHTML = `
+        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gray-900/60 backdrop-blur-md rounded-3xl">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            <span class="font-mono tracking-widest uppercase font-bold mt-3 text-cyan-400">Coming Soon...</span>
+        </div>
+        <div class="w-20 h-20 bg-slate-800/40 rounded-full flex items-center justify-center border border-slate-700/60 shadow-inner mb-6 hover:scale-105 transition-transform duration-300">
+            <svg width="48" height="48" viewBox="0 0 100 100" class="mac-flash-icon">
+                <circle cx="50" cy="38" r="18" fill="#38bdf8" fill-opacity="0.8"/>
+                <path d="M25,78 C25,60 35,56 50,56 C65,56 75,60 75,78 C75,82 75,82 75,82 H25 C25,82 25,82 25,82 Z" fill="#38bdf8" fill-opacity="0.8"/>
+            </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-3 text-white druk-font tracking-wide">Единый аккаунт O-W-M</h3>
+        <p class="text-sm text-slate-400 mb-6 leading-relaxed max-w-md font-sans">
+            Единый аккаунт проекта O-W-M связывает все разделы сайта. Он автоматически резервирует и синхронизирует ваши настройки профиля, плейлисты, а также игровой прогресс приставки Ocean TV в облачном хранилище.
+        </p>
+        <button onclick="openAuthModal()" class="flex items-center gap-3 px-6 py-3 bg-[#1e293b] border border-slate-700 hover:border-sky-400 hover:bg-slate-800 text-white font-semibold rounded-xl text-sm transition-all duration-300 pointer-events-none cursor-not-allowed shadow-md group font-sans">
+            <i class="fab fa-telegram text-sky-400 text-lg group-hover:scale-110 transition-transform"></i>
+            <span>Войти в аккаунт</span>
+        </button>
+    `;
+}
 }
 
 // Injected CSS Styles for dynamic modal and overlay
