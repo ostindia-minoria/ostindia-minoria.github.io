@@ -222,6 +222,8 @@ function injectAuthModal() {
 
 // Modal open/close actions
 window.openAuthModal = function() {
+    console.log("Authorization is temporarily disabled.");
+    return;
     const modal = document.getElementById('auth-modal-overlay');
     if (modal) {
         modal.style.display = 'flex';

@@ -1980,9 +1980,14 @@
 
     <!-- Unified TV Account Block wrapper -->
     <div id="tv-profile-wrapper" class="absolute top-[2.2rem] right-[3.5rem] z-[10000]">
-        <div class="tv-user-profile !static" id="tv-user-profile" onclick="openAuthModal()">
+        <div class="tv-user-profile !static relative pointer-events-none cursor-not-allowed" id="tv-user-profile" onclick="openAuthModal()">
             <i class="fab fa-telegram text-sky-400 text-lg"></i>
             <span class="tv-user-name">Войти</span>
+            <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+            </div>
         </div>
     </div>
 
@@ -2387,7 +2392,7 @@
 
     <!-- ACCOUNT STATUS / GUEST SCREEN (Restores visual question mark) -->
     <div id="account-status-screen" class="auth-modal-overlay" style="background: #040407;">
-        <div onclick="openAuthModal()" style="cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+        <div style="cursor: not-allowed; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
             <div id="status-icon-wrapper" style="margin-bottom: 25px;" class="hover-scale">
                 <svg width="120" height="120" viewBox="0 0 100 100" class="mac-flash-icon">
                     <circle cx="50" cy="38" r="18" fill="#555555" />
@@ -2398,8 +2403,13 @@
             <p class="text-xs text-slate-400 max-w-sm leading-relaxed mb-6 font-sans">
                 Единый аккаунт сайта не подключен. Локальные сохранения не зарезервированы. Нажмите на иконку аккаунта, чтобы войти в аккаунт проекта через Telegram и включить синхронизацию сохранений.
             </p>
-            <span onclick="openAuthModal(); event.stopPropagation();" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-full text-xs font-bold transition-all shadow-md font-sans">
+            <span class="relative px-5 py-2.5 bg-slate-800 text-white rounded-full text-xs font-bold transition-all shadow-md font-sans pointer-events-none cursor-not-allowed">
                 Войти в аккаунт
+                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                </div>
             </span>
         </div>
     </div>
@@ -3662,8 +3672,13 @@
                             <p class="text-xs text-slate-400 mb-4 max-w-xs mx-auto">
                                 Сохранения работают только локально. Авторизуйтесь, чтобы включить облачную синхронизацию прогресса.
                             </p>
-                            <button class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-full transition-all">
+                            <button class="relative px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-full transition-all pointer-events-none cursor-not-allowed">
                                 Подключить аккаунт
+                                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                    </svg>
+                                </div>
                             </button>
                         </div>
                     `;
