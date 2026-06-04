@@ -603,6 +603,35 @@
         .pc-hero-btn:active {
             transform: scale(0.97);
         }
+
+        /* Dynamic SVG Scene Animations */
+        @keyframes floatMonitor {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes floatConsole {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes floatRemote {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .animate-float-monitor {
+            animation: floatMonitor 6s ease-in-out infinite;
+            animation-timing-function: ease-in-out;
+        }
+        .animate-float-console {
+            animation: floatConsole 5.2s ease-in-out infinite;
+            animation-delay: 0.7s;
+            animation-timing-function: ease-in-out;
+        }
+        .animate-float-remote {
+            animation: floatRemote 5.8s ease-in-out infinite;
+            animation-delay: 1.4s;
+            animation-timing-function: ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -629,7 +658,7 @@
                     <div id="headerProfileBlock" onclick="openAuthModal()" class="relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
                         <i class="fab fa-telegram text-sky-400 text-lg"></i>
                         <span class="text-xs text-white font-semibold font-sans">Войти</span>
-                        <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                        <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                             </svg>
@@ -1065,24 +1094,59 @@
 
                     <!-- Презентационный блок "Файлы Егора" -->
                     <div class="admin-card pc-hero-block-mobile mt-10 mb-8 relative overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]" style="border-color: rgba(234, 179, 8, 0.5); background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(3, 7, 18, 0.98) 100%);">
-                        <!-- Бейдж Обновление -->
-                        <div class="absolute top-4 right-4 z-20 inline-block px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-widest">Обновление</div>
-
                         <!-- Содержимое -->
                         <div class="p-8 md:p-12">
                             <div class="flex flex-col md:flex-row items-center gap-10">
                                 <div class="w-full md:w-1/2 text-center md:text-left">
-                                    <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-widest mb-4">Архив</div>
-                                    <h4 class="font-bold text-white text-2xl md:text-4xl mb-3 tracking-tight">Ocean TV: Архивы</h4>
-                                    <p class="text-gray-300 text-sm md:text-base mb-6 max-w-md leading-relaxed">Интерактивный медиа-центр Apple TV 2012: файлы Егора, аудиозаписи, радиоэфир и настройки джейлбрейка.</p>
+                                    <h4 class="font-bold text-white text-2xl md:text-4xl mb-3 tracking-tight">Файлы Егора</h4>
+                                    <p class="text-gray-300 text-sm md:text-base mb-6 max-w-md leading-relaxed">Интерактивный медиа-центр Ocean TV: файлы Егора, аудиозаписи, радиоэфир и настройки джейлбрейка.</p>
                                     <button id="pc-launch-btn" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-yellow-500 text-black text-sm font-semibold hover:bg-yellow-400 transition-colors shadow-lg active:scale-95 focus:outline-none">
                                         <i class="fas fa-gamepad"></i>
                                         <span>Взять пульт</span>
                                     </button>
                                 </div>
                                 <div class="w-full md:w-1/2 flex justify-center">
-                                    <div class="w-32 h-32 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center group-hover:scale-105 transition-transform">
-                                        <i class="fas fa-tv text-4xl text-yellow-400 animate-pulse"></i>
+                                    <div class="relative w-56 h-56 md:w-64 md:h-64 overflow-hidden rounded-3xl bg-slate-950/60 border border-slate-800/80 flex items-center justify-center shadow-[0_0_30px_rgba(0,149,255,0.15)] group-hover:scale-105 transition-transform duration-300">
+                                        <!-- Neon Glow Background Base -->
+                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,149,255,0.15)_0%,transparent_70%)] z-0 pointer-events-none"></div>
+
+                                        <!-- Monitor (Television) -->
+                                        <div class="absolute top-6 left-10 w-36 h-28 md:top-8 md:left-10 md:w-44 md:h-32 z-10 animate-float-monitor" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
+                                            <svg viewBox="0 0 100 80" class="w-full h-full">
+                                                <rect x="44" y="65" width="12" height="8" rx="1" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+                                                <rect x="30" y="73" width="40" height="4" rx="2" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+                                                <rect x="5" y="5" width="90" height="60" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
+                                                <rect x="9" y="9" width="82" height="52" rx="3" fill="#020617"/>
+                                                <path d="M9 9 L50 9 L9 50 Z" fill="rgba(255,255,255,0.04)"/>
+                                                <line x1="12" y1="58" x2="88" y2="58" stroke="#38bdf8" stroke-width="1" opacity="0.3" />
+                                            </svg>
+                                        </div>
+
+                                        <!-- Ocean TV Console Box -->
+                                        <div class="absolute bottom-8 left-10 w-24 h-8 md:bottom-10 md:left-12 md:w-28 md:h-10 z-20 animate-float-console" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
+                                            <svg viewBox="0 0 80 30" class="w-full h-full">
+                                                <rect x="2" y="2" width="76" height="26" rx="4" fill="#07080a" stroke="#38bdf8" stroke-width="1.5" />
+                                                <path d="M 10 15 Q 15 10 20 15 T 30 15" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+                                                <text x="36" y="17" fill="#ffffff" font-family="sans-serif" font-size="6" font-weight="900" letter-spacing="0.5">OCEAN TV</text>
+                                                <circle cx="68" cy="15" r="2.5" fill="#ef4444" class="animate-pulse" style="filter: drop-shadow(0 0 3px #ef4444);"/>
+                                            </svg>
+                                        </div>
+
+                                        <!-- Remote Control -->
+                                        <div class="absolute bottom-3 right-8 w-8 h-24 md:bottom-4 md:right-8 md:w-10 md:h-28 z-30 animate-float-remote" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
+                                            <svg viewBox="0 0 35 100" class="w-full h-full" style="transform: rotate(-12deg);">
+                                                <rect x="2" y="2" width="31" height="96" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+                                                <circle cx="17.5" cy="8" r="1" fill="#38bdf8" />
+                                                <rect x="7" y="16" width="7" height="6" rx="2" fill="#ef4444" />
+                                                <rect x="21" y="16" width="7" height="6" rx="2" fill="#475569" />
+                                                <circle cx="17.5" cy="40" r="9" fill="#1e293b" />
+                                                <circle cx="17.5" cy="40" r="3.5" fill="#0f172a" />
+                                                <circle cx="11" cy="62" r="3" fill="#475569" />
+                                                <circle cx="24" cy="62" r="3" fill="#475569" />
+                                                <rect x="8" y="74" width="7" height="15" rx="3" fill="#1e293b" />
+                                                <rect x="20" y="74" width="7" height="15" rx="3" fill="#1e293b" />
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
