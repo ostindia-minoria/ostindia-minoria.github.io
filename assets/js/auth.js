@@ -139,6 +139,36 @@ window.checkAuthState = function() {
     const mobileHeader = document.getElementById('mobileHeaderProfileBlock');
     const tvHeaderProfile = document.getElementById('tv-user-profile');
     
+    // Check if we are on the radio page
+    const isRadioPage = window.location.pathname.endsWith('radio.html') || window.location.href.includes('radio.html');
+    
+    if (isRadioPage) {
+        const telegramId = localStorage.getItem('telegram_id');
+        const userStr = localStorage.getItem('telegram_user');
+        
+        if (telegramId && userStr) {
+            const user = JSON.parse(userStr);
+            const name = user.first_name || user.username || 'User';
+            
+            if (desktopHeader) {
+                desktopHeader.innerHTML = `
+                    <img src="${user.photo_url || 'assets/images/default-avatar.png'}" class="w-6 h-6 rounded-full border border-sky-400 object-cover" onerror="this.src='https://telegram.org/img/t_logo.png'">
+                    <span class="text-xs text-white font-semibold font-sans">${name}</span>
+                `;
+                desktopHeader.className = "flex items-center gap-2 cursor-pointer bg-sky-500/10 border border-sky-500/25 px-3.5 py-1.5 rounded-full hover:bg-sky-500/25 transition";
+            }
+        } else {
+            if (desktopHeader) {
+                desktopHeader.innerHTML = `
+                    <i class="fab fa-telegram text-sky-400 text-lg"></i>
+                    <span class="text-xs text-white font-semibold font-sans">Войти</span>
+                `;
+                desktopHeader.className = "flex items-center gap-2 cursor-pointer bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition";
+            }
+        }
+        return;
+    }
+    
     const lockOverlayHtml = `
         <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
@@ -211,8 +241,11 @@ function injectAuthModal() {
 
 // Modal open/close actions
 window.openAuthModal = function() {
-    console.log("Authorization is temporarily disabled.");
-    return;
+    const isRadioPage = window.location.pathname.endsWith('radio.html') || window.location.href.includes('radio.html');
+    if (!isRadioPage) {
+        console.log("Authorization is temporarily disabled.");
+        return;
+    }
     const modal = document.getElementById('auth-modal-overlay');
     if (modal) {
         modal.style.display = 'flex';
