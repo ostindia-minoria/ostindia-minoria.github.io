@@ -1106,45 +1106,77 @@
                                     </button>
                                 </div>
                                 <div class="w-full md:w-1/2 flex justify-center">
-                                    <div class="relative w-56 h-56 md:w-64 md:h-64 overflow-hidden rounded-3xl bg-slate-950/60 border border-slate-800/80 flex items-center justify-center shadow-[0_0_30px_rgba(0,149,255,0.15)] group-hover:scale-105 transition-transform duration-300">
+                                    <div class="relative w-72 h-44 md:w-96 md:h-52 overflow-hidden rounded-3xl bg-gradient-to-br from-[#09152e] via-[#040a17] to-[#02050c] border border-blue-950/80 flex items-center justify-center shadow-[0_0_30px_rgba(0,149,255,0.25)] group-hover:scale-[1.03] transition-transform duration-300">
                                         <!-- Neon Glow Background Base -->
-                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,149,255,0.15)_0%,transparent_70%)] z-0 pointer-events-none"></div>
+                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,149,255,0.25)_0%,transparent_75%)] z-0 pointer-events-none"></div>
 
                                         <!-- Monitor (Television) -->
-                                        <div class="absolute top-6 left-10 w-36 h-28 md:top-8 md:left-10 md:w-44 md:h-32 z-10 animate-float-monitor" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
+                                        <div class="absolute top-4 left-[20%] w-40 h-32 md:top-6 md:left-[22%] md:w-52 md:h-40 z-10 animate-float-monitor" style="filter: drop-shadow(0 0 10px rgba(0, 149, 255, 0.85)) drop-shadow(0 0 25px rgba(0, 149, 255, 0.45));">
                                             <svg viewBox="0 0 100 80" class="w-full h-full">
-                                                <rect x="44" y="65" width="12" height="8" rx="1" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-                                                <rect x="30" y="73" width="40" height="4" rx="2" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-                                                <rect x="5" y="5" width="90" height="60" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
-                                                <rect x="9" y="9" width="82" height="52" rx="3" fill="#020617"/>
-                                                <path d="M9 9 L50 9 L9 50 Z" fill="rgba(255,255,255,0.04)"/>
-                                                <line x1="12" y1="58" x2="88" y2="58" stroke="#38bdf8" stroke-width="1" opacity="0.3" />
+                                                <!-- Monitor Stand Neck -->
+                                                <rect x="44" y="65" width="12" height="8" rx="1" fill="#0f172a" stroke="#ffffff" stroke-width="1.5"/>
+                                                <!-- Monitor Stand Base -->
+                                                <rect x="30" y="73" width="40" height="4" rx="2" fill="#020617" stroke="#ffffff" stroke-width="1.5"/>
+                                                <!-- Monitor Bezel (White Outline Style) -->
+                                                <rect x="5" y="5" width="90" height="60" rx="6" fill="#020617" stroke="#ffffff" stroke-width="2.2" />
+                                                <!-- Inner Display Screen -->
+                                                <rect x="9" y="9" width="82" height="52" rx="3" fill="#070b19"/>
+                                                <!-- Glare -->
+                                                <path d="M9 9 L45 9 L9 45 Z" fill="rgba(255,255,255,0.03)"/>
+                                                <!-- Bottom Screen Line -->
+                                                <line x1="12" y1="58" x2="88" y2="58" stroke="#38bdf8" stroke-width="1.2" opacity="0.4" />
                                             </svg>
                                         </div>
 
                                         <!-- Ocean TV Console Box -->
-                                        <div class="absolute bottom-8 left-10 w-24 h-8 md:bottom-10 md:left-12 md:w-28 md:h-10 z-20 animate-float-console" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
+                                        <div class="absolute bottom-4 left-[16%] w-28 h-9 md:bottom-6 md:left-[20%] md:w-36 md:h-12 z-20 animate-float-console">
                                             <svg viewBox="0 0 80 30" class="w-full h-full">
-                                                <rect x="2" y="2" width="76" height="26" rx="4" fill="#07080a" stroke="#38bdf8" stroke-width="1.5" />
-                                                <path d="M 10 15 Q 15 10 20 15 T 30 15" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-                                                <text x="36" y="17" fill="#ffffff" font-family="sans-serif" font-size="6" font-weight="900" letter-spacing="0.5">OCEAN TV</text>
-                                                <circle cx="68" cy="15" r="2.5" fill="#ef4444" class="animate-pulse" style="filter: drop-shadow(0 0 3px #ef4444);"/>
+                                                <!-- Console Outer Frame -->
+                                                <rect x="2" y="2" width="76" height="26" rx="4" fill="#090d16" stroke="#38bdf8" stroke-width="1.8" />
+                                                <!-- Blank Front Panel/Screen -->
+                                                <rect x="8" y="7" width="64" height="16" rx="2" fill="#020408" stroke="#1e293b" stroke-width="1.2" />
+                                                <!-- Highlight reflection from above monitor -->
+                                                <line x1="4" y1="3" x2="76" y2="3" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
                                             </svg>
                                         </div>
 
                                         <!-- Remote Control -->
-                                        <div class="absolute bottom-3 right-8 w-8 h-24 md:bottom-4 md:right-8 md:w-10 md:h-28 z-30 animate-float-remote" style="filter: drop-shadow(0 0 15px rgba(0, 149, 255, 0.6));">
-                                            <svg viewBox="0 0 35 100" class="w-full h-full" style="transform: rotate(-12deg);">
-                                                <rect x="2" y="2" width="31" height="96" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+                                        <div class="absolute bottom-3 right-[16%] w-9 h-28 md:bottom-5 md:right-[20%] md:w-11 md:h-34 z-30 animate-float-remote" style="filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));">
+                                            <svg viewBox="0 0 35 100" class="w-full h-full" style="transform: rotate(-12deg); transform-origin: center;">
+                                                <!-- Body -->
+                                                <rect x="2" y="2" width="31" height="96" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" />
+                                                <!-- LED -->
                                                 <circle cx="17.5" cy="8" r="1" fill="#38bdf8" />
-                                                <rect x="7" y="16" width="7" height="6" rx="2" fill="#ef4444" />
-                                                <rect x="21" y="16" width="7" height="6" rx="2" fill="#475569" />
+                                                
+                                                <!-- White Power Button with red circle and text -->
+                                                <g>
+                                                    <rect x="6" y="15" width="11" height="8" rx="2.2" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" />
+                                                    <circle cx="11.5" cy="19" r="1.8" fill="none" stroke="#ef4444" stroke-width="0.8" />
+                                                    <text x="11.5" y="22.5" fill="#334155" font-family="sans-serif" font-size="2" font-weight="900" text-anchor="middle">ON/OFF</text>
+                                                </g>
+                                                
+                                                <!-- Grey Button -->
+                                                <rect x="20" y="15" width="9" height="8" rx="2" fill="#475569" />
+                                                
+                                                <!-- D-pad wheel -->
                                                 <circle cx="17.5" cy="40" r="9" fill="#1e293b" />
-                                                <circle cx="17.5" cy="40" r="3.5" fill="#0f172a" />
-                                                <circle cx="11" cy="62" r="3" fill="#475569" />
-                                                <circle cx="24" cy="62" r="3" fill="#475569" />
-                                                <rect x="8" y="74" width="7" height="15" rx="3" fill="#1e293b" />
-                                                <rect x="20" y="74" width="7" height="15" rx="3" fill="#1e293b" />
+                                                <!-- Cardinal direction dots -->
+                                                <circle cx="17.5" cy="33.5" r="0.8" fill="#64748b" />
+                                                <circle cx="17.5" cy="46.5" r="0.8" fill="#64748b" />
+                                                <circle cx="11" cy="40" r="0.8" fill="#64748b" />
+                                                <circle cx="24" cy="40" r="0.8" fill="#64748b" />
+                                                
+                                                <!-- White Center Button with circle & text OK -->
+                                                <circle cx="17.5" cy="40" r="3.8" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.6" />
+                                                <text x="17.5" y="41.2" fill="#0f172a" font-family="sans-serif" font-size="2.2" font-weight="900" text-anchor="middle">OK</text>
+                                                
+                                                <!-- Medium buttons -->
+                                                <circle cx="11" cy="60" r="3" fill="#475569" />
+                                                <circle cx="24" cy="60" r="3" fill="#475569" />
+                                                
+                                                <!-- Pill buttons -->
+                                                <rect x="8" y="72" width="7" height="16" rx="3.5" fill="#1e293b" />
+                                                <rect x="20" y="72" width="7" height="16" rx="3.5" fill="#1e293b" />
                                             </svg>
                                         </div>
                                     </div>
