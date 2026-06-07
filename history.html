@@ -1548,21 +1548,13 @@
 
 
         // ==========================================
-        // ЛОГИКА ЗАПУСКА ПК (PC vs MOBILE)
+        // ЛОГИКА ЗАПУСКА ПК
         // ==========================================
         const pcLaunchBtn = document.getElementById('pc-launch-btn');
         if (pcLaunchBtn) {
             pcLaunchBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Простая проверка на мобильное устройство
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                                 (window.innerWidth <= 1024 && ('ontouchstart' in window || navigator.maxTouchPoints > 0));
-                
-                if (isMobile) {
-                    window.location.href = 'tv_mobile.html';
-                } else {
-                    window.location.href = 'tv.html';
-                }
+                window.location.href = 'tv.html';
             });
         }
     </script>
