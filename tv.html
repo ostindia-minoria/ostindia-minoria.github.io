@@ -1826,6 +1826,876 @@
             color: #ffffff;
             border-bottom-color: rgba(255, 255, 255, 0.6);
         }
+
+        /* PORTRAIT ROTATE SCREEN WARNING */
+        .rotate-warning-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: radial-gradient(circle at center, #070e1b 0%, #020408 100%);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            color: #f8fafc;
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) and (orientation: portrait) {
+            .rotate-warning-overlay {
+                display: flex !important;
+            }
+            .desktop-tv-container, .mobile-tv-container {
+                display: none !important;
+            }
+        }
+
+        .rotate-phone-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rotate-phone-icon {
+            width: 50px;
+            height: 85px;
+            border: 3.5px solid #38bdf8;
+            border-radius: 10px;
+            position: relative;
+            background: rgba(56, 189, 248, 0.08);
+            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.75));
+            animation: rotatePhoneGlow 2.5s ease-in-out infinite;
+        }
+
+        .rotate-phone-icon::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #38bdf8;
+        }
+
+        .rotate-arrow-svg {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            stroke: #38bdf8;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+            animation: rotateArrowPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes rotatePhoneGlow {
+            0%, 100% {
+                transform: rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.5));
+            }
+            40%, 60% {
+                transform: rotate(-90deg);
+                filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.9));
+            }
+        }
+
+        @keyframes rotateArrowPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.95);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* ================= MOBILE ADAPTATION STYLES ================= */
+        @media (max-width: 768px) and (orientation: landscape) {
+            body {
+                overflow: hidden !important; /* Prevent default viewport bouncing */
+            }
+            .desktop-tv-container {
+                display: none !important;
+            }
+            .mobile-tv-container {
+                display: flex !important;
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            
+            /* Mobile TV Viewport styles scoped to .mobile-tv-container */
+            .mobile-tv-container .tv-screen-viewport {
+                width: 72%;
+                height: 100%;
+                position: relative;
+                border-right: 4px solid #1e293b;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .mobile-tv-container .tv-backdrop {
+                position: absolute;
+                inset: 0;
+                background: 
+                    radial-gradient(circle at 50% 0%, rgba(20, 48, 85, 0.9) 0%, rgba(6, 12, 22, 1) 75%),
+                    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                background-size: 100% 100%, 4px 4px, 4px 4px;
+                z-index: -3;
+            }
+            
+            .mobile-tv-container .top-light-glow {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                height: 180px;
+                background: radial-gradient(ellipse at 50% 0%, rgba(0, 162, 255, 0.2) 0%, rgba(0, 162, 255, 0.02) 60%, transparent 80%);
+                pointer-events: none;
+                z-index: -1;
+                filter: blur(25px);
+            }
+            
+            .mobile-tv-container .brand-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+                position: relative;
+                z-index: 10;
+            }
+            
+            .mobile-tv-container .brand-logo {
+                font-size: 2.2rem;
+                font-weight: 800;
+                letter-spacing: 4px;
+                text-transform: lowercase;
+                color: #ffffff;
+                text-shadow: 0 0 15px rgba(0, 162, 255, 0.4);
+                position: relative;
+                line-height: 1;
+            }
+            
+            .mobile-tv-container .brand-logo::after {
+                content: 'tv';
+                position: absolute;
+                right: -30px;
+                top: -2px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                background: linear-gradient(135deg, #00d2ff, #0072ff);
+                color: #ffffff;
+                padding: 1px 5px;
+                border-radius: 3px;
+                text-transform: uppercase;
+            }
+            
+            .mobile-tv-container .brand-reflection {
+                font-size: 2.2rem;
+                font-weight: 800;
+                letter-spacing: 4px;
+                text-transform: lowercase;
+                color: #ffffff;
+                transform: scaleY(-1.0) translateY(-3px);
+                opacity: 0.12;
+                mask-image: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 65%);
+                -webkit-mask-image: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 65%);
+                pointer-events: none;
+                line-height: 1;
+            }
+            
+            .mobile-tv-container .tv-clock {
+                position: absolute;
+                top: 1.25rem;
+                right: 2rem;
+                font-size: 1rem;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.8);
+                text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            }
+            
+            .mobile-tv-container .shelf-container {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                width: 100%;
+                margin-top: 30px;
+                padding: 0 2rem;
+                z-index: 10;
+                overflow-y: auto;
+                max-height: calc(100vh - 120px);
+                scrollbar-width: none;
+                scroll-behavior: smooth;
+            }
+            
+            .mobile-tv-container .shelf-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .mobile-tv-container .shelf-grid {
+                display: flex;
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .mobile-tv-container .tv-tile {
+                position: relative;
+                width: 120px;
+                height: 85px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, rgba(25, 38, 58, 0.55) 0%, rgba(10, 18, 30, 0.8) 100%);
+                border: 2px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 6px 12px rgba(255,255,255,0.04);
+                backdrop-filter: blur(8px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 6px;
+                opacity: 1;
+                transform: none;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            
+            .mobile-tv-container .tv-tile::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50%;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .mobile-tv-container .tv-tile.focused {
+                transform: scale(1.1) translateY(-4px);
+                border-color: #38bdf8;
+                box-shadow: 
+                    0 0 25px rgba(0, 162, 255, 0.7), 
+                    0 15px 30px rgba(0,0,0,0.7),
+                    inset 0 6px 12px rgba(255,255,255,0.08);
+                background: linear-gradient(135deg, rgba(30, 52, 85, 0.8) 0%, rgba(12, 24, 42, 0.95) 100%);
+            }
+            
+            .mobile-tv-container .tv-tile i {
+                font-size: 1.6rem;
+                color: #d1d5db;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-tv-container .tv-tile.focused i {
+                color: #38bdf8;
+                transform: scale(1.1);
+                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            }
+            
+            .mobile-tv-container .tv-tile-label {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #9ca3af;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-tv-container .tv-tile.focused .tv-tile-label {
+                color: #ffffff;
+                font-weight: 600;
+            }
+            
+            /* App overlays in mobile */
+            .mobile-tv-container .app-overlay {
+                position: absolute;
+                inset: 0;
+                z-index: 100;
+                background: radial-gradient(circle at 50% 50%, rgba(15, 26, 42, 0.98) 0%, rgba(5, 8, 15, 1) 100%);
+                backdrop-filter: blur(15px);
+                display: flex;
+                flex-direction: column;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                padding: 1.5rem;
+            }
+            
+            .mobile-tv-container .app-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            
+            .mobile-tv-container .app-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 2px solid rgba(255,255,255,0.05);
+                padding-bottom: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-tv-container .app-title {
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .mobile-tv-container .app-title i {
+                color: #38bdf8;
+            }
+            
+            /* Passcode mobile */
+            .mobile-tv-container .tv-passcode-overlay {
+                position: absolute;
+                inset: 0;
+                z-index: 500;
+                background: rgba(3, 7, 18, 0.94);
+                backdrop-filter: blur(10px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+            
+            .mobile-tv-container .tv-passcode-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            
+            .mobile-tv-container .tv-passcode-box {
+                width: 320px;
+                background: linear-gradient(135deg, rgba(20, 30, 45, 0.95) 0%, rgba(8, 12, 20, 0.98) 100%);
+                border: 2px solid rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                padding: 1.5rem;
+                box-shadow: 0 0 35px rgba(0, 162, 255, 0.25), 0 20px 40px rgba(0,0,0,0.8);
+                text-align: center;
+            }
+            
+            .mobile-tv-container .tv-passcode-dots {
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                margin: 15px 0;
+            }
+            
+            .mobile-tv-container .tv-passcode-dot {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            .mobile-tv-container .tv-passcode-dot.filled {
+                background: #00a2ff;
+                border-color: #00a2ff;
+                box-shadow: 0 0 8px rgba(0, 162, 255, 0.7);
+            }
+            
+            .mobile-tv-container .tv-passcode-dot.error {
+                background: #ef4444;
+                border-color: #ef4444;
+                box-shadow: 0 0 8px #ef4444;
+                animation: shake 0.3s ease;
+            }
+            
+            .mobile-tv-container .tv-passcode-dot.success {
+                background: #22c55e;
+                border-color: #22c55e;
+                box-shadow: 0 0 8px #22c55e;
+            }
+            
+            .mobile-tv-container .tv-passcode-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                margin-top: 15px;
+            }
+            
+            .mobile-tv-container .tv-passcode-key {
+                height: 44px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.15rem;
+                font-weight: 600;
+                color: #d1d5db;
+                cursor: pointer;
+            }
+            
+            .mobile-tv-container .tv-passcode-key.focused {
+                background: #38bdf8;
+                color: #0f172a;
+                border-color: #38bdf8;
+                box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+                transform: scale(1.05);
+            }
+            
+            /* Remote control styles */
+            .mobile-tv-container .remote-viewport {
+                width: 28%;
+                height: 100%;
+                background: radial-gradient(circle at 50% 30%, #e2e8f0 0%, #cbd5e1 55%, #94a3b8 100%);
+                box-shadow: inset 5px 0 15px rgba(0,0,0,0.15), -5px 0 25px rgba(0,0,0,0.4);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 1.5rem;
+                z-index: 50;
+                position: relative;
+            }
+            
+            .mobile-tv-container .apple-remote {
+                width: 140px;
+                height: 340px;
+                background: linear-gradient(to right, #f1f5f9 0%, #cbd5e1 20%, #94a3b8 80%, #64748b 100%);
+                border-radius: 24px;
+                border: 1px solid #475569;
+                box-shadow: 
+                    0 15px 35px rgba(0,0,0,0.55),
+                    inset 0 2px 4px rgba(255,255,255,0.8),
+                    inset 0 -5px 15px rgba(0,0,0,0.25);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1.8rem 1rem;
+                gap: 1.5rem;
+            }
+            
+            .mobile-tv-container .remote-dpad {
+                width: 95px;
+                height: 95px;
+                background: #1e293b;
+                border-radius: 50%;
+                position: relative;
+                box-shadow: 
+                    inset 0 4px 10px rgba(0,0,0,0.6),
+                    0 2px 3px rgba(255,255,255,0.25);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .mobile-tv-container .dpad-btn {
+                position: absolute;
+                color: #94a3b8;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 28px;
+                height: 28px;
+                cursor: pointer;
+                transition: color 0.1s;
+            }
+            
+            .mobile-tv-container .dpad-btn:active {
+                color: #38bdf8;
+                text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+            }
+            
+            .mobile-tv-container .dpad-up { top: 6px; left: 50%; transform: translateX(-50%); }
+            .mobile-tv-container .dpad-down { bottom: 6px; left: 50%; transform: translateX(-50%); }
+            .mobile-tv-container .dpad-left { left: 6px; top: 50%; transform: translateY(-50%); }
+            .mobile-tv-container .dpad-right { right: 6px; top: 50%; transform: translateY(-50%); }
+            
+            .mobile-tv-container .dpad-select {
+                width: 34px;
+                height: 34px;
+                background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+                border: 1px solid #94a3b8;
+                border-radius: 50%;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+                cursor: pointer;
+                transition: all 0.1s;
+            }
+            
+            .mobile-tv-container .dpad-select:active {
+                transform: scale(0.92);
+                background: #e2e8f0;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            }
+            
+            .mobile-tv-container .remote-btn {
+                width: 44px;
+                height: 44px;
+                background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+                border: 1px solid #64748b;
+                border-radius: 50%;
+                box-shadow: 
+                    0 2px 4px rgba(0,0,0,0.3),
+                    inset 0 1px 2px rgba(255,255,255,0.6);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                font-weight: 800;
+                color: #334155;
+                cursor: pointer;
+                transition: all 0.1s;
+            }
+            
+            .mobile-tv-container .remote-btn:active {
+                transform: scale(0.92);
+                background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+                box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            }
+            
+            /* Apps inside mobile layout */
+            .mobile-tv-container .wave-visualizer {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+                height: 60px;
+                margin: 1rem 0;
+            }
+            
+            .mobile-tv-container .wave-bar {
+                width: 4px;
+                height: 8px;
+                background: #00d2ff;
+                border-radius: 2px;
+                box-shadow: 0 0 6px rgba(0, 210, 255, 0.5);
+                animation: bounce-wave 1s ease-in-out infinite alternate;
+            }
+            
+            .mobile-tv-container .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+            .mobile-tv-container .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+            .mobile-tv-container .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+            .mobile-tv-container .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+            
+            @keyframes bounce-wave {
+                0% { height: 8px; opacity: 0.4; }
+                100% { height: 50px; opacity: 1; }
+            }
+            
+            .mobile-tv-container .crt-static-box {
+                width: 100%;
+                height: 140px;
+                background: #000;
+                border: 4px solid #27272a;
+                border-radius: 8px;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .mobile-tv-container .crt-static-canvas {
+                width: 100%;
+                height: 100%;
+                background: repeating-linear-gradient(0deg, #111, #111 2px, #333 2px, #333 4px);
+                opacity: 0.95;
+            }
+            
+            .mobile-tv-container .radio-offline-watermark {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0,0,0,0.5);
+                color: #ef4444;
+                font-size: 1.25rem;
+                font-weight: 800;
+                text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+                text-transform: uppercase;
+            }
+            
+            .mobile-tv-container .photo-stream-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            
+            .mobile-tv-container .tv-photo-frame {
+                max-width: 90%;
+                max-height: 80%;
+                border-radius: 12px;
+                padding: 8px;
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+                position: relative;
+            }
+            
+            .mobile-tv-container .tv-photo-img {
+                max-width: 100%;
+                max-height: 140px;
+                border-radius: 8px;
+                object-fit: contain;
+                transition: opacity 0.3s ease;
+            }
+            
+            .mobile-tv-container .tv-photo-indicator {
+                position: absolute;
+                bottom: -35px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0,0,0,0.6);
+                padding: 2px 10px;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                color: #d1d5db;
+            }
+            
+            .mobile-tv-container .settings-container {
+                display: flex;
+                gap: 1rem;
+                flex: 1;
+                min-height: 0;
+            }
+            
+            .mobile-tv-container .settings-menu {
+                width: 38%;
+                background: rgba(0,0,0,0.3);
+                border-radius: 12px;
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .mobile-tv-container .settings-menu-item {
+                padding: 0.5rem 0.8rem;
+                border-radius: 8px;
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #d1d5db;
+                background: rgba(255,255,255,0.02);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .mobile-tv-container .settings-menu-item.focused {
+                border: 1px solid #38bdf8;
+                background: rgba(0, 162, 255, 0.1);
+                color: white;
+            }
+            
+            .mobile-tv-container .settings-menu-item.active {
+                background: linear-gradient(135deg, #00d2ff, #0072ff);
+                color: white;
+                font-weight: 600;
+            }
+            
+            .mobile-tv-container .settings-details {
+                width: 62%;
+                background: rgba(0,0,0,0.4);
+                border-radius: 12px;
+                padding: 1rem;
+                overflow-y: auto;
+                font-size: 0.75rem;
+            }
+            
+            .mobile-tv-container .settings-card {
+                background: rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.05);
+                border-radius: 8px;
+                padding: 0.6rem;
+                margin-top: 8px;
+            }
+            
+            .mobile-tv-container .dev-console-box {
+                font-family: 'Share Tech Mono', monospace;
+                background: #020617;
+                border: 1px solid rgba(0, 221, 255, 0.2);
+                border-radius: 6px;
+                padding: 6px;
+                font-size: 0.6rem;
+                color: #00d2ff;
+                height: 60px;
+                overflow-y: auto;
+                margin-top: 8px;
+            }
+            
+            .mobile-tv-container .diag-btn {
+                width: 100%;
+                padding: 0.4rem 0.6rem;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 6px;
+                text-align: left;
+                font-size: 0.65rem;
+                font-weight: 600;
+                margin-top: 4px;
+            }
+            
+            .mobile-tv-container .diag-btn.focused {
+                border-color: #38bdf8;
+                background: rgba(0, 162, 255, 0.1);
+                color: white;
+            }
+            
+            .mobile-tv-container .tv-player-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .mobile-tv-container .tv-screen-bezel {
+                width: 90%;
+                aspect-ratio: 16/9;
+                background: #000;
+                border: 6px solid #1f2937;
+                border-radius: 8px;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .mobile-tv-container .tv-screen-video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .mobile-tv-container .comp-system-grid {
+                display: flex;
+                gap: 1rem;
+                flex: 1;
+                min-height: 0;
+            }
+            
+            .mobile-tv-container .comp-devices-list {
+                width: 35%;
+                background: rgba(0,0,0,0.3);
+                border-radius: 12px;
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .mobile-tv-container .comp-device-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 0.5rem;
+                background: rgba(255,255,255,0.02);
+                border: 1px solid transparent;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+            
+            .mobile-tv-container .comp-device-item.focused {
+                border-color: #38bdf8;
+                background: rgba(0, 162, 255, 0.1);
+            }
+            
+            .mobile-tv-container .comp-device-item.active {
+                background: #38bdf8;
+                color: #0f172a;
+                font-weight: 600;
+            }
+            
+            .mobile-tv-container .comp-explorer-panel {
+                width: 65%;
+                background: #ffffff;
+                color: #1e293b;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            
+            .mobile-tv-container .tv-file-card {
+                padding: 0.4rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .mobile-tv-container .tv-file-card.focused {
+                border-color: #0284c7;
+                background: #f0f9ff;
+                transform: scale(1.03);
+            }
+            
+            .mobile-tv-container .recovery-overlay {
+                position: absolute;
+                inset: 0;
+                z-index: 2000;
+                background: #05050a;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1.5rem;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+            
+            .mobile-tv-container .recovery-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            
+            .mobile-tv-container .recovery-card {
+                max-width: 420px;
+                background: linear-gradient(180deg, #09090f 0%, #030305 100%);
+                border: 1px solid rgba(255,255,255,0.05);
+                padding: 1.5rem;
+                border-radius: 16px;
+                text-align: center;
+            }
+            
+            .mobile-tv-container .bot-glow-link {
+                display: inline-block;
+                font-weight: 600;
+                color: #00d2ff;
+                text-decoration: underline;
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+            
+            /* Boot tv modal for mobile */
+            .mobile-tv-container .boot-tv-modal-mobile {
+                position: absolute;
+                inset: 0;
+                background: #000;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: opacity 0.6s ease;
+            }
+            
+            .mobile-tv-container .boot-tv-modal-mobile.fade-out {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1836,6 +2706,8 @@
     
     <div class="tv-backdrop"></div>
     <div class="top-light-glow"></div>
+
+    <div class="desktop-tv-container">
 
     <!-- BOOT MODAL (Cinematic Space/Click boot sequence) -->
     <div id="boot-tv-modal" class="boot-tv-modal">
@@ -2416,6 +3288,308 @@
             </span>
         </div>
     </div>
+    </div> <!-- Close desktop-tv-container -->
+
+    <!-- PORTRAIT ORIENTATION WARNING (glowing premium screen) -->
+    <div class="rotate-warning-overlay" id="rotate-screen-overlay-mobile">
+        <div class="rotate-phone-container">
+            <svg class="rotate-arrow-svg" viewBox="0 0 100 100">
+                <!-- Curved arrows showing clockwise/counterclockwise rotation -->
+                <path d="M 15 50 A 35 35 0 0 1 85 50" stroke-dasharray="6,4" />
+                <path d="M 80 44 L 85 50 L 79 56" />
+                <path d="M 85 50 A 35 35 0 0 1 15 50" stroke-dasharray="6,4" />
+                <path d="M 20 56 L 15 50 L 21 44" />
+            </svg>
+            <div class="rotate-phone-icon"></div>
+        </div>
+        <div class="text-center px-4">
+            <h4 class="text-xl font-bold tracking-wide mb-3 font-sans text-white">Пожалуйста, переверните устройство</h4>
+            <p class="text-xs text-slate-400 max-w-[280px] mx-auto leading-relaxed">Интерфейс Ocean TV оптимизирован для горизонтального (ландшафтного) режима отображения.</p>
+        </div>
+    </div>
+
+    <!-- MOBILE HYBRID INTERFACE -->
+    <div class="mobile-tv-container">
+        
+        <!-- ================= LEFT TV VIEWPORT ================= -->
+        <div class="tv-screen-viewport">
+            <div class="tv-backdrop"></div>
+            <div class="top-light-glow"></div>
+            
+            <div class="crt-scanlines"></div>
+            <div class="crt-vignette"></div>
+
+            <!-- Header -->
+            <div class="brand-container">
+                <div class="brand-logo">ocean</div>
+                <div class="brand-reflection">ocean</div>
+            </div>
+
+            <div class="tv-clock" id="tv-clock-display-mobile">23:59</div>
+
+            <!-- App Shelf Grid -->
+            <div class="shelf-container" id="shelf-container-mobile">
+                <div class="shelf-grid">
+                    <div class="tv-tile focused" id="tile-0-mobile">
+                        <i class="fas fa-images"></i>
+                        <span class="tv-tile-label">Медиатека</span>
+                    </div>
+                    <div class="tv-tile" id="tile-1-mobile">
+                        <i class="fas fa-tv"></i>
+                        <span class="tv-tile-label">Фильмы</span>
+                    </div>
+                    <div class="tv-tile" id="tile-2-mobile">
+                        <i class="fas fa-music"></i>
+                        <span class="tv-tile-label">Музыка</span>
+                    </div>
+                    <div class="tv-tile" id="tile-3-mobile">
+                        <i class="fas fa-podcast"></i>
+                        <span class="tv-tile-label">Подкасты</span>
+                    </div>
+                    <div class="tv-tile" id="tile-4-mobile">
+                        <i class="fas fa-radio"></i>
+                        <span class="tv-tile-label">Радио</span>
+                    </div>
+                    <div class="tv-tile" id="tile-5-mobile">
+                        <i class="fas fa-network-wired"></i>
+                        <span class="tv-tile-label">Компьютеры</span>
+                    </div>
+                    <div class="tv-tile" id="tile-6-mobile">
+                        <i class="fas fa-sliders"></i>
+                        <span class="tv-tile-label">Настройки</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TV PASSCODE MODAL -->
+            <div id="tv-passcode-modal-mobile" class="tv-passcode-overlay">
+                <div class="tv-passcode-box">
+                    <h3 class="text-sm font-semibold text-white mb-1">Приватный архив Егора</h3>
+                    <p class="text-[9px] text-gray-400 mb-3">Введите код доступа</p>
+                    
+                    <div class="tv-passcode-dots">
+                        <div class="tv-passcode-dot" id="dot-0-mobile"></div>
+                        <div class="tv-passcode-dot" id="dot-1-mobile"></div>
+                        <div class="tv-passcode-dot" id="dot-2-mobile"></div>
+                        <div class="tv-passcode-dot" id="dot-3-mobile"></div>
+                    </div>
+                    
+                    <div class="tv-passcode-grid">
+                        <div class="tv-passcode-key focused" id="key-1-mobile">1</div>
+                        <div class="tv-passcode-key" id="key-2-mobile">2</div>
+                        <div class="tv-passcode-key" id="key-3-mobile">3</div>
+                        <div class="tv-passcode-key" id="key-4-mobile">4</div>
+                        <div class="tv-passcode-key" id="key-5-mobile">5</div>
+                        <div class="tv-passcode-key" id="key-6-mobile">6</div>
+                        <div class="tv-passcode-key" id="key-7-mobile">7</div>
+                        <div class="tv-passcode-key" id="key-8-mobile">8</div>
+                        <div class="tv-passcode-key" id="key-9-mobile">9</div>
+                        <div class="tv-passcode-key" id="key-c-mobile" style="color:#ef4444;">C</div>
+                        <div class="tv-passcode-key" id="key-0-mobile">0</div>
+                        <div class="tv-passcode-key" id="key-back-mobile"><i class="fas fa-backspace"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APP 1: MEDIA (PHOTO STREAM) -->
+            <div id="app-media-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-images"></i> Фотопоток</div>
+                </div>
+                <div class="photo-stream-container">
+                    <div class="tv-photo-frame">
+                        <img id="tv-photo-display-mobile" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
+                        <div class="tv-photo-indicator" id="tv-photo-indicator-mobile">Слайд 1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APP 2: TV SHOWS -->
+            <div id="app-tvshows-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-tv"></i> Видео плеер</div>
+                </div>
+                <div class="tv-player-container">
+                    <div class="tv-screen-bezel">
+                        <video id="tv-show-video-mobile" class="tv-screen-video" loop playsinline src="assets/video/bg-history.mp4"></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APP 3: MUSIC -->
+            <div id="app-music-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-music"></i> Плеер</div>
+                </div>
+                <div class="flex-1 flex flex-col justify-center items-center text-center">
+                    <i class="fas fa-music text-3xl text-sky-400 animate-bounce mb-3"></i>
+                    <h4 class="text-sm font-bold text-white mb-1">Служебный фон</h4>
+                    <p class="text-[10px] text-sky-400">Гул процессора Egor PC</p>
+                </div>
+            </div>
+
+            <!-- APP 4: PODCASTS -->
+            <div id="app-podcasts-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-podcast"></i> Подкасты</div>
+                </div>
+                <div class="flex-1 flex flex-col justify-center items-center text-center">
+                    <div class="wave-visualizer">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <h4 class="text-xs font-bold text-sky-400">CYAN1DE PODCAST STREAM</h4>
+                    <p class="text-[9px] text-gray-500 max-w-[200px] mt-2">Сервер подкастинга отключен.</p>
+                </div>
+            </div>
+
+            <!-- APP 5: RADIO -->
+            <div id="app-radio-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
+                </div>
+                <div class="flex-1 flex justify-center items-center">
+                    <div class="crt-static-box">
+                        <div class="crt-static-canvas" id="crt-static-mobile"></div>
+                        <div class="radio-offline-watermark">
+                            <span>Нет Сигнала</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APP 6: COMPUTERS -->
+            <div id="app-computers-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-network-wired"></i> Сеть</div>
+                </div>
+                <div class="comp-system-grid">
+                    <div class="comp-devices-list">
+                        <div class="comp-device-item active focused" id="dev-local-mobile">
+                            <i class="fas fa-hdd text-sky-400 text-sm"></i>
+                            <span class="text-[9px] font-bold">Локальный</span>
+                        </div>
+                        <div class="comp-device-item" id="dev-office-mobile">
+                            <i class="fas fa-desktop text-gray-500 text-sm"></i>
+                            <span class="text-[9px]">OFFICE-PC</span>
+                        </div>
+                        <div class="comp-device-item" id="dev-nas-mobile">
+                            <i class="fas fa-server text-gray-500 text-sm"></i>
+                            <span class="text-[9px]">NAS Share</span>
+                        </div>
+                    </div>
+                    
+                    <div class="comp-explorer-panel">
+                        <div class="h-6 bg-gray-100 border-b border-gray-200 px-2 flex justify-between items-center text-[9px]">
+                            <span class="font-bold text-gray-600" id="tv-explorer-title-mobile">Локальный узел</span>
+                        </div>
+                        <div class="flex-1 bg-white p-3 overflow-y-auto" id="tv-explorer-content-mobile">
+                            <!-- Dynamically loaded files on D-pad navigation -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GLASS TV NOTEPAD -->
+            <div id="tv-notepad-overlay-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title" id="tv-notepad-title-mobile">readme.txt</div>
+                </div>
+                <div class="flex-1 flex items-center justify-center p-2">
+                    <div class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg p-4 shadow-xl">
+                        <div class="font-mono text-xs text-sky-200 h-[100px] overflow-y-auto whitespace-pre-wrap leading-relaxed select-text" id="tv-notepad-text-mobile">
+                            Система инициализирована. Ожидание указаний.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APP 7: SETTINGS -->
+            <div id="app-settings-mobile" class="app-overlay">
+                <div class="app-header">
+                    <div class="app-title"><i class="fas fa-sliders"></i> Настройки</div>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-menu">
+                        <div class="settings-menu-item active focused" id="set-main-mobile">
+                            <i class="fas fa-gears text-xs"></i> <span>Основные</span>
+                        </div>
+                        <div class="settings-menu-item" id="set-network-mobile">
+                            <i class="fas fa-wifi text-xs"></i> <span>Сеть</span>
+                        </div>
+                        <div class="settings-menu-item" id="set-diagnostic-mobile">
+                            <i class="fas fa-heart-pulse text-xs"></i> <span>Диагностика</span>
+                        </div>
+                        <div class="settings-menu-item" id="set-cyanide-mobile" style="color: #0df;">
+                            <i class="fas fa-syringe text-xs"></i> <span>Jailbreak</span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-details" id="settings-details-panel-mobile">
+                        <!-- Dynamic panels -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOOT ERROR RECOVERY SCREENS -->
+            <div id="recovery-screen-mobile" class="recovery-overlay">
+                <div class="recovery-card">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i id="recovery-icon-mobile" class="fas fa-globe text-xl text-sky-400"></i>
+                    </div>
+                    <h2 class="text-sm font-bold text-white mb-1" id="recovery-title-mobile">Критическая системная ошибка</h2>
+                    <p class="text-[9px] text-red-500 font-bold uppercase tracking-wider mb-3" id="recovery-code-mobile">RECOVERY_ERR1_NETWORK_DISCONNECTED</p>
+                    
+                    <p class="text-[10px] text-gray-300 leading-normal mb-3 max-w-[280px] mx-auto">
+                        В результате инъекции кастомного ядра cyan1de OS произошел сбой. Отсканируйте QR или перейдите по ссылке:
+                    </p>
+                    
+                    <a href="#" target="_blank" class="bot-glow-link mb-3" id="recovery-bot-link-mobile">https://t.me/sitemedia07_bot?start=recovery_err1</a>
+                    
+                    <div class="text-[9px] text-gray-500 mb-2" id="recovery-timer-mobile">
+                        Сессия восстановления действительна: 14:59
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= RIGHT APPLE REMOTE PANEL ================= -->
+        <div class="remote-viewport">
+            <div class="apple-remote">
+                
+                <!-- Brushed Circular D-pad overlay -->
+                <div class="remote-dpad">
+                    <div class="dpad-btn dpad-up" onclick="pressRemoteMobile('up')"><i class="fas fa-chevron-up"></i></div>
+                    <div class="dpad-btn dpad-down" onclick="pressRemoteMobile('down')"><i class="fas fa-chevron-down"></i></div>
+                    <div class="dpad-btn dpad-left" onclick="pressRemoteMobile('left')"><i class="fas fa-chevron-left"></i></div>
+                    <div class="dpad-btn dpad-right" onclick="pressRemoteMobile('right')"><i class="fas fa-chevron-right"></i></div>
+                    
+                    <!-- Select button -->
+                    <div class="dpad-select" onclick="pressRemoteMobile('select')"></div>
+                </div>
+
+                <!-- Lower controls centered MENU button (centered, Play/Pause removed) -->
+                <div class="flex justify-center w-full mt-4">
+                    <div class="remote-btn" onclick="pressRemoteMobile('menu')">MENU</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- BOOT MODAL (Click to start mobile remote) -->
+        <div id="boot-tv-modal-mobile" class="boot-tv-modal-mobile" onclick="powerOnTvMobile()">
+            <div class="flex items-center gap-4 text-white text-xl tracking-wider font-sans">
+                <i class="fas fa-satellite-dish text-3xl text-sky-400 animate-bounce"></i>
+                <span>OCEAN TV</span>
+            </div>
+            <p class="text-[9px] text-gray-500 tracking-widest mt-6 uppercase font-sans">Нажмите на экран для запуска пульта</p>
+        </div>
+
+    </div>
 
     <!-- CORE LOGIC JS -->
     <script>
@@ -2425,6 +3599,639 @@
         let isPasscodeUnlocked = localStorage.getItem('om_tv_passcode_unlocked') === 'true';
         let currentPasscodeInput = "";
         const PASSCODE_CORRECT = "4515";
+
+        // ================= MOBILE HYBRID INTERFACE SCRIPT =================
+        let mobileTvPowerState = false;
+        let mobilePasscodeUnlocked = false;
+        let mobileCurrentPasscodeInput = "";
+        const MOBILE_PASSCODE_CORRECT = "0921";
+        let mobileCurrentPhotoIndex = 1;
+        const MOBILE_TOTAL_PHOTOS = 4;
+        let mobileActiveContext = "main-shelf";
+        
+        let mobileShelfFocusIndex = 0;
+        let mobilePasscodeFocusIndex = 0;
+        let mobileSettingsMenuIndex = 0;
+        let mobileSettingsDiagIndex = 0;
+        let mobileComputersDeviceIndex = 0;
+        let mobileComputersExplorerIndex = 0;
+        let mobileActiveSettingsTab = "main";
+
+        const passcodeKeysArr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "c", "0", "back"];
+        const mobileFilesystem = [
+            { name: 'Рабочий стол', id: 'Desktop', type: 'folder', icon: 'fa-desktop text-sky-600' },
+            { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Система инициализирована. Ожидание указаний.' },
+            { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-sky-400', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] },
+            { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-gray-500', content: '0921' },
+            { name: 'locked_Egor', id: 'locked', type: 'locked_folder', icon: 'fa-folder-closed text-yellow-600' }
+        ];
+
+        function playSndMobile(audio) {
+            if (!mobileTvPowerState && audio !== soundEnable) return;
+            const clone = audio.cloneNode();
+            clone.volume = audio.volume || 0.5;
+            clone.play().catch(e => {});
+        }
+
+        function powerOnTvMobile() {
+            if (mobileTvPowerState) return;
+            mobileTvPowerState = true;
+            
+            soundEnable.volume = 0.5;
+            soundAmbient.volume = 0.2;
+            
+            playSndMobile(soundEnable);
+            
+            const bootModal = document.getElementById('boot-tv-modal-mobile');
+            bootModal.classList.add('fade-out');
+            setTimeout(() => {
+                bootModal.style.display = 'none';
+                soundAmbient.play().catch(() => {});
+            }, 600);
+            
+            const now = new Date();
+            document.getElementById('tv-clock-display-mobile').textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            setInterval(() => {
+                const clockNow = new Date();
+                document.getElementById('tv-clock-display-mobile').textContent = `${String(clockNow.getHours()).padStart(2, '0')}:${String(clockNow.getMinutes()).padStart(2, '0')}`;
+            }, 30000);
+            
+            renderSettingsTabMobileMobile('main');
+        }
+
+        function pressRemoteMobile(action) {
+            if (!mobileTvPowerState) return;
+            
+            if (action === 'up' || action === 'down' || action === 'left' || action === 'right') {
+                navigateFocusMobile(action);
+            }
+            if (action === 'select') {
+                triggerSelectActionMobile();
+            }
+            if (action === 'menu') {
+                triggerMenuBackMobile();
+            }
+        }
+
+        function navigateFocusMobile(direction) {
+            playSndMobile(soundClick);
+            
+            if (mobileActiveContext === "main-shelf") {
+                if (direction === 'left') {
+                    mobileShelfFocusIndex = (mobileShelfFocusIndex - 1 + 7) % 7;
+                    updateShelfFocusVisualsMobile();
+                } else if (direction === 'right') {
+                    mobileShelfFocusIndex = (mobileShelfFocusIndex + 1) % 7;
+                    updateShelfFocusVisualsMobile();
+                } else if (direction === 'up' || direction === 'down') {
+                    const shelfContainer = document.getElementById('shelf-container-mobile');
+                    if (shelfContainer) {
+                        if (direction === 'up') {
+                            shelfContainer.scrollBy({ top: -60, behavior: 'smooth' });
+                        } else {
+                            shelfContainer.scrollBy({ top: 60, behavior: 'smooth' });
+                        }
+                    }
+                }
+            }
+            else if (mobileActiveContext === "passcode-pad") {
+                let row = Math.floor(mobilePasscodeFocusIndex / 3);
+                let col = mobilePasscodeFocusIndex % 3;
+                
+                if (direction === 'up') row = (row - 1 + 4) % 4;
+                if (direction === 'down') row = (row + 1) % 4;
+                if (direction === 'left') col = (col - 1 + 3) % 3;
+                if (direction === 'right') col = (col + 1) % 3;
+                
+                mobilePasscodeFocusIndex = row * 3 + col;
+                updatePasscodeFocusVisualsMobile();
+            }
+            else if (mobileActiveContext === "settings-tabs") {
+                if (direction === 'down') {
+                    mobileSettingsMenuIndex = (mobileSettingsMenuIndex + 1) % 4;
+                } else if (direction === 'up') {
+                    mobileSettingsMenuIndex = (mobileSettingsMenuIndex - 1 + 4) % 4;
+                } else if (direction === 'right' && mobileActiveSettingsTab === 'diagnostic') {
+                    mobileActiveContext = "settings-diag";
+                    mobileSettingsDiagIndex = 0;
+                }
+                updateSettingsTabsFocusVisualsMobile();
+            }
+            else if (mobileActiveContext === "settings-diag") {
+                if (direction === 'down') {
+                    mobileSettingsDiagIndex = (mobileSettingsDiagIndex + 1) % 3;
+                } else if (direction === 'up') {
+                    mobileSettingsDiagIndex = (mobileSettingsDiagIndex - 1 + 3) % 3;
+                } else if (direction === 'left') {
+                    mobileActiveContext = "settings-tabs";
+                }
+                updateSettingsDiagFocusVisualsMobile();
+            }
+            else if (mobileActiveContext === "computers-device") {
+                if (direction === 'down') {
+                    mobileComputersDeviceIndex = (mobileComputersDeviceIndex + 1) % 3;
+                } else if (direction === 'up') {
+                    mobileComputersDeviceIndex = (mobileComputersDeviceIndex - 1 + 3) % 3;
+                } else if (direction === 'right' && mobileComputersDeviceIndex === 0) {
+                    mobileActiveContext = "computers-explorer";
+                    mobileComputersExplorerIndex = 0;
+                }
+                updateComputersDeviceFocusVisualsMobile();
+            }
+            else if (mobileActiveContext === "computers-explorer") {
+                if (direction === 'down') {
+                    mobileComputersExplorerIndex = (mobileComputersExplorerIndex + 1) % mobileFilesystem.length;
+                } else if (direction === 'up') {
+                    mobileComputersExplorerIndex = (mobileComputersExplorerIndex - 1 + mobileFilesystem.length) % mobileFilesystem.length;
+                } else if (direction === 'left') {
+                    mobileActiveContext = "computers-device";
+                }
+                updateComputersExplorerFocusVisualsMobile();
+            }
+            else if (mobileActiveContext === "media-gallery") {
+                if (direction === 'left') {
+                    slidePhotoMobileMobile(-1);
+                } else if (direction === 'right') {
+                    slidePhotoMobileMobile(1);
+                }
+            }
+        }
+
+        function triggerSelectActionMobile() {
+            playSndMobile(soundClick);
+            
+            if (mobileActiveContext === "main-shelf") {
+                if (mobileShelfFocusIndex === 0) {
+                    if (mobilePasscodeUnlocked) {
+                        launchAppMobileMobile("app-media-mobile", "media-gallery");
+                    } else {
+                        launchPasscodeModalMobileMobile();
+                    }
+                } else if (mobileShelfFocusIndex === 1) {
+                    launchAppMobileMobile("app-tvshows-mobile", "tv-shows");
+                    toggleTvVideoMobileMobile(true);
+                } else if (mobileShelfFocusIndex === 2) {
+                    launchAppMobileMobile("app-music-mobile", "music-player");
+                } else if (mobileShelfFocusIndex === 3) {
+                    launchAppMobileMobile("app-podcasts-mobile", "podcasts-fallback");
+                } else if (mobileShelfFocusIndex === 4) {
+                    launchAppMobileMobile("app-radio-mobile", "radio-fallback");
+                    soundAmbient.pause();
+                    animateStaticMobile();
+                } else if (mobileShelfFocusIndex === 5) {
+                    launchAppMobileMobile("app-computers-mobile", "computers-device");
+                    selectDeviceMobileMobile("local");
+                } else if (mobileShelfFocusIndex === 6) {
+                    launchAppMobileMobile("app-settings-mobile", "settings-tabs");
+                }
+            }
+            else if (mobileActiveContext === "passcode-pad") {
+                const key = passcodeKeysArr[mobilePasscodeFocusIndex];
+                if (key === 'c') {
+                    mobileCurrentPasscodeInput = "";
+                    updatePasscodeDotsMobileMobile();
+                } else if (key === 'back') {
+                    mobileCurrentPasscodeInput = mobileCurrentPasscodeInput.slice(0, -1);
+                    updatePasscodeDotsMobileMobile();
+                } else {
+                    if (mobileCurrentPasscodeInput.length < 4) {
+                        mobileCurrentPasscodeInput += key;
+                        updatePasscodeDotsMobileMobile();
+                        if (mobileCurrentPasscodeInput.length === 4) {
+                            setTimeout(verifyPasscodeMobileMobile, 300);
+                        }
+                    }
+                }
+            }
+            else if (mobileActiveContext === "settings-tabs") {
+                const tabs = ["main", "network", "diagnostic", "cyanide"];
+                mobileActiveSettingsTab = tabs[mobileSettingsMenuIndex];
+                renderSettingsTabMobileMobile(mobileActiveSettingsTab);
+            }
+            else if (mobileActiveContext === "settings-diag") {
+                triggerRecoveryScreenMobileMobile(mobileSettingsDiagIndex + 1);
+            }
+            else if (mobileActiveContext === "computers-device") {
+                const devs = ["local", "office", "nas"];
+                selectDeviceMobileMobile(devs[mobileComputersDeviceIndex]);
+            }
+            else if (mobileActiveContext === "computers-explorer") {
+                const file = mobileFilesystem[mobileComputersExplorerIndex];
+                if (file.type === 'locked_folder') {
+                    launchPasscodeModalMobileMobile();
+                } else if (file.type === 'text') {
+                    openTvNotepadMobileMobile(file.name, file.content);
+                } else if (file.type === 'links_file') {
+                    openTvNotepadMobileMobile(file.name, file.content);
+                }
+            }
+        }
+
+        function triggerMenuBackMobile() {
+            playSndMobile(soundClick);
+            
+            if (mobileActiveContext === "passcode-pad") {
+                closePasscodeModalMobileMobile();
+            }
+            else if (mobileActiveContext === "media-gallery") {
+                closeAppMobileMobile("app-media-mobile");
+            }
+            else if (mobileActiveContext === "tv-shows") {
+                toggleTvVideoMobileMobile(false);
+                closeAppMobileMobile("app-tvshows-mobile");
+            }
+            else if (mobileActiveContext === "music-player") {
+                closeAppMobileMobile("app-music-mobile");
+            }
+            else if (mobileActiveContext === "podcasts-fallback") {
+                closeAppMobileMobile("app-podcasts-mobile");
+            }
+            else if (mobileActiveContext === "radio-fallback") {
+                if (staticAnimationIdMobile) cancelAnimationFrame(staticAnimationIdMobile);
+                soundAmbient.play().catch(() => {});
+                closeAppMobileMobile("app-radio-mobile");
+            }
+            else if (mobileActiveContext === "computers-device" || mobileActiveContext === "computers-explorer") {
+                closeAppMobileMobile("app-computers-mobile");
+            }
+            else if (mobileActiveContext === "settings-tabs" || mobileActiveContext === "settings-diag") {
+                closeAppMobileMobile("app-settings-mobile");
+            }
+            else if (mobileActiveContext === "notepad-open") {
+                closeTvNotepadMobileMobile();
+            }
+            else if (mobileActiveContext === "recovery") {
+                exitRecoveryScreenMobileMobile();
+            }
+        }
+
+        function launchAppMobileMobile(appId, contextName) {
+            document.getElementById(appId).classList.add('active');
+            mobileActiveContext = contextName;
+            
+            if (appId === 'app-settings-mobile') {
+                renderSettingsTabMobileMobile(mobileActiveSettingsTab);
+            }
+        }
+
+        function closeAppMobileMobile(appId) {
+            document.getElementById(appId).classList.remove('active');
+            mobileActiveContext = "main-shelf";
+        }
+
+        function updateShelfFocusVisualsMobile() {
+            document.querySelectorAll('.mobile-tv-container .tv-tile').forEach((tile, index) => {
+                tile.classList.remove('focused');
+                if (index === mobileShelfFocusIndex) {
+                    tile.classList.add('focused');
+                }
+            });
+        }
+
+        function updatePasscodeFocusVisualsMobile() {
+            document.querySelectorAll('.mobile-tv-container .tv-passcode-key').forEach((key, index) => {
+                key.classList.remove('focused');
+                if (index === mobilePasscodeFocusIndex) {
+                    key.classList.add('focused');
+                }
+            });
+        }
+
+        function updateSettingsTabsFocusVisualsMobile() {
+            document.querySelectorAll('.mobile-tv-container .settings-menu-item').forEach((item, index) => {
+                item.classList.remove('active', 'focused');
+                if (mobileActiveSettingsTab === ["main", "network", "diagnostic", "cyanide"][index]) {
+                    item.classList.add('active');
+                }
+                if (mobileActiveContext === "settings-tabs" && index === mobileSettingsMenuIndex) {
+                    item.classList.add('focused');
+                }
+            });
+        }
+
+        function updateSettingsDiagFocusVisualsMobile() {
+            updateSettingsTabsFocusVisualsMobile();
+            document.querySelectorAll('.mobile-tv-container .diag-btn').forEach((btn, index) => {
+                btn.classList.remove('focused');
+                if (mobileActiveContext === "settings-diag" && index === mobileSettingsDiagIndex) {
+                    btn.classList.add('focused');
+                }
+            });
+        }
+
+        function updateComputersDeviceFocusVisualsMobile() {
+            document.querySelectorAll('.mobile-tv-container .comp-device-item').forEach((item, index) => {
+                item.classList.remove('active', 'focused');
+                if (mobileComputersDeviceIndex === index) {
+                    if (mobileActiveContext === "computers-device") {
+                        item.classList.add('focused');
+                    } else {
+                        item.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        function updateComputersExplorerFocusVisualsMobile() {
+            updateComputersDeviceFocusVisualsMobile();
+            document.querySelectorAll('.mobile-tv-container .tv-file-card').forEach((card, index) => {
+                card.classList.remove('focused');
+                if (mobileActiveContext === "computers-explorer" && index === mobileComputersExplorerIndex) {
+                    card.classList.add('focused');
+                }
+            });
+        }
+
+        function launchPasscodeModalMobileMobile() {
+            mobileCurrentPasscodeInput = "";
+            mobilePasscodeFocusIndex = 0;
+            updatePasscodeDotsMobileMobile();
+            updatePasscodeFocusVisualsMobile();
+            document.getElementById('tv-passcode-modal-mobile').classList.add('active');
+            mobileActiveContext = "passcode-pad";
+        }
+
+        function closePasscodeModalMobileMobile() {
+            document.getElementById('tv-passcode-modal-mobile').classList.remove('active');
+            mobileActiveContext = "main-shelf";
+        }
+
+        function updatePasscodeDotsMobileMobile() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById(`dot-${i}-mobile`);
+                dot.className = "tv-passcode-dot";
+                if (i < mobileCurrentPasscodeInput.length) {
+                    dot.classList.add('filled');
+                }
+            }
+        }
+
+        function verifyPasscodeMobileMobile() {
+            const dots = document.querySelectorAll('.mobile-tv-container .tv-passcode-dot');
+            if (mobileCurrentPasscodeInput === MOBILE_PASSCODE_CORRECT) {
+                mobilePasscodeUnlocked = true;
+                dots.forEach(d => d.className = "tv-passcode-dot success");
+                setTimeout(() => {
+                    closePasscodeModalMobileMobile();
+                    launchAppMobileMobile("app-media-mobile", "media-gallery");
+                }, 350);
+            } else {
+                dots.forEach(d => d.className = "tv-passcode-dot error");
+                setTimeout(() => {
+                    mobileCurrentPasscodeInput = "";
+                    updatePasscodeDotsMobileMobile();
+                }, 500);
+            }
+        }
+
+        function slidePhotoMobileMobile(dir) {
+            mobileCurrentPhotoIndex += dir;
+            if (mobileCurrentPhotoIndex < 1) mobileCurrentPhotoIndex = 1;
+            
+            const displayImg = document.getElementById('tv-photo-display-mobile');
+            displayImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                displayImg.src = `assets/images/computer/egor_files/${mobileCurrentPhotoIndex}.jpg`;
+                displayImg.onload = () => {
+                    displayImg.style.opacity = '1';
+                    document.getElementById('tv-photo-indicator-mobile').textContent = `Слайд ${mobileCurrentPhotoIndex}`;
+                };
+                displayImg.onerror = () => {
+                    if (mobileCurrentPhotoIndex > 1) {
+                        mobileCurrentPhotoIndex--;
+                        displayImg.src = `assets/images/computer/egor_files/${mobileCurrentPhotoIndex}.jpg`;
+                        displayImg.style.opacity = '1';
+                        document.getElementById('tv-photo-indicator-mobile').textContent = `Слайд ${mobileCurrentPhotoIndex} (Конец архива)`;
+                    }
+                };
+            }, 200);
+        }
+
+        function toggleTvVideoMobileMobile(forceState) {
+            const video = document.getElementById('tv-show-video-mobile');
+            if (forceState === true) {
+                video.play();
+            } else if (forceState === false) {
+                video.pause();
+            } else {
+                if (video.paused) video.play();
+                else video.pause();
+            }
+        }
+
+        let staticAnimationIdMobile;
+        function animateStaticMobile() {
+            const canvas = document.getElementById('crt-static-mobile');
+            if (!canvas) return;
+            let toggle = false;
+            function step() {
+                toggle = !toggle;
+                canvas.style.opacity = toggle ? '0.85' : '0.95';
+                canvas.style.backgroundPosition = `${Math.random()*50}px ${Math.random()*50}px`;
+                staticAnimationIdMobile = requestAnimationFrame(step);
+            }
+            step();
+        }
+
+        function selectDeviceMobileMobile(dev) {
+            const container = document.getElementById('tv-explorer-content-mobile');
+            const titleEl = document.getElementById('tv-explorer-title-mobile');
+            container.innerHTML = '';
+            
+            if (dev === 'local') {
+                titleEl.textContent = "Локальный узел";
+                
+                const ul = document.createElement('div');
+                ul.className = "flex flex-col gap-1.5";
+                
+                mobileFilesystem.forEach((file, index) => {
+                    const el = document.createElement('div');
+                    el.className = "tv-file-card flex items-center gap-3 p-2 border border-gray-200 rounded-lg text-left text-[10px] font-semibold cursor-pointer";
+                    el.innerHTML = `<i class="fas ${file.icon} text-sm"></i> <span>${file.name}</span>`;
+                    ul.appendChild(el);
+                });
+                
+                container.appendChild(ul);
+                updateComputersExplorerFocusVisualsMobile();
+            } else {
+                titleEl.textContent = "OFFLINE";
+                container.innerHTML = `
+                    <div class="h-full flex flex-col justify-center items-center text-center p-4 bg-slate-50">
+                        <i class="fas fa-plug-circle-xmark text-3xl text-gray-400 mb-2"></i>
+                        <span class="text-[9px] text-gray-500">Сетевой узел недоступен.</span>
+                    </div>
+                `;
+            }
+        }
+
+        function openTvNotepadMobileMobile(name, text) {
+            document.getElementById('tv-notepad-title-mobile').textContent = name;
+            document.getElementById('tv-notepad-text-mobile').textContent = text;
+            document.getElementById('tv-notepad-overlay-mobile').classList.add('active');
+            mobileActiveContext = "notepad-open";
+        }
+
+        function closeTvNotepadMobileMobile() {
+            document.getElementById('tv-notepad-overlay-mobile').classList.remove('active');
+            mobileActiveContext = "computers-explorer";
+        }
+
+        function renderSettingsTabMobileMobile(tab) {
+            const details = document.getElementById('settings-details-panel-mobile');
+            details.innerHTML = '';
+            
+            if (tab === 'main') {
+                details.innerHTML = `
+                    <h5 class="font-bold text-white mb-2">Основные сведения</h5>
+                    <div class="settings-card text-[9px] flex flex-col gap-1">
+                        <div class="flex justify-between py-1 border-b border-white/5"><span class="text-gray-400">Модель</span><span class="text-white font-bold">Apple TV 3rd Gen</span></div>
+                        <div class="flex justify-between py-1 border-b border-white/5"><span class="text-gray-400">Прошивка</span><span class="text-sky-400 font-bold">Ocean TV Mobile v5.02</span></div>
+                    </div>
+                `;
+            } else if (tab === 'network') {
+                details.innerHTML = `
+                    <h5 class="font-bold text-white mb-2">Статус сети</h5>
+                    <div class="settings-card text-[9px] flex flex-col gap-1">
+                        <div class="flex justify-between py-1 border-b border-white/5"><span class="text-gray-400">Точка Wi-Fi</span><span class="text-white font-bold">OCEAN_FREE_WIFI</span></div>
+                        <div class="flex justify-between py-1 border-b border-white/5"><span class="text-gray-400">Сила сети</span><span class="text-sky-400 font-bold">Отличная</span></div>
+                    </div>
+                `;
+            } else if (tab === 'diagnostic') {
+                details.innerHTML = `
+                    <h5 class="font-bold text-white mb-2">Диагностика</h5>
+                    <div class="settings-card flex flex-col gap-1.5">
+                        <button class="diag-btn text-white" id="db-1-mobile"><i class="fas fa-globe text-sky-400 mr-1.5"></i> Отладка Сети (Err 1)</button>
+                        <button class="diag-btn text-white" id="db-2-mobile"><i class="fas fa-folder-closed text-sky-400 mr-1.5"></i> Отладка Ядра (Err 2)</button>
+                        <button class="diag-btn text-white" id="db-3-mobile"><i class="fas fa-triangle-exclamation text-sky-400 mr-1.5"></i> Отладка Памяти (Err 3)</button>
+                    </div>
+                `;
+                updateSettingsDiagFocusVisualsMobile();
+            } else if (tab === 'cyanide') {
+                details.innerHTML = `
+                    <h5 class="font-bold text-white mb-2">cyan1de Injection</h5>
+                    <div class="settings-card flex flex-col">
+                        <div class="flex justify-between text-[9px] mb-1"><span class="text-gray-400">Режим</span><span class="text-sky-400 font-bold uppercase">FakeSigned</span></div>
+                        <div class="dev-console-box" id="dev-console-mobile">[+] Debugger initialized...<br>[+] custom remote listening on port 8070...<br>[+] signature bypassed.</div>
+                    </div>
+                `;
+            }
+            updateSettingsTabsFocusVisualsMobile();
+        }
+
+        let recoveryTimerIntervalMobile;
+        function triggerRecoveryScreenMobileMobile(errNum) {
+            soundAmbient.pause();
+            
+            const overlay = document.getElementById('recovery-screen-mobile');
+            const icon = document.getElementById('recovery-icon-mobile');
+            const title = document.getElementById('recovery-title-mobile');
+            const code = document.getElementById('recovery-code-mobile');
+            const botLink = document.getElementById('recovery-bot-link-mobile');
+            
+            const sessionTokenVal = "tv_sess_" + Math.random().toString(36).substr(2, 6);
+            mobileActiveContext = "recovery";
+            
+            if (errNum === 1) {
+                icon.className = "fas fa-globe text-sky-400";
+                title.textContent = "Сетевой сбой";
+                code.textContent = "RECOVERY_ERR1_NETWORK_DISCONNECTED";
+                botLink.textContent = `https://t.me/sitemedia07_bot?start=recovery_err1_tv_sess_${sessionTokenVal}`;
+                botLink.href = `https://t.me/sitemedia07_bot?start=recovery_err1_tv_sess_${sessionTokenVal}`;
+            } else if (errNum === 2) {
+                icon.className = "fas fa-folder-closed text-yellow-500";
+                title.textContent = "Ядро не найдено";
+                code.textContent = "RECOVERY_ERR2_OS_MISSING";
+                botLink.textContent = `https://t.me/sitemedia07_bot?start=recovery_err2_tv_sess_${sessionTokenVal}`;
+                botLink.href = `https://t.me/sitemedia07_bot?start=recovery_err2_tv_sess_${sessionTokenVal}`;
+            } else if (errNum === 3) {
+                icon.className = "fas fa-triangle-exclamation text-red-500";
+                title.textContent = "Сбой прошивки";
+                code.textContent = "RECOVERY_ERR3_FIRMWARE_CORRUPTED";
+                botLink.textContent = `https://t.me/sitemedia07_bot?start=recovery_err3_tv_sess_${sessionTokenVal}`;
+                botLink.href = `https://t.me/sitemedia07_bot?start=recovery_err3_tv_sess_${sessionTokenVal}`;
+            }
+            
+            let secondsLeft = 900;
+            const timerEl = document.getElementById('recovery-timer-mobile');
+            
+            clearInterval(recoveryTimerIntervalMobile);
+            recoveryTimerIntervalMobile = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft < 0) {
+                    clearInterval(recoveryTimerIntervalMobile);
+                    timerEl.textContent = "Сессия истекла.";
+                } else {
+                    const min = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+                    const sec = String(secondsLeft % 60).padStart(2, '0');
+                    timerEl.textContent = `Сессия восстановления действительна: ${min}:${sec}`;
+                }
+            }, 1000);
+            
+            overlay.classList.add('active');
+        }
+
+        function exitRecoveryScreenMobileMobile() {
+            clearInterval(recoveryTimerIntervalMobile);
+            document.getElementById('recovery-screen-mobile').classList.remove('active');
+            mobileActiveContext = "settings-diag";
+            soundAmbient.play().catch(() => {});
+        }
+
+        // --- MOBILE ROTATION AND FULLSCREEN API ENGINE ---
+        let hasPendingFullscreenMobile = false;
+
+        function handleOrientationChange() {
+            const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+            const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+            
+            if (isMobile) {
+                if (isLandscape) {
+                    hasPendingFullscreenMobile = true;
+                    requestFullscreenMobile();
+                } else {
+                    hasPendingFullscreenMobile = false;
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen().catch(err => {
+                            console.log("Error exiting fullscreen: ", err);
+                        });
+                    }
+                }
+            }
+        }
+
+        function requestFullscreenMobile() {
+            if (!hasPendingFullscreenMobile) return;
+            const docEl = document.documentElement;
+            const requestFS = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen;
+            
+            if (requestFS) {
+                requestFS.call(docEl)
+                    .then(() => {
+                        hasPendingFullscreenMobile = false;
+                    })
+                    .catch(err => {
+                        console.log("Fullscreen request deferred: ", err);
+                    });
+            }
+        }
+
+        window.addEventListener('click', () => {
+            if (hasPendingFullscreenMobile) {
+                requestFullscreenMobile();
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchstart', () => {
+            if (hasPendingFullscreenMobile) {
+                requestFullscreenMobile();
+            }
+        }, { passive: true });
+
+        window.addEventListener('resize', handleOrientationChange);
+        window.addEventListener('orientationchange', handleOrientationChange);
+        
+        handleOrientationChange();
         
         let currentPhotoIndex = 1;
 
