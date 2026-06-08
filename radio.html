@@ -400,14 +400,9 @@
                     </nav>
                     <!-- Telegram Profile Widget -->
                     <div class="relative">
-                        <div id="headerProfileBlock" onclick="openAuthModal()" class="relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
+                        <div id="headerProfileBlock" onclick="openAuthModal()" class="flex items-center gap-2 cursor-pointer bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition">
                             <i class="fab fa-telegram text-sky-400 text-lg"></i>
                             <span class="text-xs text-white font-semibold font-sans">Войти</span>
-                            <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                </svg>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -579,78 +574,216 @@
 
     <script>
         const tracks = [
-{
-  title: "Замай",
-  artist: "Замай",
-  src: "assets/music/20260207_222530_Замай.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "ТВИЧ",
-  artist: "KAMZ0NER",
-  src: "assets/music/20260208_124853_ТВИЧ.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Новый Год",
-  artist: "Д///ИХАД",
-  src: "assets/music/20260208_130936_Новый_Год.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Барабан",
-  artist: "Poнни, Spttchhouse",
-  src: "assets/music/20260208_152412_Барабан.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Rumble",
-  artist: "Rumble",
-  src: "assets/music/20260210_200551_Rumble.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Комиксы Макса Пейна",
-  artist: "Картси Хатакка, Киммо Каясто",
-  src: "assets/music/20260224_154423_Комиксы_Макса_Пейна.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Speed с отцом",
-  artist: "KAMZ0NER",
-  src: "assets/music/20260224_155625_Speed_с_отцом.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Mi general Augusto Pinochet",
-  artist: "Луис Гонсалес",
-  src: "assets/music/20260309_053951_Mi_general_Augusto_Pinochet.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Обоюдно",
-  artist: "Gazan",
-  src: "assets/music/20260309_123933_Обоюдно.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Бархатные Тяги",
-  artist: "Gazan",
-  src: "assets/music/20260309_124418_Бархатные_Тяги.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Six Seven",
-  artist: "Gazan",
-  src: "assets/music/20260309_124649_Six_Seven.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "OCG",
-  artist: "FRIENDLY THUG 52 NGG",
-  src: "assets/music/20260609_015711_FRIENDLY_THUG_52_NGG_OCG.mp3",
-  cover: "assets/images/default.png"
-}
+    {
+        title: "Я ГИДРОЦЕФАЛ",
+        artist: "KAMZ0NER",
+        src: "assets/music/track1.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Арбитраж",
+        artist: "KAMZ0NER",
+        src: "assets/music/track3.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "ГРАТАТАТА",
+        artist: "KAMZ0NER",
+        src: "assets/music/track5.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Саддам Хусейн",
+        artist: "Мистер Кредо",
+        src: "assets/music/track6.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Serbia Strong",
+        artist: "Unknown",
+        src: "assets/music/track8.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Я люблю",
+        artist: "Anacondaz",
+        src: "assets/music/track9.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Гимн Ост-Индии",
+        artist: "History Music",
+        src: "assets/music/track10.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "План убийства Лукашенко",
+        artist: "Unknown",
+        src: "assets/music/track11.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "MOSKAU",
+        artist: "Unknown",
+        src: "assets/music/track12.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Рулетка",
+        artist: "Unknown",
+        src: "assets/music/track13.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "70 лет октября",
+        artist: "Unknown",
+        src: "assets/music/track14.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Рыцари чести и долга",
+        artist: "Unknown",
+        src: "assets/music/track18.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Burgundian Lullaby",
+        artist: "Unknown",
+        src: "assets/music/track19.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Лето и арбалеты",
+        artist: "Unknown",
+        src: "assets/music/track21.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "juice (СВО Remix)",
+        artist: "Unknown",
+        src: "assets/music/track22.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Свобода",
+        artist: "Unknown",
+        src: "assets/music/track30.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Порвал штаны freestyle",
+        artist: "Unknown",
+        src: "assets/music/track31.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Руны и свастики",
+        artist: "Unknown",
+        src: "assets/music/track33.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Verify Your Clock",
+        artist: "Unknown",
+        src: "assets/music/track35.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Боже, отдай нам царя",
+        artist: "Unknown",
+        src: "assets/music/track36.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Teufelslied",
+        artist: "Unknown",
+        src: "assets/music/track37.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "13:56",
+        artist: "Unknown",
+        src: "assets/music/track38.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "New World Order",
+        artist: "Michaelanthony",
+        src: "assets/music/track40.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Замай",
+        artist: "Замай",
+        src: "assets/music/20260207_222530_Замай.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "ТВИЧ",
+        artist: "KAMZ0NER",
+        src: "assets/music/20260208_124853_ТВИЧ.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Новый Год",
+        artist: "Д///ИХАД",
+        src: "assets/music/20260208_130936_Новый_Год.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Барабан",
+        artist: "Poнни, Spttchhouse",
+        src: "assets/music/20260208_152412_Барабан.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Rumble",
+        artist: "Rumble",
+        src: "assets/music/20260210_200551_Rumble.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Комиксы Макса Пейна",
+        artist: "Картси Хатакка, Киммо Каясто",
+        src: "assets/music/20260224_154423_Комиксы_Макса_Пейна.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Speed с отцом",
+        artist: "KAMZ0NER",
+        src: "assets/music/20260224_155625_Speed_с_отцом.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Mi general Augusto Pinochet",
+        artist: "Луис Гонсалес",
+        src: "assets/music/20260309_053951_Mi_general_Augusto_Pinochet.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Обоюдно",
+        artist: "Gazan",
+        src: "assets/music/20260309_123933_Обоюдно.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Бархатные Тяги",
+        artist: "Gazan",
+        src: "assets/music/20260309_124418_Бархатные_Тяги.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "Six Seven",
+        artist: "Gazan",
+        src: "assets/music/20260309_124649_Six_Seven.mp3",
+        cover: "assets/images/.png"
+    },
+    {
+        title: "OCG",
+        artist: "FRIENDLY THUG 52 NGG",
+        src: "assets/music/20260609_015711_FRIENDLY_THUG_52_NGG_OCG.mp3",
+        cover: "assets/images/default.png"
+    }
 ];
 
         const audio = document.getElementById('audio');
