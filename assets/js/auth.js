@@ -155,7 +155,7 @@ window.checkAuthState = function() {
     
     if (desktopHeader) {
         desktopHeader.innerHTML = defaultHeaderHtml;
-        desktopHeader.className = "relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed";
+        desktopHeader.className = "relative hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed";
     }
     if (mobileHeader) {
         mobileHeader.innerHTML = `

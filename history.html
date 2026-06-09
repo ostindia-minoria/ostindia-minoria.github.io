@@ -74,6 +74,11 @@
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
         
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             color: #e2e8f0;
@@ -715,6 +720,31 @@
             height: 100% !important;
             z-index: 50 !important;
         }
+        @media (max-width: 768px) {
+            #headerProfileBlock, #mobileHeaderProfileBlock {
+                display: none !important;
+            }
+            header nav {
+                margin-left: 0 !important;
+                gap: 0.5rem !important;
+            }
+            header nav a {
+                margin-left: 0 !important;
+                font-size: 0.75rem !important;
+            }
+            header .container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+            /* Table adaptation fallback */
+            table, thead, tbody, th, td, tr {
+                display: block !important;
+            }
+        }
+        .admin-card, .timeline-item p, .timeline-item h3, .chat-block p, .chat-block h3, h4, td, th {
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+        }
     </style>
 </head>
 <body>
@@ -738,7 +768,7 @@
                 </nav>
                 <!-- Telegram Profile Widget -->
                 <div class="relative">
-                    <div id="headerProfileBlock" onclick="openAuthModal()" class="relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
+                    <div id="headerProfileBlock" onclick="openAuthModal()" class="relative hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
                         <i class="fab fa-telegram text-sky-400 text-lg"></i>
                         <span class="text-xs text-white font-semibold font-sans">Войти</span>
                         <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded-full">
@@ -1189,7 +1219,7 @@
                                     </button>
                                 </div>
                                 <div class="w-full md:w-1/2 flex justify-center">
-                                    <div class="relative w-72 h-44 md:w-96 md:h-52 overflow-hidden rounded-3xl bg-gradient-to-br from-[#09152e] via-[#040a17] to-[#02050c] border border-blue-950/80 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.15)] group-hover:scale-[1.03] transition-transform duration-300">
+                                    <div class="relative w-72 max-w-full h-44 md:w-96 md:h-52 overflow-hidden rounded-3xl bg-gradient-to-br from-[#09152e] via-[#040a17] to-[#02050c] border border-blue-950/80 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.15)] group-hover:scale-[1.03] transition-transform duration-300">
                                         <!-- White diffuse background light overlay -->
                                         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] z-0 pointer-events-none"></div>
 
@@ -1613,6 +1643,86 @@
         if (pcLaunchBtn) {
             pcLaunchBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                if (window.innerWidth < 1024) {
+                    // Create overlay element
+                    const overlay = document.createElement('div');
+                    overlay.id = 'pc-warning-modal-overlay';
+                    overlay.style.position = 'fixed';
+                    overlay.style.inset = '0';
+                    overlay.style.zIndex = '999999';
+                    overlay.style.background = 'rgba(0, 0, 0, 0)';
+                    overlay.style.backdropFilter = 'blur(0px)';
+                    overlay.style.display = 'flex';
+                    overlay.style.alignItems = 'center';
+                    overlay.style.justifyContent = 'center';
+                    overlay.style.padding = '1.5rem';
+                    overlay.style.transition = 'all 0.3s ease-out';
+                    
+                    // Create modal content box
+                    const modalBox = document.createElement('div');
+                    modalBox.style.width = '100%';
+                    modalBox.style.maxWidth = '360px';
+                    modalBox.style.background = '#070b19';
+                    modalBox.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                    modalBox.style.borderRadius = '16px';
+                    modalBox.style.padding = '1.75rem';
+                    modalBox.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.7)';
+                    modalBox.style.opacity = '0';
+                    modalBox.style.transform = 'scale(0.9) translateY(20px)';
+                    modalBox.style.transition = 'all 0.3s ease-out';
+                    modalBox.style.color = '#e2e8f0';
+                    modalBox.style.fontFamily = "'Inter', sans-serif";
+                    
+                    // Text wrapper inside modal
+                    modalBox.innerHTML = `
+                        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; text-align: center; color: #ffffff; line-height: 1.4;">
+                            🖥️ Экран Ocean TV оптимизирован для ПК
+                        </div>
+                        <div style="font-size: 0.85rem; line-height: 1.6; color: #94a3b8; margin-bottom: 1.5rem; text-align: center;">
+                            На мобильных устройствах интерактивный интерфейс системы и пульт управления могут отображаться некорректно.<br><br>
+                            Чтобы получить доступ к полному функционалу, рекомендуем включить опцию «Версия для ПК» в настройках вашего мобильного браузера или воспользоваться десктопом.
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <button id="pc-warning-close-btn" style="padding: 0.625rem 2.25rem; background: #eab308; color: #000000; border: none; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.25);">
+                                Понятно
+                            </button>
+                        </div>
+                    `;
+                    
+                    overlay.appendChild(modalBox);
+                    document.body.appendChild(overlay);
+                    
+                    // Trigger animations
+                    setTimeout(() => {
+                        overlay.style.background = 'rgba(0, 0, 0, 0.6)';
+                        overlay.style.backdropFilter = 'blur(8px)';
+                        modalBox.style.opacity = '1';
+                        modalBox.style.transform = 'scale(1) translateY(0)';
+                    }, 10);
+                    
+                    // Close event
+                    const closeBtn = modalBox.querySelector('#pc-warning-close-btn');
+                    closeBtn.addEventListener('click', () => {
+                        overlay.style.background = 'rgba(0, 0, 0, 0)';
+                        overlay.style.backdropFilter = 'blur(0px)';
+                        modalBox.style.opacity = '0';
+                        modalBox.style.transform = 'scale(0.9) translateY(20px)';
+                        setTimeout(() => {
+                            overlay.remove();
+                        }, 300);
+                    });
+                    
+                    // Close on clicking overlay background
+                    overlay.addEventListener('click', (ev) => {
+                        if (ev.target === overlay) {
+                            closeBtn.click();
+                        }
+                    });
+                    
+                    return;
+                }
+                
+                // If desktop, proceed to tv.html
                 window.location.href = 'tv.html';
             });
         }

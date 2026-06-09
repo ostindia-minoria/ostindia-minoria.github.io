@@ -382,6 +382,11 @@
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
             transform: translateY(-1px);
         }
+        @media (max-width: 768px) {
+            #headerProfileBlock, #mobileHeaderProfileBlock {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="dark">
@@ -409,7 +414,7 @@
                     </a>
                     <!-- Telegram Profile Widget -->
                     <div class="relative">
-                        <div id="headerProfileBlock" onclick="openAuthModal()" class="relative flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
+                        <div id="headerProfileBlock" onclick="openAuthModal()" class="relative hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
                             <i class="fab fa-telegram text-sky-400 text-lg"></i>
                             <span class="text-xs text-white font-semibold font-sans">Войти</span>
                             <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded-full">

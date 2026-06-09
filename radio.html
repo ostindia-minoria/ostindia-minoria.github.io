@@ -364,6 +364,23 @@
             margin-top: 4rem;
         }
         
+        @media (max-width: 768px) {
+            #headerProfileBlock, #mobileHeaderProfileBlock {
+                display: none !important;
+            }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .page-title h1 {
@@ -400,15 +417,34 @@
                     </nav>
                     <!-- Telegram Profile Widget -->
                     <div class="relative">
-                        <div id="headerProfileBlock" onclick="openAuthModal()" class="flex items-center gap-2 cursor-pointer bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition">
+                        <div id="headerProfileBlock" onclick="openAuthModal()" class="hidden md:flex items-center gap-2 cursor-pointer bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition">
                             <i class="fab fa-telegram text-sky-400 text-lg"></i>
                             <span class="text-xs text-white font-semibold font-sans">Войти</span>
                         </div>
                     </div>
                 </div>
-                <button class="md:hidden text-white text-2xl">
+                <button id="mobileMenuButton" class="md:hidden text-white text-2xl focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="flex flex-col space-y-4 mt-4 pb-4">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
+                    <a href="radio.html" class="active-link transition">Радио</a>
+                    <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
+                    <!-- Telegram Mobile Profile Widget -->
+                    <div id="mobileHeaderProfileBlock" onclick="openAuthModal()" class="hidden relative flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
+                        <i class="fab fa-telegram text-sky-400 text-lg"></i>
+                        <span class="text-xs text-white font-medium font-sans">Войти</span>
+                        <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -475,8 +511,8 @@
         <!-- Suggest Track Section -->
         <div class="text-center mt-8 fade-in" style="animation-delay: 0.5s;">
             <p class="text-gray-300 mb-4">Хотите добавить свою песню?</p>
-            <a href="https://t.me/sitemedia71_bot" target="_blank" class="inline-block bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                <i class="fas fa-paper-plane mr-2"></i>Используйте бота для хранилища медиа
+            <a href="https://t.me/sitemedia07_bot" target="_blank" class="inline-block bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                <i class="fas fa-paper-plane mr-2"></i>@sitemedia07_bot
             </a>
         </div>
     </main>
@@ -982,6 +1018,14 @@
         if (closeTooltipBtn) closeTooltipBtn.addEventListener('click', hideTooltip);
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('open');
+                });
+            }
             if (!localStorage.getItem('om_settings_tooltip_seen')) {
                 setTimeout(() => {
                     showTooltip();
