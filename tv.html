@@ -1,0 +1,3852 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean TV</title>
+    <!-- Tailwind CSS (retained for folder explorer styles compatibility) -->
+    <script src="assets/js/tailwindcss.js"></script>
+    <link rel="stylesheet" href="fonts/font-awesome/css/all.min.css">
+    
+    <style>
+        /* Local Fonts */
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Light-Cyrillic.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Light-Latin.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-SemiBold-Cyrillic.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-SemiBold-Latin.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Share Tech Mono';
+            src: url('fonts/ShareTechMono-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Ocean TV Skeuomorphic Design System */
+        :root {
+            --glow-color: rgba(255, 255, 255, 0.25);
+            --ocean-silver: #e2e8f0;
+            --cyanide-color: #00d2ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #07080a;
+            color: #f1f5f9;
+            overflow: hidden;
+        }
+
+        /* Brushed Matte Slate-Gray Background (Warm premium TV look) */
+        .tv-backdrop {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 40%, #20232a 0%, #0c0e12 100%);
+            z-index: -3;
+        }
+
+        /* Subtle CRT scanlines and vignette (extremely soft and realistic) */
+        .crt-scanlines {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%);
+            background-size: 100% 2px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0.008; /* Extremely soft and thin */
+        }
+
+        .crt-vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 80%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1001;
+            pointer-events: none;
+            opacity: 0.06; /* Subdued vignette */
+        }
+
+        /* Soft Ocean TV ambient glow */
+        .top-light-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 250px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 80%);
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(30px);
+        }
+
+        /* Classic Ocean TV typography logo */
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 45px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            position: relative;
+            line-height: 1;
+        }
+
+        .brand-logo span {
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-left: 2px;
+        }
+
+
+
+        .brand-reflection {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            transform: scaleY(-0.8) translateY(-4px);
+            opacity: 0.08;
+            mask-image: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 40%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 40%);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .brand-reflection span {
+            font-weight: 300;
+            color: #cbd5e1;
+        }
+
+        /* User Profile Style (Replaces Clock) */
+        .tv-user-profile {
+            position: absolute;
+            top: 2.2rem;
+            right: 3.5rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 100;
+            user-select: none;
+        }
+
+        .tv-user-profile:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(56, 189, 248, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .tv-user-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            box-shadow: 0 0 8px rgba(0, 194, 255, 0.2);
+        }
+
+        .tv-user-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        #boot-prompt {
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .boot-tv-modal.zooming #boot-prompt {
+            opacity: 0 !important;
+            transition: none !important;
+            display: none !important;
+        }
+
+        /* Retro-System Account Modal */
+        .auth-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(4, 4, 7, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .auth-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .auth-modal-box {
+            width: 440px;
+            max-width: 90vw;
+            background: #0f1015;
+            border: 2px solid #272a37;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 1.8rem;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: #e2e8f0;
+        }
+        .auth-modal-overlay.active .auth-modal-box {
+            transform: scale(1) translateY(0);
+        }
+        
+        .auth-system-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: #1c1e26;
+            border: 1px solid #3b3f54;
+            color: #ffffff;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .auth-system-btn:hover {
+            background: #282b37;
+            border-color: #5d6382;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+        .auth-system-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Cascading Entry Animation for Tiles */
+        @keyframes tileFlyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.85);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .shelf-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 50px;
+            padding: 2rem 4rem;
+            z-index: 10;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 100%);
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            box-shadow: inset 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Frosted Glass reflection line underneath */
+        .shelf-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.15) 80%, transparent 100%);
+            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .shelf-grid {
+            display: flex;
+            gap: 2.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        /* 3D Skeuomorphic Solid Black Glossy Tiles */
+        .tv-tile {
+            position: relative;
+            width: 175px;
+            height: 110px;
+            border-radius: 12px;
+            background: linear-gradient(to bottom, #252830 0%, #121419 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 10px 22px rgba(0,0,0,0.65), 
+                inset 0 1px 0 rgba(255,255,255,0.18),
+                inset 0 -1px 0 rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            opacity: 0; /* Animated dynamically on boot */
+            transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+            -webkit-box-reflect: below 5px linear-gradient(transparent 60%, rgba(255, 255, 255, 0.12) 100%);
+            flex-shrink: 0; /* Protection against tile shrinkage */
+        }
+
+        /* Glossy physical top reflection highlight */
+        .tv-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 11px 11px 0 0;
+            pointer-events: none;
+        }
+
+        /* Lock Badge overlay */
+        .lock-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #ef4444 0%, #dc2626 100%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .lock-badge i {
+            font-size: 0.72rem !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .lock-badge.unlocked {
+            background: linear-gradient(to bottom, #22c55e 0%, #16a34a 100%);
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        /* Focused Tile (Ocean TV White Bezel glow) */
+        .tv-tile:hover {
+            transform: scale(1.1) translateY(-6px);
+            border: 3.5px solid #ffffff;
+            box-shadow: 
+                0 18px 38px rgba(0, 0, 0, 0.85), 
+                0 0 15px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(to bottom, #30343e 0%, #15171b 100%);
+        }
+
+        .tv-tile i {
+            font-size: 2.1rem;
+            color: #cbd5e1;
+            transition: all 0.22s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .tv-tile:hover i {
+            color: #ffffff;
+            transform: scale(1.08);
+            text-shadow: 0 3px 8px rgba(255,255,255,0.2);
+        }
+
+        .tv-tile-label {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            transition: all 0.22s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .tv-tile:hover .tv-tile-label {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .tv-tile-svg {
+            transition: all 0.22s ease;
+        }
+
+        .tv-tile-svg path, .tv-tile-svg text {
+            transition: all 0.22s ease;
+        }
+
+        .tv-tile:hover .tv-tile-svg path {
+            stroke: #ffffff;
+        }
+
+        .tv-tile:hover .tv-tile-svg text {
+            fill: #ffffff;
+        }
+
+        @keyframes mac-flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+        .mac-flash-icon {
+            animation: mac-flash 1.6s infinite step-end;
+        }
+
+        /* Snappy organic cascading animation delay */
+        .boot-animated .tv-tile {
+            animation: tileFlyIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .boot-animated .tv-tile:nth-child(1) { animation-delay: 0.02s; }
+        .boot-animated .tv-tile:nth-child(2) { animation-delay: 0.04s; }
+        .boot-animated .tv-tile:nth-child(3) { animation-delay: 0.06s; }
+        .boot-animated .tv-tile:nth-child(4) { animation-delay: 0.08s; }
+        .boot-animated .tv-tile:nth-child(5) { animation-delay: 0.10s; }
+        .boot-animated .tv-tile:nth-child(6) { animation-delay: 0.12s; }
+        .boot-animated .tv-tile:nth-child(7) { animation-delay: 0.14s; }
+        .boot-animated .tv-tile:nth-child(8) { animation-delay: 0.16s; }
+
+        /* Premium Glass Overlays */
+        .app-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 50% 30%, #1c1e24 0%, #090a0d 100%);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 3rem;
+        }
+
+        .app-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Glossy Pill-shaped remote buttons */
+        .app-menu-btn {
+            padding: 0.5rem 1.8rem;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 
+                0 2px 6px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .app-menu-btn:hover {
+            background: #ffffff;
+            color: #08090c;
+            border-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Passcode dialog modal */
+        .tv-passcode-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(7, 8, 10, 0.96);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .tv-passcode-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .tv-passcode-box {
+            width: 360px;
+            background: linear-gradient(to bottom, #252831 0%, #111318 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 
+                0 0 35px rgba(255,255,255,0.06),
+                0 20px 50px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .tv-passcode-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tv-passcode-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tv-passcode-dot.filled {
+            background: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        .tv-passcode-dot.error {
+            background: #ef4444;
+            border-color: #ef4444;
+            box-shadow: 0 0 10px #ef4444;
+            animation: shake 0.3s ease;
+        }
+
+        .tv-passcode-dot.success {
+            background: #22c55e;
+            border-color: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .tv-passcode-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tv-passcode-key {
+            height: 55px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            width: 55px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .tv-passcode-key:hover {
+            background: #ffffff;
+            color: #08090c;
+            border-color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        /* TV Photo Stream Frame */
+        .photo-stream-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .tv-photo-frame {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 16px;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tv-photo-img {
+            max-width: 100%;
+            max-height: 480px;
+            border-radius: 10px;
+            object-fit: contain;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            transition: opacity 0.3s ease;
+        }
+
+        .tv-photo-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tv-photo-arrow:hover {
+            background: #ffffff;
+            color: #08090c;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .tv-photo-arrow-left { left: -65px; }
+        .tv-photo-arrow-right { right: -65px; }
+
+        .tv-photo-indicator {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+
+        /* LED TV Screen container for TV Shows */
+        .tv-player-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tv-screen-bezel {
+            width: 72%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 12px solid #1a1c23;
+            border-radius: 10px;
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.8),
+                inset 0 2px 6px rgba(255,255,255,0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tv-screen-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tv-video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            padding: 1rem;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tv-screen-bezel:hover .tv-video-controls {
+            opacity: 1;
+        }
+
+        .tv-video-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .tv-video-btn:hover {
+            background: #ffffff;
+            color: black;
+        }
+
+        /* Music Skeuomorphic Playlist layout */
+        .music-player-grid {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .skeuo-vinyl-deck {
+            width: 270px;
+            height: 270px;
+            background: radial-gradient(circle, #252830 0%, #0d0f12 85%);
+            border: 6px solid #333742;
+            border-radius: 50%;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.7),
+                inset 0 2px 8px rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .spinning-vinyl {
+            width: 230px;
+            height: 230px;
+            background: 
+                radial-gradient(circle, #000 30%, transparent 31%),
+                repeating-radial-gradient(circle, #151821 0px, #151821 1.5px, #202430 3px, #151821 4.5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 8s linear infinite paused;
+        }
+
+        .spinning-vinyl.playing {
+            animation-play-state: running;
+        }
+
+        .vinyl-label {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffffff 0%, #cbd5e1 70%);
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #08090c;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 4px;
+        }
+
+        .vinyl-center-hole {
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border: 2px solid #000;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .music-meta-box {
+            width: 340px;
+            background: linear-gradient(to bottom, rgba(33, 37, 45, 0.8) 0%, rgba(18, 21, 27, 0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .music-playlist-list {
+            height: 110px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.25);
+            border-radius: 8px;
+            padding: 5px;
+            margin: 10px 0;
+            font-size: 0.75rem;
+        }
+
+        .music-playlist-item {
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .music-playlist-item.active {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Radio Analog CRT screen fallback */
+        .crt-static-box {
+            width: 540px;
+            height: 340px;
+            background: #000;
+            border: 8px solid #282a32;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .crt-static-canvas {
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, #111, #111 2px, #333 2px, #333 4px);
+            opacity: 0.92;
+        }
+
+        .radio-offline-watermark {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.55);
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            text-transform: uppercase;
+        }
+
+        /* Skeuomorphic Radio styles */
+        .text-shadow-glow {
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        .radio-display-overlay {
+            z-index: 5;
+        }
+
+        /* Computers full filesystem mapping */
+        .comp-system-grid {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .comp-devices-list {
+            width: 30%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comp-device-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .comp-device-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .comp-device-item.active {
+            background: #ffffff;
+            color: #08090c;
+            font-weight: 600;
+        }
+
+        .comp-device-item.active i {
+            color: #08090c;
+        }
+
+        .comp-explorer-panel {
+            width: 70%;
+            background: #ffffff;
+            color: #1e293b;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+        }
+
+        /* Settings Split layout panels */
+        .settings-container {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .settings-menu {
+            width: 30%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .settings-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            background: rgba(255,255,255,0.01);
+        }
+
+        .settings-menu-item:hover {
+            background: rgba(255,255,255,0.04);
+            color: white;
+        }
+
+        .settings-menu-item.active {
+            background: #ffffff;
+            color: #08090c;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        .settings-details {
+            width: 70%;
+            background: linear-gradient(to bottom, rgba(33, 37, 45, 0.4) 0%, rgba(18, 21, 27, 0.6) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.8rem;
+            overflow-y: auto;
+        }
+
+        .settings-card {
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-top: 12px;
+        }
+
+        /* Developer Console box for cyan1de firmware */
+        .dev-console-box {
+            font-family: 'Share Tech Mono', monospace;
+            background: #050608;
+            border: 1px solid rgba(0, 221, 255, 0.2);
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 0.75rem;
+            color: var(--cyanide-color);
+            height: 130px;
+            overflow-y: auto;
+            margin-top: 12px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        /* Custom boot errors / Emergency recoveries */
+        .recovery-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: #040407;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .recovery-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .recovery-card {
+            max-width: 600px;
+            background: #090a0f;
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.9);
+        }
+
+        .recovery-icon-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* Backdoor target */
+        }
+
+        .recovery-icon-container i {
+            font-size: 2.5rem;
+            color: #ffffff;
+        }
+
+        .bot-glow-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--cyanide-color);
+            text-decoration: underline;
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+
+        .bot-glow-link:hover {
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        /* Custom boot sequence styling */
+        .boot-tv-modal {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
+        }
+
+        .boot-tv-modal.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Snappy 0.4s entry scale/fade animation */
+        .startup-scene-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.92) translateY(20px);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .startup-scene-wrap.loaded {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .boot-tv-modal.black-screen .startup-scene-wrap {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Remote Button Press Effect */
+        #startup-remote-svg {
+            overflow: visible;
+        }
+
+        #zoom-group {
+            transform-origin: 400px 185px; /* Locked precisely to center of 2012 widescreen flat TV */
+            transition: transform 1.0s cubic-bezier(0.6, 0.05, 0.01, 1);
+        }
+
+        #remote-group {
+            transform: translate(480px, 200px) rotate(-10deg);
+            transform-origin: 50px 125px;
+            transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+        }
+
+        /* Hover states */
+        .boot-tv-modal:hover #remote-group {
+            transform: translate(480px, 200px) rotate(-10deg) translateY(-3px) translateX(-1px);
+        }
+
+        #power-btn-group {
+            transform-origin: 62px 46px;
+            transition: transform 0.12s ease-out;
+        }
+
+        /* Button click transform - power button scales down nicely */
+        .boot-tv-modal.pressing #power-btn-group {
+            transform: scale(0.82);
+        }
+
+        #power-btn-circle {
+            fill: #ffffff;
+            stroke: #cbd5e1;
+            stroke-width: 0.8px;
+            transition: fill 0.15s, stroke 0.15s;
+        }
+
+        #power-btn-icon {
+            fill: #334155;
+            transition: fill 0.15s;
+        }
+
+        #remote-led {
+            fill: #cbd5e1;
+            transition: fill 0.15s, filter 0.15s;
+        }
+
+        .boot-tv-modal.pressing #power-btn-circle {
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
+
+        .boot-tv-modal.pressing #power-btn-icon {
+            fill: #ffffff;
+        }
+
+        .boot-tv-modal.pressing #remote-led {
+            fill: #00d2ff;
+            filter: drop-shadow(0 0 3px #00d2ff);
+        }
+
+        /* Camera dive zoom-in transition */
+        .boot-tv-modal.zooming #zoom-group {
+            transform: scale(22);
+        }
+
+        .boot-tv-modal.zooming #remote-group {
+            opacity: 0;
+            transform: translate(480px, 200px) rotate(-10deg) translateY(60px) scale(0.92);
+            transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Boot logo layer on black backdrop (ultra-shortened transitions) */
+        .boot-logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 10000;
+        }
+
+        .boot-logo-container.visible {
+            opacity: 1;
+            transition: opacity 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* When fading out, we override transition time to 0.2s */
+        .boot-logo-container:not(.visible) {
+            transition: opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .boot-logo-container .brand-logo {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .boot-logo-container .brand-logo span {
+            font-weight: 300;
+            color: #cbd5e1;
+        }
+
+        /* Alert styling */
+        .tv-alert-box {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            z-index: 1000;
+            background: rgba(33, 37, 45, 0.95);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tv-alert-box.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* --- CUSTOM DECORATIVE VISUALIZERS --- */
+
+        /* 1. Podcasts: Sound Waves */
+        .wave-visualizer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            height: 60px;
+            margin-bottom: 24px;
+        }
+        .wave-bar {
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 210, 255, 0.3), var(--cyanide-color));
+            border-radius: 3px;
+            animation: wavePulse 1.2s ease-in-out infinite alternate;
+            transform-origin: bottom;
+        }
+        .wave-bar:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+        .wave-bar:nth-child(2) { height: 60%; animation-delay: 0.3s; }
+        .wave-bar:nth-child(3) { height: 90%; animation-delay: 0.5s; }
+        .wave-bar:nth-child(4) { height: 40%; animation-delay: 0.2s; }
+        .wave-bar:nth-child(5) { height: 80%; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { height: 50%; animation-delay: 0.6s; }
+        .wave-bar:nth-child(7) { height: 70%; animation-delay: 0.15s; }
+
+        @keyframes wavePulse {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1.1); }
+        }
+
+        /* 2. Music: Audio Spectrum */
+        .music-spectrum {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            height: 60px;
+            margin-bottom: 24px;
+        }
+        .spectrum-bar {
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to top, rgba(168, 85, 247, 0.3), #ec4899);
+            border-radius: 2px;
+            animation: spectrumPulse 1s ease-in-out infinite alternate;
+            transform-origin: bottom;
+        }
+        .spectrum-bar:nth-child(1) { height: 20%; animation-delay: 0.15s; animation-duration: 0.8s; }
+        .spectrum-bar:nth-child(2) { height: 50%; animation-delay: 0.35s; animation-duration: 1.1s; }
+        .spectrum-bar:nth-child(3) { height: 80%; animation-delay: 0.05s; animation-duration: 0.9s; }
+        .spectrum-bar:nth-child(4) { height: 35%; animation-delay: 0.25s; animation-duration: 1.2s; }
+        .spectrum-bar:nth-child(5) { height: 95%; animation-delay: 0.45s; animation-duration: 0.75s; }
+        .spectrum-bar:nth-child(6) { height: 60%; animation-delay: 0.1s; animation-duration: 1.05s; }
+        .spectrum-bar:nth-child(7) { height: 40%; animation-delay: 0.3s; animation-duration: 0.85s; }
+        .spectrum-bar:nth-child(8) { height: 75%; animation-delay: 0.5s; animation-duration: 1.15s; }
+        .spectrum-bar:nth-child(9) { height: 25%; animation-delay: 0.2s; animation-duration: 0.95s; }
+        .spectrum-bar:nth-child(10) { height: 90%; animation-delay: 0.4s; animation-duration: 0.7s; }
+        .spectrum-bar:nth-child(11) { height: 55%; animation-delay: 0.15s; animation-duration: 1.0s; }
+        .spectrum-bar:nth-child(12) { height: 30%; animation-delay: 0.35s; animation-duration: 0.8s; }
+
+        @keyframes spectrumPulse {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(1.0); }
+        }
+
+        /* 3. Radio: Broadcast Beacon Pulses */
+        .radio-beacon {
+            position: relative;
+            width: 100px;
+            height: 80px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .beacon-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+            z-index: 2;
+        }
+        .beacon-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            border-radius: 50%;
+            animation: radioPulse 2.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .beacon-pulse:nth-child(2) { animation-delay: 0.8s; }
+        .beacon-pulse:nth-child(3) { animation-delay: 1.6s; }
+
+        @keyframes radioPulse {
+            0% {
+                transform: scale(0.12);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        /* 4. Movies: Widescreen CRT Scanline Monitor */
+        .movie-monitor {
+            position: relative;
+            width: 110px;
+            height: 62px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .movie-monitor::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(14, 165, 233, 0.08);
+            animation: movieFlicker 0.15s infinite alternate;
+            pointer-events: none;
+        }
+        .monitor-scanline {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+            box-shadow: 0 0 8px #0ea5e9;
+            animation: scanlineMove 3s linear infinite;
+        }
+        .monitor-noise {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.03),
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+            pointer-events: none;
+        }
+
+        @keyframes movieFlicker {
+            0% { opacity: 0.75; }
+            100% { opacity: 1; }
+        }
+        @keyframes scanlineMove {
+            0% { top: -2%; }
+            100% { top: 102%; }
+        }
+
+        /* --- Glossy Help & Instruction System Styles --- */
+        .help-notification-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 990;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+        }
+        .help-notification-container.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        .help-trigger-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #252830 0%, #121419 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.65), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            outline: none;
+        }
+        .help-trigger-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 27px 27px 0 0;
+            pointer-events: none;
+        }
+        .help-trigger-btn:hover {
+            transform: scale(1.15) translateY(-2px);
+            border-color: #ffffff;
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.85), 
+                0 0 15px rgba(255, 255, 255, 0.35);
+            background: linear-gradient(to bottom, #30343e 0%, #15171b 100%);
+        }
+        .help-trigger-btn i {
+            font-size: 1.4rem;
+            color: #cbd5e1;
+            transition: all 0.25s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .help-trigger-btn:hover i {
+            color: #ffffff;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .help-tooltip {
+            background: rgba(18, 20, 24, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #f1f5f9;
+            white-space: nowrap;
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            opacity: 0;
+            transform: scale(0.85) translateX(25px);
+            transform-origin: right center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .help-notification-container:hover .help-tooltip {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+        }
+        .help-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 850;
+            background: rgba(7, 8, 10, 0.72);
+            backdrop-filter: blur(18px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .help-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .help-modal-box {
+            width: 580px;
+            height: 580px;
+            max-width: 92vw;
+            max-height: 92vh;
+            background: linear-gradient(to bottom, #252831 0%, #111318 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 26px;
+            box-shadow: 
+                0 25px 65px rgba(0, 0, 0, 0.9),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2.2rem;
+            transform: scale(0.88) translateY(40px);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+        }
+        .help-modal-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 38%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 25px 25px 0 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .help-modal-overlay.active .help-modal-box {
+            transform: scale(1) translateY(0);
+        }
+        .help-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            margin: 1.2rem 0;
+            padding-right: 8px;
+            z-index: 10;
+        }
+        .help-scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .help-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 3px;
+        }
+        .help-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+        }
+        .help-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .help-step-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 1.5rem;
+        }
+        .help-step-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .help-step-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .help-step-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+        .help-accordion-item {
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            background: rgba(0, 210, 255, 0.03);
+            border-radius: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .help-accordion-item.active {
+            border-color: var(--cyanide-color);
+            background: rgba(0, 210, 255, 0.07);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.15);
+        }
+        .help-accordion-header {
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        .help-accordion-header:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .help-accordion-header i.arrow-icon {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+            color: var(--cyanide-color);
+        }
+        .help-accordion-item.active i.arrow-icon {
+            transform: rotate(180deg);
+        }
+        .help-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            padding: 0 14px;
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: #cbd5e1;
+            border-top: 1px solid transparent;
+        }
+        .help-accordion-item.active .help-accordion-content {
+            max-height: 350px;
+            padding: 10px 14px 14px 14px;
+            border-top: 1px solid rgba(0, 210, 255, 0.15);
+        }
+
+        /* CRITICAL GLITCH SYSTEM CRASH & APPLE STYLE RECOVERY LINK STYLES */
+        .glitch-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: transparent;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .glitch-overlay.active {
+            opacity: 1;
+            animation: glitch-anim 0.8s steps(2, start) infinite;
+            background: rgba(0, 0, 0, 0.95);
+        }
+        @keyframes glitch-anim {
+            0% {
+                background: rgba(0, 0, 0, 0.95);
+                box-shadow: inset 0 0 80px rgba(0,255,255,0.25);
+                transform: translateY(0) scaleY(1);
+            }
+            10% {
+                background: repeating-linear-gradient(0deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 4px, rgba(0,0,0,0.85) 4px, rgba(0,0,0,0.85) 8px);
+                transform: translateY(-8px) scaleY(1.03);
+            }
+            20% {
+                background: rgba(0,0,0,0.9);
+                transform: translateY(4px) skewX(4deg);
+            }
+            30% {
+                background: repeating-linear-gradient(90deg, rgba(255,0,0,0.15) 0px, rgba(255,0,0,0.15) 2px, rgba(0,0,0,0.9) 2px, rgba(0,0,0,0.9) 4px);
+                transform: translateY(0);
+            }
+            40% {
+                background: rgba(0,0,0,0.98);
+                transform: translateY(-12px) scaleY(0.96);
+            }
+            50% {
+                background: repeating-linear-gradient(0deg, rgba(0,255,255,0.15) 0px, rgba(0,255,255,0.15) 1px, rgba(0,0,0,0.9) 1px, rgba(0,0,0,0.9) 2px);
+                transform: translateY(8px);
+            }
+            60% {
+                background: rgba(0,0,0,0.9);
+                transform: skewX(-4deg);
+            }
+            70% {
+                background: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 5px, rgba(0,0,0,0.95) 5px, rgba(0,0,0,0.95) 10px);
+                transform: translateY(-4px);
+            }
+            80% {
+                background: rgba(0,0,0,0.95);
+                transform: translateY(12px) scaleY(1.06);
+            }
+            90% {
+                background: repeating-linear-gradient(0deg, rgba(255,255,255,0.25) 0px, rgba(255,255,255,0.25) 3px, rgba(0,0,0,0.9) 3px, rgba(0,0,0,0.9) 6px);
+                transform: translateY(0);
+            }
+            100% {
+                background: rgba(0, 0, 0, 1);
+                transform: translateY(0);
+            }
+        }
+        body.body-glitch {
+            animation: body-shake 0.8s ease-in-out infinite;
+        }
+        @keyframes body-shake {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-4px, -6px); }
+            30% { transform: translate(4px, 3px); }
+            50% { transform: translate(-3px, 5px); }
+            70% { transform: translate(5px, -2px); }
+            90% { transform: translate(-2px, -4px); }
+        }
+
+        .recovery-link {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            color: #7c7c7c;
+            text-decoration: none;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            letter-spacing: 0.4px;
+            display: inline-block;
+        }
+        .recovery-link:hover {
+            color: #ffffff;
+            border-bottom-color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CRT visual noise overlays (very light, low-opacity) -->
+    <div class="crt-scanlines"></div>
+    <div class="crt-vignette"></div>
+    
+    <div class="tv-backdrop"></div>
+    <div class="top-light-glow"></div>
+
+    <!-- BOOT MODAL (Cinematic Space/Click boot sequence) -->
+    <div id="boot-tv-modal" class="boot-tv-modal">
+        <div class="startup-scene-wrap flex flex-col items-center gap-8 select-none">
+            <!-- Sleek vector graphics for retro TV, console box, and outline 2D remote -->
+            <svg id="startup-remote-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full max-w-[800px] max-h-[500px]">
+                <defs>
+                    <linearGradient id="remote-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#e2e8f0" />
+                    </linearGradient>
+                    <filter id="red-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <filter id="green-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <filter id="remote-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.22" />
+                    </filter>
+                </defs>
+
+                <!-- Unified zooming group for camera-dive effect -->
+                <g id="zoom-group">
+                    <!-- Widescreen Flat TV Base Stand Neck (2012 flat-panel TV look) -->
+                    <rect x="385" y="290" width="30" height="20" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
+                    
+                    <!-- Widescreen Flat TV Solid Rectangular Base Plate -->
+                    <rect x="320" y="310" width="160" height="8" rx="4" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
+                    
+                    <!-- Widescreen Flat TV Outer Frame Bezel -->
+                    <rect x="220" y="80" width="360" height="210" rx="10" fill="#07080a" stroke="#ffffff" stroke-width="3" />
+                    
+                    <!-- Pure Black TV Screen (No scanlines, glare, or stripes for a clean, pitch-black cutoff zoom) -->
+                    <rect id="schematic-tv-screen" x="232" y="92" width="336" height="186" rx="4" fill="#000000" stroke="none" />
+                    
+                    <!-- Connected Ocean TV Console Box (Set-top box) placed neatly near base -->
+                    <rect x="220" y="302" width="90" height="16" rx="3" fill="#07080a" stroke="#ffffff" stroke-width="2" />
+                    <!-- Minimalist Wave Logo Symbol -->
+                    <path d="M 230 310 C 232 308, 234 312, 236 310 C 238 308, 240 312, 242 310" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+                    <!-- Console Name -->
+                    <text x="248" y="313" fill="#ffffff" font-family="'Inter', sans-serif" font-size="7" font-weight="800" letter-spacing="0.5">OCEAN TV</text>
+                    <!-- Console standby LED (Red initially, switches to green) -->
+                    <circle id="console-led" cx="298" cy="310" r="2.2" fill="#ef4444" filter="url(#red-glow)" style="transition: fill 0.2s, filter 0.2s;" />
+
+                    <!-- Stylized Connecting HDMI Cable -->
+                    <path d="M 310 310 C 330 310, 350 270, 350 260" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
+                </g>
+
+                <!-- Foreground Floating Remote (with independent zoom-out slide animation, completely without hand) -->
+                <g id="remote-group" transform="translate(480, 200) rotate(-10)" style="transform-origin: 50px 125px;">
+                    <!-- White 2D Remote Control body -->
+                    <rect x="20" y="35" width="60" height="200" rx="14" fill="url(#remote-grad)" stroke="#cbd5e1" stroke-width="1.2" filter="url(#remote-shadow)" />
+                    
+                    <!-- Top Bar Elements -->
+                    <!-- Mic/LED hole (lights up on click) -->
+                    <circle id="remote-led" cx="44" cy="48" r="1.2" />
+                    
+                    <!-- Power Button Group (Circle + Symbol) -->
+                    <g id="power-btn-group">
+                        <rect id="power-btn-circle" x="50" y="40" width="24" height="12" rx="4" />
+                        <!-- Power text button -->
+                        <text id="power-btn-icon" x="62" y="47.8" font-family="'Inter', sans-serif" font-size="4.2" font-weight="900" text-anchor="middle" letter-spacing="-0.2" pointer-events="none">ON/OFF</text>
+                    </g>
+
+                    <!-- Upper Navigation Zone (D-Pad) -->
+                    <g id="nav-wheel-group">
+                        <circle cx="50" cy="85" r="22" fill="#1e293b" />
+                        <circle cx="50" cy="85" r="9" fill="#0f172a" />
+                        <!-- Cardinal direction dots -->
+                        <circle cx="50" cy="70" r="1.2" fill="#64748b" />
+                        <circle cx="50" cy="100" r="1.2" fill="#64748b" />
+                        <circle cx="35" cy="85" r="1.2" fill="#64748b" />
+                        <circle cx="65" cy="85" r="1.2" fill="#64748b" />
+                    </g>
+
+                    <!-- Middle Buttons Row (Back & TV) -->
+                    <g id="middle-buttons-group">
+                        <!-- Back button -->
+                        <circle cx="37" cy="127" r="9" fill="#1e293b" />
+                        <path d="M 39 123.5 L 35 127 L 39 130.5" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+
+                        <!-- TV button -->
+                        <circle cx="63" cy="127" r="9" fill="#1e293b" />
+                        <rect x="59" y="123" width="8" height="5.5" rx="1" fill="none" stroke="#ffffff" stroke-width="1.2" />
+                        <path d="M 61 129.5 L 65 129.5 M 63 128.5 L 63 129.5" fill="none" stroke="#ffffff" stroke-width="1" />
+                    </g>
+
+                    <!-- Bottom Buttons Group (Play/Pause, Mute & Volume Pill) -->
+                    <g id="bottom-buttons-group">
+                        <!-- Play/Pause -->
+                        <circle cx="37" cy="154" r="9" fill="#1e293b" />
+                        <path d="M 33.5 151.5 L 33.5 156.5 L 37 154 Z" fill="#ffffff" />
+                        <path d="M 39.5 151.5 L 39.5 156.5 M 41.5 151.5 L 41.5 156.5" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+
+                        <!-- Mute -->
+                        <circle cx="37" cy="181" r="9" fill="#1e293b" />
+                        <path d="M 32.5 178 L 34.5 178 L 37 175.5 L 37 186.5 L 34.5 184 L 32.5 184 Z" fill="#ffffff" />
+                        <path d="M 31.5 184.5 L 41 177.5" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+
+                        <!-- Volume Pill -->
+                        <rect x="54" y="145" width="18" height="45" rx="9" fill="#1e293b" />
+                        <!-- Volume Plus -->
+                        <path d="M 63 149 L 63 159 M 58 154 L 68 154" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+                        <!-- Volume Minus -->
+                        <path d="M 58 181 L 68 181" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+                    </g>
+                </g>
+            </svg>
+
+            <!-- Instructional Action Prompt -->
+            <p id="boot-prompt" class="text-xs text-slate-400 tracking-[0.25em] uppercase text-center font-medium animate-pulse select-none">
+                Нажмите Пробел или кликните для включения
+            </p>
+        </div>
+
+        <!-- Center screen deep-black Ocean TV boot logo -->
+        <div id="boot-logo-container" class="boot-logo-container">
+            <div class="brand-logo">ocean<span>tv</span></div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION SYSTEM ALERT -->
+    <div id="tv-alert" class="tv-alert-box">
+        <i class="fas fa-triangle-exclamation text-2xl text-red-500"></i>
+        <div>
+            <h5 class="font-bold text-white text-sm" id="tv-alert-title">Предупреждение системы</h5>
+            <p class="text-xs text-gray-300 mt-0.5" id="tv-alert-desc">Медиатека заблокирована. Требуется Jailbreak.</p>
+        </div>
+    </div>
+
+    <!-- TOP BRANDING & CLOCK -->
+    <div class="brand-container">
+        <div class="brand-logo">ocean<span>tv</span></div>
+        <div class="brand-reflection">ocean<span>tv</span></div>
+    </div>
+
+    <!-- MAIN APP SHELF -->
+    <div class="shelf-container" id="shelf-container-wrap">
+        <div class="shelf-grid">
+            <div class="tv-tile" onclick="openMediaApp()">
+                <i class="fas fa-images"></i>
+                <span class="tv-tile-label">Медиатека</span>
+                <div class="lock-badge" id="media-lock-badge">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <div class="tv-tile" onclick="openTvShowsApp()">
+                <i class="fas fa-tv"></i>
+                <span class="tv-tile-label">Фильмы</span>
+            </div>
+            <div class="tv-tile" onclick="openMusicApp()">
+                <i class="fas fa-music"></i>
+                <span class="tv-tile-label">Музыка</span>
+            </div>
+            <div class="tv-tile" onclick="openPodcastsApp()">
+                <i class="fas fa-podcast"></i>
+                <span class="tv-tile-label">Подкасты</span>
+            </div>
+            <div class="tv-tile" onclick="openRadioApp()">
+                <i class="fas fa-radio"></i>
+                <span class="tv-tile-label">Радио</span>
+            </div>
+            <div class="tv-tile" onclick="openComputersApp()">
+                <i class="fas fa-network-wired"></i>
+                <span class="tv-tile-label">Компьютеры</span>
+            </div>
+            <div class="tv-tile" onclick="openSettingsApp()">
+                <i class="fas fa-sliders"></i>
+                <span class="tv-tile-label">Настройки</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO CHANNELS -->
+    <audio id="audio-click" src="assets/sounds/click.mp3" preload="auto"></audio>
+    <audio id="audio-ambient" src="assets/sounds/computer/n.mp3" loop preload="auto"></audio>
+    <audio id="audio-whoosh" src="assets/sounds/whoosh.mp3" preload="auto"></audio>
+    <audio id="audio-enable" src="assets/sounds/computer/enable.mp3" preload="auto"></audio>
+    <audio id="audio-off" src="assets/sounds/computer/off.mp3" preload="auto"></audio>
+
+    <!-- BOTTOM-RIGHT HELP NOTIFICATION -->
+    <div class="help-notification-container" id="help-notification-container">
+        <div class="help-tooltip">Нажмите, чтобы узнать инструкцию по использованию Ocean TV</div>
+        <button class="help-trigger-btn" onclick="openHelpModal()" aria-label="Открыть инструкцию">
+            <i class="fas fa-question text-shadow-glow"></i>
+        </button>
+    </div>
+
+    <!-- CENTRAL INSTRUCTION MODAL -->
+    <div id="help-modal-overlay" class="help-modal-overlay" onclick="if(event.target === this) closeHelpModal()">
+        <div class="help-modal-box">
+            <!-- Modal Header -->
+            <div class="app-header z-10">
+                <div class="app-title">
+                    <i class="fas fa-book-open text-sky-400"></i> Руководство Ocean TV
+                </div>
+                <button class="app-menu-btn" onclick="closeHelpModal()">Закрыть</button>
+            </div>
+
+            <!-- Scrollable Guide Content -->
+            <div class="help-scroll-container">
+                <!-- Step 1 -->
+                <div class="help-step-item">
+                    <div class="help-step-badge">1</div>
+                    <div class="flex-1">
+                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Доступ к Медиатеке</div>
+                        <p class="help-step-desc">
+                            Для полноценного использования приставки Ocean TV вам необходим доступ к приватной медиатеке (файлам Егора). По умолчанию этот раздел заблокирован защитой DRM.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="help-step-item">
+                    <div class="help-step-badge">2</div>
+                    <div class="flex-1">
+                        <div class="help-step-title"><i class="fas fa-syringe text-slate-400"></i> Сделать Jailbreak</div>
+                        <p class="help-step-desc">
+                            Перейдите в приложение <strong>Настройки (Settings)</strong> на главном экране приставки, выберите пункт <strong>cyan1de Jailbreak</strong> и выполните инъекцию кастомного ядра.
+                        </p>
+                        <!-- Accordion for jailbreak -->
+                        <div class="help-accordion-item">
+                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
+                                <span>Дополнительные инструкции по Jailbreak</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </div>
+                            <div class="help-accordion-content">
+                                <p class="mb-2">Выполнение jailbreak отключает встроенные системные проверки подписи приложений и обходит DRM песочницы.</p>
+                                <strong class="text-white block mt-2 mb-1">Что делать, если возникла ошибка при jailbreak?</strong>
+                                <p>В случае сбоя или появления экрана восстановления (Recovery Screen), следуйте инструкциям на экране для подтверждения запроса в Telegram или перезагрузки системы.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="help-step-item">
+                    <div class="help-step-badge">3</div>
+                    <div class="flex-1">
+                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Computers</div>
+                        <p class="help-step-desc">
+                            После завершения джейлбрейка вам потребуется ввести 4-значный код доступа в Медиатеке.
+                        </p>
+                        <!-- Accordion for password -->
+                        <div class="help-accordion-item">
+                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
+                                <span>Инструкция по поиску пароля</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </div>
+                            <div class="help-accordion-content">
+                                <p class="mb-2">Чтобы ввести пароль, сначала перейдите в приложение <strong>Computers (Компьютеры)</strong> на главном экране приставки.</p>
+                                <p>Там вам предстоит самостоятельно исследовать локальные диски и найти, на каком из них лежит нужный путь к файлу с паролем. После нахождения пароля его нужно ввести в Медиатеке для разблокировки доступа.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="help-step-item text-slate-400">
+                    <div class="help-step-badge border-green-500/30 text-green-400"><i class="fas fa-check text-xs"></i></div>
+                    <div class="flex-1">
+                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка доступа</div>
+                        <p class="help-step-desc">
+                            После успешного ввода кода, Медиатека приставки разблокируется, и вы получите полный и неограниченный доступ к скрытым медиаматериалам Егора.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between z-10">
+                <label class="flex items-center gap-2.5 cursor-pointer text-xs text-slate-400 hover:text-white transition-colors select-none">
+                    <input type="checkbox" id="dont-show-help-session" class="rounded bg-black/40 border-white/10 text-sky-500 focus:ring-0 focus:ring-offset-0">
+                    <span>Больше не показывать в этой сессии</span>
+                </label>
+                <button class="app-menu-btn" onclick="closeHelpModal()">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TV PASSCODE MODAL -->
+    <div id="tv-passcode-modal" class="tv-passcode-overlay">
+        <div class="tv-passcode-box">
+            <h3 class="text-lg font-semibold text-white mb-2">Введите пароль</h3>
+            <p class="text-xs text-gray-400 mb-4">Для разблокировки файлов Егора</p>
+            
+            <div class="tv-passcode-dots">
+                <div class="tv-passcode-dot" id="dot-0"></div>
+                <div class="tv-passcode-dot" id="dot-1"></div>
+                <div class="tv-passcode-dot" id="dot-2"></div>
+                <div class="tv-passcode-dot" id="dot-3"></div>
+            </div>
+            
+            <div class="tv-passcode-grid">
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('1')">1</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('2')">2</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('3')">3</button>
+                
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('4')">4</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('5')">5</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('6')">6</button>
+                
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('7')">7</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('8')">8</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('9')">9</button>
+                
+                <button class="tv-passcode-key" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;" onclick="clearPasscode()">C</button>
+                <button class="tv-passcode-key" onclick="pressPasscodeKey('0')">0</button>
+                <button class="tv-passcode-key" style="background: rgba(255,255,255,0.1);" onclick="backspacePasscode()"><i class="fas fa-backspace text-sm"></i></button>
+            </div>
+            
+            <button class="app-menu-btn mt-6 w-full" onclick="closePasscodeModal()">Отмена</button>
+        </div>
+    </div>
+
+    <!-- APP 1: MEDIA (PHOTO STREAM) -->
+    <div id="app-media" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-images"></i> Файлы Егора</div>
+            <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
+        </div>
+        <div class="photo-stream-container">
+            <div class="tv-photo-frame">
+                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slidePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
+                <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
+                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slidePhoto(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APP 2: TV SHOWS (MOVIES PLACEHOLDER) -->
+    <div id="app-tvshows" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-tv"></i> Фильмы</div>
+            <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="movie-monitor">
+                <div class="monitor-scanline"></div>
+                <div class="monitor-noise"></div>
+                <i class="fas fa-film text-slate-500 text-lg opacity-40"></i>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN VIDEO STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер видеовещания отключен. Инъекция прошивки не обнаружила активных медиа-синдикатов.
+            </p>
+        </div>
+    </div>
+
+    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) -->
+    <div id="app-music" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-music"></i> Музыка</div>
+            <button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="music-spectrum">
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN MUSIC STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер аудиовещания отключен. Инъекция прошивки не обнаружила активных музыкальных синдикатов.
+            </p>
+        </div>
+    </div>
+
+    <!-- APP 4: PODCASTS -->
+    <div id="app-podcasts" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-podcast"></i> Подкасты</div>
+            <button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="wave-visualizer">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN PODCAST STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер подкастинга отключен. Инъекция прошивки не обнаружила активных аудио-синдикатов.
+            </p>
+        </div>
+    </div>
+
+    <!-- APP 5: RADIO (RADIO PLACEHOLDER) -->
+    <div id="app-radio" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
+            <button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="radio-beacon">
+                <div class="beacon-pulse"></div>
+                <div class="beacon-pulse"></div>
+                <div class="beacon-pulse"></div>
+                <div class="beacon-dot"></div>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN RADIO STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер радиовещания отключен. Инъекция прошивки не обнаружила активных эфирных синдикатов.
+            </p>
+        </div>
+    </div>
+
+    <!-- APP 6: COMPUTERS (FULL FILE EXPLORER MAPPED) -->
+    <div id="app-computers" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-network-wired"></i> Домашняя Сеть и Файлы</div>
+            <button class="app-menu-btn" onclick="closeApp('app-computers')">Меню</button>
+        </div>
+        <div class="comp-system-grid">
+            <div class="comp-devices-list">
+                <div class="comp-device-item active" id="dev-local" onclick="selectDevice('local')">
+                    <i class="fas fa-hdd text-slate-400"></i>
+                    <div class="text-left">
+                        <div class="text-sm font-semibold">Локальный узел</div>
+                        <div class="text-[10px] text-slate-500">Подключено (OS Files)</div>
+                    </div>
+                </div>
+                <div class="comp-device-item" id="dev-office" onclick="selectDevice('office')">
+                    <i class="fas fa-desktop text-gray-500"></i>
+                    <div class="text-left">
+                        <div class="text-sm font-semibold">OFFICE-PC</div>
+                        <div class="text-[10px] text-red-500">Не в сети</div>
+                    </div>
+                </div>
+                <div class="comp-device-item" id="dev-nas" onclick="selectDevice('nas')">
+                    <i class="fas fa-server text-gray-500"></i>
+                    <div class="text-left">
+                        <div class="text-sm font-semibold">PUBLIC-NAS</div>
+                        <div class="text-[10px] text-yellow-500">Общий доступ</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="comp-explorer-panel">
+                <!-- Navigation path bar -->
+                <div class="h-10 bg-gray-100 border-b border-gray-200 flex justify-between items-center px-4">
+                    <span class="font-medium text-xs text-gray-600 flex items-center gap-2" id="tv-explorer-title">
+                        <i class="fas fa-folder-open"></i> Локальный узел
+                    </span>
+                    <button class="text-xs text-slate-600 hover:text-slate-800 font-semibold focus:outline-none" onclick="tvExplorerBack()">
+                        <i class="fas fa-arrow-left mr-1"></i> Назад
+                    </button>
+                </div>
+                
+                <!-- Inner Explorer Content -->
+                <div class="flex-1 bg-white p-6 overflow-y-auto min-h-0" id="tv-explorer-content">
+                    <!-- Dynamic Files Grid -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GLASS TV NOTEPAD MODAL (Inside computers) -->
+    <div id="tv-notepad-overlay" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title" id="tv-notepad-title"><i class="fas fa-file-alt"></i> readme.txt</div>
+            <button class="app-menu-btn" onclick="closeTvNotepad()">Закрыть</button>
+        </div>
+        <div class="flex-1 flex justify-center items-center">
+            <div class="w-[600px] bg-slate-900/90 border border-slate-700/80 rounded-2xl p-8 shadow-2xl flex flex-col">
+                <div class="flex-1 font-mono text-sm text-sky-200 min-h-[220px] max-h-[300px] overflow-y-auto whitespace-pre-wrap leading-relaxed select-text" id="tv-notepad-text">
+                    Система инициализирована. Ожидание указаний.
+                </div>
+                <div id="tv-notepad-links-wrap" class="mt-6 flex flex-wrap gap-3 justify-center">
+                    <!-- Dynamic clickable links -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APP 7: SETTINGS SPLIT PANEL (WITH MAPPED SYSTEM MODEL TO OCEAN TV) -->
+    <div id="app-settings" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-sliders"></i> Системные настройки</div>
+            <button class="app-menu-btn" onclick="closeApp('app-settings')">Меню</button>
+        </div>
+        <div class="settings-container">
+            <div class="settings-menu">
+                <div class="settings-menu-item active" id="set-main" onclick="selectSettingTab('main')">
+                    <i class="fas fa-gears w-6"></i> Основные
+                </div>
+                <div class="settings-menu-item" id="set-network" onclick="selectSettingTab('network')">
+                    <i class="fas fa-wifi w-6"></i> Сеть
+                </div>
+                <div class="settings-menu-item" id="set-account" onclick="selectSettingTab('account')">
+                    <i class="fas fa-circle-user w-6"></i> Аккаунт сайта
+                </div>
+                <div class="settings-menu-item" id="set-cyanide" onclick="selectSettingTab('cyanide')" style="color: var(--cyanide-color);">
+                    <i class="fas fa-syringe syringe-icon w-6"></i> cyan1de Jailbreak
+                </div>
+            </div>
+            
+            <div class="settings-details" id="settings-details-panel">
+                <!-- Settings Content goes here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TELEGRAM AUTH MODAL -->
+    <div id="auth-modal-overlay" class="auth-modal-overlay" style="display: none;">
+        <div class="auth-modal-box">
+            <!-- Modal Header -->
+            <div class="app-header z-10 !p-0 !bg-transparent !border-0 mb-4 flex justify-between items-center">
+                <div class="app-title !text-lg !font-bold flex items-center gap-2 text-white">
+                    <i class="fab fa-telegram text-sky-400"></i> Единый аккаунт сайта
+                </div>
+                <button class="app-menu-btn" onclick="closeAuthModal()">✕</button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="z-10 flex flex-col gap-4 text-slate-300 text-sm leading-relaxed" id="auth-modal-content">
+                <!-- Will be rendered dynamically based on login state -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ACCOUNT STATUS / GUEST SCREEN (Restores visual question mark) -->
+    <div id="account-status-screen" class="auth-modal-overlay" style="background: #040407;">
+        <div style="cursor: not-allowed; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+            <div id="status-icon-wrapper" style="margin-bottom: 25px;" class="hover-scale">
+                <svg width="120" height="120" viewBox="0 0 100 100" class="mac-flash-icon">
+                    <circle cx="50" cy="38" r="18" fill="#555555" />
+                    <path d="M25,78 C25,60 35,56 50,56 C65,56 75,60 75,78 C75,82 75,82 75,82 H25 C25,82 25,82 25,82 Z" fill="#555555" />
+                </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2 tracking-wide uppercase font-sans">Единый аккаунт O-W-M</h4>
+            <p class="text-xs text-slate-400 max-w-sm leading-relaxed mb-6 font-sans">
+                Единый аккаунт сайта не подключен. Локальные сохранения не зарезервированы. Нажмите на иконку аккаунта, чтобы войти в аккаунт проекта через Telegram и включить синхронизацию сохранений.
+            </p>
+            <span class="relative px-5 py-2.5 bg-slate-800 text-white rounded-full text-xs font-bold transition-all shadow-md font-sans pointer-events-none cursor-not-allowed">
+                Войти в аккаунт
+                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <!-- CORE LOGIC JS -->
+    <script>
+        // Exploit Jailbreak state - persisted in localStorage
+        let isJailbroken = localStorage.getItem('om_tv_jailbroken') === 'true';
+        let tvPowerState = false;
+        let isPasscodeUnlocked = localStorage.getItem('om_tv_passcode_unlocked') === 'true';
+        let currentPasscodeInput = "";
+        const PASSCODE_CORRECT = "4515";
+        
+        let currentPhotoIndex = 1;
+
+        // Retrieve or generate persistent Session ID
+        let sessionToken = localStorage.getItem('om_tv_session_id');
+        if (!sessionToken) {
+            const chars = 'abcdef0123456789';
+            let token = '';
+            for (let i = 0; i < 6; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            sessionToken = `tv_sess_${token}`;
+            localStorage.setItem('om_tv_session_id', sessionToken);
+        }
+
+        // Dynamic lock badge updater
+        function updateMediaLockBadge() {
+            const badge = document.getElementById('media-lock-badge');
+            if (badge) {
+                if (isJailbroken) {
+                    badge.classList.add('unlocked');
+                    setTimeout(() => { badge.style.display = 'none'; }, 300);
+                } else {
+                    badge.style.display = 'flex';
+                    badge.classList.remove('unlocked');
+                }
+            }
+        }
+
+        // Sounds elements
+        const soundClick = document.getElementById('audio-click');
+        const soundAmbient = document.getElementById('audio-ambient');
+        const soundWhoosh = document.getElementById('audio-whoosh');
+        const soundEnable = document.getElementById('audio-enable');
+        const soundOff = document.getElementById('audio-off');
+
+        // Bounded polyphony pool for click sounds (max 3 instances, 60ms cooldown)
+        const clickPool = [];
+        let lastClickTime = 0;
+
+        function triggerClickSound() {
+            const now = Date.now();
+            if (now - lastClickTime < 60) return; // Anti-spam throttle
+            lastClickTime = now;
+
+            let audio = clickPool.find(a => a.paused);
+            if (!audio) {
+                if (clickPool.length < 3) {
+                    audio = new Audio('assets/sounds/click.mp3');
+                    clickPool.push(audio);
+                } else {
+                    // Reuse oldest
+                    audio = clickPool.shift();
+                    clickPool.push(audio);
+                    audio.pause();
+                }
+            }
+            audio.volume = 0.38; // soft, pleasing volume
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+        }
+
+        // Single-instance exclusive channel for whoosh sounds (180ms cooldown)
+        let lastWhooshTime = 0;
+        let whooshAudio = null;
+
+        function triggerWhooshSound() {
+            const now = Date.now();
+            if (now - lastWhooshTime < 180) return; // Anti-spam throttle
+            lastWhooshTime = now;
+
+            if (!whooshAudio) {
+                whooshAudio = new Audio('assets/sounds/whoosh.mp3');
+            }
+
+            // Instantly stop and rewind current whoosh if playing to prevent overlaps
+            if (!whooshAudio.paused) {
+                whooshAudio.pause();
+            }
+            whooshAudio.volume = 0.22; // smooth, not irritating
+            whooshAudio.currentTime = 0;
+            whooshAudio.play().catch(() => {});
+        }
+
+        // Play standard sounds
+        function playSnd(audio) {
+            if (!audio) return;
+            if (!tvPowerState) return;
+
+            if (audio.id === 'audio-click' || audio === soundClick) {
+                triggerClickSound();
+            } else if (audio.id === 'audio-whoosh' || audio === soundWhoosh) {
+                triggerWhooshSound();
+            } else {
+                const clone = audio.cloneNode();
+                clone.volume = audio.volume || 0.5;
+                clone.play().catch(e => {});
+            }
+        }
+
+        // Soft volume transitions
+        function fadeAudioIn(audio, targetVolume, duration, callback) {
+            if (!audio) return;
+            clearInterval(audio.fadeInterval);
+            audio.volume = 0;
+            const startTime = performance.now();
+            
+            audio.fadeInterval = setInterval(() => {
+                const elapsed = performance.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                audio.volume = progress * targetVolume;
+                
+                if (progress >= 1) {
+                    clearInterval(audio.fadeInterval);
+                    audio.volume = targetVolume;
+                    if (callback) callback();
+                }
+            }, 30);
+        }
+
+        function fadeAudioOut(audio, duration, callback) {
+            if (!audio) return;
+            clearInterval(audio.fadeInterval);
+            const startVolume = audio.volume;
+            const startTime = performance.now();
+            
+            audio.fadeInterval = setInterval(() => {
+                const elapsed = performance.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                audio.volume = startVolume * (1 - progress);
+                
+                if (progress >= 1) {
+                    clearInterval(audio.fadeInterval);
+                    audio.volume = 0;
+                    audio.pause();
+                    if (callback) callback();
+                }
+            }, 30);
+        }
+
+        // Show a custom TV system alert box
+        function showTvAlert(title, text) {
+            const box = document.getElementById('tv-alert');
+            document.getElementById('tv-alert-title').textContent = title;
+            document.getElementById('tv-alert-desc').textContent = text;
+            
+            box.classList.add('active');
+            setTimeout(() => {
+                box.classList.remove('active');
+            }, 3500);
+        }
+
+
+
+        // Power On TV Boot sequence controller
+        let isBooting = false;
+        let isBootSoundPlayed = false;
+        let handleBootClick = null;
+        let handleBootKeydown = null;
+
+        function cleanupBootEvents() {
+            const bootModal = document.getElementById('boot-tv-modal');
+            if (bootModal && handleBootClick) {
+                bootModal.removeEventListener('click', handleBootClick);
+            }
+            if (handleBootKeydown) {
+                document.removeEventListener('keydown', handleBootKeydown);
+            }
+        }
+
+        function startBootSequence() {
+            if (isBooting || tvPowerState) return;
+            isBooting = true;
+            
+            const bootModal = document.getElementById('boot-tv-modal');
+            const bootLogo = document.getElementById('boot-logo-container');
+            const consoleLed = document.getElementById('console-led');
+            
+            // 1. Immediate remote click button state & sound
+            bootModal.classList.add('pressing');
+            if (soundClick) {
+                soundClick.volume = 0.45;
+                soundClick.currentTime = 0;
+                soundClick.play().catch(() => {});
+            }
+            
+            // 2. Button press completes, console LED turns green, zoom camera-dive begins
+            setTimeout(() => {
+                bootModal.classList.remove('pressing');
+                if (consoleLed) {
+                    consoleLed.style.fill = '#22c55e';
+                    consoleLed.setAttribute('filter', 'url(#green-glow)');
+                }
+                bootModal.classList.add('zooming');
+            }, 150); // 150ms press timing
+
+            // 3. Screen cuts to black as zoom completes (TV screen is solid black, remote hidden)
+            setTimeout(() => {
+                bootModal.classList.add('black-screen');
+            }, 950); // Snappy mid-zoom cut to black (shifted by 400ms for 1.0s zoom)
+
+            // 4. Logo starts fading in on black background (takes exactly 0.1s)
+            setTimeout(() => {
+                bootLogo.classList.add('visible');
+            }, 1000);
+
+            // 5. Sound enable.mp3 plays right as logo is fully visible (at 1100ms)
+            setTimeout(() => {
+                if (soundEnable && !isBootSoundPlayed) {
+                    isBootSoundPlayed = true;
+                    soundEnable.volume = 0.38;
+                    soundEnable.currentTime = 0;
+                    soundEnable.play().catch(() => {});
+                }
+            }, 1100); // 1000ms + 100ms = 1100ms (when logo is fully visible)
+
+            // 6. Logo starts fading out (takes exactly 0.2s) after sound plays (at 2900ms)
+            setTimeout(() => {
+                bootLogo.classList.remove('visible');
+            }, 2900);
+
+            // 7. Complete reveal of the dashboard (takes exactly 0.6s starting at 3100ms)
+            setTimeout(() => {
+                tvPowerState = true;
+                
+                // Fade in ambient audio loop smoothly over 1500ms
+                soundAmbient.volume = 0;
+                soundAmbient.play().then(() => {
+                    fadeAudioIn(soundAmbient, 0.22, 1500);
+                }).catch(() => {});
+
+                // Cascade animation for tiles with whoosh
+                setTimeout(() => {
+                    const shelf = document.getElementById('shelf-container-wrap');
+                    if (shelf) shelf.classList.add('boot-animated');
+                    triggerWhooshSound();
+                }, 100);
+
+                // Fade out full boot container modal overlay
+                bootModal.classList.add('fade-out');
+
+                // Cleanup boot modal element
+                setTimeout(() => {
+                    bootModal.style.display = 'none';
+                }, 800);
+
+                buildMusicPlaylistUI();
+                updateMediaLockBadge();
+
+                // Trigger help notification after 2.0s
+                if (sessionStorage.getItem('om_tv_hide_help') !== 'true') {
+                    setTimeout(() => {
+                        const notif = document.getElementById('help-notification-container');
+                        if (notif) {
+                            notif.classList.add('show');
+                        }
+                    }, 2000);
+                }
+            }, 3100); // 2900ms + 200ms logo fade = 3100ms transition to main interface
+        }
+
+        // Spacebar and Click event listeners for boot modal
+        function initBootEvents() {
+            const bootModal = document.getElementById('boot-tv-modal');
+            const wrap = bootModal ? bootModal.querySelector('.startup-scene-wrap') : null;
+            
+            // Snappy entry animation on load (0.4s)
+            setTimeout(() => {
+                if (wrap) wrap.classList.add('loaded');
+            }, 50);
+
+            handleBootClick = () => {
+                cleanupBootEvents();
+                startBootSequence();
+            };
+
+            if (bootModal) {
+                // Click anywhere on screen to boot - only once!
+                bootModal.addEventListener('click', handleBootClick);
+            }
+
+            // Keyboard event listener (Space for boot)
+            handleBootKeydown = (e) => {
+                if (e.code === 'Space') {
+                    if (wrap && !wrap.classList.contains('zooming') && !tvPowerState) {
+                        e.preventDefault();
+                        cleanupBootEvents();
+                        startBootSequence();
+                    }
+                }
+            };
+            document.addEventListener('keydown', handleBootKeydown);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBootEvents);
+        } else {
+            initBootEvents();
+        }
+
+        // Cloud Sync disabled (offline only)
+
+        // --- APP OVERLAYS DISPLAY CONTROLS ---
+        function openApp(appId) {
+            if (!tvPowerState) return;
+            playSnd(soundClick);
+            const overlay = document.getElementById(appId);
+            if (overlay) {
+                overlay.classList.add('active');
+                // Hide TV profile block and help trigger button inside apps
+                const tvProfile = document.getElementById('tv-profile-wrapper');
+                if (tvProfile) tvProfile.style.display = 'none';
+                const helpNotif = document.getElementById('help-notification-container');
+                if (helpNotif) helpNotif.classList.remove('show');
+            }
+        }
+
+        function closeApp(appId) {
+            playSnd(soundClick);
+            const overlay = document.getElementById(appId);
+            if (overlay) {
+                overlay.classList.remove('active');
+                // Show TV profile block and help trigger button when returning to shelf
+                const tvProfile = document.getElementById('tv-profile-wrapper');
+                if (tvProfile) tvProfile.style.display = 'flex';
+                const helpNotif = document.getElementById('help-notification-container');
+                if (helpNotif && sessionStorage.getItem('om_tv_hide_help') !== 'true') {
+                    helpNotif.classList.add('show');
+                }
+                
+                // Audio tear downs
+                if (appId === 'app-tvshows') {
+                    const video = document.getElementById('tv-show-video');
+                    if (video) video.pause();
+                    const playBtn = document.getElementById('tv-play-btn');
+                    if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+                if (appId === 'app-music') {
+                    stopMusicPlayback();
+                }
+                if (appId === 'app-radio') {
+                    stopRadioNoise();
+                }
+            }
+        }
+
+        // Media App unlock logic (Locked initially until jailbroken in settings)
+        function openMediaApp() {
+            if (!tvPowerState) return;
+            
+            if (!isJailbroken) {
+                showTvAlert("Система заблокирована", "Медиатека закрыта. Выполните Jailbreak в Настройках приставки.");
+                return;
+            }
+            
+            if (isPasscodeUnlocked) {
+                openApp('app-media');
+            } else {
+                openPasscodeModal();
+            }
+        }
+
+        // Passcode Popup handlers
+        function openPasscodeModal() {
+            playSnd(soundClick);
+            currentPasscodeInput = "";
+            updatePasscodeDots();
+            document.getElementById('tv-passcode-modal').classList.add('active');
+        }
+
+        function closePasscodeModal() {
+            playSnd(soundClick);
+            document.getElementById('tv-passcode-modal').classList.remove('active');
+        }
+
+        function pressPasscodeKey(num) {
+            if (currentPasscodeInput.length >= 4) return;
+            playSnd(soundClick);
+            currentPasscodeInput += num;
+            updatePasscodeDots();
+            
+            if (currentPasscodeInput.length === 4) {
+                setTimeout(verifyPasscode, 350);
+            }
+        }
+
+        function backspacePasscode() {
+            playSnd(soundClick);
+            currentPasscodeInput = currentPasscodeInput.slice(0, -1);
+            updatePasscodeDots();
+        }
+
+        function clearPasscode() {
+            playSnd(soundClick);
+            currentPasscodeInput = "";
+            updatePasscodeDots();
+        }
+
+        function updatePasscodeDots() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                dot.className = "tv-passcode-dot";
+                if (i < currentPasscodeInput.length) {
+                    dot.classList.add('filled');
+                }
+            }
+        }
+
+        function verifyPasscode() {
+            const dots = document.querySelectorAll('.tv-passcode-dot');
+            if (currentPasscodeInput === PASSCODE_CORRECT) {
+                isPasscodeUnlocked = true;
+                localStorage.setItem('om_tv_passcode_unlocked', 'true');
+                dots.forEach(d => {
+                    d.className = "tv-passcode-dot success";
+                });
+                
+                if (window.syncAccountData) window.syncAccountData();
+                
+                setTimeout(() => {
+                    closePasscodeModal();
+                    openApp('app-media');
+                }, 400);
+            } else {
+                dots.forEach(d => {
+                    d.className = "tv-passcode-dot error";
+                });
+                
+                setTimeout(() => {
+                    currentPasscodeInput = "";
+                    updatePasscodeDots();
+                }, 600);
+            }
+        }
+
+        // Photo Stream gallery handlers
+        function slidePhoto(dir) {
+            playSnd(soundClick);
+            currentPhotoIndex += dir;
+            if (currentPhotoIndex < 1) currentPhotoIndex = 1;
+            
+            const displayImg = document.getElementById('tv-photo-display');
+            displayImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                displayImg.src = `assets/images/computer/egor_files/${currentPhotoIndex}.jpg`;
+                displayImg.onload = () => {
+                    displayImg.style.opacity = '1';
+                    document.getElementById('tv-photo-indicator').textContent = `Слайд ${currentPhotoIndex}`;
+                };
+                displayImg.onerror = () => {
+                    if (currentPhotoIndex > 1) {
+                        currentPhotoIndex--;
+                        displayImg.src = `assets/images/computer/egor_files/${currentPhotoIndex}.jpg`;
+                        displayImg.style.opacity = '1';
+                        document.getElementById('tv-photo-indicator').textContent = `Слайд ${currentPhotoIndex} (Конец архива)`;
+                    }
+                };
+            }, 200);
+        }
+
+        // --- INTEGRATED VIDEO PLAYLIST PLAYER ---
+        const videoPlaylist = [
+            { name: "bg-main.mp4", title: "Главная Презентация", desc: "Локальный видеофайл приставки", file: "assets/video/bg-main.mp4" },
+            { name: "big_buck_bunny.mp4", title: "Big Buck Bunny", desc: "Сетевой видеопоток (Blender Animation)", file: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { name: "sintel.mp4", title: "Sintel (Movie Trailer)", desc: "Сетевой видеопоток (Blender Foundation)", file: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+            { name: "tears_of_steel.mp4", title: "Tears of Steel (Sci-Fi)", desc: "Сетевой видеопоток (VFX Showcase)", file: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+            { name: "elephants_dream.mp4", title: "Elephants Dream", desc: "Сетевой видеопоток (Retro CGI)", file: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
+        ];
+
+        let activeVideoIndex = 0;
+
+        function openTvShowsApp() {
+            openApp('app-tvshows');
+        }
+
+        function buildVideoPlaylistUI() {
+            const box = document.getElementById('tv-video-playlist-box');
+            if (!box) return;
+            box.innerHTML = '';
+            videoPlaylist.forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = `music-playlist-item ${idx === activeVideoIndex ? 'active' : ''}`;
+                row.innerHTML = `<span>${item.title}</span><span class="text-[9px] text-slate-500">${item.name}</span>`;
+                row.onclick = () => {
+                    playSnd(soundClick);
+                    loadVideoTrack(idx, true);
+                };
+                box.appendChild(row);
+            });
+        }
+
+        function loadVideoTrack(idx, startPlaying = false) {
+            activeVideoIndex = idx;
+            
+            // Re-render playlist classes
+            const items = document.querySelectorAll('#tv-video-playlist-box .music-playlist-item');
+            items.forEach((item, i) => {
+                item.className = `music-playlist-item ${i === activeVideoIndex ? 'active' : ''}`;
+            });
+
+            const movie = videoPlaylist[activeVideoIndex];
+            document.getElementById('tv-video-active-title').textContent = movie.title;
+            document.getElementById('tv-video-active-desc').textContent = movie.desc;
+            document.getElementById('tv-video-status').textContent = `Проигрывание: ${movie.name}`;
+
+            const video = document.getElementById('tv-show-video');
+            video.src = movie.file;
+            video.load();
+
+            if (startPlaying) {
+                soundAmbient.pause();
+                video.play().then(() => {
+                    document.getElementById('tv-play-btn').innerHTML = '<i class="fas fa-pause"></i>';
+                }).catch(() => {
+                    document.getElementById('tv-play-btn').innerHTML = '<i class="fas fa-play"></i>';
+                });
+            } else {
+                video.pause();
+                document.getElementById('tv-play-btn').innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        function toggleTvVideo() {
+            const video = document.getElementById('tv-show-video');
+            const playBtn = document.getElementById('tv-play-btn');
+            playSnd(soundClick);
+            
+            if (video.paused) {
+                video.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                soundAmbient.pause();
+            } else {
+                video.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                soundAmbient.play().catch(() => {});
+            }
+        }
+
+        // --- FULL HIGH-FIDELITY MUSIC PLAYLIST SYSTEM ---
+        const musicPlaylist = [
+            { name: "evolve-bg.mp3", title: "Evolve Main Theme", artist: "Evolve Soundtrack", file: "assets/music/evolve-bg.mp3" },
+            { name: "pccreator-bg.mp3", title: "PC Creator Theme", artist: "PC Creator OST", file: "assets/music/pccreator-bg.mp3" },
+            { name: "20260228_182720_Late_Goodbye.mp3", title: "Late Goodbye (Max Payne 2)", artist: "Poets of the Fall", file: "assets/music/20260228_182720_Late_Goodbye.mp3" },
+            { name: "20260224_154423_Комиксы_Макса_Пейна.mp3", title: "Комиксы Макса Пейна", artist: "Remedy Music", file: "assets/music/20260224_154423_Комиксы_Макса_Пейна.mp3" },
+            { name: "20260224_155110_С_отцом.mp3", title: "Разговор с отцом", artist: "Егор Лог Архив", file: "assets/music/20260224_155110_С_отцом.mp3" },
+            { name: "20260224_155625_Speed_с_отцом.mp3", title: "Разговор с отцом (Speed Up)", artist: "Егор Лог Архив", file: "assets/music/20260224_155625_Speed_с_отцом.mp3" },
+            { name: "20260309_123933_Обоюдно.mp3", title: "Обоюдно", artist: "Егор Лог Архив", file: "assets/music/20260309_123933_Обоюдно.mp3" },
+            { name: "20260309_124649_Six_Seven.mp3", title: "Six Seven", artist: "Егор Лог Архив", file: "assets/music/20260309_124649_Six_Seven.mp3" },
+            { name: "20260309_124418_Бархатные_Тяги.mp3", title: "Бархатные Тяги", artist: "Meme Records", file: "assets/music/20260309_124418_Бархатные_Тяги.mp3" },
+            { name: "20260207_221213_4Q.mp3", title: "4Q Track", artist: "Егор Архив", file: "assets/music/20260207_221213_4Q.mp3" },
+            { name: "20260207_222530_Замай.mp3", title: "Замай OST", artist: "Замай", file: "assets/music/20260207_222530_Замай.mp3" },
+            { name: "20260207_223221_Слава_КПСС.mp3", title: "Слава КПСС OST", artist: "Слава КПСС", file: "assets/music/20260207_223221_Слава_КПСС.mp3" },
+            { name: "20260208_124853_ТВИЧ.mp3", title: "ТВИЧ Музыка", artist: "Streamer Audio", file: "assets/music/20260208_124853_ТВИЧ.mp3" },
+            { name: "20260208_130936_Новый_Год.mp3", title: "Новый Год 2026", artist: "Holiday Hits", file: "assets/music/20260208_130936_Новый_Год.mp3" },
+            { name: "20260208_152412_Барабан.mp3", title: "Барабанный Ритм", artist: "Drum Solo", file: "assets/music/20260208_152412_Барабан.mp3" },
+            { name: "20260209_051744_Эрика_от_Poland_Boll.mp3", title: "Эрика (Poland Boll)", artist: "Poland Boll", file: "assets/music/20260209_051744_Эрика_от_Poland_Boll.mp3" },
+            { name: "20260210_200551_Rumble.mp3", title: "Rumble Beat", artist: "Action Ost", file: "assets/music/20260210_200551_Rumble.mp3" },
+            { name: "20260214_153209_Марш_сс_ост_Индии.mp3", title: "Марш Ост Индии", artist: "Historical Brass Band", file: "assets/music/20260214_153209_Марш_сс_ост_Индии.mp3" },
+            { name: "20260309_053951_Mi_general_Augusto_Pinochet.mp3", title: "Mi General Augusto Pinochet", artist: "Historic Anthems", file: "assets/music/20260309_053951_Mi_general_Augusto_Pinochet.mp3" },
+            { name: "track1.mp3", title: "Архивный трек #1", artist: "Егор Лог Музыка", file: "assets/music/track1.mp3" },
+            { name: "track2.mp3", title: "Архивный трек #2", artist: "Егор Лог Музыка", file: "assets/music/track2.mp3" },
+            { name: "track3.mp3", title: "Архивный трек #3", artist: "Егор Лог Музыка", file: "assets/music/track3.mp3" },
+            { name: "track4.mp3", title: "Архивный трек #4", artist: "Егор Лог Музыка", file: "assets/music/track4.mp3" },
+            { name: "track5.mp3", title: "Архивный трек #5", artist: "Егор Лог Музыка", file: "assets/music/track5.mp3" },
+            { name: "track6.mp3", title: "Архивный трек #6", artist: "Егор Лог Музыка", file: "assets/music/track6.mp3" },
+            { name: "track7.mp3", title: "Архивный трек #7", artist: "Егор Лог Музыка", file: "assets/music/track7.mp3" },
+            { name: "track8.mp3", title: "Архивный трек #8", artist: "Егор Лог Музыка", file: "assets/music/track8.mp3" },
+            { name: "track9.mp3", title: "Архивный трек #9", artist: "Егор Лог Музыка", file: "assets/music/track9.mp3" },
+            { name: "track10.mp3", title: "Архивный трек #10", artist: "Егор Лог Музыка", file: "assets/music/track10.mp3" },
+            { name: "track11.mp3", title: "Архивный трек #11", artist: "Егор Лог Музыка", file: "assets/music/track11.mp3" },
+            { name: "track12.mp3", title: "Архивный трек #12", artist: "Егор Лог Музыка", file: "assets/music/track12.mp3" },
+            { name: "track13.mp3", title: "Архивный трек #13", artist: "Егор Лог Музыка", file: "assets/music/track13.mp3" },
+            { name: "track14.mp3", title: "Архивный трек #14", artist: "Егор Лог Музыка", file: "assets/music/track14.mp3" },
+            { name: "track16.mp3", title: "Архивный трек #16", artist: "Егор Лог Музыка", file: "assets/music/track16.mp3" },
+            { name: "track17.mp3", title: "Архивный трек #17", artist: "Егор Лог Музыка", file: "assets/music/track17.mp3" },
+            { name: "track18.mp3", title: "Архивный трек #18", artist: "Егор Лог Музыка", file: "assets/music/track18.mp3" },
+            { name: "track19.mp3", title: "Архивный трек #19", artist: "Егор Лог Музыка", file: "assets/music/track19.mp3" },
+            { name: "track20.mp3", title: "Архивный трек #20", artist: "Егор Лог Музыка", file: "assets/music/track20.mp3" },
+            { name: "track21.mp3", title: "Архивный трек #21", artist: "Егор Лог Музыка", file: "assets/music/track21.mp3" },
+            { name: "track22.mp3", title: "Архивный трек #22", artist: "Егор Лог Музыка", file: "assets/music/track22.mp3" },
+            { name: "track23.mp3", title: "Архивный трек #23", artist: "Егор Лог Музыка", file: "assets/music/track23.mp3" },
+            { name: "track24.mp3", title: "Архивный трек #24", artist: "Егор Лог Музыка", file: "assets/music/track24.mp3" },
+            { name: "track25.mp3", title: "Архивный трек #25", artist: "Егор Лог Музыка", file: "assets/music/track25.mp3" },
+            { name: "track26.mp3", title: "Архивный трек #26", artist: "Егор Лог Музыка", file: "assets/music/track26.mp3" },
+            { name: "track27.mp3", title: "Архивный трек #27", artist: "Егор Лог Музыка", file: "assets/music/track27.mp3" },
+            { name: "track28.mp3", title: "Архивный трек #28", artist: "Егор Лог Музыка", file: "assets/music/track28.mp3" },
+            { name: "track29.mp3", title: "Архивный трек #29", artist: "Егор Лог Музыка", file: "assets/music/track29.mp3" },
+            { name: "track30.mp3", title: "Архивный трек #30", artist: "Егор Лог Музыка", file: "assets/music/track30.mp3" },
+            { name: "track31.mp3", title: "Архивный трек #31", artist: "Егор Лог Музыка", file: "assets/music/track31.mp3" },
+            { name: "track32.mp3", title: "Архивный трек #32", artist: "Егор Лог Музыка", file: "assets/music/track32.mp3" },
+            { name: "track33.mp3", title: "Архивный трек #33", artist: "Егор Лог Музыка", file: "assets/music/track33.mp3" },
+            { name: "track34.mp3", title: "Архивный трек #34", artist: "Егор Лог Музыка", file: "assets/music/track34.mp3" },
+            { name: "track35.mp3", title: "Архивный трек #35", artist: "Егор Лог Музыка", file: "assets/music/track35.mp3" },
+            { name: "track36.mp3", title: "Архивный трек #36", artist: "Егор Лог Музыка", file: "assets/music/track36.mp3" },
+            { name: "track37.mp3", title: "Архивный трек #37", artist: "Егор Лог Музыка", file: "assets/music/track37.mp3" },
+            { name: "track38.mp3", title: "Архивный трек #38", artist: "Егор Лог Музыка", file: "assets/music/track38.mp3" },
+            { name: "track39.mp3", title: "Архивный трек #39", artist: "Егор Лог Музыка", file: "assets/music/track39.mp3" },
+            { name: "track40.mp3", title: "Архивный трек #40", artist: "Егор Лог Музыка", file: "assets/music/track40.mp3" }
+        ];
+
+        let activeTrackIndex = 0;
+        let activeAudioElement = null;
+        let isMusicPlaying = false;
+        let trackTimeTicker = null;
+
+        function openMusicApp() {
+            openApp('app-music');
+        }
+
+        function buildMusicPlaylistUI() {
+            const box = document.getElementById('music-playlist-box');
+            if (!box) return;
+            box.innerHTML = '';
+            musicPlaylist.forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = `music-playlist-item ${idx === activeTrackIndex ? 'active' : ''}`;
+                row.innerHTML = `<span>${item.title}</span><span class="text-[9px] text-slate-500">${item.name}</span>`;
+                row.onclick = () => {
+                    playSnd(soundClick);
+                    loadPlaylistTrack(idx, true);
+                };
+                box.appendChild(row);
+            });
+        }
+
+        function loadPlaylistTrack(idx, startPlaying = false) {
+            if (activeAudioElement) {
+                activeAudioElement.pause();
+                activeAudioElement.src = "";
+                clearInterval(trackTimeTicker);
+            }
+
+            activeTrackIndex = idx;
+            
+            // Re-render playlist classes
+            const items = document.querySelectorAll('.music-playlist-item');
+            items.forEach((item, i) => {
+                item.className = `music-playlist-item ${i === activeTrackIndex ? 'active' : ''}`;
+            });
+
+            const track = musicPlaylist[activeTrackIndex];
+            document.getElementById('music-active-title').textContent = track.title;
+            document.getElementById('music-active-artist').textContent = track.artist;
+            document.getElementById('vinyl-track-label').textContent = track.name;
+
+            activeAudioElement = new Audio(track.file);
+            activeAudioElement.volume = 0.55;
+
+            // Clock timer updates
+            activeAudioElement.addEventListener('loadedmetadata', () => {
+                updateTrackTimeDisplay();
+            });
+
+            if (startPlaying) {
+                isMusicPlaying = true;
+                soundAmbient.pause();
+                activeAudioElement.play().catch(() => {});
+                document.getElementById('music-vinyl').classList.add('playing');
+                document.getElementById('music-play-btn').innerHTML = '<i class="fas fa-pause mr-1"></i> Пауза';
+                
+                trackTimeTicker = setInterval(updateTrackTimeDisplay, 1000);
+            } else {
+                isMusicPlaying = false;
+                document.getElementById('music-vinyl').classList.remove('playing');
+                document.getElementById('music-play-btn').innerHTML = '<i class="fas fa-play mr-1"></i> Играть';
+            }
+        }
+
+        function toggleMusicPlayback() {
+            playSnd(soundClick);
+            const playBtn = document.getElementById('music-play-btn');
+            const vinyl = document.getElementById('music-vinyl');
+            
+            if (!activeAudioElement) return;
+
+            if (!isMusicPlaying) {
+                isMusicPlaying = true;
+                soundAmbient.pause();
+                activeAudioElement.play().catch(() => {});
+                vinyl.classList.add('playing');
+                playBtn.innerHTML = '<i class="fas fa-pause mr-1"></i> Пауза';
+                trackTimeTicker = setInterval(updateTrackTimeDisplay, 1000);
+            } else {
+                isMusicPlaying = false;
+                activeAudioElement.pause();
+                vinyl.classList.remove('playing');
+                playBtn.innerHTML = '<i class="fas fa-play mr-1"></i> Играть';
+                clearInterval(trackTimeTicker);
+                soundAmbient.play().catch(() => {});
+            }
+        }
+
+        function stopMusicPlayback() {
+            isMusicPlaying = false;
+            if (activeAudioElement) {
+                activeAudioElement.pause();
+            }
+            const vinyl = document.getElementById('music-vinyl');
+            if (vinyl) vinyl.classList.remove('playing');
+            const playBtn = document.getElementById('music-play-btn');
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play mr-1"></i> Играть';
+            clearInterval(trackTimeTicker);
+            soundAmbient.play().catch(() => {});
+        }
+
+        function nextMusicTrack() {
+            playSnd(soundClick);
+            let nextIdx = (activeTrackIndex + 1) % musicPlaylist.length;
+            loadPlaylistTrack(nextIdx, true);
+        }
+
+        function prevMusicTrack() {
+            playSnd(soundClick);
+            let prevIdx = (activeTrackIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
+            loadPlaylistTrack(prevIdx, true);
+        }
+
+        function updateTrackTimeDisplay() {
+            if (!activeAudioElement) return;
+            const cur = activeAudioElement.currentTime || 0;
+            const dur = activeAudioElement.duration || 0;
+            
+            const formatTime = (sec) => {
+                const m = Math.floor(sec / 60);
+                const s = String(Math.floor(sec % 60)).padStart(2, '0');
+                return `${m}:${s}`;
+            };
+            
+            document.getElementById('music-time-display').textContent = `${formatTime(cur)} / ${formatTime(dur)}`;
+            
+            // Loop tracks automatically
+            if (activeAudioElement.ended) {
+                nextMusicTrack();
+            }
+        }
+
+        // --- HIGH-FIDELITY RADIO TUNING JS SYSTEM ---
+        let currentRadioFrequency = 96.8;
+        let radioStationAudio = null;
+        let activeRadioStation = null;
+        
+        const radioStations = [
+            { freq: 91.5, name: "Эхо Истории", track: "assets/music/20260214_153209_Марш_сс_ост_Индии.mp3", artist: "Historical Brass Band" },
+            { freq: 96.8, name: "Ретро Волна", track: "assets/music/20260228_182720_Late_Goodbye.mp3", artist: "Poets of the Fall" },
+            { freq: 101.2, name: "Свободный Эфир", track: "assets/music/20260207_222530_Замай.mp3", artist: "Замай OST" },
+            { freq: 105.4, name: "Егор FM", track: "assets/music/20260224_155110_С_отцом.mp3", artist: "Егор Лог Архив" }
+        ];
+
+        // --- TRUE WEB AUDIO CRT STATIC NOISE SYNTHESIZER ---
+        let webAudioCtx = null;
+        let audioNoiseNode = null;
+        let audioFilterNode = null;
+        let noiseGainNode = null;
+        let staticAnimationId = null;
+
+        function openRadioApp() {
+            if (!tvPowerState) return;
+            openApp('app-radio');
+            
+            try {
+                animateRadioStaticOverlay();
+                updateRadioUI();
+            } catch (e) {
+                console.error("Radio initialization failed:", e);
+            }
+        }
+
+        function stopRadioNoise() {
+            if (radioStationAudio) {
+                try {
+                    radioStationAudio.pause();
+                } catch(e) {}
+                radioStationAudio = null;
+            }
+            
+            cancelAnimationFrame(staticAnimationId);
+        }
+
+        function animateRadioStaticOverlay() {
+            const canvas = document.getElementById('crt-static');
+            if (!canvas) return;
+            
+            let toggle = false;
+            function step() {
+                toggle = !toggle;
+                canvas.style.opacity = toggle ? '0.05' : '0.12';
+                canvas.style.backgroundPosition = `${Math.random() * 80}px ${Math.random() * 80}px`;
+                staticAnimationId = requestAnimationFrame(step);
+            }
+            step();
+        }
+
+        function tuneRadio(diff) {
+            playSnd(soundClick);
+            currentRadioFrequency += diff;
+            if (currentRadioFrequency < 88.0) currentRadioFrequency = 108.0;
+            if (currentRadioFrequency > 108.0) currentRadioFrequency = 88.0;
+            updateRadioUI();
+        }
+
+        function setRadioFrequency(freq) {
+            playSnd(soundClick);
+            currentRadioFrequency = freq;
+            updateRadioUI();
+        }
+        
+        function autoTuneRadio() {
+            playSnd(soundClick);
+            const spinner = document.getElementById('radio-auto-tune');
+            spinner.innerHTML = '<i class="fas fa-sync animate-spin mr-1"></i> Поиск...';
+            
+            let current = currentRadioFrequency;
+            let sorted = [...radioStations].sort((a,b) => a.freq - b.freq);
+            let found = sorted.find(st => st.freq > current + 0.1);
+            if (!found) found = sorted[0]; // loop back to first
+            
+            setTimeout(() => {
+                spinner.innerHTML = '<i class="fas fa-circle-dot mr-1"></i> Автопоиск';
+                currentRadioFrequency = found.freq;
+                updateRadioUI();
+                showTvAlert("Радио Захвачено", `Найдена станция на частоте ${found.freq} FM!`);
+            }, 1200);
+        }
+
+        function updateRadioUI() {
+            // Update needle position (range 88.0 to 108.0 = 20 MHz)
+            const pct = ((currentRadioFrequency - 88.0) / 20.0) * 100;
+            const needle = document.getElementById('radio-dial-needle');
+            if (needle) needle.style.left = `${pct}%`;
+            
+            // Update frequency display
+            const freqDisp = document.getElementById('radio-frequency-display');
+            if (freqDisp) freqDisp.innerHTML = `${currentRadioFrequency.toFixed(1)} <span class="text-lg font-normal">MHz</span>`;
+            
+            // Check for nearest station
+            let nearest = null;
+            let minDiff = 999;
+            for (const st of radioStations) {
+                const diff = Math.abs(currentRadioFrequency - st.freq);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    nearest = st;
+                }
+            }
+            
+            // Lock factor & volumes
+            let noiseVolume = 1.0;
+            let stationVolume = 0.0;
+            let isStereo = false;
+            
+            if (nearest && minDiff < 0.6) {
+                const factor = minDiff / 0.6; // 0 at station, 1 at boundary
+                noiseVolume = factor;
+                stationVolume = 1.0 - factor;
+                
+                if (minDiff < 0.2) {
+                    isStereo = true;
+                }
+                
+                document.getElementById('radio-station-title').textContent = `${nearest.name} — ${nearest.artist}`;
+                document.getElementById('radio-signal-strength').textContent = minDiff < 0.15 ? "СИГНАЛ: ОТЛИЧНЫЙ" : "СИГНАЛ: СЛАБЫЙ";
+                document.getElementById('radio-signal-strength').className = minDiff < 0.15 
+                    ? "px-2 py-0.5 bg-green-900/40 text-[9px] rounded uppercase font-bold text-green-300 animate-pulse"
+                    : "px-2 py-0.5 bg-yellow-900/40 text-[9px] rounded uppercase font-bold text-yellow-300";
+            } else {
+                document.getElementById('radio-station-title').textContent = "Поиск частоты...";
+                document.getElementById('radio-signal-strength').textContent = "НЕТ СИГНАЛА";
+                document.getElementById('radio-signal-strength').className = "px-2 py-0.5 bg-sky-900/40 text-[9px] rounded uppercase font-bold text-sky-300";
+            }
+            
+            const staticCanvas = document.getElementById('crt-static');
+            if (staticCanvas) {
+                // If signal is locked, fade the visual static canvas opacity completely
+                staticCanvas.style.opacity = (noiseVolume * 0.12).toFixed(3);
+            }
+            
+            document.getElementById('radio-noise-level').textContent = `ШУМ: ${Math.round(noiseVolume * 100)}%`;
+            document.getElementById('radio-stereo-indicator').textContent = isStereo ? "STEREO" : "MONO";
+            document.getElementById('radio-stereo-indicator').className = isStereo ? "text-green-400 font-bold" : "text-sky-500/80 font-mono";
+            
+            // Connect and adjust Audio volumes
+            if (webAudioCtx && noiseGainNode) {
+                noiseGainNode.gain.setValueAtTime(noiseVolume * 0.22, webAudioCtx.currentTime);
+            }
+            
+            if (stationVolume > 0 && nearest) {
+                if (!radioStationAudio || radioStationAudio.getAttribute('data-freq') !== String(nearest.freq)) {
+                    if (radioStationAudio) {
+                        radioStationAudio.pause();
+                    }
+                    radioStationAudio = new Audio(nearest.track);
+                    radioStationAudio.loop = true;
+                    radioStationAudio.setAttribute('data-freq', String(nearest.freq));
+                    radioStationAudio.volume = 0;
+                    radioStationAudio.play().catch(() => {});
+                }
+                
+                radioStationAudio.volume = stationVolume * 0.65;
+            } else {
+                if (radioStationAudio) {
+                    radioStationAudio.pause();
+                    radioStationAudio = null;
+                }
+            }
+        }
+
+        function openPodcastsApp() {
+            openApp('app-podcasts');
+        }
+
+        // --- INTEGRATED LOCAL FILE SYSTEM ENGINE ---
+        const tvFilesystem = {
+            name: 'Локальный узел',
+            id: 'root',
+            type: 'folder',
+            children: [
+                {
+                    name: 'Рабочий стол', id: 'Desktop', type: 'folder', icon: 'fa-desktop text-slate-500', children: [
+                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Система инициализирована. Ожидание указаний.' },
+                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
+                    ]
+                },
+                {
+                    name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
+                        {
+                            name: 'System', id: 'System', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                {
+                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                        {
+                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                                {
+                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-gray-500', content: '4515' }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-gray-500' },
+                                { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-gray-500' },
+                                { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-gray-500' },
+                                { name: 'ocean_drv.sys', id: 'ocean_drv', type: 'sys', icon: 'fa-cogs text-gray-500' }
+                            ]
+                        },
+                        {
+                            name: 'Users', id: 'Users', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                {
+                                    name: 'admin', id: 'admin', type: 'folder', icon: 'fa-user text-gray-500', children: [
+                                        { name: 'settings.ini', id: 'settings', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'theme=ocean; lang=ru;' }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'No errors.' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: 'Локальный диск (E:)', id: 'E:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
+                        { name: 'locked', id: 'locked', type: 'locked_folder', icon: 'fa-folder text-slate-500' },
+                        {
+                            name: 'Archive', id: 'Arch', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                { name: 'data_01.dat', id: 'd1', type: 'sys', icon: 'fa-database text-gray-500' },
+                                { name: 'data_02.dat', id: 'd2', type: 'sys', icon: 'fa-database text-gray-500' }
+                            ]
+                        },
+                        { name: 'Temp', id: 'Temp', type: 'folder', icon: 'fa-folder text-slate-500', children: [] }
+                    ]
+                }
+            ]
+        };
+
+        let currentActiveDevice = "local";
+        let explorerPath = [];
+
+        function openComputersApp() {
+            openApp('app-computers');
+            selectDevice('local');
+        }
+
+        function selectDevice(dev) {
+            playSnd(soundClick);
+            currentActiveDevice = dev;
+            explorerPath = [];
+            
+            document.querySelectorAll('.comp-device-item').forEach(el => el.classList.remove('active'));
+            
+            if (dev === 'local') {
+                document.getElementById('dev-local').classList.add('active');
+                renderTvExplorer();
+            } else if (dev === 'office') {
+                document.getElementById('dev-office').classList.add('active');
+                renderOfflineExplorer("Внимание: OFFICE-PC не отвечает на запросы. Проверьте кабели Ethernet.");
+            } else if (dev === 'nas') {
+                document.getElementById('dev-nas').classList.add('active');
+                renderNasExplorer();
+            }
+        }
+
+        function getTvFolderByPath() {
+            let current = tvFilesystem;
+            for (const step of explorerPath) {
+                current = current.children.find(c => c.id === step);
+                if (!current) return null;
+            }
+            return current;
+        }
+
+        function renderTvExplorer() {
+            const container = document.getElementById('tv-explorer-content');
+            const titleEl = document.getElementById('tv-explorer-title');
+            container.innerHTML = '';
+            
+            const currentFolder = getTvFolderByPath();
+            if (!currentFolder) return;
+            
+            let pathStr = "Локальный узел";
+            if (explorerPath.length > 0) {
+                pathStr += " > " + explorerPath.map(p => {
+                    let search = tvFilesystem;
+                    for (const s of explorerPath) {
+                        const next = search.children.find(c => c.id === s);
+                        if (next) search = next;
+                    }
+                    return search.name;
+                }).join(" > ");
+            }
+            titleEl.innerHTML = `<i class="fas fa-folder-open text-slate-600"></i> ${currentFolder.name}`;
+            
+            const grid = document.createElement('div');
+            grid.className = "grid grid-cols-4 gap-4";
+            
+            currentFolder.children.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none";
+                card.innerHTML = `
+                    <i class="fas ${item.icon || 'fa-file'} text-4xl mb-3"></i>
+                    <span class="text-xs text-gray-700 font-semibold leading-tight">${item.name}</span>
+                `;
+                
+                card.onclick = () => {
+                    playSnd(soundClick);
+                    if (item.type === 'folder') {
+                        explorerPath.push(item.id);
+                        renderTvExplorer();
+                    } else if (item.type === 'locked_folder') {
+                        showTvAlert("Доступ ограничен", "Прямой доступ к папке locked заблокирован. Пожалуйста, используйте Медиатеку.");
+                    } else if (item.type === 'text') {
+                        openTvNotepad(item.name, item.content);
+                    } else if (item.type === 'links_file') {
+                        openTvNotepad(item.name, item.content, item.links);
+                    } else if (item.type === 'sys') {
+                        openTvNotepad(item.name, `[SYSTEM BINARY DATA]\nOffset: 0x${Math.floor(Math.random()*9999).toString(16).toUpperCase()}\nIntegrity signature: OK\nState: Locked under kernel root privileges.`);
+                    }
+                };
+                
+                grid.appendChild(card);
+            });
+            
+            container.appendChild(grid);
+        }
+
+        function tvExplorerBack() {
+            if (currentActiveDevice !== 'local') {
+                selectDevice('local');
+                return;
+            }
+            
+            if (explorerPath.length > 0) {
+                playSnd(soundClick);
+                explorerPath.pop();
+                renderTvExplorer();
+            }
+        }
+
+        function renderOfflineExplorer(message) {
+            const container = document.getElementById('tv-explorer-content');
+            const titleEl = document.getElementById('tv-explorer-title');
+            titleEl.innerHTML = `<i class="fas fa-triangle-exclamation text-red-500"></i> Сбой подключения`;
+            
+            container.innerHTML = `
+                <div class="h-full flex flex-col justify-center items-center text-center p-8 bg-slate-50">
+                    <i class="fas fa-plug-circle-xmark text-5xl text-gray-400 mb-4"></i>
+                    <h5 class="text-base font-bold text-gray-800 mb-2">Устройство недоступно</h5>
+                    <p class="text-sm text-gray-500 max-w-sm">${message}</p>
+                </div>
+            `;
+        }
+
+        function renderNasExplorer() {
+            const container = document.getElementById('tv-explorer-content');
+            const titleEl = document.getElementById('tv-explorer-title');
+            titleEl.innerHTML = `<i class="fas fa-server text-slate-600"></i> PUBLIC-NAS Share`;
+            
+            container.innerHTML = `
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('share.txt', 'Public share access granted. Egor\\'s home network server holds no extra private logs.')">
+                        <i class="fas fa-file-alt text-slate-600 text-4xl mb-3"></i>
+                        <span class="text-xs text-gray-700 font-semibold leading-tight">share.txt</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // TV Notepad handlers
+        function openTvNotepad(name, text, links) {
+            playSnd(soundClick);
+            document.getElementById('tv-notepad-title').innerHTML = `<i class="fas fa-file-alt text-slate-400"></i> ${name}`;
+            document.getElementById('tv-notepad-text').textContent = text;
+            
+            const btnWrap = document.getElementById('tv-notepad-links-wrap');
+            btnWrap.innerHTML = '';
+            
+            if (links && links.length) {
+                links.forEach((url, i) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = "px-5 py-2.5 bg-slate-600 hover:bg-slate-500 text-white rounded-full text-xs font-bold transition-all shadow-md active:scale-95";
+                    btn.textContent = `Открыть ссылку ${i + 1}`;
+                    btn.onclick = () => {
+                        playSnd(soundClick);
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                    };
+                    btnWrap.appendChild(btn);
+                });
+            }
+            
+            document.getElementById('tv-notepad-overlay').classList.add('active');
+        }
+
+        function closeTvNotepad() {
+            playSnd(soundClick);
+            document.getElementById('tv-notepad-overlay').classList.remove('active');
+        }
+
+        // --- SETTINGS TAB & JAILBREAK HANDLERS ---
+        let jailbreakLogInterval;
+        function openSettingsApp() {
+            openApp('app-settings');
+            selectSettingTab('main');
+        }
+
+        function selectSettingTab(tab) {
+            playSnd(soundClick);
+            clearInterval(jailbreakLogInterval);
+            
+            document.querySelectorAll('.settings-menu-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`set-${tab}`).classList.add('active');
+            
+            const details = document.getElementById('settings-details-panel');
+            details.innerHTML = '';
+            
+            if (tab === 'main') {
+                details.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-gears text-slate-400 mr-2"></i> Основные настройки</h3>
+                    <p class="text-xs text-slate-400 mb-6">Сведения о медиацентре</p>
+                    
+                    <div class="settings-card">
+                        <div class="flex justify-between py-2 border-b border-white/5 text-sm">
+                            <span class="text-gray-400">Имя устройства</span>
+                            <span class="text-white font-semibold">Ocean TV HD</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5 text-sm mt-2">
+                            <span class="text-gray-400">Модель приставки</span>
+                            <!-- Persisted Model changed to Ocean TV as requested -->
+                            <span class="text-white font-semibold">Ocean TV</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5 text-sm mt-2">
+                            <span class="text-gray-400">Версия системы</span>
+                            <span class="text-sky-400 font-semibold">Ocean TV OS 5.0.2 (Jailbroken)</span>
+                        </div>
+                        <div class="flex justify-between py-2 text-sm mt-2">
+                            <span class="text-gray-400">Серийный номер</span>
+                            <span class="text-white font-mono">DYTH29188AK9</span>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'network') {
+                details.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-wifi text-slate-400 mr-2"></i> Беспроводная Сеть</h3>
+                    <p class="text-xs text-slate-400 mb-6">Соединение Wi-Fi</p>
+                    
+                    <div class="settings-card">
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-400">Статус сети</span>
+                            <span class="text-green-400 font-bold"><i class="fas fa-circle-check mr-1"></i> Подключено</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 text-sm mt-2">
+                            <span class="text-gray-400">Точка доступа</span>
+                            <span class="text-white font-semibold">OCEAN_FREE_WIFI</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 text-sm mt-2">
+                            <span class="text-gray-400">Сила сигнала</span>
+                            <span class="text-white"><i class="fas fa-signal"></i> Отличный</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 text-sm mt-2">
+                            <span class="text-gray-400">IP-адрес</span>
+                            <span class="text-white font-mono">192.168.1.187</span>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'account') {
+                const userStr = localStorage.getItem('om_user_profile');
+                if (userStr) {
+                    const user = JSON.parse(userStr);
+                    const name = user.first_name || user.username || "Пользователь";
+                    const usernameText = user.username ? `@${user.username}` : `ID: ${user.id}`;
+                    
+                    details.innerHTML = `
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-circle-user text-slate-400 mr-2"></i> Аккаунт проекта</h3>
+                        <p class="text-xs text-slate-400 mb-6">Профиль единого аккаунта сайта</p>
+                        
+                        <div class="settings-card">
+                            <div class="flex items-center gap-4 mb-4 pb-4 border-b border-white/5">
+                                <div class="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center text-lg font-bold text-white uppercase font-mono">
+                                    ${name.charAt(0)}
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold text-white font-sans">${name}</div>
+                                    <div class="text-xs text-sky-400 font-mono">${usernameText}</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between py-1.5 text-sm border-b border-white/5 font-sans">
+                                <span class="text-gray-400">Статус сессии</span>
+                                <span class="text-green-400 font-semibold">Активна</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 text-sm font-sans">
+                                <span class="text-gray-400">Синхронизация сохранений</span>
+                                <span class="text-green-400 font-semibold"><i class="fas fa-circle-check"></i> Включена</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    details.innerHTML = `
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-circle-user text-slate-400 mr-2"></i> Аккаунт проекта</h3>
+                        <p class="text-xs text-slate-400 mb-6">Профиль единого аккаунта сайта</p>
+                        
+                        <div class="settings-card text-center py-6 font-sans">
+                            <i class="fas fa-circle-question text-5xl text-slate-500 mb-3"></i>
+                            <h4 class="text-sm font-bold text-white mb-2">Гостевой сеанс</h4>
+                            <p class="text-xs text-slate-400 mb-4 max-w-xs mx-auto">
+                                Сохранения работают только локально. Авторизуйтесь, чтобы включить облачную синхронизацию прогресса.
+                            </p>
+                            <button class="relative px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-full transition-all pointer-events-none cursor-not-allowed">
+                                Подключить аккаунт
+                                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    `;
+                }
+            } else if (tab === 'diagnostic') {
+                details.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-heart-pulse text-slate-400 mr-2"></i> Диагностика системы</h3>
+                    <p class="text-xs text-slate-400 mb-6">Проверка целостности оборудования</p>
+                    
+                    <div class="settings-card">
+                        <div class="text-xs text-gray-400 leading-relaxed mb-4">
+                            Для проверки физических плат приставки и тестирования сетевого декодера выберите диагностический профиль загрузки:
+                        </div>
+                        
+                        <div class="flex flex-col gap-2">
+                            <button class="px-4 py-2.5 bg-white/5 border border-white/10 hover:border-slate-500 hover:bg-slate-500/10 text-xs font-bold text-left rounded-xl transition-all" onclick="triggerRecoveryScreen(1)">
+                                <i class="fas fa-globe mr-2 text-slate-400"></i> Ошибка 1: Сетевая отладка декодера
+                            </button>
+                            <button class="px-4 py-2.5 bg-white/5 border border-white/10 hover:border-slate-500 hover:bg-slate-500/10 text-xs font-bold text-left rounded-xl transition-all" onclick="triggerRecoveryScreen(2)">
+                                <i class="fas fa-folder-closed mr-2 text-slate-400"></i> Ошибка 2: Тест ядра загрузчика
+                            </button>
+                            <button class="px-4 py-2.5 bg-white/5 border border-white/10 hover:border-slate-500 hover:bg-slate-500/10 text-xs font-bold text-left rounded-xl transition-all" onclick="triggerRecoveryScreen(3)">
+                                <i class="fas fa-triangle-exclamation mr-2 text-slate-400"></i> Ошибка 3: Тест целостности прошивки
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'cyanide') {
+                renderJailbreakPanel();
+            }
+        }
+
+        // Jailbreak Panel Renderer
+        function renderJailbreakPanel() {
+            const details = document.getElementById('settings-details-panel');
+            if (isJailbroken) {
+                details.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-syringe syringe-icon mr-2"></i> cyan1de Jailbreak</h3>
+                    <p class="text-xs text-sky-400">Статус: JAILBREAK АКТИВЕН (FakeSigned)</p>
+                    
+                    <div class="settings-card text-center py-6">
+                        <i class="fas fa-circle-check text-5xl text-green-400 mb-3"></i>
+                        <h4 class="text-base font-bold text-white mb-1">Все блокировки обойдены</h4>
+                        <p class="text-xs text-slate-400">Пользовательские привилегии повышены до ROOT. Доступ к Медиатеке открыт.</p>
+                        
+                        <!-- Option to re-jailbreak for testing failing loop -->
+                        <button class="mt-6 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-full transition-all" onclick="resetJailbreakState()">
+                            Сбросить статус Джейлбрейка
+                        </button>
+                    </div>
+                `;
+            } else {
+                details.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-syringe syringe-icon mr-2"></i> cyan1de Jailbreak Injection</h3>
+                    <p class="text-xs text-red-400">Статус: Требуется Jailbreak (Медиатека заблокирована)</p>
+                    
+                    <div class="settings-card">
+                        <div class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Для обхода ограничений DRM и активации скрытой Медиатеки Егора, нажмите кнопку ниже для инъекции кастомного ядра:
+                        </div>
+                        
+                        <button class="w-full py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2" onclick="runCyanideExploit()">
+                            <i class="fas fa-syringe"></i> Выполнить Jailbreak (cyan1de)
+                        </button>
+
+                        <div class="dev-console-box" id="dev-console">
+                            [+] Waiting for user exploit command...
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Snappy Jailbreak injection runner (always successful, 1.5s total duration)
+        function runCyanideExploit() {
+            playSnd(soundClick);
+            const consoleEl = document.getElementById('dev-console');
+            consoleEl.innerHTML = "[+] Exploitation started...";
+            
+            const logs = [
+                "[+] Checking kernel base offset...",
+                "[+] Kernel found at 0xffffff800e004000",
+                "[+] Injecting boot.dll memory payload...",
+                "[+] Sandboxes bypassed. Patching kernel restrictions...",
+                "[+] Elevating privileges to system root...",
+                "[+] Injecting custom filesystem patches...",
+                "[+] Integrity checks PASSED. Jailbreak complete!"
+            ];
+
+            let idx = 0;
+            const logInterval = setInterval(() => {
+                if (idx < logs.length) {
+                    consoleEl.innerHTML += `<br>${logs[idx]}`;
+                    consoleEl.scrollTop = consoleEl.scrollHeight;
+                    idx++;
+                } else {
+                    clearInterval(logInterval);
+                    
+                    isJailbroken = true;
+                    localStorage.setItem('om_tv_jailbroken', 'true');
+                    
+                    showTvAlert("Jailbreak Успешен!", "Все ограничения DRM сняты. Медиатека разблокирована!");
+                    updateMediaLockBadge();
+                    renderJailbreakPanel();
+                    
+                    if (window.syncAccountData) window.syncAccountData();
+                }
+            }, 200); // 200ms per step
+        }
+
+        function resetJailbreakState() {
+            playSnd(soundClick);
+            isJailbroken = false;
+            isPasscodeUnlocked = false;
+            localStorage.setItem('om_tv_jailbroken', 'false');
+            localStorage.setItem('om_tv_passcode_unlocked', 'false');
+            showTvAlert("Сброс системы", "Статус джейлбрейка очищен. Медиатека снова заблокирована.");
+            updateMediaLockBadge();
+            renderJailbreakPanel();
+            
+            if (window.syncAccountData) window.syncAccountData();
+        }
+
+        // --- HELP & GUIDELINES INTERACTION HANDLERS ---
+        function openHelpModal() {
+            playSnd(soundClick);
+            const overlay = document.getElementById('help-modal-overlay');
+            if (overlay) {
+                overlay.classList.add('active');
+            }
+            // Hide bottom-right notification while modal is active
+            const notif = document.getElementById('help-notification-container');
+            if (notif) {
+                notif.classList.remove('show');
+            }
+        }
+
+        function closeHelpModal() {
+            playSnd(soundClick);
+            const overlay = document.getElementById('help-modal-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+
+            // Persistence storage for this session if checked
+            const checkbox = document.getElementById('dont-show-help-session');
+            const notif = document.getElementById('help-notification-container');
+            if (checkbox && checkbox.checked) {
+                sessionStorage.setItem('om_tv_hide_help', 'true');
+                if (notif) {
+                    notif.classList.remove('show');
+                }
+            } else {
+                // Show back on the home screen if not explicitly hidden for the session
+                if (notif) {
+                    setTimeout(() => {
+                        notif.classList.add('show');
+                    }, 300);
+                }
+            }
+        }
+
+        function toggleHelpAccordion(headerEl) {
+            playSnd(soundClick);
+            const item = headerEl.parentElement;
+            if (item) {
+                const isActive = item.classList.contains('active');
+                
+                // Toggle active class
+                if (isActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
+                }
+            }
+        }
+
+    </script>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
