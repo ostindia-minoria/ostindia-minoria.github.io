@@ -2348,9 +2348,7 @@
                 <div class="settings-menu-item" id="set-network" onclick="selectSettingTab('network')">
                     <i class="fas fa-wifi w-6"></i> Сеть
                 </div>
-                <div class="settings-menu-item" id="set-account" onclick="selectSettingTab('account')">
-                    <i class="fas fa-circle-user w-6"></i> Аккаунт сайта
-                </div>
+
                 <div class="settings-menu-item" id="set-cyanide" onclick="selectSettingTab('cyanide')" style="color: var(--cyanide-color);">
                     <i class="fas fa-syringe syringe-icon w-6"></i> cyan1de Jailbreak
                 </div>
@@ -2362,47 +2360,7 @@
         </div>
     </div>
 
-    <!-- TELEGRAM AUTH MODAL -->
-    <div id="auth-modal-overlay" class="auth-modal-overlay" style="display: none;">
-        <div class="auth-modal-box">
-            <!-- Modal Header -->
-            <div class="app-header z-10 !p-0 !bg-transparent !border-0 mb-4 flex justify-between items-center">
-                <div class="app-title !text-lg !font-bold flex items-center gap-2 text-white">
-                    <i class="fab fa-telegram text-sky-400"></i> Единый аккаунт сайта
-                </div>
-                <button class="app-menu-btn" onclick="closeAuthModal()">✕</button>
-            </div>
 
-            <!-- Content Area -->
-            <div class="z-10 flex flex-col gap-4 text-slate-300 text-sm leading-relaxed" id="auth-modal-content">
-                <!-- Will be rendered dynamically based on login state -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ACCOUNT STATUS / GUEST SCREEN (Restores visual question mark) -->
-    <div id="account-status-screen" class="auth-modal-overlay" style="background: #040407;">
-        <div style="cursor: not-allowed; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
-            <div id="status-icon-wrapper" style="margin-bottom: 25px;" class="hover-scale">
-                <svg width="120" height="120" viewBox="0 0 100 100" class="mac-flash-icon">
-                    <circle cx="50" cy="38" r="18" fill="#555555" />
-                    <path d="M25,78 C25,60 35,56 50,56 C65,56 75,60 75,78 C75,82 75,82 75,82 H25 C25,82 25,82 25,82 Z" fill="#555555" />
-                </svg>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2 tracking-wide uppercase font-sans">Единый аккаунт O-W-M</h4>
-            <p class="text-xs text-slate-400 max-w-sm leading-relaxed mb-6 font-sans">
-                Единый аккаунт сайта не подключен. Локальные сохранения не зарезервированы. Нажмите на иконку аккаунта, чтобы войти в аккаунт проекта через Telegram и включить синхронизацию сохранений.
-            </p>
-            <span class="relative px-5 py-2.5 bg-slate-800 text-white rounded-full text-xs font-bold transition-all shadow-md font-sans pointer-events-none cursor-not-allowed">
-                Войти в аккаунт
-                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                    </svg>
-                </div>
-            </span>
-        </div>
-    </div>
 
     <!-- CORE LOGIC JS -->
     <script>
@@ -3620,59 +3578,7 @@
                         </div>
                     </div>
                 `;
-            } else if (tab === 'account') {
-                const userStr = localStorage.getItem('om_user_profile');
-                if (userStr) {
-                    const user = JSON.parse(userStr);
-                    const name = user.first_name || user.username || "Пользователь";
-                    const usernameText = user.username ? `@${user.username}` : `ID: ${user.id}`;
-                    
-                    details.innerHTML = `
-                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-circle-user text-slate-400 mr-2"></i> Аккаунт проекта</h3>
-                        <p class="text-xs text-slate-400 mb-6">Профиль единого аккаунта сайта</p>
-                        
-                        <div class="settings-card">
-                            <div class="flex items-center gap-4 mb-4 pb-4 border-b border-white/5">
-                                <div class="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center text-lg font-bold text-white uppercase font-mono">
-                                    ${name.charAt(0)}
-                                </div>
-                                <div>
-                                    <div class="text-sm font-semibold text-white font-sans">${name}</div>
-                                    <div class="text-xs text-sky-400 font-mono">${usernameText}</div>
-                                </div>
-                            </div>
-                            <div class="flex justify-between py-1.5 text-sm border-b border-white/5 font-sans">
-                                <span class="text-gray-400">Статус сессии</span>
-                                <span class="text-green-400 font-semibold">Активна</span>
-                            </div>
-                            <div class="flex justify-between py-1.5 text-sm font-sans">
-                                <span class="text-gray-400">Синхронизация сохранений</span>
-                                <span class="text-green-400 font-semibold"><i class="fas fa-circle-check"></i> Включена</span>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    details.innerHTML = `
-                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-circle-user text-slate-400 mr-2"></i> Аккаунт проекта</h3>
-                        <p class="text-xs text-slate-400 mb-6">Профиль единого аккаунта сайта</p>
-                        
-                        <div class="settings-card text-center py-6 font-sans">
-                            <i class="fas fa-circle-question text-5xl text-slate-500 mb-3"></i>
-                            <h4 class="text-sm font-bold text-white mb-2">Гостевой сеанс</h4>
-                            <p class="text-xs text-slate-400 mb-4 max-w-xs mx-auto">
-                                Сохранения работают только локально. Авторизуйтесь, чтобы включить облачную синхронизацию прогресса.
-                            </p>
-                            <button class="relative px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-full transition-all pointer-events-none cursor-not-allowed">
-                                Подключить аккаунт
-                                <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
-                    `;
-                }
+
             } else if (tab === 'diagnostic') {
                 details.innerHTML = `
                     <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-heart-pulse text-slate-400 mr-2"></i> Диагностика системы</h3>
@@ -3847,6 +3753,5 @@
         }
 
     </script>
-    <script src="assets/js/auth.js"></script>
 </body>
 </html>

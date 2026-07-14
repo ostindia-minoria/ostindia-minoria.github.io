@@ -382,11 +382,6 @@
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
             transform: translateY(-1px);
         }
-        @media (max-width: 768px) {
-            #headerProfileBlock, #mobileHeaderProfileBlock {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 <body class="dark">
@@ -412,18 +407,6 @@
                     <a href="https://telegram.me/mmaydesk" target="_blank" class="hidden md:block px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition">
                         Связь с создателем
                     </a>
-                    <!-- Telegram Profile Widget -->
-                    <div class="relative">
-                        <div id="headerProfileBlock" onclick="openAuthModal()" class="relative hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
-                            <i class="fab fa-telegram text-sky-400 text-lg"></i>
-                            <span class="text-xs text-white font-semibold font-sans">Войти</span>
-                            <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- Mobile menu button -->
@@ -443,16 +426,6 @@
                     <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition text-center">
                         Связь с создателем
                     </a>
-                    <!-- Telegram Mobile Profile Widget -->
-                    <div id="mobileHeaderProfileBlock" onclick="openAuthModal()" class="hidden relative flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded hover:bg-white/10 transition pointer-events-none cursor-not-allowed">
-                        <i class="fab fa-telegram text-sky-400 text-lg"></i>
-                        <span class="text-xs text-white font-medium font-sans">Войти</span>
-                        <div class="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/50 backdrop-blur-[3px] rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.5)]">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                            </svg>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -523,32 +496,6 @@
                     </div>
                 </div>
 
-                <!-- Telegram Account CTA Block -->
-                <div id="indexAccountCtaBlock" class="mt-16 max-w-xl mx-auto hover-scale">
-                    <div class="relative overflow-hidden flex flex-col items-center text-center p-8 bg-[#0f1015] border-2 border-[#272a37] rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gray-900/60 backdrop-blur-md rounded-3xl">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                            </svg>
-                            <span class="font-mono tracking-widest uppercase font-bold mt-3 text-cyan-400">Coming Soon...</span>
-                        </div>
-                        <div class="w-20 h-20 bg-slate-800/40 rounded-full flex items-center justify-center border border-slate-700/60 shadow-inner mb-6 hover:scale-105 transition-transform duration-300">
-                            <svg width="48" height="48" viewBox="0 0 100 100" class="mac-flash-icon">
-                                <circle cx="50" cy="38" r="18" fill="#38bdf8" fill-opacity="0.8"/>
-                                <path d="M25,78 C25,60 35,56 50,56 C65,56 75,60 75,78 C75,82 75,82 75,82 H25 C25,82 25,82 25,82 Z" fill="#38bdf8" fill-opacity="0.8"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white druk-font tracking-wide">Единый аккаунт O-W-M</h3>
-                        <p class="text-sm text-slate-400 mb-6 leading-relaxed max-w-md font-sans">
-                            Единый аккаунт проекта O-W-M связывает все разделы сайта. Он автоматически резервирует и синхронизирует ваши настройки профиля, плейлисты, а также игровой прогресс приставки Ocean TV в облачном хранилище.
-                        </p>
-                        <button onclick="openAuthModal()" class="flex items-center gap-3 px-6 py-3 bg-[#1e293b] border border-slate-700 hover:border-sky-400 hover:bg-slate-800 text-white font-semibold rounded-xl text-sm transition-all duration-300 pointer-events-none cursor-not-allowed shadow-md group font-sans">
-                            <i class="fab fa-telegram text-sky-400 text-lg group-hover:scale-110 transition-transform"></i>
-                            <span>Войти в аккаунт</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- Featured Content -->
@@ -939,7 +886,5 @@
         }
     </script>
 
-    <!-- ПОДКЛЮЧЕНИЕ ЕДИНОГО МОДУЛЯ АВТОРИЗАЦИИ И СИНХРОНИЗАЦИИ -->
-    <script src="assets/js/auth.js"></script>
 </body>
 </html>
