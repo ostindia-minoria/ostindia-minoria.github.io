@@ -982,64 +982,20 @@
                         </div>
                     </div>
 
-                    <!-- Администрация профессиональных хойщиков -->
-                    <div class="chat-subsection">
-                        <h3 class="subsection-title">Администрация Профессиональных хойщиков</h3>
-                        <p class="text-gray-400 text-center mb-8 max-w-3xl mx-auto">Профессиональные хойщики управляли чатом до перерождения Вест-Индии.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                            <div class="admin-card">
-                                <h4 class="font-bold text-white text-lg">Окт</h4>
-                                <p class="text-gray-400 text-sm">Уважаемый среди олдов.</p>
-                            </div>
-                            <div class="admin-card">
-                                <h4 class="font-bold text-white text-lg">Николай</h4>
-                                <p class="text-gray-400 text-sm">Украинский нацист.</p>
-                            </div>
-                            <div class="admin-card">
-                                <h4 class="font-bold text-white text-lg">Гвардеец</h4>
-                                <p class="text-gray-400 text-sm">Владелец чата.</p>
-                            </div>
-                            <div class="admin-card">
-                                <h4 class="font-bold text-white text-lg">Кар Кар</h4>
-                                <p class="text-gray-400 text-sm">Бывший владелец чата.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Основная история -->
-                    <div class="flex flex-col xl:flex-row items-start justify-between gap-12 mt-10">
-                        <div class="w-full xl:w-2/3">
-                            <h3 class="text-2xl font-bold text-white mb-6 border-b border-purple-500/30 pb-2">Основная история</h3>
-                            <div class="relative pl-10 mb-8">
-                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
-                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Раннее время</h3>
-                                <p class="text-gray-300">Первые ост-индийцы стали заходить в чат в конце августа — начале сентября 2025, а массовое переселение продолжалось всю осень. Чат стал Вест-Индией 13 ноября 2025; всю осень он находился под старым названием, хотя большинство людей в чате было из Ост-Индии.</p>
-                            </div>
-                            <div class="relative pl-10 mb-8">
-                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
-                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Передача владельца Сотарку</h3>
-                                <p class="text-gray-300">С каждым днём олды чата вместе с Окт активили всё меньше, и в итоге ушли в свой чат или ассимилировались и стали Ост-Индийцами. Окт решил уйти с поста владельца и перестать управлять чатом, и получил 5 ранг за заслуги в развитии чата.</p>
-                            </div>
-                            <div class="relative pl-10 mb-8">
-                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
-                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Чат Джона</h3>
-                                <p class="text-gray-300">В начале января 2026 чат Джона Смита стал не просто чатом к его каналу, а важным и популярным местом в ост-индийском комьюнити. Он был доступен только небольшому числу людей и фактически стал заменой чату мода на Минорию. В нём зарождались все популярные на тот момент мемы и дискуссии.</p>
-                            </div>
-                        </div>
-                        <div class="w-full xl:w-1/3">
-                            <img src="assets/images/west_india.jpg" alt="West-India Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
-                        </div>
-                    </div>
-
-                    <!-- Новейшая история -->
-                    <div id="latest-history-section" class="chat-subsection mt-12">
+                    <!-- Администрация профессиональных хойщиков                    <!-- Новейшая история -->
+                    <div id="latest-history-section" class="mt-12 space-y-12">
                         <h3 class="subsection-title">Новейшая история</h3>
 
                         <!-- Этап 1: Ла Корона и Лерийский союз -->
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
                             <!-- Ветка: Ла Корона -->
                             <div class="space-y-6">
-                                <img src="assets/images/la_corona_update.png" alt="Ла Корона" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover">
+                                <div class="relative group w-full overflow-hidden rounded-xl">
+                                    <img src="assets/images/la_corona_update.png" alt="Ла Корона" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                    <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                        <i class="fas fa-expand text-xs"></i>
+                                    </button>
+                                </div>
                                 <h4 class="text-xl font-bold text-yellow-400 text-center">Ла Корона</h4>
                                 <div class="relative pl-10">
                                     <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
@@ -1065,7 +1021,12 @@
 
                             <!-- Ветка: Лерийский союз -->
                             <div class="space-y-6">
-                                <img src="assets/images/lera_union.png" alt="Лерийский союз" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover">
+                                <div class="relative group w-full overflow-hidden rounded-xl">
+                                    <img src="assets/images/lera_union.png" alt="Лерийский союз" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                    <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                        <i class="fas fa-expand text-xs"></i>
+                                    </button>
+                                </div>
                                 <h4 class="text-xl font-bold text-purple-300 text-center">Лерийский союз</h4>
                                 <div class="relative pl-10">
                                     <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
@@ -1081,7 +1042,7 @@
                         </div>
 
                         <!-- Черта-разделитель -->
-                        <div class="mt-12 pt-8 border-t border-purple-500/20"></div>
+                        <div class="pt-8 border-t border-purple-500/20"></div>
 
                         <!-- Этап 2: Исламская Революция и Вест-Индийская весна -->
                         <div class="max-w-4xl mx-auto space-y-6">
@@ -1111,13 +1072,18 @@
                         </div>
 
                         <!-- Черта-разделитель -->
-                        <div class="mt-12 pt-8 border-t border-purple-500/20"></div>
+                        <div class="pt-8 border-t border-purple-500/20"></div>
 
                         <!-- Этап 3: Тапок и Светская Революция -->
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
                             <!-- Ветка: Интервенция в чат Тапка -->
                             <div class="space-y-6">
-                                <img src="assets/images/tapok_1.jpg" alt="Интервенция в чат Тапка" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover">
+                                <div class="relative group w-full overflow-hidden rounded-xl">
+                                    <img src="assets/images/tapok_1.jpg" alt="Интервенция в чат Тапка" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                    <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                        <i class="fas fa-expand text-xs"></i>
+                                    </button>
+                                </div>
                                 <h4 class="text-xl font-bold text-sky-400 text-center">Интервенция в чат Тапка</h4>
                                 <div class="relative pl-10">
                                     <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
@@ -1130,18 +1096,189 @@
                                     <p class="text-gray-300 text-sm leading-relaxed">Благодаря вмешательству Вест-Индии новое руководство чата Тапка удалось защитить от сноса, и те смогли консолидировать свою власть. Затем между Вест-Индией и новым руководством было подписано соглашение о дружбе и сотрудничестве. В текущий момент медиа-империя Тапка переживает кризис и спад, раздираемая внутренними распрями и личной слабостью Тапка как лидера — тот пытался даже продать свой канал.</p>
                                 </div>
                                 <div class="pt-2">
-                                    <img src="assets/images/tapok_2.jpg" alt="Статус конфликта" class="vintage-img w-full max-w-full sm:max-w-xs md:max-w-sm h-auto rounded-xl shadow-2xl object-cover mx-auto block overflow-hidden">
+                                    <div class="relative group max-w-full sm:max-w-xs md:max-w-sm mx-auto overflow-hidden rounded-xl">
+                                        <img src="assets/images/tapok_2.jpg" alt="Статус конфликта" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover block cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                        <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                            <i class="fas fa-expand text-xs"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Ветка: Светская Революция -->
                             <div class="space-y-6">
-                                <img src="assets/images/secular_revolution.jpg" alt="Светская Революция" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover">
+                                <div class="relative group w-full overflow-hidden rounded-xl">
+                                    <img src="assets/images/secular_revolution.jpg" alt="Светская Революция" class="vintage-img w-full h-48 sm:h-56 md:h-64 rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                    <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                        <i class="fas fa-expand text-xs"></i>
+                                    </button>
+                                </div>
                                 <h4 class="text-xl font-bold text-purple-300 text-center">Вест-Индийская Светская Революция и окончание Джихада</h4>
                                 <div class="relative pl-10">
                                     <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
                                     <h3 class="text-lg font-semibold text-purple-300 mb-2">Предпосылки <span class="text-xs text-gray-400 font-normal">(4–29 июля 2026)</span></h3>
                                     <p class="text-gray-300 text-sm leading-relaxed">Июль 2026 года ознаменовал для Вест-Индии стагнацию, вопреки всем более ранним оптимистичным прогнозам на лето. Постоянные конфликты, операции и интервенции сильно утомили участников и подкосили глобальный статус Вест-Индии, что привело к спаду актива, исходу старых участников и провалу поставленных планов. Политика стремительной исламизации утратила какую-либо поддержку и стала проклятием, что чуть не ввергло Вест-Индию в коллапс.</p>
+                                </div>
+                                <div class="relative pl-10">
+                                    <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
+                                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Начало массовых протестов <span class="text-xs text-gray-400 font-normal">(29–31 июля 2026)</span></h3>
+                                    <p class="text-gray-300 text-sm leading-relaxed">Кульминация событий настала в ночь с 29 на 30 июля, когда админ Игиловец (Абу-ль-Хайр) выдал варны и забанил нового участника по религиозным причинам. За новичка заступилась часть администрации в виде Подвала и Алексея Смесители, что вылилось в полномасштабную конфронтацию админов и последовавшие за ней массовые протесты участников. Открылись все язвы, что образовывались в организме Имарата, и тот оказался на грани коллапса.</p>
+                                </div>
+                                <div class="relative pl-10">
+                                    <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
+                                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Окончание конфликта и перестройка <span class="text-xs text-gray-400 font-normal">(1–3 августа 2026)</span></h3>
+                                    <p class="text-gray-300 text-sm leading-relaxed">После длительной серии переговоров админов и владельца Сотарка всеобъемлющий конфликт был улажен и начата программа реформации и перестройки. Вест-Индия в срочном порядке свернула все интервенции и спецоперации в других чатах, и Сотарк объявил об упразднении Всемирного Халифата 1 августа 2026 года. Были отменены все религиозные титулы, сменена символика и оформление чата, канала и сообщества. В тот же день состоялся дебют Сотарка как HoI-ютубера, после которого была сформирована новая администрация и реставрировано Народное Государство со стандартизированным и ясным свовод правил.</p>
+                                </div>
+                                <div class="pt-2">
+                                    <div class="relative group max-w-full sm:max-w-xs md:max-w-sm mx-auto overflow-hidden rounded-xl">
+                                        <img src="assets/images/jihadi_sotark.jpg" alt="Джихади Сотарк" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover block cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                        <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                            <i class="fas fa-expand text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wes-India Admins Subsection -->
+                    <div class="chat-subsection">
+                        <h3 class="subsection-title">Администрация Вест-Индии</h3>
+                        <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Состав реформированной администрации и распределение комиссарских должностей:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Сотарк</h4>
+                                <p class="text-gray-400 text-sm">Владелец чата и телеграм-канала Вест-Индии, бывший главадмин Ост-Индии и чата Беброва, начинающий ютубер.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Бочонок Бисмарка</h4>
+                                <p class="text-gray-400 text-sm">Ведущий модератор телеграм-канала и правая рука Сотарка, Главный Комиссар.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Austriakkk</h4>
+                                <p class="text-gray-400 text-sm">Комиссар специальных дел, левая рука Сотарка.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Кайзер</h4>
+                                <p class="text-gray-400 text-sm">Комиссар внутренних дел, админ за особые заслуги.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Не Лама</h4>
+                                <p class="text-gray-400 text-sm">Комиссар внешних дел, герой множества операций в Ла-Короне и Минории.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Подвал</h4>
+                                <p class="text-gray-400 text-sm">Комиссар газа и завоза (развлечений). Админ, потому что мечтал об этом с детства.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Maydesk</h4>
+                                <p class="text-gray-400 text-sm">Комиссар технологий, автор этого сайта и разработчик AeroTunVPN.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Алексей Смесители</h4>
+                                <p class="text-gray-400 text-sm">Комиссар творчества, автор множества прекрасных работ, публикуемых в телеграм-канале.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Еврей</h4>
+                                <p class="text-gray-400 text-sm">Зам. Комиссара развлечений, владелец дискорд-сервера Вест-Индии и герой чистки 31 декабря.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Еврей Zетник</h4>
+                                <p class="text-gray-400 text-sm">Комиссар финансов, пожертвовал Вест-Индии суммарно более 60 бустов на канал и чат, подарил множеству людей Telegram Premium.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Faith_Ridy и xd_carcar</h4>
+                                <p class="text-gray-400 text-sm">Замы Комиссара творчества, авторы нескольких артов, множества мемов и пары видеороликов в телеграм-канале.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Партнёры Вест-Индии Subsection -->
+                    <div class="chat-subsection mt-16 pt-8 border-t border-purple-500/20">
+                        <h3 class="subsection-title">Партнёры Вест-Индии</h3>
+                        <p class="text-gray-400 text-center mb-10 max-w-3xl mx-auto">Сообщества и союзники не из O-W-M, внесшие свой значимый вклад в историю и медиа-сферу Вест-Индии:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            
+                            <!-- SARA -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-purple-950/40 border border-purple-500/20 hover:border-purple-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-bullhorn text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">SARA</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Главный админ телеграм-канала «Дноградач», постоянно репостит важные посты Вест-Индии, согласовал партнёрскую программу, является близким другом Сотарка.
+                                </p>
+                            </div>
+
+                            <!-- Акио Судзуки -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-code text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Акио Судзуки</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Разработчик сабмода на TFR, посвящённого Центральной Азии «The Great Steppe Rises». Давний партнёр Вест-Индии, имел две взаимных рекламы с ней и заключал партнёрку.
+                                </p>
+                            </div>
+
+                            <!-- Валькес -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-amber-950/40 border border-amber-500/20 hover:border-amber-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-fire text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Валькес (Павел Няхно)</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Владелец телеграм-канала «Срачи.com». Бывший Ост-Индиец, ныне близкий партнёр Вест-Индии. Имел три взаимных рекламы с ней и разделяет много общих участников.
+                                </p>
+                            </div>
+
+                            <!-- Токи, Кац, Deylor -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-sky-950/40 border border-sky-500/20 hover:border-sky-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-users-cog text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Токи, Кац и Deylor</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Троица участников и админов телеграм-канала и чата «Альт-База» — сообщества, восставшего против ютубера Ожидание, куда перешла большая часть его администрации. Несмотря на отсутствие официальной партнёрки, поддерживают с Вест-Индией тесные межличностные связи и регулярно её репостят.
+                                </p>
+                            </div>
+
+                            <!-- Агерез и Василевский -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-pink-950/40 border border-pink-500/20 hover:border-pink-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-laugh-squint text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Агерез и Василевский</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Админы телеграм-канала и чата «Прах ктотакопса» — мемной щитпостни, где состоят преимущественно старые Ост-Индийцы и Минорцы. Имели взаимную рекламу и входят в сообщество Вест-Индии.
+                                </p>
+                            </div>
+
+                            <!-- Volgin -->
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-blue-950/40 border border-blue-500/20 hover:border-blue-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform shrink-0">
+                                        <i class="fas fa-fish text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Volgin</h4>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Основатель и владелец телеграм-канала «Виды рыб». Регулярно репостится в Вест-Индии, являлся ранее партнёром по папке каналов, а также имел много взаимной рекламы с Вест-Индией. Уважаемый чаттерами человек.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>я Вест-Индии стагнацию, вопреки всем более ранним оптимистичным прогнозам на лето. Постоянные конфликты, операции и интервенции сильно утомили участников и подкосили глобальный статус Вест-Индии, что привело к спаду актива, исходу старых участников и провалу поставленных планов. Политика стремительной исламизации утратила какую-либо поддержку и стала проклятием, что чуть не ввергло Вест-Индию в коллапс.</p>
                                 </div>
                                 <div class="relative pl-10">
                                     <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
@@ -1859,6 +1996,45 @@
                 window.location.href = 'tv.html';
             });
         }
+    </script>
+
+    <!-- Fullscreen Image Viewer Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[200] bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex flex-col items-center justify-center p-4 md:p-8" onclick="if(event.target===this) closeImageModal();">
+        <button onclick="closeImageModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-full bg-gray-900/80 border border-white/20 text-white hover:bg-red-600 transition flex items-center justify-center text-xl shadow-2xl z-20 cursor-pointer" title="Закрыть (Esc)">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="relative max-w-5xl max-h-[85vh] flex flex-col items-center justify-center">
+            <img id="modalImageSrc" src="" alt="Full view" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl border border-purple-500/30 scale-95 transition-transform duration-300">
+            <p id="modalImageCaption" class="mt-4 text-center text-gray-200 font-semibold text-sm md:text-base bg-gray-900/90 border border-purple-500/30 px-6 py-2 rounded-full shadow-xl backdrop-blur-md max-w-xl"></p>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImageSrc');
+            const cap = document.getElementById('modalImageCaption');
+            img.src = src;
+            cap.textContent = caption || '';
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            setTimeout(() => { img.classList.remove('scale-95'); img.classList.add('scale-100'); }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImageSrc');
+            img.classList.remove('scale-100');
+            img.classList.add('scale-95');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeImageModal();
+        });
     </script>
 </body>
 </html>
