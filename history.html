@@ -755,14 +755,20 @@
 
     <!-- Header Navigation -->
     <header>
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-white font-bold text-xl hover:text-purple-400 transition duration-300" style="white-space: nowrap;">Project O-W-M</a>
-            <div class="flex items-center gap-6">
-                <nav class="flex space-x-4 sm:space-x-10 flex-shrink-0">
-                    <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Главная</a>
-                    <a href="history.html" class="active-link transition duration-300">История</a>
-                    <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
-                </nav>
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
+            <div class="w-48 shrink-0 hidden md:block">
+                <a href="index.html" class="text-white font-bold text-xl hover:text-purple-400 transition duration-300" style="white-space: nowrap;">Project O-W-M</a>
+            </div>
+            <a href="index.html" class="text-white font-bold text-xl hover:text-purple-400 transition duration-300 md:hidden" style="white-space: nowrap;">Project O-W-M</a>
+            <nav class="hidden md:flex space-x-10 flex-1 justify-center">
+                <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Главная</a>
+                <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
+                <a href="history.html" class="active-link transition duration-300">История</a>
+            </nav>
+            <div class="w-48 shrink-0 hidden md:flex justify-end">
+                <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-transparent border border-white/40 text-white rounded-lg hover:bg-white hover:text-black transition text-sm">
+                    Связь с создателем
+                </a>
             </div>
         </div>
     </header>

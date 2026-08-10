@@ -404,14 +404,19 @@
     <header class="py-4">
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-white">Project O-W-M</a>
-                <div class="flex items-center gap-6">
-                    <nav class="hidden md:flex space-x-8">
-                        <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
-                        <a href="radio.html" class="active-link">Радио</a>
-                        <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
-                    </nav>
-
+                <div class="w-48 shrink-0 hidden md:block">
+                    <a href="index.html" class="text-2xl font-bold text-white">Project O-W-M</a>
+                </div>
+                <a href="index.html" class="text-2xl font-bold text-white md:hidden">Project O-W-M</a>
+                <nav class="hidden md:flex space-x-8 flex-1 justify-center">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
+                    <a href="radio.html" class="active-link">Радио</a>
+                    <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
+                </nav>
+                <div class="w-48 shrink-0 hidden md:flex justify-end">
+                    <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-transparent border border-white/40 text-white rounded hover:bg-white hover:text-black transition text-sm">
+                        Связь с создателем
+                    </a>
                 </div>
                 <button id="mobileMenuButton" class="md:hidden text-white text-2xl focus:outline-none">
                     <i class="fas fa-bars"></i>

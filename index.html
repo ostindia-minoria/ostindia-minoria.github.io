@@ -388,24 +388,28 @@
     <!-- Header -->
     <header class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-sm">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
+            <div class="flex justify-between items-center relative">
+                <!-- Left Logo -->
+                <div class="hidden md:flex items-center w-48 shrink-0">
+                    <a href="index.html" class="text-white font-bold text-xl hover:text-gray-300 transition">Project O-W-M</a>
+                </div>
+
+                <!-- Center Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 justify-center flex-1">
                     <a href="index.html" class="nav-link text-white hover:text-gray-300 transition">Главная</a>
                     <a href="radio.html" class="nav-link text-white hover:text-gray-300 transition">Радио</a>
                     <a href="history.html" class="nav-link text-white hover:text-gray-300 transition">История</a>
                 </nav>
                 
-                <!-- Header Actions Container -->
-                <div class="flex items-center gap-4">
-                    <!-- Contact button -->
-                    <a href="https://telegram.me/mmaydesk" target="_blank" class="hidden md:block px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition">
+                <!-- Right Action Button -->
+                <div class="hidden md:flex items-center justify-end w-48 shrink-0">
+                    <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-transparent border border-white text-white rounded hover:bg-white hover:text-black transition text-sm">
                         Связь с создателем
                     </a>
                 </div>
                 
                 <!-- Mobile menu button -->
-                <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none">
+                <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none ml-auto">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
