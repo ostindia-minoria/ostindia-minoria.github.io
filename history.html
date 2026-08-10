@@ -812,8 +812,14 @@
                                 <p class="text-gray-300">23 сентября 2025 Сотарка банят в Ост Индии из-за того, что он помог Кайзеру сделать чистку. Он уходит в профессиональные хойщики, где становится президентом и получает 5 ранг. Спустя недолгое время Сотарку передают овнерку уже в Вест Индию. 6 января 2026 Маратий написал Сотарку с предложением мира и возвращения в чат. Через несколько дней переговоров Данило вернулся на правах заслуженного гражданина.</p>
                             </div>
                         </div>
-                        <div class="w-full xl:w-1/3">
-                            <img src="assets/images/ostindia.png" alt="Ost-India Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+                        <div class="w-full xl:w-1/3 space-y-2">
+                            <div class="relative group w-full overflow-hidden rounded-xl">
+                                <img src="assets/images/ostindia.png" alt="Чат Ост-Индии" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                    <i class="fas fa-expand text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-400 text-center font-medium">Иллюстрация: Чат Ост-Индии</p>
                         </div>
                     </div>
 
@@ -932,8 +938,14 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="w-full xl:w-1/3">
-                            <img src="assets/images/minoria.png" alt="Minoria Chat" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+                        <div class="w-full xl:w-1/3 space-y-2">
+                            <div class="relative group w-full overflow-hidden rounded-xl">
+                                <img src="assets/images/minoria.png" alt="Чат Минории" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                    <i class="fas fa-expand text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-400 text-center font-medium">Иллюстрация: Чат Минории</p>
                         </div>
                     </div>
 
@@ -977,12 +989,71 @@
                                 <p class="text-gray-300">В ходе тех же выборов президента Дуче передал владельца чата Валере Окт, при котором президентом стал Николай. Чат стал превращаться в РП, Николай хотел его реформировать и значительно расширить, но проиграл выборы Генриху, который написал знаменитую РП конституцию.</p>
                             </div>
                         </div>
-                        <div class="w-full xl:w-1/3">
-                            <img src="assets/images/P.png" alt="Профессиональные хойщики" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover">
+                        <div class="w-full xl:w-1/3 space-y-2">
+                            <div class="relative group w-full overflow-hidden rounded-xl">
+                                <img src="assets/images/P.png" alt="Профессиональные хойщики" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                    <i class="fas fa-expand text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-400 text-center font-medium">Иллюстрация: Чат «Профессиональные хойщики»</p>
                         </div>
                     </div>
 
-                    <!-- Администрация профессиональных хойщиков                    <!-- Новейшая история -->
+                    <!-- Администрация профессиональных хойщиков -->
+                    <div class="chat-subsection">
+                        <h3 class="subsection-title">Администрация Профессиональных хойщиков</h3>
+                        <p class="text-gray-400 text-center mb-8 max-w-3xl mx-auto">Профессиональные хойщики управляли чатом до перерождения Вест-Индии.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Окт</h4>
+                                <p class="text-gray-400 text-sm">Уважаемый среди олдов.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Николай</h4>
+                                <p class="text-gray-400 text-sm">Украинский нацист.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Гвардеец</h4>
+                                <p class="text-gray-400 text-sm">Владелец чата.</p>
+                            </div>
+                            <div class="admin-card">
+                                <h4 class="font-bold text-white text-lg">Кар Кар</h4>
+                                <p class="text-gray-400 text-sm">Бывший владелец чата.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Основная история -->
+                    <div class="flex flex-col xl:flex-row items-start justify-between gap-12 mt-10">
+                        <div class="w-full xl:w-2/3">
+                            <h3 class="text-2xl font-bold text-white mb-6 border-b border-purple-500/30 pb-2">Основная история</h3>
+                            <div class="relative pl-10 mb-8">
+                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Раннее время</h3>
+                                <p class="text-gray-300">Первые ост-индийцы стали заходить в чат в конце августа — начале сентября 2025, а массовое переселение продолжалось всю осень. Чат стал Вест-Индией 13 ноября 2025; всю осень он находился под старым названием, хотя большинство людей в чате было из Ост-Индии.</p>
+                            </div>
+                            <div class="relative pl-10 mb-8">
+                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Передача владельца Сотарку</h3>
+                                <p class="text-gray-300">С каждым днём олды чата вместе с Окт активили всё меньше, и в итоге ушли в свой чат или ассимилировались и стали Ост-Индийцами. Окт решил уйти с поста владельца и перестать управлять чатом, и получил 5 ранг за заслуги в развитии чата.</p>
+                            </div>
+                            <div class="relative pl-10 mb-8">
+                                <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
+                                <h3 class="text-xl font-semibold text-purple-300 mb-3">Чат Джона</h3>
+                                <p class="text-gray-300">В начале января 2026 чат Джона Смита стал не просто чатом к его каналу, а важным и популярным местом в ост-индийском комьюнити. Он был доступен только небольшому числу людей и фактически стал заменой чату мода на Минорию. В нём зарождались все популярные на тот момент мемы и дискуссии.</p>
+                            </div>
+                        </div>
+                        <div class="w-full xl:w-1/3 space-y-2">
+                            <div class="relative group w-full overflow-hidden rounded-xl">
+                                <img src="assets/images/west_india.jpg" alt="Вест-Индия" class="vintage-img w-full h-auto rounded-xl shadow-2xl object-cover cursor-pointer" onclick="openImageModal(this.src, this.alt)">
+                                <button onclick="openImageModal(this.previousElementSibling.src, this.previousElementSibling.alt)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 hover:bg-purple-600 border border-white/30 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all duration-200 shadow-lg cursor-pointer z-10" title="Полноэкранный просмотр">
+                                    <i class="fas fa-expand text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-400 text-center font-medium">Иллюстрация: Сообщество Вест-Индии</p>
+                        </div>
+                    </div>
                     <div id="latest-history-section" class="mt-12 space-y-12">
                         <h3 class="subsection-title">Новейшая история</h3>
 
@@ -1277,23 +1348,6 @@
                                 </p>
                             </div>
 
-                        </div>
-                    </div>я Вест-Индии стагнацию, вопреки всем более ранним оптимистичным прогнозам на лето. Постоянные конфликты, операции и интервенции сильно утомили участников и подкосили глобальный статус Вест-Индии, что привело к спаду актива, исходу старых участников и провалу поставленных планов. Политика стремительной исламизации утратила какую-либо поддержку и стала проклятием, что чуть не ввергло Вест-Индию в коллапс.</p>
-                                </div>
-                                <div class="relative pl-10">
-                                    <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
-                                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Начало массовых протестов <span class="text-xs text-gray-400 font-normal">(29–31 июля 2026)</span></h3>
-                                    <p class="text-gray-300 text-sm leading-relaxed">Кульминация событий настала в ночь с 29 на 30 июля, когда админ Игиловец (Абу-ль-Хайр) выдал варны и забанил нового участника по религиозным причинам. За новичка заступилась часть администрации в виде Подвала и Алексея Смесители, что вылилось в полномасштабную конфронтацию админов и последовавшие за ней массовые протесты участников. Открылись все язвы, что образовывались в организме Имарата, и тот оказался на грани коллапса.</p>
-                                </div>
-                                <div class="relative pl-10">
-                                    <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1.5"></div>
-                                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Окончание конфликта и перестройка <span class="text-xs text-gray-400 font-normal">(1–3 августа 2026)</span></h3>
-                                    <p class="text-gray-300 text-sm leading-relaxed">После длительной серии переговоров админов и владельца Сотарка всеобъемлющий конфликт был улажен и начата программа реформации и перестройки. Вест-Индия в срочном порядке свернула все интервенции и спецоперации в других чатах, и Сотарк объявил об упразднении Всемирного Халифата 1 августа 2026 года. Были отменены все религиозные титулы, сменена символика и оформление чата, канала и сообщества. В тот же день состоялся дебют Сотарка как HoI-ютубера, после которого была сформирована новая администрация и реставрировано Народное Государство со стандартизированным и ясным сводом правил.</p>
-                                </div>
-                                <div class="pt-2">
-                                    <img src="assets/images/jihadi_sotark.jpg" alt="Джихади Сотарк" class="vintage-img w-full max-w-full sm:max-w-xs md:max-w-sm h-auto rounded-xl shadow-2xl object-cover mx-auto block overflow-hidden">
-                                </div>
-                            </div>
                         </div>
                     </div>
 
