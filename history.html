@@ -763,10 +763,11 @@
                 </div>
 
                 <!-- Center Desktop Navigation -->
-                <nav class="hidden md:flex space-x-10 flex-1 justify-center">
+                <nav class="hidden md:flex space-x-8 lg:space-x-10 flex-1 justify-center">
                     <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Главная</a>
                     <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
                     <a href="history.html" class="active-link transition duration-300">История</a>
+                    <a href="tv.html" class="text-gray-300 hover:text-white transition duration-300">Ocean TV</a>
                 </nav>
 
                 <!-- Right Action Button -->
@@ -788,6 +789,7 @@
                     <a href="index.html" class="text-gray-300 hover:text-white transition">Главная</a>
                     <a href="radio.html" class="text-gray-300 hover:text-white transition">Радио</a>
                     <a href="history.html" class="active-link transition">История</a>
+                    <a href="tv.html" class="text-gray-300 hover:text-white transition">Ocean TV</a>
                     <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-purple-500/20 border border-purple-500/40 text-purple-300 rounded-lg hover:bg-purple-600 hover:text-white transition text-center text-sm font-medium">
                         Связь с создателем
                     </a>
@@ -1746,78 +1748,106 @@
                         </button>
                     </div>
 
-                    <!-- Презентационный блок "Файлы Егора" -->
-                    <div class="admin-card pc-hero-block-mobile mt-10 mb-8 relative overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]" style="border-color: rgba(234, 179, 8, 0.5); background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(3, 7, 18, 0.98) 100%);">
-                        <!-- Содержимое -->
-                        <div class="p-8 md:p-12">
-                            <div class="flex flex-col md:flex-row items-center gap-10">
-                                <div class="w-full md:w-1/2 text-center md:text-left">
-                                    <h4 class="font-bold text-white text-2xl md:text-4xl mb-3 tracking-tight">Файлы Егора</h4>
-                                    <p class="text-gray-300 text-sm md:text-base mb-6 max-w-md leading-relaxed">Интерактивный медиа-центр Ocean TV: файлы Егора, аудиозаписи, радиоэфир и настройки джейлбрейка.</p>
-                                    <button id="pc-launch-btn" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-yellow-500 text-black text-sm font-semibold hover:bg-yellow-400 transition-colors shadow-lg active:scale-95 focus:outline-none">
-                                        <i class="fas fa-gamepad"></i>
-                                        <span>Взять пульт</span>
-                                    </button>
-                                </div>
-                                <div class="w-full md:w-1/2 flex justify-center">
-                                    <div class="relative w-72 max-w-full h-44 md:w-96 md:h-52 overflow-hidden rounded-3xl bg-gradient-to-br from-[#09152e] via-[#040a17] to-[#02050c] border border-blue-950/80 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.15)] group-hover:scale-[1.03] transition-transform duration-300">
-                                        <!-- White diffuse background light overlay -->
-                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] z-0 pointer-events-none"></div>
-
-                                        <!-- Giant Widescreen TV Mockup matching screensaver outlines exactly -->
-                                        <svg viewBox="190 70 420 260" class="w-full h-full tv-bezel-glow z-10">
-                                            <!-- Monitor Stand Neck -->
-                                            <rect x="385" y="290" width="30" height="20" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
-                                            
-                                            <!-- Monitor Stand Base -->
-                                            <rect x="320" y="310" width="160" height="8" rx="4" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
-                                            
-                                            <!-- Monitor Bezel (White Outline Style) -->
-                                            <rect x="220" y="80" width="360" height="210" rx="10" fill="#07080a" stroke="#ffffff" stroke-width="3" />
-                                            
-                                            <!-- Inner Display Screen using foreignObject -->
-                                            <foreignObject x="232" y="92" width="336" height="186" class="tv-screen-fo">
-                                                <div xmlns="http://www.w3.org/1999/xhtml" class="tv-screen-inner">
-                                                    <!-- Top brand header title -->
-                                                    <div class="tv-screen-header">Ocean TV</div>
-                                                    
-                                                    <!-- Menu with 4 skeleton tiles -->
-                                                    <div class="tv-screen-grid">
-                                                        <div class="tv-screen-tile">
-                                                            <div class="skeleton-line short"></div>
-                                                            <div class="skeleton-line long"></div>
-                                                        </div>
-                                                        <div class="tv-screen-tile">
-                                                            <div class="skeleton-line short"></div>
-                                                            <div class="skeleton-line long"></div>
-                                                        </div>
-                                                        <div class="tv-screen-tile">
-                                                            <div class="skeleton-line short"></div>
-                                                            <div class="skeleton-line long"></div>
-                                                        </div>
-                                                        <div class="tv-screen-tile">
-                                                            <div class="skeleton-line short"></div>
-                                                            <div class="skeleton-line long"></div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <!-- Mock Overlay container (compliance with position: absolute setup) -->
-                                                    <div class="tv-screen-overlay-mock">
-                                                        <div class="skeleton-line short"></div>
-                                                        <div class="skeleton-line long"></div>
-                                                    </div>
-                                                </div>
-                                            </foreignObject>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- OCEAN TV / КОМПЬЮТЕР (ОТДЕЛЬНЫЙ РАЗДЕЛ) -->
+        <!-- ========================================== -->
+        <div id="ocean-tv-standalone" class="slide-up mb-24" style="animation-delay: 0.9s;">
+            <div class="relative overflow-hidden rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-gray-900/95 via-[#080d1e]/90 to-cyan-950/30 p-8 md:p-12 shadow-[0_0_40px_rgba(6,182,212,0.15)] transition-all duration-300 hover:border-cyan-400/60 hover:shadow-[0_0_50px_rgba(6,182,212,0.25)]">
+                <!-- Background decorative ambient lights -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 flex flex-col xl:flex-row items-center justify-between gap-10">
+                    <div class="w-full xl:w-1/2 text-center xl:text-left space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            Виртуальный компьютер и медиа-центр
+                        </div>
+                        <h2 class="druk-font text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                            Ocean TV <span class="text-cyan-400 font-sans text-xl md:text-2xl font-bold tracking-normal block sm:inline sm:ml-2">/ Компьютер</span>
+                        </h2>
+                        <p class="text-gray-300 text-sm md:text-base leading-relaxed max-w-xl">
+                            Автономная виртуальная система и медиа-платформа сообщества: секретные файлы Егора, архивные аудиозаписи, радиоэфир, терминал и скрытые настройки джейлбрейка.
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center justify-center xl:justify-start gap-2 pt-1 pb-2 text-xs text-gray-300">
+                            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">🖥️ Ocean TV OS 5.0.2</span>
+                            <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">🔓 Jailbreak Active</span>
+                            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">📻 Радио & Аудио</span>
+                            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">📁 Файловая система</span>
+                        </div>
+
+                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center xl:justify-start gap-4">
+                            <button id="pc-launch-btn" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-black font-bold text-sm tracking-wide shadow-lg shadow-cyan-500/25 transition-all hover:scale-105 active:scale-95 focus:outline-none cursor-pointer">
+                                <i class="fas fa-gamepad text-base"></i>
+                                <span>Взять пульт / Включить</span>
+                            </button>
+                            <a href="tv.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 text-white font-medium text-sm transition-all hover:scale-105 active:scale-95 text-center">
+                                <span>Прямой вход</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="w-full xl:w-1/2 flex justify-center">
+                        <div class="relative w-80 max-w-full h-48 md:w-[420px] md:h-56 overflow-hidden rounded-3xl bg-gradient-to-br from-[#09152e] via-[#040a17] to-[#02050c] border border-cyan-900/60 flex items-center justify-center shadow-[0_0_35px_rgba(6,182,212,0.2)] group-hover:scale-[1.03] transition-transform duration-300 cursor-pointer" onclick="document.getElementById('pc-launch-btn').click();" title="Кликните для запуска Ocean TV">
+                            <!-- White diffuse background light overlay -->
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.12)_0%,transparent_75%)] z-0 pointer-events-none"></div>
+
+                            <!-- Giant Widescreen TV Mockup matching screensaver outlines exactly -->
+                            <svg viewBox="190 70 420 260" class="w-full h-full tv-bezel-glow z-10">
+                                <!-- Monitor Stand Neck -->
+                                <rect x="385" y="290" width="30" height="20" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
+                                
+                                <!-- Monitor Stand Base -->
+                                <rect x="320" y="310" width="160" height="8" rx="4" fill="#07080a" stroke="#ffffff" stroke-width="2.5" />
+                                
+                                <!-- Monitor Bezel (White Outline Style) -->
+                                <rect x="220" y="80" width="360" height="210" rx="10" fill="#07080a" stroke="#ffffff" stroke-width="3" />
+                                
+                                <!-- Inner Display Screen using foreignObject -->
+                                <foreignObject x="232" y="92" width="336" height="186" class="tv-screen-fo">
+                                    <div xmlns="http://www.w3.org/1999/xhtml" class="tv-screen-inner">
+                                        <!-- Top brand header title -->
+                                        <div class="tv-screen-header">Ocean TV</div>
+                                        
+                                        <!-- Menu with 4 skeleton tiles -->
+                                        <div class="tv-screen-grid">
+                                            <div class="tv-screen-tile">
+                                                <div class="skeleton-line short"></div>
+                                                <div class="skeleton-line long"></div>
+                                            </div>
+                                            <div class="tv-screen-tile">
+                                                <div class="skeleton-line short"></div>
+                                                <div class="skeleton-line long"></div>
+                                            </div>
+                                            <div class="tv-screen-tile">
+                                                <div class="skeleton-line short"></div>
+                                                <div class="skeleton-line long"></div>
+                                            </div>
+                                            <div class="tv-screen-tile">
+                                                <div class="skeleton-line short"></div>
+                                                <div class="skeleton-line long"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Mock Overlay container (compliance with position: absolute setup) -->
+                                        <div class="tv-screen-overlay-mock">
+                                            <div class="skeleton-line short"></div>
+                                            <div class="skeleton-line long"></div>
+                                        </div>
+                                    </div>
+                                </foreignObject>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Evolution Section -->

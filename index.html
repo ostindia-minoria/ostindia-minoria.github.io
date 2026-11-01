@@ -410,10 +410,11 @@
                 </div>
 
                 <!-- Center Desktop Navigation -->
-                <nav class="hidden md:flex space-x-10 flex-1 justify-center">
+                <nav class="hidden md:flex space-x-8 lg:space-x-10 flex-1 justify-center">
                     <a href="index.html" class="active-link transition duration-300">Главная</a>
                     <a href="radio.html" class="text-gray-300 hover:text-white transition duration-300">Радио</a>
                     <a href="history.html" class="text-gray-300 hover:text-white transition duration-300">История</a>
+                    <a href="tv.html" class="text-gray-300 hover:text-white transition duration-300">Ocean TV</a>
                 </nav>
 
                 <!-- Right Action Button -->
@@ -435,6 +436,7 @@
                     <a href="index.html" class="active-link transition">Главная</a>
                     <a href="radio.html" class="text-gray-300 hover:text-white transition">Радио</a>
                     <a href="history.html" class="text-gray-300 hover:text-white transition">История</a>
+                    <a href="tv.html" class="text-gray-300 hover:text-white transition">Ocean TV</a>
                     <a href="https://telegram.me/mmaydesk" target="_blank" class="px-4 py-2 bg-white/10 border border-white/30 text-white rounded-lg hover:bg-white hover:text-black transition text-center text-sm font-medium">
                         Связь с создателем
                     </a>
@@ -461,12 +463,16 @@
                 <p class="text-xl md:text-2xl mb-8 fade-in" style="animation-delay: 0.3s;">
                     На этом сайте вы сможете узнать краткую историю чатов, послушать радио от участников, предожить свои песни и так далее.
                 </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 fade-in" style="animation-delay: 0.6s;">
-                    <a href="radio.html" class="px-8 py-3 bg-white text-black rounded hover:bg-gray-200 transition hover-scale">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 fade-in" style="animation-delay: 0.6s;">
+                    <a href="radio.html" class="w-full sm:w-auto px-8 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition hover-scale text-center">
                         Слушать радио
                     </a>
-                    <a href="history.html" class="px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition hover-scale">
+                    <a href="history.html" class="w-full sm:w-auto px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition hover-scale text-center">
                         Узнать историю
+                    </a>
+                    <a href="tv.html" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-bold rounded transition hover-scale flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 text-center">
+                        <i class="fas fa-tv text-sm"></i>
+                        <span>Ocean TV</span>
                     </a>
                 </div>
             </div>
@@ -482,27 +488,38 @@
                     </p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-gray-900 p-8 rounded-lg hover-scale">
-                        <div class="text-4xl mb-4">📻</div>
-                        <h3 class="druk-font text-xl mb-3">Радио</h3>
-                        <p class="opacity-80">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="radio.html" class="bg-gray-900 p-8 rounded-lg hover-scale block group transition border border-transparent hover:border-blue-500/30">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📻</div>
+                        <h3 class="druk-font text-xl mb-3 text-white group-hover:text-blue-400 transition-colors">Радио</h3>
+                        <p class="opacity-80 text-sm leading-relaxed text-gray-300">
                             Радио от участников чата, вы также можете предложить песню.
                         </p>
-                    </div>
+                    </a>
                     
-                    <div class="bg-gray-900 p-8 rounded-lg hover-scale">
-                        <div class="text-4xl mb-4">📜</div>
-                        <h3 class="druk-font text-xl mb-3">История</h3>
-                        <p class="opacity-80">
-                            История всех чатов.
+                    <a href="history.html" class="bg-gray-900 p-8 rounded-lg hover-scale block group transition border border-transparent hover:border-purple-500/30">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📜</div>
+                        <h3 class="druk-font text-xl mb-3 text-white group-hover:text-purple-400 transition-colors">История</h3>
+                        <p class="opacity-80 text-sm leading-relaxed text-gray-300">
+                            Хроника и подробная история всех чатов сообщества.
                         </p>
-                    </div>
+                    </a>
+
+                    <a href="tv.html" class="bg-gray-900 p-8 rounded-lg hover-scale block group transition border border-cyan-500/30 hover:border-cyan-400/80 hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🖥️</div>
+                        <h3 class="druk-font text-xl mb-3 text-cyan-400 flex items-center gap-2">
+                            <span>Ocean TV</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono font-normal">ПК</span>
+                        </h3>
+                        <p class="opacity-80 text-sm leading-relaxed text-gray-300">
+                            Интерактивный виртуальный компьютер: файлы, секреты, радио и приложения.
+                        </p>
+                    </a>
                     
                     <div class="bg-gray-900 p-8 rounded-lg hover-scale">
                         <div class="text-4xl mb-4">🔍</div>
-                        <h3 class="druk-font text-xl mb-3">Архив</h3>
-                        <p class="opacity-80">
+                        <h3 class="druk-font text-xl mb-3 text-white">Архив</h3>
+                        <p class="opacity-80 text-sm leading-relaxed text-gray-300">
                             Коллекция редких фото, документов, видео из чатов.
                         </p>
                     </div>
