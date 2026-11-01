@@ -346,9 +346,7 @@
             transition: transform 0.4s ease;
         }
         
-        .chat-block:hover .chat-header-img {
-            transform: scale(1.05);
-        }
+        /* .chat-block avatar scale on hover removed to prevent twitching */
 
         .chat-header-content {
             flex-grow: 1;
@@ -640,11 +638,7 @@
 
         /* --- RIGHT BLOCK NEW TV REDESIGN --- */
         .tv-bezel-glow {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.75));
-            transition: filter 0.4s ease;
-        }
-        .tv-bezel-glow:hover {
-            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.95));
+            transition: opacity 0.3s ease;
         }
         .tv-screen-fo {
             overflow: hidden;
@@ -1531,9 +1525,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             
                             <!-- SARA -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-purple-950/40 border border-purple-500/20 hover:border-purple-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-purple-950/40 border border-purple-500/20 hover:border-purple-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400  shrink-0">
                                         <i class="fas fa-bullhorn text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">SARA</h4>
@@ -1544,9 +1538,9 @@
                             </div>
 
                             <!-- Акио Судзуки -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400  shrink-0">
                                         <i class="fas fa-code text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Акио Судзуки</h4>
@@ -1557,9 +1551,9 @@
                             </div>
 
                             <!-- Валькес -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-amber-950/40 border border-amber-500/20 hover:border-amber-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-amber-950/40 border border-amber-500/20 hover:border-amber-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400  shrink-0">
                                         <i class="fas fa-fire text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Валькес (Павел Няхно)</h4>
@@ -1570,9 +1564,9 @@
                             </div>
 
                             <!-- Токи, Кац, Deylor -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-sky-950/40 border border-sky-500/20 hover:border-sky-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-sky-950/40 border border-sky-500/20 hover:border-sky-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400  shrink-0">
                                         <i class="fas fa-users-cog text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Токи, Кац и Deylor</h4>
@@ -1583,9 +1577,9 @@
                             </div>
 
                             <!-- Агерез и Василевский -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-pink-950/40 border border-pink-500/20 hover:border-pink-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-pink-950/40 border border-pink-500/20 hover:border-pink-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400  shrink-0">
                                         <i class="fas fa-laugh-squint text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Агерез и Василевский</h4>
@@ -1596,9 +1590,9 @@
                             </div>
 
                             <!-- Volgin -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-blue-950/40 border border-blue-500/20 hover:border-blue-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-blue-950/40 border border-blue-500/20 hover:border-blue-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400  shrink-0">
                                         <i class="fas fa-fish text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Volgin</h4>
@@ -1609,9 +1603,9 @@
                             </div>
 
                             <!-- Maratii HOI4 -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-red-950/40 border border-red-500/20 hover:border-red-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-red-950/40 border border-red-500/20 hover:border-red-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400  shrink-0">
                                         <i class="fab fa-youtube text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Maratii HOI4</h4>
@@ -1622,9 +1616,9 @@
                             </div>
 
                             <!-- Егор и Империум Человечества -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-amber-950/40 border border-amber-500/20 hover:border-amber-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-amber-950/40 border border-amber-500/20 hover:border-amber-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400  shrink-0">
                                         <i class="fas fa-crown text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Егор и Империум Человечества</h4>
@@ -1635,9 +1629,9 @@
                             </div>
 
                             <!-- Иствер и его Джамахирия -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-red-950/40 border border-red-500/20 hover:border-red-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-red-950/40 border border-red-500/20 hover:border-red-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400  shrink-0">
                                         <i class="fab fa-youtube text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Иствер и его Джамахирия</h4>
@@ -1648,9 +1642,9 @@
                             </div>
 
                             <!-- Федерация Кикирика -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-cyan-950/40 border border-cyan-500/20 hover:border-cyan-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-cyan-950/40 border border-cyan-500/20 hover:border-cyan-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400  shrink-0">
                                         <i class="fas fa-paint-brush text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Федерация Кикирика</h4>
@@ -1661,9 +1655,9 @@
                             </div>
 
                             <!-- Хоистан и Нота -->
-                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-indigo-950/40 border border-indigo-500/20 hover:border-indigo-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="partner-card bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-indigo-950/40 border border-indigo-500/20 hover:border-indigo-500/50 rounded-2xl p-6 shadow-xl transition-all duration-300 ">
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400  shrink-0">
                                         <i class="fas fa-map-marked-alt text-xl"></i>
                                     </div>
                                     <h4 class="font-bold text-white text-lg">Хоистан и Нота</h4>
@@ -1744,7 +1738,7 @@
                         </div>
                         <button onclick="goToLatestHistory()" class="flex-shrink-0 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-purple-900/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group">
                             <span>Перейти</span>
-                            <i class="fas fa-external-link-alt text-xs group-hover:rotate-12 transition-transform"></i>
+                            <i class="fas fa-external-link-alt text-xs "></i>
                         </button>
                     </div>
 
@@ -1757,7 +1751,7 @@
         <!-- OCEAN TV / КОМПЬЮТЕР (ОТДЕЛЬНЫЙ РАЗДЕЛ) -->
         <!-- ========================================== -->
         <div id="ocean-tv-standalone" class="slide-up mb-24" style="animation-delay: 0.9s;">
-            <div class="admin-card p-8 md:p-10 rounded-2xl border border-white/10 bg-gray-900/60 transition-colors hover:border-white/20">
+            <div class="p-8 md:p-10 rounded-2xl border border-white/10 bg-gray-900/60 transition-colors hover:border-white/20">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div class="w-full md:w-1/2 text-center md:text-left space-y-3">
                         <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Ocean TV</h3>
