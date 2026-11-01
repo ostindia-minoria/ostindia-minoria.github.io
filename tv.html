@@ -1826,328 +1826,6 @@
             color: #ffffff;
             border-bottom-color: rgba(255, 255, 255, 0.6);
         }
-    
-        /* ========================================================
-           MINORYEVKA & OCEAN TV ARCHIVE EXTENSION STYLES
-           ======================================================== */
-        .minoryevka-scroll-wrap {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem 1rem;
-            max-width: 1150px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .minoryevka-scroll-wrap::-webkit-scrollbar {
-            width: 6px;
-        }
-        .minoryevka-scroll-wrap::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-        .minoryevka-scroll-wrap::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-        }
-        .minoryevka-scroll-wrap::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Tabs bar */
-        .tv-tabs-bar {
-            display: flex;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: fit-content;
-            margin: 0 auto 1.5rem auto;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .tv-tab-btn {
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #94a3b8;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tv-tab-btn:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .tv-tab-btn.active {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Chronicle Timeline */
-        .chronicle-timeline {
-            position: relative;
-            padding-left: 2rem;
-            margin-top: 1rem;
-        }
-        .chronicle-timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 10px;
-            bottom: 20px;
-            width: 2px;
-            background: linear-gradient(to bottom, #38bdf8, #818cf8, #c084fc, #f43f5e);
-            border-radius: 2px;
-        }
-        .chronicle-item {
-            position: relative;
-            margin-bottom: 2.2rem;
-        }
-        .chronicle-dot {
-            position: absolute;
-            left: -2rem;
-            top: 6px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #0f172a;
-            border: 3px solid #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
-            z-index: 2;
-        }
-        .chronicle-card {
-            background: rgba(18, 22, 32, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.25s ease;
-        }
-        .chronicle-card:hover {
-            border-color: rgba(255, 255, 255, 0.18);
-            background: rgba(22, 27, 40, 0.95);
-        }
-        .epoch-tag {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            width: fit-content;
-            margin-bottom: 0.6rem;
-        }
-
-        /* Iceberg Layers */
-        .iceberg-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-        .iceberg-tier {
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.25s ease;
-        }
-        .iceberg-tier-1 {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(15, 23, 42, 0.85) 100%);
-            border-color: rgba(56, 189, 248, 0.35);
-        }
-        .iceberg-tier-2 {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.16) 0%, rgba(15, 23, 42, 0.88) 100%);
-            border-color: rgba(6, 182, 212, 0.3);
-        }
-        .iceberg-tier-3 {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-        .iceberg-tier-4 {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(10, 15, 28, 0.92) 100%);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-        .iceberg-tier-5 {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18) 0%, rgba(8, 10, 20, 0.95) 100%);
-            border-color: rgba(139, 92, 246, 0.35);
-        }
-        .iceberg-tier-6 {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.22) 0%, rgba(4, 5, 10, 0.98) 100%);
-            border-color: rgba(239, 68, 68, 0.4);
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.15);
-        }
-        .iceberg-badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .iceberg-badge {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: text;
-        }
-        .iceberg-badge:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-        .iceberg-badge.active-fact {
-            background: #ffffff;
-            color: #000000;
-            font-weight: 700;
-            border-color: #ffffff;
-        }
-        .iceberg-info-card {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            margin-top: 1rem;
-            display: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-
-        /* Photo Cards Grid */
-        .photo-grid-minoryevka {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .photo-card-item {
-            background: rgba(18, 22, 32, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .photo-card-item:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            background: rgba(26, 32, 48, 0.95);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-        .photo-card-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 190px;
-            background: #000;
-            overflow: hidden;
-        }
-        .photo-card-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .photo-card-item:hover .photo-card-img-wrap img {
-            transform: scale(1.04);
-        }
-        .photo-card-body {
-            padding: 1rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Lightbox Modal */
-        .minoryevka-lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: rgba(0, 0, 0, 0.94);
-            backdrop-filter: blur(25px);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-        .minoryevka-lightbox.active {
-            display: flex;
-        }
-        .lightbox-img-box {
-            position: relative;
-            max-width: 90vw;
-            max-height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .lightbox-img-box img {
-            max-width: 100%;
-            max-height: 75vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.85);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        /* Video Players Box */
-        .video-box-card {
-            background: rgba(18, 22, 32, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-        .video-player-wrap {
-            position: relative;
-            width: 100%;
-            background: #000;
-            aspect-ratio: 16 / 9;
-            max-height: 520px;
-        }
-        .video-player-wrap video,
-        .video-player-wrap iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        /* Laws Document Styles */
-        .laws-article-box {
-            background: rgba(18, 22, 32, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .laws-num-pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 12px;
-            margin-right: 8px;
-        }
-
     </style>
 </head>
 <body>
@@ -2312,31 +1990,34 @@
     <!-- MAIN APP SHELF -->
     <div class="shelf-container" id="shelf-container-wrap">
         <div class="shelf-grid">
-            <div class="tv-tile" onclick="openChronicleApp()" title="Летопись сервера Минорьевка 2024–2026">
-                <i class="fas fa-scroll"></i>
-                <span class="tv-tile-label">Хроника</span>
-            </div>
-            <div class="tv-tile" onclick="openIcebergApp()" title="Интерактивный Айсберг 6 уровней тайн">
-                <i class="fas fa-mountain"></i>
-                <span class="tv-tile-label">Айсберг</span>
-            </div>
-            <div class="tv-tile" onclick="openMediaApp()" title="Фотоархив всех эпох">
+            <div class="tv-tile" onclick="openMediaApp()">
                 <i class="fas fa-images"></i>
                 <span class="tv-tile-label">Медиатека</span>
+                <div class="lock-badge" id="media-lock-badge">
+                    <i class="fas fa-lock"></i>
+                </div>
             </div>
-            <div class="tv-tile" onclick="openVideoApp()" title="Видеотур от Гендальфа и ролики">
-                <i class="fas fa-film"></i>
-                <span class="tv-tile-label">Видеотека</span>
+            <div class="tv-tile" onclick="openTvShowsApp()">
+                <i class="fas fa-tv"></i>
+                <span class="tv-tile-label">Фильмы</span>
             </div>
-            <div class="tv-tile" onclick="openLawsApp()" title="Правила сервiра и Кодекс Азриэля">
-                <i class="fas fa-gavel"></i>
-                <span class="tv-tile-label">Законы</span>
+            <div class="tv-tile" onclick="openMusicApp()">
+                <i class="fas fa-music"></i>
+                <span class="tv-tile-label">Музыка</span>
             </div>
-            <div class="tv-tile" onclick="openComputersApp()" title="Проводник файлов и дисков">
+            <div class="tv-tile" onclick="openPodcastsApp()">
+                <i class="fas fa-podcast"></i>
+                <span class="tv-tile-label">Подкасты</span>
+            </div>
+            <div class="tv-tile" onclick="openRadioApp()">
+                <i class="fas fa-radio"></i>
+                <span class="tv-tile-label">Радио</span>
+            </div>
+            <div class="tv-tile" onclick="openComputersApp()">
                 <i class="fas fa-network-wired"></i>
                 <span class="tv-tile-label">Компьютеры</span>
             </div>
-            <div class="tv-tile" onclick="openSettingsApp()" title="Параметры и звук системы">
+            <div class="tv-tile" onclick="openSettingsApp()">
                 <i class="fas fa-sliders"></i>
                 <span class="tv-tile-label">Настройки</span>
             </div>
@@ -2485,504 +2166,13 @@
         </div>
     </div>
 
-    <!-- ========================================================
-         OCEAN TV MINORYEVKA MEDIA APPS
-         ======================================================== -->
-
-    <!-- APP: CHRONICLE (ХРОНИКА СЕРВЕРА МИНОРЬЕВКА) -->
-    <div id="app-chronicle" class="app-overlay">
-        <div class="app-header">
-            <div class="app-title"><i class="fas fa-scroll text-sky-400"></i> Хроника сервера Минорьевка (2024–2026)</div>
-            <button class="app-menu-btn" onclick="closeApp('app-chronicle')">Меню</button>
-        </div>
-        <div class="minoryevka-scroll-wrap">
-            <div class="mb-6 p-6 rounded-2xl bg-gradient-to-r from-sky-950/50 via-indigo-950/40 to-purple-950/50 border border-sky-500/30">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-semibold mb-3">
-                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-                    Маратьевград → Минорьевка → Новоминорьевка
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">Полная история сервера сообщества</h3>
-                <p class="text-gray-300 text-sm leading-relaxed max-w-3xl">
-                    Летопись сервера Minecraft сообщества Минории от зарождения в августе 2024 года до финала осенью 2026. Записано со слов Гендальфа, участников и администраторов.
-                </p>
-            </div>
-
-            <div class="chronicle-timeline">
-                <!-- Epoch 1 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #38bdf8;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-sky-500/20 text-sky-300 border border-sky-500/30">
-                            Август – Ноябрь 2024 • Основание
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Зарождение Маратьевграда и Aternos</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            Сервер был основан в августе 2024 года. Его главными основоположниками стали <strong>Еврей</strong>, хостивший сам сервер, и <strong>Навугадоносор</strong>, владевший Telegram-каналом сервера. Первые две недели сервер был крайне активным: множество игроков строили спавн, в этот период было сделано легендарное первое общее фото игроков (предположительно сделанное Евреем).
-                        </p>
-                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 text-xs text-gray-400 leading-relaxed mb-4">
-                            <i class="fas fa-info-circle text-sky-400 mr-1.5"></i> Хостинг сервера работал на бесплатном Aternos, из-за чего он часто выключался. Через две недели активность игроков резко упала, сервер опустел и вплоть до конца ноября стоял на грани полного закрытия.
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="openMinoryevkaLightbox(0)" class="px-3.5 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-xs font-semibold flex items-center gap-1.5 border border-sky-500/30">
-                                <i class="fas fa-image"></i> Посмотреть первое фото игроков (Август 2024)
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Epoch 2 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #818cf8;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                            Декабрь 2024 – Февраль 2025 • Возрождение
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Приход Майка Эрмантраута и Золотой век строек</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
-                            В ноябре 2024 года о сервере узнал <strong>Майк Эрмантраут</strong> (будущий Азриэль). В конце декабря 2024 года легендарный <strong>Минор Минорыч</strong> (<code>@estonia78</code>) запустил сервер. Майк сразу взялся за работу: по просьбе Минорыча возвёл центральный склад ресурсов и часами играл, поднимая онлайн.
-                        </p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            В январе 2025 года онлайн взлетел до рекордных 5–6 игроков в сутки. В январе и феврале под руководством Майка были построены масштабные совместные объекты:
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs text-gray-300">
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-start gap-2.5">
-                                <i class="fas fa-hammer text-indigo-400 mt-0.5"></i>
-                                <div><strong>Автоматическая ферма железа</strong> и ферма опыта на Эндерменах.</div>
-                            </div>
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-start gap-2.5">
-                                <i class="fas fa-layer-group text-indigo-400 mt-0.5"></i>
-                                <div><strong>Глобальное выравнивание ландшафта</strong> до 64 высоты и сеть мощёных дорог.</div>
-                            </div>
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-start gap-2.5">
-                                <i class="fas fa-building text-indigo-400 mt-0.5"></i>
-                                <div><strong>«Минорьевки» (хрущёвки)</strong> Минора Минорыча (простояли до февраля 2025).</div>
-                            </div>
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-start gap-2.5">
-                                <i class="fas fa-monument text-indigo-400 mt-0.5"></i>
-                                <div><strong>Статуя Француженки</strong> и <strong>Дом Кайзера Катзё</strong> («концлагерь»).</div>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="openMinoryevkaLightbox(1)" class="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-semibold flex items-center gap-1.5 border border-indigo-500/30">
-                                <i class="fas fa-image"></i> Хрущёвки Минорыча
-                            </button>
-                            <button onclick="openMinoryevkaLightbox(2)" class="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-semibold flex items-center gap-1.5 border border-indigo-500/30">
-                                <i class="fas fa-image"></i> Дом Кайзера Катзё
-                            </button>
-                            <button onclick="openMinoryevkaLightbox(3)" class="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-semibold flex items-center gap-1.5 border border-indigo-500/30">
-                                <i class="fas fa-image"></i> Панорама (Майншилд 4)
-                            </button>
-                            <button onclick="openMinoryevkaLightbox(4)" class="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-semibold flex items-center gap-1.5 border border-indigo-500/30">
-                                <i class="fas fa-image"></i> Статуя Француженки
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Epoch 3 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #a855f7;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                            Март – Май 2025 • Смута
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Уход Майка, Arsherr18 и переименование в Минорьевку</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
-                            В марте 2025 года Майк временно покинул сервер, и активность моментально упала. Управление перехватил <strong>Arsherr18</strong> совместно с <strong>Куртуко</strong>. Аршер видел развитие сервера исключительно в установке модификаций (на оружие, лодки и технику). Именно Аршер в марте предложил переименовать сервер из Маратьевграда в <strong>Минорьевку</strong>.
-                        </p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            Однако уже через 1 месяц подписка на хостинг закончилась, и сервер снова умер. Началась смута до мая 2025 года, пока Майк не вернулся. Увидев токсичность Аршера и обесценивание своего труда, Майк возглавил тайную интригу: собрал жалобы от 5 игроков сервера, в результате чего Arsherr18 был публично «отменён» и отстранён.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Epoch 4 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #ec4899;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-pink-500/20 text-pink-300 border border-pink-500/30">
-                            Июнь – Август 2025 • Закон и Порядок
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">«Эра террора Азриэля», Хостинг и Суд</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
-                            Сервером руководили Виталий Пипенко (хостинг) и Гинденбург (ныне <code>@MishanyaBanana67</code>). В один день сервер намертво сломался и не запускался. Все попытки администраторов починить его оказались тщетны. Тогда Майк предложил купить собственный стабильный хостинг. На голосовании игроки единогласно избрали Майка новым хостом.
-                        </p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            Началась знаменитая <strong>«Эра террора Азриэля»</strong>. Майк ввёл жёсткие правила: 7 строгих статей с банами от 3 до 14 дней за гриферство, воровство и читы (Meteor, X-Ray), пожизненный бан за кражу аккаунтов, ежедневный Суд Азриэля в 18:00 и Кодекс администрации с лимитом не более 3 мемов в сутки. Игроки в шутку называли Майка «Большим Братом», но на сервере воцарился идеальный порядок.
-                        </p>
-                        <div class="p-3 bg-pink-950/30 rounded-xl border border-pink-500/20 text-xs text-pink-200 leading-relaxed mb-4">
-                            <i class="fas fa-exclamation-triangle mr-1.5"></i> В июне 2025 года хостинг Mine-Rent допустил сбой без бэкапа, вызвав внеочередной вайп. Однако именно в этот период было смонтировано первое историческое видео по серверу.
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="openLawsApp()" class="px-3.5 py-1.5 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 text-xs font-semibold flex items-center gap-1.5 border border-pink-500/30">
-                                <i class="fas fa-gavel"></i> Изучить Правила и Кодекс Азриэля
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Epoch 5 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #10b981;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                            Июнь – Август 2026 • Расцвет
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Новоминорьевка и Политическая карта Гинденбурга</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
-                            В июне 2026 года сервер официально переименовали в <strong>Новоминорьевку</strong>. В июле 2026 года Майк официально сменил свой никнейм на <strong>Азриэль</strong> (откуда и закрепилось название эры). Контроль казался многим удушающим, но сервер процветал: росла инфраструктура, появлялись кланы и республики.
-                        </p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            К августу 2026 года <strong>Гинденбург</strong> составил грандиозную политическую карту сервера: на ней были обозначены границы государств, колоний и союзов. Онлайн снова взлетел до пиковых отметок.
-                        </p>
-                        <button onclick="openMinoryevkaLightbox(5)" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 border border-emerald-500/30">
-                            <i class="fas fa-map"></i> Политическая карта Гинденбурга (Август 2026)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Epoch 6 -->
-                <div class="chronicle-item">
-                    <div class="chronicle-dot" style="border-color: #f43f5e;"></div>
-                    <div class="chronicle-card">
-                        <div class="epoch-tag bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                            Август – Сентябрь 2026 • Финал
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Конфликт Азриэля и Никиты: Порядок против Анархии</h4>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
-                            В августе 2026 года вспыхнул идеологический кризис: конфликт Азриэля с Никитой. Азриэль требовал строгого соблюдения законов и наказания за нарушения, тогда как Никита и часть игроков требовали полной анархии и свободы от регламентов.
-                        </p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                            Под давлением публики Азриэль добровольно сложил полномочия и передал управление сервером в руки Никиты. Была составлена новая карта сервера эпохи Никиты. Однако в условиях анархии интерес игроков быстро угас, и к сентябрю 2026 года легендарный сервер окончательно закрылся.
-                        </p>
-                        <button onclick="openMinoryevkaLightbox(6)" class="px-3.5 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-1.5 border border-rose-500/30">
-                            <i class="fas fa-map-marked-alt"></i> Карта эпохи Никиты (Сентябрь 2026)
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- APP: ICEBERG (ИНТЕРАКТИВНЫЙ АЙСБЕРГ НОВОМИНОРЬЕВКИ) -->
-    <div id="app-iceberg" class="app-overlay">
-        <div class="app-header">
-            <div class="app-title"><i class="fas fa-mountain text-cyan-400"></i> Айсберг Новоминорьевки (6 слоёв)</div>
-            <button class="app-menu-btn" onclick="closeApp('app-iceberg')">Меню</button>
-        </div>
-        <div class="minoryevka-scroll-wrap">
-            <div class="mb-6 p-6 rounded-2xl bg-gradient-to-r from-blue-950/60 via-slate-900/80 to-purple-950/60 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold mb-2">
-                        <i class="fas fa-layer-group"></i> Составлено Виталием Пипенко
-                    </div>
-                    <h3 class="text-2xl font-bold text-white">Интерактивный Айсберг тайн сервера</h3>
-                    <p class="text-gray-300 text-sm max-w-2xl mt-1">
-                        От общеизвестных мемов и каналов на поверхности до глубочайших теорий и мистификаций в бездне. Нажмите на любой факт, чтобы прочитать его описание.
-                    </p>
-                </div>
-                <div class="text-right shrink-0">
-                    <span class="text-xs text-gray-400 font-mono">Глубина: 0м → 11 000м</span>
-                </div>
-            </div>
-
-            <div id="iceberg-info-card" class="iceberg-info-card">
-                <div class="flex items-start justify-between gap-4">
-                    <div>
-                        <div class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-1" id="iceberg-card-tier">Слой</div>
-                        <h4 class="text-lg font-bold text-white" id="iceberg-card-title">Название факта</h4>
-                        <p class="text-gray-300 text-sm mt-1 leading-relaxed" id="iceberg-card-desc">Описание</p>
-                    </div>
-                    <button onclick="document.getElementById('iceberg-info-card').style.display='none'" class="text-gray-400 hover:text-white text-xs px-2 py-1 rounded bg-white/10">✕</button>
-                </div>
-            </div>
-
-            <div class="iceberg-wrap mt-4">
-                <!-- Tier 1: Heavens -->
-                <div class="iceberg-tier iceberg-tier-1">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-sky-200 flex items-center gap-2">
-                            <span>☁️ 1 Слой: Небеса</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-sky-400/20 text-sky-300 font-mono">0 – 100м</span>
-                        </h4>
-                        <span class="text-xs text-sky-300/70">Поверхность • Общеизвестное</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Сегодняшний канал', 'Официальный информационный рупор сервера, освещавший события дня.')">Сегодняшний канал</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Первый канал Маратьевград', 'Первый исторический Telegram-канал, с которого начиналось информирование участников.')">Первый канал Маратьевград</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Еврей', 'Один из двух главных отцов-основателей сервера, предоставивший первый хостинг и сделавший легендарное фото.')">Еврей</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Нагувадер (Навугадоносор)', 'Сооснователь сервера и создатель первого Telegram-канала Маратьевграда.')">Нагувадер</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Минор Минорыч (@estonia78)', 'Культовая легенда сообщества, в честь которого был назван сервер, перезапустивший его в декабре 2024.')">Минор Минорыч</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Майк / Инженер / Азриель', 'Главный архитектор, строитель ферм и центрального склада, будущий хостер и создатель суда.')">Майк (Инженер / Азриель)</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Шутки про 1984', 'Постоянные мемы игроков о тотальном контроле и вертикали власти во времена Азриэля.')">Шутки про 1984</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Бункеры Виталия Пипенко', 'Тайные фортификационные сооружения, которые Виталий строил для защиты от вайпов и угроз.')">Бункеры Виталия Пипенко</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Арбузный рейх', 'Шуточная фракция и мем игроков эпохи расцвета спавна.')">Арбузный рейх</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Ебеньград', 'Один из самых известных и колоритных дальних посёлков сервера.')">Ебеньград</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Покупка хостинга Азриелем', 'Ключевое поворотное событие лета 2025 года, спасшее сервер от гибели и открывшее Эру Террора.')">Покупка хостинга Азриелем</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Виталий Пипенко', 'Администратор сервера, технический специалист и автор айсберга.')">Виталий Пипенко</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(1, 'Егор', 'Участник сообщества и автор легендарных архивных файлов Ocean TV.')">Егор</span>
-                    </div>
-                </div>
-
-                <!-- Tier 2: Sub-heavens -->
-                <div class="iceberg-tier iceberg-tier-2">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-cyan-200 flex items-center gap-2">
-                            <span>🌤️ 2 Слой: Поднебесье</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono">100 – 500м</span>
-                        </h4>
-                        <span class="text-xs text-cyan-300/70">Мелководье • История сообщества</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Война небоскрёбов', 'Эпическое соревнование строителей на спавне за самое высокое здание сервера.')">Война небоскрёбов</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Эщкерия', 'Государственное образование на сервере со своей внутренней экономикой и казино.')">Эщкерия</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Аршерр18', 'Администратор весны 2025 года, предложивший название Минорьевка и смещённый в результате интриги.')">Аршерр18</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Атернос', 'Первый нестабильный хостинг сервера с постоянными выключениями и очередями.')">Атернос</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'МДК', 'Таинственная аббревиатура и организация, породившая множество теорий заговора.')">МДК</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Инфраструктура Майка', 'Сеть дорог на 64 высоте, склады и фермы, ставшие хребтом экономики сервера.')">Инфраструктура Майка</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Уход Майка', 'Кризис марта 2025 года, когда после ухода Майка онлайн упал до нуля.')">Уход Майка</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Количество Сезонов', 'Споры о том, сколько на самом деле сезонов и перезапусков пережил сервер.')">Количество Сезонов</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Моды на оружие', 'Идея Аршера превратить сервер в милитари-песочницу, не нашедшая долгой жизни.')">Моды на оружие</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Новички 2025 года', 'Волна игроков, пришедшая зимой 2025 года на готовые фермы Майка.')">Новички 2025 года</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Куртуко', 'Соратник Аршера, финансировавший хостинг на 1 месяц весной 2025.')">Куртуко</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Проблемы с Вайпами', 'Регулярные потери миров из-за отсутствия нормального бэкап-плана у ранних хостингов.')">Проблемы с Вайпами</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Никита990iQ', 'Лидер оппозиции порядку Азриэля, перенявший сервер в августе 2026.')">Никита990iQ</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Максим', 'Активный строитель и участник политических споров.')">Максим</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Троцкий (Ваня)', 'Колоритный игрок, вечно страдавший от багов с аккаунтом.')">Троцкий (Ваня)</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Возвращение Майка', 'Май 2025 года: триумфальное возвращение и заговор против Аршера.')">Возвращение Майка</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Первое видео по Минорьевке', 'Исторический ролик июня 2025 года на YouTube после вайпа Mine-Rent.')">Первое видео по Минорьевке</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(2, 'Кайзер', 'Автор скандального дома, прозванного концлагерем.')">Кайзер</span>
-                    </div>
-                </div>
-
-                <!-- Tier 3: Iceberg Tip -->
-                <div class="iceberg-tier iceberg-tier-3">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-blue-200 flex items-center gap-2">
-                            <span>🏔️ 3 Слой: Верхушка айсберга</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-blue-400/20 text-blue-300 font-mono">500 – 1 500м</span>
-                        </h4>
-                        <span class="text-xs text-blue-300/70">Сумеречная зона</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Сервер Виталия Пипенко', 'Отдельный параллельный тестовый сервер, где тестировались плагины и бэкапы.')">Сервер Виталия Пипенко</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Уход от Нагувадера', 'Переход комьюнити из первого канала во владения новой администрации.')">Уход от Нагувадера</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Новый ТГК Гинденбурга', 'Канал, ставший центром политической жизни Новоминорьевки в 2026 году.')">Новый ТГК Гинденбурга</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Олды Маратьевграда', 'Игроки первых двух недель августа 2024 года, помнящие спавн до эпохи складов.')">Олды Маратьевграда</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Заводы Клауса', 'Секретные индустриальные комплексы по производству пороха и ресурсов.')">Заводы Клауса</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Гойдания', 'Сепаратистское движение на сервере со своими лозунгами.')">Гойдания</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Логи Атерноса', 'Утерянные логи чата августа 2024 года, где зафиксированы первые диалоги.')">Логи Атерноса</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Летающие лодки Аршера', 'Багованные модификации лодок, позволявшие летать над картой.')">Летающие лодки Аршера</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Старый Ебеньград', 'Первоначальное поселение, разрушенное до основания во время междоусобиц.')">Старый Ебеньград</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Подземная Эщкерия', 'Многоярусные катакомбы под столицей Эщкерии.')">Подземная Эщкерия</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(3, 'Вторая Якутская Республика', 'Игровое квазигосударство на краю карты.')">Вторая Якутская Республика</span>
-                    </div>
-                </div>
-
-                <!-- Tier 4: Middle -->
-                <div class="iceberg-tier iceberg-tier-4">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-indigo-200 flex items-center gap-2">
-                            <span>🌊 4 Слой: Середина айсберга</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-indigo-400/20 text-indigo-300 font-mono">1 500 – 4 000м</span>
-                        </h4>
-                        <span class="text-xs text-indigo-300/70">Батипель • Закрытые инциденты</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Казино в Эщкерии', 'Подпольное игорное заведение на редстоуне, разорившее половину активных игроков.')">Казино в Эщкерии</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Башня Эщкериец', 'Гигантский монолит, построенный вопреки строительным регламентам Азриэля.')">Башня Эщкериец</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Бахмут', 'Участок карты, полностью превращённый в лунный кратер после серии тестов динамита.')">Бахмут</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Расшифровка МДК Сыркодружбенский АО', 'Официальная бюрократическая расшифровка тайной корпорации.')">МДК Сыркодружбенский АО</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Азриеля держат в заложниках?', 'Популярная конспирологическая теория о том, что Майком манипулировала тайная ложа.')">Азриеля держат в заложниках?</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Пытки от Еврея', 'Наказания нарушителей в специальных обсидиановых комнатах до появления суда.')">Пытки от Еврея</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Коалиция Виталия, Егора, Гинденбурга и Савелия', 'Четырёхсторонний союз, негласно контролировавший сервер.')">Коалиция четырёх</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Техасская НР', 'Колония игроков на юге, объявившая о выходе из юрисдикции Минорьевки.')">Техасская НР</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(4, 'Суперивенты', 'Полноэкранные TNO-подобные заставки, рисовавшиеся художниками под каждое падение сервера.')">Суперивенты</span>
-                    </div>
-                </div>
-
-                <!-- Tier 5: The Deep -->
-                <div class="iceberg-tier iceberg-tier-5">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-purple-200 flex items-center gap-2">
-                            <span>🌑 5 Слой: Глубина</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-purple-400/20 text-purple-300 font-mono">4 000 – 8 000м</span>
-                        </h4>
-                        <span class="text-xs text-purple-300/70">Абиссаль • Запретная хроника</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Нац. Банк Эщкерии', 'Афера с выпуском необеспеченной валюты и крахом золотого стандарта.')">Нац. Банк Эщкерии</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Никитовка и ее разгром Савелием', 'Карательная военная операция Савелия против форпоста сторонников Никиты.')">Разгром Никитовки Савелием</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Разгром Ебеньграда Нагувадером', 'Внезапный налёт основателя сервера на мирное поселение.')">Разгром Ебеньграда Нагувадером</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Полуостров Лесоповальный', 'Зона принудительных работ, куда Азриэль ссылал за мелкий гриферский ущерб.')">Полуостров Лесоповальный</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Азриель это ИИ?', 'Теория о том, что пунктуальный суд в 18:00 проводился ботом на основе языковой модели.')">Азриель это ИИ?</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Ферма железа в аду', 'Запрещённый редстоун-механизм, вызывавший лаги на всём хостинге.')">Ферма железа в аду</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(5, 'Зоопарк Маратьевграда', 'Секретная тюрьма для мобов и провинившихся игроков.')">Зоопарк Маратьевграда</span>
-                    </div>
-                </div>
-
-                <!-- Tier 6: The Abyss / Bottom -->
-                <div class="iceberg-tier iceberg-tier-6">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-base font-bold text-red-200 flex items-center gap-2">
-                            <span>☠️ 6 Слой: Дно айсберга</span>
-                            <span class="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-mono">8 000 – 11 000м</span>
-                        </h4>
-                        <span class="text-xs text-red-400 font-bold uppercase tracking-wider">Бездна • Эзотерика</span>
-                    </div>
-                    <div class="iceberg-badge-list">
-                        <span class="iceberg-badge" onclick="showIcebergFact(6, 'БПЯАА', 'Сверхсекретная аббревиатура, значение которой знали только двое создателей.')">БПЯАА</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(6, 'МДК это Маратий?', 'Гипотеза о том, что корпорацией МДК негласно управлял сам Маратий.')">МДК это Маратий?</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(6, 'Ядерный апокалипсис в Новоминорьевке', 'Событие, в результате которого мир был стёрт до коренной породы.')">Ядерный апокалипсис</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(6, 'Спец. Производство на заводах Клауса', 'Оружие массового поражения на модификациях Аршера.')">Спец. Производство Клауса</span>
-                        <span class="iceberg-badge" onclick="showIcebergFact(6, 'Первый арбитраж на Новоминорьевке', 'Судебный процесс века, расколовший сервер надвое.')">Первый арбитраж</span>
-                        <span class="iceberg-badge border-red-500 text-red-300 font-bold" onclick="showIcebergFact(6, 'НОВОМИНОРЬЕВКИ НЕ СУЩЕСТВУЕТ, ВСЕ ЭТО СОН МАРАТИЯ', 'Главная эсхатологическая доктрина: весь сервер, все его войны, хрущёвки и суды — это лишь симуляция во сне Маратия.')">НОВОМИНОРЬЕВКИ НЕ СУЩЕСТВУЕТ, ВСЕ ЭТО СОН МАРАТИЯ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- APP: MEDIA & PHOTO ARCHIVE -->
+    <!-- APP 1: MEDIA (PHOTO STREAM) -->
     <div id="app-media" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-images text-emerald-400"></i> Фотоархив & Медиатека</div>
+            <div class="app-title"><i class="fas fa-images"></i> Файлы Егора</div>
             <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
         </div>
-        
-        <div class="tv-tabs-bar">
-            <button class="tv-tab-btn active" id="tab-btn-minoryevka" onclick="switchMediaTab('minoryevka')">
-                <i class="fas fa-cube"></i> Сервер Минорьевка (7 фото)
-            </button>
-            <button class="tv-tab-btn" id="tab-btn-egor" onclick="switchMediaTab('egor')">
-                <i class="fas fa-folder-closed"></i> Архив Егора (118 фото)
-            </button>
-        </div>
-
-        <div class="minoryevka-scroll-wrap" id="media-tab-minoryevka">
-            <div class="photo-grid-minoryevka">
-                <!-- 1 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(0)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Первое фото">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Август 2024</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Легендарное первое фото игроков</h5>
-                            <p class="text-xs text-gray-400">Сделано предположительно Евреем на спавне Маратьевграда в первые дни сервера.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(1)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/khrushchevki.jpg" alt="Хрущёвки Минорыча">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Зима 2025</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Минорьевки (хрущёвки) Минора Минорыча</h5>
-                            <p class="text-xs text-gray-400">Культовые жилые постройки Минорыча, просуществовавшие на сервере до февраля 2025 года.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(2)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/kaiser_house.jpg" alt="Дом Кайзера">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Зима 2025</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Дом Кайзера Катзё («Концлагерь»)</h5>
-                            <p class="text-xs text-gray-400">Одиозный особняк Кайзера, прозванный игроками концлагерем из-за суровой архитектуры.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(3)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/birds_eye.jpg" alt="Вид с высоты">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Декабрь 2024</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Вид спавна с высоты птичьего полёта</h5>
-                            <p class="text-xs text-gray-400">Панорама сервера до декабря 2024 года. Амир Камаров назвал это отсылкой на Майншилд 4.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(4)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/french_statue.jpg" alt="Статуя Француженки">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Январь 2025</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Статуя Француженки</h5>
-                            <p class="text-xs text-gray-400">Один из самых знаменитых монументов эпохи строек Майка Эрмантраута.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(5)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/map_hindenburg.jpg" alt="Карта Гинденбурга">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Август 2026</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Политическая карта сервера от Гинденбурга</h5>
-                            <p class="text-xs text-gray-400">Детальное государственно-территориальное деление Новоминорьевки (@MishanyaBanana67).</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7 -->
-                <div class="photo-card-item" onclick="openMinoryevkaLightbox(6)">
-                    <div class="photo-card-img-wrap">
-                        <img src="assets/images/minoryevka/map_nikita.jpg" alt="Карта Никиты">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] text-white font-mono">Сентябрь 2026</div>
-                    </div>
-                    <div class="photo-card-body">
-                        <div>
-                            <h5 class="text-sm font-bold text-white mb-1">Карта сервера эпохи Никиты</h5>
-                            <p class="text-xs text-gray-400">Финальная карта периода анархии после ухода Азриэля перед закрытием сервера.</p>
-                        </div>
-                        <div class="mt-3 text-[11px] text-sky-400 font-semibold flex items-center gap-1">
-                            <i class="fas fa-search-plus"></i> Открыть просмотр
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="photo-stream-container" id="media-tab-egor" style="display: none;">
+        <div class="photo-stream-container">
             <div class="tv-photo-frame">
                 <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slidePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
@@ -2992,242 +2182,103 @@
         </div>
     </div>
 
-    <!-- APP: VIDEO (ВИДЕОТЕКА СЕРВЕРА) -->
-    <div id="app-video" class="app-overlay">
+    <!-- APP 2: TV SHOWS (MOVIES PLACEHOLDER) -->
+    <div id="app-tvshows" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-film text-purple-400"></i> Видеотека сервера Минорьевка</div>
-            <button class="app-menu-btn" onclick="closeApp('app-video')">Меню</button>
+            <div class="app-title"><i class="fas fa-tv"></i> Фильмы</div>
+            <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
         </div>
-        <div class="minoryevka-scroll-wrap">
-            
-            <!-- Video 1: Tour -->
-            <div class="video-box-card">
-                <div class="p-5 border-b border-white/10 flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Эксклюзив • Ноябрь 2026</span>
-                        <h4 class="text-xl font-bold text-white mt-0.5">Видеотур по серверу Минорьевка от Гендальфа</h4>
-                    </div>
-                    <span class="text-xs px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 font-mono">1080p 60fps</span>
-                </div>
-                <div class="video-player-wrap">
-                    <video id="tour-video-player" controls preload="metadata" poster="assets/images/minoryevka/birds_eye.jpg">
-                        <source src="assets/video/minoryevka_tour.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает встроенное видео.
-                    </video>
-                </div>
-                <div class="p-5 bg-black/40 text-sm text-gray-300 leading-relaxed">
-                    Полная видеоэкскурсия по спавну, хрущёвкам Минора Минорыча, дому Кайзера, дорожной сети и главным достопримечательностям сервера Минорьевка, сохранённая Гендальфом.
-                </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="movie-monitor">
+                <div class="monitor-scanline"></div>
+                <div class="monitor-noise"></div>
+                <i class="fas fa-film text-slate-500 text-lg opacity-40"></i>
             </div>
-
-            <!-- Video 2: Historical YouTube video -->
-            <div class="video-box-card">
-                <div class="p-5 border-b border-white/10 flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Архив • Июнь 2025</span>
-                        <h4 class="text-xl font-bold text-white mt-0.5">Первый видеоролик по серверу Минорьевка</h4>
-                    </div>
-                    <span class="text-xs px-2.5 py-1 rounded bg-red-500/20 text-red-300 font-mono">YouTube</span>
-                </div>
-                <div class="video-player-wrap">
-                    <iframe src="https://www.youtube.com/embed/uuY9NIbsNR0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="p-5 bg-black/40 text-sm text-gray-300 leading-relaxed">
-                    Исторический первый ролик по серверу, созданный в июне 2025 года в период кризиса хостинга Mine-Rent и первого вайпа.
-                </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN VIDEO STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер видеовещания отключен. Обнаружены сохранённые архивные видеозаписи:
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3 justify-center max-w-md">
+                <button onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-600 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-2 transition shadow">
+                    <i class="fas fa-play text-sky-400"></i> Видеотур сервера от Гендальфа (1080p)
+                </button>
+                <button onclick="openTvNotepad('Первое_видео_Минорьевки_2025.url', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года) на YouTube.', ['https://www.youtube.com/watch?v=uuY9NIbsNR0'])" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-600 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-2 transition shadow">
+                    <i class="fab fa-youtube text-red-400"></i> Первое видео (Июнь 2025)
+                </button>
             </div>
-
         </div>
     </div>
 
-    <!-- APP: LAWS (ПРАВИЛА И КОДЕКС АЗРИЭЛЯ) -->
-    <div id="app-laws" class="app-overlay">
+    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) -->
+    <div id="app-music" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-gavel text-amber-400"></i> Законы и Кодекс администрации</div>
-            <button class="app-menu-btn" onclick="closeApp('app-laws')">Меню</button>
+            <div class="app-title"><i class="fas fa-music"></i> Музыка</div>
+            <button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
         </div>
-        
-        <div class="tv-tabs-bar">
-            <button class="tv-tab-btn active" id="tab-laws-rules" onclick="switchLawsTab('rules')">
-                <i class="fas fa-scroll"></i> Правила сервiра (7 статей + Суд)
-            </button>
-            <button class="tv-tab-btn" id="tab-laws-admin" onclick="switchLawsTab('admin')">
-                <i class="fas fa-user-shield"></i> Кодекс для администрации
-            </button>
-        </div>
-
-        <div class="minoryevka-scroll-wrap">
-            <!-- Rules Content -->
-            <div id="laws-content-rules">
-                <div class="mb-5 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">
-                    <i class="fas fa-balance-scale mr-1.5"></i> Исторический документ эпохи правления Майка / Азриэля (Июнь – Август 2025 года). Орфография и формулировки сохранены.
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">1</span> Взрыв и разрушение построек
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Взрыв или уничтожение построек или ландшафта игроков в крупном размере карается <strong>баном на 14 дней</strong>.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">2</span> Поджог и взрыв баз
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Взрыв или поджог чьей-либо базы на сервере карается <strong>баном на 7 дней</strong>. Разрешается гриферить свои собственные постройки или территорию доверенному лицу.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">3</span> Кража аккаунтов
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Запрещается красть или вымогать чужой аккаунт — это карается <strong>перманентным баном навсегда</strong>.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">4</span> Присвоение чужого имущества
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Никто не имеет права забирать вещи у игрока на сервере без его ведома или спроса. За это следует наказание в виде <strong>бана на 7 дней</strong>.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">5</span> Запрет читов
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Запрещается использовать читы по типу Meteor Client и X-Ray. Нарушение карается <strong>баном на 7 дней</strong>.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">6</span> Определение границ территорий
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Территорией игрока считается участок с ясными границами по типу деревянных заборов либо других ограждений.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">7</span> Неприкосновенность баз вглубь
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        На территории базы игрока ничего без его ведома нельзя разрушать. Вглубь тоже нельзя разрушать базу игрока без его ведома (наказание — <strong>бан на 3 дня</strong>). Однако можно строить подземные базы для третьих лиц при условии обязательного уведомления владельца базы на поверхности.
-                    </p>
-                </div>
-
-                <!-- Court box -->
-                <div class="p-5 rounded-2xl bg-gradient-to-r from-red-950/60 to-amber-950/40 border border-red-500/30 mt-6">
-                    <div class="flex items-center gap-2 text-red-400 font-bold text-sm mb-2">
-                        <i class="fas fa-gavel text-base"></i> Ежедневный суд сервера
-                    </div>
-                    <p class="text-xs text-gray-300 leading-relaxed">
-                        После каждого нарушения правил проводится суд. Заседания суда могут проводиться каждый день <strong>с 18:00 до 18:30</strong>, где жертва нарушения правил 1, 2, 4, 7 может простить нарушителя, попросить амнистию или наказание. Окончательное решение остаётся за судом, и проводит его лично <code>@Asriel_Dr3emurr</code>.
-                    </p>
-                    <blockquote class="mt-3 p-3 bg-black/40 rounded-lg border-l-2 border-red-500 text-xs italic text-gray-400">
-                        «...не из-за того что я какой-то тиран, нет скорее я единственный игрок который может понимать полностью правила. Пусть это звучит высокомерно, но это так.»
-                    </blockquote>
-                </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="music-spectrum">
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-bar"></div>
             </div>
-
-            <!-- Admin Code Content -->
-            <div id="laws-content-admin" style="display: none;">
-                <div class="mb-5 p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-200">
-                    <i class="fas fa-shield-alt mr-1.5"></i> Кодекс для администрации (простым игрокам читать не требовалось). Строгая дисциплина административного аппарата.
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">1</span> Публикации от имени администрации
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Администраторам разрешено публиковать новости и мемы от имени сервера в умеренном количестве и только если это строго соответствует тематике и атмосфере сообщества.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">2</span> Лимит на мемы (общий)
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        На весь сервер устанавливается единый лимит — <strong>не более трёх мемов в сутки</strong>, публикуемых администраторами. После достижения лимита дополнительные публикации запрещены для всех администраторов без исключения.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">3</span> Рекламная активность
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Размещение рекламы допускается исключительно в чате Минорьевки. Каждый пользователь, включая администраторов, имеет право разместить не более трёх рекламных сообщений в день.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">4</span> Использование админ-чата
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Чат администрации должен использоваться только для организационных и технических обсуждений. Использование его в личных, неинформативных или комментаторских целях запрещено, за исключением уместных шуточных сообщений в пределах нормы.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">5</span> Правила опросов
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        В Telegram-канале разрешены только опросы, связанные с сервером (правила, баланс, предложения). В чате Минорьевки — любые опросы, кроме призывов к нарушениям.
-                    </p>
-                </div>
-
-                <div class="laws-article-box">
-                    <h5 class="text-base font-bold text-white mb-2 flex items-center">
-                        <span class="laws-num-pill">6</span> Система предупреждений
-                    </h5>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Ограничение на нарушения — <strong>10 предупреждений</strong>. При нарушении сообщение удаляется и выдаётся предупреждение. Администрация признаётся важнейшим институтом власти на сервере.
-                    </p>
-                </div>
-            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN MUSIC STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер аудиовещания отключен. Инъекция прошивки не обнаружила активных музыкальных синдикатов.
+            </p>
         </div>
     </div>
 
-    <!-- FULLSCREEN LIGHTBOX MODAL FOR MINORYEVKA PHOTOS -->
-    <div id="minoryevka-lightbox-modal" class="minoryevka-lightbox" onclick="if(event.target === this) closeMinoryevkaLightbox()">
-        <button onclick="closeMinoryevkaLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white text-2xl z-50 p-2 cursor-pointer focus:outline-none">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <button onclick="navigateMinoryevkaLightbox(-1)" class="absolute left-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-2xl p-4 z-50 bg-black/50 hover:bg-black/80 rounded-full border border-white/10 transition cursor-pointer focus:outline-none">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-
-        <button onclick="navigateMinoryevkaLightbox(1)" class="absolute right-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-2xl p-4 z-50 bg-black/50 hover:bg-black/80 rounded-full border border-white/10 transition cursor-pointer focus:outline-none">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-
-        <div class="lightbox-img-box">
-            <img id="lightbox-img-el" src="" alt="Enlarged photo">
+    <!-- APP 4: PODCASTS -->
+    <div id="app-podcasts" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-podcast"></i> Подкасты</div>
+            <button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
         </div>
-
-        <div class="mt-4 text-center max-w-2xl px-4 z-40">
-            <div id="lightbox-counter-el" class="text-xs text-sky-400 font-mono uppercase mb-1">Фото 1 из 7</div>
-            <h4 id="lightbox-title-el" class="text-lg font-bold text-white">Название</h4>
-            <p id="lightbox-desc-el" class="text-xs text-gray-300 mt-1 leading-relaxed">Описание</p>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="wave-visualizer">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN PODCAST STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер подкастинга отключен. Инъекция прошивки не обнаружила активных аудио-синдикатов.
+            </p>
         </div>
     </div>
 
+    <!-- APP 5: RADIO (RADIO PLACEHOLDER) -->
+    <div id="app-radio" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
+            <button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="radio-beacon">
+                <div class="beacon-pulse"></div>
+                <div class="beacon-pulse"></div>
+                <div class="beacon-pulse"></div>
+                <div class="beacon-dot"></div>
+            </div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN RADIO STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
+                Сетевой сервер радиовещания отключен. Инъекция прошивки не обнаружила активных эфирных синдикатов.
+            </p>
+        </div>
+    </div>
 
     <!-- APP 6: COMPUTERS (FULL FILE EXPLORER MAPPED) -->
     <div id="app-computers" class="app-overlay">
@@ -3286,13 +2337,47 @@
             <button class="app-menu-btn" onclick="closeTvNotepad()">Закрыть</button>
         </div>
         <div class="flex-1 flex justify-center items-center">
-            <div class="w-[600px] bg-slate-900/90 border border-slate-700/80 rounded-2xl p-8 shadow-2xl flex flex-col">
-                <div class="flex-1 font-mono text-sm text-sky-200 min-h-[220px] max-h-[300px] overflow-y-auto whitespace-pre-wrap leading-relaxed select-text" id="tv-notepad-text">
+            <div class="w-[780px] max-w-[95vw] bg-slate-900/95 border border-slate-700/80 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col max-h-[85vh]">
+                <div class="flex-1 font-mono text-sm text-sky-200 min-h-[220px] max-h-[500px] overflow-y-auto whitespace-pre-wrap leading-relaxed select-text text-xs md:text-sm" id="tv-notepad-text">
                     Система инициализирована. Ожидание указаний.
                 </div>
                 <div id="tv-notepad-links-wrap" class="mt-6 flex flex-wrap gap-3 justify-center">
                     <!-- Dynamic clickable links -->
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TV VIDEO MODAL (Inside computers & movies) -->
+    <div id="tv-video-overlay" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title" id="tv-video-title"><i class="fas fa-film text-purple-400"></i> Видеозапись</div>
+            <button class="app-menu-btn" onclick="closeTvVideo()">Закрыть</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center p-2 md:p-4">
+            <div class="w-[850px] max-w-[95vw] bg-black border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+                <div class="aspect-video w-full bg-black">
+                    <video id="tv-video-player" controls preload="metadata" class="w-full h-full">
+                        <source src="assets/video/minoryevka_tour.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="p-4 bg-slate-900/95 text-xs text-gray-300 leading-relaxed" id="tv-video-caption">
+                    Видеотур по серверу Минорьевка от Гендальфа (1080p).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TV PHOTO VIEWER MODAL (Inside computers) -->
+    <div id="tv-photo-overlay" class="app-overlay">
+        <div class="app-header">
+            <div class="app-title" id="tv-photo-title"><i class="fas fa-image text-emerald-400"></i> Фотоархив</div>
+            <button class="app-menu-btn" onclick="closeTvPhoto()">Закрыть</button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center p-4">
+            <div class="max-w-[90vw] max-h-[80vh] flex flex-col items-center">
+                <img id="tv-photo-img" src="" alt="Photo" class="max-w-full max-h-[65vh] object-contain rounded-xl border border-white/10 shadow-2xl">
+                <div class="mt-3 text-center text-xs text-gray-300 max-w-xl" id="tv-photo-caption"></div>
             </div>
         </div>
     </div>
@@ -3681,15 +2766,8 @@
             }
         }
 
-        function openMediaApp() {
-            if (!tvPowerState) return;
-            playSnd(soundClick);
-            switchMediaTab('minoryevka');
-            openApp('app-media');
-        }
-        
         // Media App unlock logic (Locked initially until jailbroken in settings)
-        function openMediaAppOriginal() {
+        function openMediaApp() {
             if (!tvPowerState) return;
             
             if (!isJailbroken) {
@@ -4721,182 +3799,6 @@
                 }
             }
         }
-
-    
-        // ========================================================
-        // MINORYEVKA LOGIC INJECTION
-        // ========================================================
-        const minoryevkaPhotos = [
-            {
-                src: 'assets/images/minoryevka/legendary_first_photo.jpg',
-                title: 'Самое первое легендарное фото игроков сервера',
-                epoch: 'Август 2024 • Основание',
-                desc: 'Снято предположительно Евреем на спавне Маратьевграда в первые дни сервера. На фото запечатлён золотой состав первых активных игроков.'
-            },
-            {
-                src: 'assets/images/minoryevka/khrushchevki.jpg',
-                title: 'Минорьевки (хрущёвки) Минора Минорыча',
-                epoch: 'Зима 2024–2025 • Эпоха Майка',
-                desc: 'Культовые жилые постройки Минора Минорыча, ставшие архитектурным символом ранней эпохи сервера. Были на сервере до февраля 2025 года.'
-            },
-            {
-                src: 'assets/images/minoryevka/kaiser_house.jpg',
-                title: 'Дом Кайзера Катзё («Концлагерь»)',
-                epoch: 'Зима 2025 • Эпоха Майка',
-                desc: 'Одиозный дом участника Кайзера Катзё, получивший в народе мрачное прозвище «концлагерь» из-за строгого вида и заборов.'
-            },
-            {
-                src: 'assets/images/minoryevka/birds_eye.jpg',
-                title: 'Сервер с высоты птичьего полёта',
-                epoch: 'До декабря 2024 • Панорама',
-                desc: 'Вид центрального спавна сверху. Амир Камаров в шутку прозвал эту композицию «одной большой отсылкой на Майншилд 4».'
-            },
-            {
-                src: 'assets/images/minoryevka/french_statue.jpg',
-                title: 'Статуя Француженки',
-                epoch: 'Январь 2025 • Золотой век строек',
-                desc: 'Один из красивейших арт-монументов спавна, возведённый во время зимнего строительного бума при Майке.'
-            },
-            {
-                src: 'assets/images/minoryevka/map_hindenburg.jpg',
-                title: 'Политическая карта сервера от Гинденбурга',
-                epoch: 'Август 2026 • Новоминорьевка',
-                desc: 'Масштабная карта территориального деления сервера, составленная администратором Гинденбургом (@MishanyaBanana67) в период расцвета.'
-            },
-            {
-                src: 'assets/images/minoryevka/map_nikita.jpg',
-                title: 'Карта сервера эпохи Никиты',
-                epoch: 'Сентябрь 2026 • Финал и Анархия',
-                desc: 'Финальная карта сервера эпохи правления Никиты после ухода Азриэля, зафиксировавшая закат перед закрытием.'
-            }
-        ];
-
-        let currentLightboxIndex = 0;
-
-        function openChronicleApp() {
-            openApp('app-chronicle');
-        }
-
-        function openIcebergApp() {
-            openApp('app-iceberg');
-        }
-
-        function openVideoApp() {
-            openApp('app-video');
-        }
-
-        function openLawsApp() {
-            openApp('app-laws');
-        }
-
-        function switchMediaTab(tab) {
-            playSnd(soundClick);
-            const btnM = document.getElementById('tab-btn-minoryevka');
-            const btnE = document.getElementById('tab-btn-egor');
-            const tabM = document.getElementById('media-tab-minoryevka');
-            const tabE = document.getElementById('media-tab-egor');
-
-            if (tab === 'minoryevka') {
-                if (btnM) btnM.classList.add('active');
-                if (btnE) btnE.classList.remove('active');
-                if (tabM) tabM.style.display = 'block';
-                if (tabE) tabE.style.display = 'none';
-            } else {
-                if (btnM) btnM.classList.remove('active');
-                if (btnE) btnE.classList.add('active');
-                if (tabM) tabM.style.display = 'none';
-                if (tabE) tabE.style.display = 'flex';
-            }
-        }
-
-        function switchLawsTab(tab) {
-            playSnd(soundClick);
-            const btnR = document.getElementById('tab-laws-rules');
-            const btnA = document.getElementById('tab-laws-admin');
-            const tabR = document.getElementById('laws-content-rules');
-            const tabA = document.getElementById('laws-content-admin');
-
-            if (tab === 'rules') {
-                if (btnR) btnR.classList.add('active');
-                if (btnA) btnA.classList.remove('active');
-                if (tabR) tabR.style.display = 'block';
-                if (tabA) tabA.style.display = 'none';
-            } else {
-                if (btnR) btnR.classList.remove('active');
-                if (btnA) btnA.classList.add('active');
-                if (tabR) tabR.style.display = 'none';
-                if (tabA) tabA.style.display = 'block';
-            }
-        }
-
-        function openMinoryevkaLightbox(index) {
-            playSnd(soundClick);
-            if (index < 0) index = 0;
-            if (index >= minoryevkaPhotos.length) index = minoryevkaPhotos.length - 1;
-            currentLightboxIndex = index;
-
-            const item = minoryevkaPhotos[index];
-            const modal = document.getElementById('minoryevka-lightbox-modal');
-            const img = document.getElementById('lightbox-img-el');
-            const title = document.getElementById('lightbox-title-el');
-            const counter = document.getElementById('lightbox-counter-el');
-            const desc = document.getElementById('lightbox-desc-el');
-
-            if (img) img.src = item.src;
-            if (title) title.textContent = item.title;
-            if (counter) counter.textContent = `Фото ${index + 1} из ${minoryevkaPhotos.length} • ${item.epoch}`;
-            if (desc) desc.textContent = item.desc;
-            if (modal) modal.classList.add('active');
-        }
-
-        function closeMinoryevkaLightbox() {
-            playSnd(soundClick);
-            const modal = document.getElementById('minoryevka-lightbox-modal');
-            if (modal) modal.classList.remove('active');
-        }
-
-        function navigateMinoryevkaLightbox(dir) {
-            let nextIndex = currentLightboxIndex + dir;
-            if (nextIndex < 0) nextIndex = minoryevkaPhotos.length - 1;
-            if (nextIndex >= minoryevkaPhotos.length) nextIndex = 0;
-            openMinoryevkaLightbox(nextIndex);
-        }
-
-        function showIcebergFact(tier, title, desc) {
-            playSnd(soundClick);
-            const card = document.getElementById('iceberg-info-card');
-            const tierEl = document.getElementById('iceberg-card-tier');
-            const titleEl = document.getElementById('iceberg-card-title');
-            const descEl = document.getElementById('iceberg-card-desc');
-
-            const tierNames = [
-                '',
-                '1 Слой: Небеса (Поверхность • 0 – 100м)',
-                '2 Слой: Поднебесье (Мелководье • 100 – 500м)',
-                '3 Слой: Верхушка айсберга (500 – 1 500м)',
-                '4 Слой: Середина айсберга (1 500 – 4 000м)',
-                '5 Слой: Глубина (4 000 – 8 000м)',
-                '6 Слой: Дно айсберга (Бездна • 8 000 – 11 000м)'
-            ];
-
-            if (tierEl) tierEl.textContent = tierNames[tier] || `Слой ${tier}`;
-            if (titleEl) titleEl.textContent = title;
-            if (descEl) descEl.textContent = desc;
-            if (card) {
-                card.style.display = 'block';
-                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        }
-
-        // Keyboard arrow listener for lightbox
-        document.addEventListener('keydown', (e) => {
-            const modal = document.getElementById('minoryevka-lightbox-modal');
-            if (modal && modal.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') navigateMinoryevkaLightbox(-1);
-                if (e.key === 'ArrowRight') navigateMinoryevkaLightbox(1);
-                if (e.key === 'Escape') closeMinoryevkaLightbox();
-            }
-        });
 
     </script>
 </body>
