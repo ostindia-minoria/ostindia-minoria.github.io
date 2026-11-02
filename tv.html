@@ -149,7 +149,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 45px;
+            margin-bottom: 2.5rem;
             position: relative;
             z-index: 10;
         }
@@ -327,26 +327,13 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-top: 50px;
-            padding: 2rem 4rem;
+            padding: 1.5rem 1rem;
             z-index: 10;
             position: relative;
             background: linear-gradient(to bottom, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 100%);
-            border-top: 1px solid rgba(255,255,255,0.04);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            box-shadow: inset 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        /* Frosted Glass reflection line underneath */
-        .shelf-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 5%;
-            right: 5%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.15) 80%, transparent 100%);
-            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .shelf-grid {
@@ -725,16 +712,39 @@
         .tv-photo-arrow-right { right: -65px; }
 
         .tv-photo-indicator {
-            position: absolute;
-            bottom: -45px;
-            left: 50%;
-            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 3px 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 500;
             color: #cbd5e1;
+            backdrop-filter: blur(8px);
+        }
+
+        .egor-resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+        .egor-resource-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            transform: translateY(-1px);
         }
 
         /* LED TV Screen container for TV Shows */
@@ -2026,17 +2036,19 @@
            APPLE TV 2014 & MOBILE FULLSCREEN STYLING
            ======================================================== */
         html, body {
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            position: fixed;
-            inset: 0;
             background: #000000;
             -webkit-user-select: none;
             user-select: none;
+            overflow-x: hidden;
+        }
+
+        body.app-active {
+            overflow: hidden;
         }
 
         .tv-fullscreen-btn {
@@ -2047,23 +2059,77 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            background: rgba(15, 23, 42, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #94a3b8;
             cursor: pointer;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+            opacity: 0.7;
         }
         .tv-fullscreen-btn:hover {
+            opacity: 1;
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(255, 255, 255, 0.3);
             color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.08);
+            transform: translateY(-1px);
         }
-        .tv-fullscreen-btn:active {
-            transform: scale(0.95);
+
+        .tv-back-to-site-btn {
+            position: fixed;
+            top: 16px;
+            left: 20px;
+            z-index: 99999;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 14px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            color: #94a3b8;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+            opacity: 0.7;
+        }
+        .tv-back-to-site-btn:hover {
+            opacity: 1;
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Seamlessly fade out floating buttons when any app overlay is open */
+        body.app-active .tv-back-to-site-btn,
+        body.app-active .tv-fullscreen-btn {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: translateY(-6px);
+        }
+
+        /* Center stage layout for Ocean TV Home Screen */
+        .tv-home-stage {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            padding: 2.5rem 1rem;
+            box-sizing: border-box;
         }
 
         /* Apple TV 2014 Poster Cards for Albums */
@@ -2205,7 +2271,7 @@
     </button>
 
     <!-- RETURN TO MAIN SITE BUTTON -->
-    <a href="index.html" class="tv-back-to-site-btn" style="position: fixed; top: 18px; left: 22px; z-index: 99999; display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; background: rgba(10, 15, 30, 0.75); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 9999px; color: #cbd5e1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(12px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); transition: all 0.25s ease;" onmouseover="this.style.background='rgba(6, 182, 212, 0.2)'; this.style.borderColor='rgba(6, 182, 212, 0.6)'; this.style.color='#ffffff'; this.style.transform='scale(1.03)';" onmouseout="this.style.background='rgba(10, 15, 30, 0.75)'; this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='#cbd5e1'; this.style.transform='scale(1)';">
+    <a href="index.html" class="tv-back-to-site-btn" title="Вернуться на сайт">
         <i class="fas fa-arrow-left text-xs"></i>
         <span>На сайт</span>
     </a>
@@ -2355,48 +2421,51 @@
         </div>
     </div>
 
-    <!-- TOP BRANDING & CLOCK -->
-    <div class="brand-container">
-        <div class="brand-logo">ocean<span>tv</span></div>
-        <div class="brand-reflection">ocean<span>tv</span></div>
-    </div>
+    <!-- OCEAN TV MAIN HOME STAGE -->
+    <main class="tv-home-stage">
+        <!-- TOP BRANDING & CLOCK -->
+        <div class="brand-container">
+            <div class="brand-logo">ocean<span>tv</span></div>
+            <div class="brand-reflection">ocean<span>tv</span></div>
+        </div>
 
-    <!-- MAIN APP SHELF -->
-    <div class="shelf-container" id="shelf-container-wrap">
-        <div class="shelf-grid">
-            <div class="tv-tile" onclick="openMediaApp()">
-                <i class="fas fa-images"></i>
-                <span class="tv-tile-label">Медиатека</span>
-                <div class="lock-badge" id="media-lock-badge">
-                    <i class="fas fa-lock"></i>
+        <!-- MAIN APP SHELF -->
+        <div class="shelf-container" id="shelf-container-wrap">
+            <div class="shelf-grid">
+                <div class="tv-tile" onclick="openMediaApp()">
+                    <i class="fas fa-images"></i>
+                    <span class="tv-tile-label">Медиатека</span>
+                    <div class="lock-badge" id="media-lock-badge">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                <div class="tv-tile" onclick="openTvShowsApp()">
+                    <i class="fas fa-tv"></i>
+                    <span class="tv-tile-label">Фильмы</span>
+                </div>
+                <div class="tv-tile" onclick="openMusicApp()">
+                    <i class="fas fa-music"></i>
+                    <span class="tv-tile-label">Музыка</span>
+                </div>
+                <div class="tv-tile" onclick="openPodcastsApp()">
+                    <i class="fas fa-podcast"></i>
+                    <span class="tv-tile-label">Подкасты</span>
+                </div>
+                <div class="tv-tile" onclick="openRadioApp()">
+                    <i class="fas fa-radio"></i>
+                    <span class="tv-tile-label">Радио</span>
+                </div>
+                <div class="tv-tile" onclick="openComputersApp()">
+                    <i class="fas fa-network-wired"></i>
+                    <span class="tv-tile-label">Компьютеры</span>
+                </div>
+                <div class="tv-tile" onclick="openSettingsApp()">
+                    <i class="fas fa-sliders"></i>
+                    <span class="tv-tile-label">Настройки</span>
                 </div>
             </div>
-            <div class="tv-tile" onclick="openTvShowsApp()">
-                <i class="fas fa-tv"></i>
-                <span class="tv-tile-label">Фильмы</span>
-            </div>
-            <div class="tv-tile" onclick="openMusicApp()">
-                <i class="fas fa-music"></i>
-                <span class="tv-tile-label">Музыка</span>
-            </div>
-            <div class="tv-tile" onclick="openPodcastsApp()">
-                <i class="fas fa-podcast"></i>
-                <span class="tv-tile-label">Подкасты</span>
-            </div>
-            <div class="tv-tile" onclick="openRadioApp()">
-                <i class="fas fa-radio"></i>
-                <span class="tv-tile-label">Радио</span>
-            </div>
-            <div class="tv-tile" onclick="openComputersApp()">
-                <i class="fas fa-network-wired"></i>
-                <span class="tv-tile-label">Компьютеры</span>
-            </div>
-            <div class="tv-tile" onclick="openSettingsApp()">
-                <i class="fas fa-sliders"></i>
-                <span class="tv-tile-label">Настройки</span>
-            </div>
         </div>
-    </div>
+    </main>
 
     <!-- AUDIO CHANNELS -->
     <audio id="audio-click" src="assets/sounds/click.mp3" preload="auto"></audio>
@@ -2430,9 +2499,9 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">1</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Доступ к Медиатеке</div>
+                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Доступ к Файлам Егора</div>
                         <p class="help-step-desc">
-                            Для полноценного использования приставки Ocean TV вам необходим доступ к приватной медиатеке (файлам Егора). По умолчанию этот раздел заблокирован защитой DRM.
+                            Для просмотра личного архива (Файлов Егора) требуется снять системную защиту DRM. По умолчанию Медиатека заблокирована.
                         </p>
                     </div>
                 </div>
@@ -2443,7 +2512,7 @@
                     <div class="flex-1">
                         <div class="help-step-title"><i class="fas fa-syringe text-slate-400"></i> Сделать Jailbreak</div>
                         <p class="help-step-desc">
-                            Перейдите в приложение <strong>Настройки (Settings)</strong> на главном экране приставки, выберите пункт <strong>cyan1de Jailbreak</strong> и выполните инъекцию кастомного ядра.
+                            Перейдите в раздел <strong>Настройки (Settings)</strong> на главном экране приставки, выберите пункт <strong>cyan1de Jailbreak</strong> и выполните инъекцию кастомного ядра.
                         </p>
                         <!-- Accordion for jailbreak -->
                         <div class="help-accordion-item">
@@ -2452,7 +2521,7 @@
                                 <i class="fas fa-chevron-down arrow-icon"></i>
                             </div>
                             <div class="help-accordion-content">
-                                <p class="mb-2">Выполнение jailbreak отключает встроенные системные проверки подписи приложений и обходит DRM песочницы.</p>
+                                <p class="mb-2">Выполнение jailbreak отключает встроенные системные проверки подписи приложений и обходит DRM песочницу.</p>
                                 <strong class="text-white block mt-2 mb-1">Что делать, если возникла ошибка при jailbreak?</strong>
                                 <p>В случае сбоя или появления экрана восстановления (Recovery Screen), следуйте инструкциям на экране для подтверждения запроса в Telegram или перезагрузки системы.</p>
                             </div>
@@ -2464,9 +2533,9 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">3</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Computers</div>
+                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Компьютерах</div>
                         <p class="help-step-desc">
-                            После завершения джейлбрейка вам потребуется ввести 4-значный код доступа в Медиатеке.
+                            После завершения джейлбрейка терминал запросит 4-значный код доступа. Код спрятан на диске локального ПК:
                         </p>
                         <!-- Accordion for password -->
                         <div class="help-accordion-item">
@@ -2475,8 +2544,11 @@
                                 <i class="fas fa-chevron-down arrow-icon"></i>
                             </div>
                             <div class="help-accordion-content">
-                                <p class="mb-2">Чтобы ввести пароль, сначала перейдите в приложение <strong>Computers (Компьютеры)</strong> на главном экране приставки.</p>
-                                <p>Там вам предстоит самостоятельно исследовать локальные диски и системные журналы, чтобы найти код авторизации. После нахождения пароля его нужно ввести в Медиатеке для разблокировки доступа.</p>
+                                <p class="mb-2">Откройте приложение <strong>Компьютеры (Computers)</strong> на главном экране приставки:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                                    <li>Каталог <code>Локальный диск (C:) &gt; System &gt; passwords &gt; 887.73 &gt; SpamEnergy &gt; pass.txt</code></li>
+                                    <li>Или журнал событий ядра <code>Локальный диск (C:) &gt; Logs &gt; audit.log</code> (ищите запись fallback PIN)</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -2486,9 +2558,9 @@
                 <div class="help-step-item text-slate-400">
                     <div class="help-step-badge border-green-500/30 text-green-400"><i class="fas fa-check text-xs"></i></div>
                     <div class="flex-1">
-                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка доступа</div>
+                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка Файлов Егора</div>
                         <p class="help-step-desc">
-                            После успешного ввода кода, Медиатека приставки разблокируется, и вы получите полный и неограниченный доступ к скрытым медиаматериалам Егора, а в PUBLIC-NAS откроется закрытый архив.
+                            Вернитесь в раздел <strong>Медиатека</strong>, введите 4-значный код <code>0621</code> на терминальной клавиатуре — после этого блокировка снимется, открывая фотоархив Егора, связанные ресурсы и закрытые каталоги.
                         </p>
                     </div>
                 </div>
@@ -2546,67 +2618,88 @@
             <div class="app-title" id="media-app-title"><i class="fas fa-images"></i> Медиатека</div>
             <div class="flex items-center gap-2">
                 <button id="media-back-albums-btn" class="app-menu-btn" style="display: none;" onclick="showMediaAlbums()">Альбомы</button>
+                <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button>
                 <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
             </div>
         </div>
 
-        <!-- ALBUM SELECTION SCREEN (Apple TV 2014 Grid) -->
+        <!-- ALBUM SELECTION SCREEN (Apple TV 2014 Grid - Pure Clean) -->
         <div id="media-albums-view" class="flex-1 flex flex-col justify-center items-center p-6 overflow-y-auto">
             <div class="w-full max-w-2xl flex flex-col sm:flex-row gap-8 justify-center items-center">
-                <!-- Album 1: Файлы Егора -->
+                <!-- Album 1: Файлы Егора (Clean, zero badges or subtext) -->
                 <div class="apple-tv-poster-card cursor-pointer group" onclick="openEgorAlbum()">
                     <div class="apple-tv-poster-frame">
                         <img src="assets/images/computer/egor_files/1.jpg" alt="Файлы Егора" class="w-full h-full object-cover">
                         <div class="apple-tv-poster-gloss"></div>
-                        <div class="apple-tv-badge">118 ФОТО</div>
                     </div>
                     <div class="apple-tv-poster-reflection">
                         <img src="assets/images/computer/egor_files/1.jpg" alt="Reflection" class="w-full h-full object-cover">
                     </div>
                     <div class="mt-3 text-center">
-                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide group-hover:text-sky-400 transition">Файлы Егора</h4>
-                        <span class="text-xs text-slate-400">Личный фотопоток</span>
+                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide transition">Файлы Егора</h4>
                     </div>
                 </div>
 
-                <!-- Album 2: Архив Минорьевки -->
+                <!-- Album 2: Архив Минорьевки (Clean, zero badges or subtext) -->
                 <div class="apple-tv-poster-card cursor-pointer group" onclick="openMinorAlbum()">
                     <div class="apple-tv-poster-frame">
                         <img src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Архив Минорьевки" class="w-full h-full object-cover">
                         <div class="apple-tv-poster-gloss"></div>
-                        <div class="apple-tv-badge">7 ФОТО</div>
                     </div>
                     <div class="apple-tv-poster-reflection">
                         <img src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Reflection" class="w-full h-full object-cover">
                     </div>
                     <div class="mt-3 text-center">
-                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide group-hover:text-amber-400 transition">Архив Минорьевки</h4>
-                        <span class="text-xs text-slate-400">Историческая фотохроника</span>
+                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide transition">Архив Минорьевки</h4>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PHOTO STREAM VIEWER (Original Pure View) -->
-        <div id="media-viewer-view" class="photo-stream-container flex-1 flex flex-col justify-center items-center" style="display: none;">
+        <!-- PHOTO STREAM VIEWER (Natural Flow, Zero Overlap, Egor Resource Links) -->
+        <div id="media-viewer-view" class="photo-stream-container flex-1 flex flex-col justify-center items-center px-4 py-6" style="display: none;">
             <div class="tv-photo-frame relative">
                 <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideActivePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
                 <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideActivePhoto(1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
             </div>
-            <div id="tv-photo-caption-wrap" class="mt-4 text-center max-w-xl px-4 min-h-[30px]" style="display: none;">
-                <div id="tv-photo-caption-title" class="text-xs md:text-sm font-semibold text-white"></div>
-                <div id="tv-photo-caption-desc" class="text-[11px] text-gray-400 mt-0.5"></div>
+
+            <!-- Unified info panel in standard flex flow (no absolute collision) -->
+            <div class="mt-5 flex flex-col items-center justify-center gap-2 text-center max-w-xl px-4 select-none">
+                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
+
+                <!-- Minoryevka caption info -->
+                <div id="tv-photo-caption-wrap" class="flex flex-col items-center gap-1" style="display: none;">
+                    <div id="tv-photo-caption-title" class="text-sm md:text-base font-semibold text-white tracking-wide"></div>
+                    <div id="tv-photo-caption-desc" class="text-xs text-slate-400 max-w-lg leading-relaxed"></div>
+                </div>
+
+                <!-- Egor Files Resource Links -->
+                <div id="egor-resources-wrap" class="mt-2 flex items-center justify-center gap-2.5 flex-wrap" style="display: none;">
+                    <span class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Ссылки:</span>
+                    <a href="https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk" target="_blank" rel="noopener noreferrer" class="egor-resource-link">
+                        <i class="fab fa-youtube text-red-500 text-xs"></i>
+                        <span>МП с Егором #1</span>
+                        <i class="fas fa-external-link-alt text-[9px] text-slate-500"></i>
+                    </a>
+                    <a href="https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r" target="_blank" rel="noopener noreferrer" class="egor-resource-link">
+                        <i class="fab fa-youtube text-red-500 text-xs"></i>
+                        <span>МП с Егором #2</span>
+                        <i class="fas fa-external-link-alt text-[9px] text-slate-500"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- APP 2: TV SHOWS (APPLE TV 2014 СТИЛЬ) -->
+    <!-- APP 2: TV SHOWS (APPLE TV 2014) -->
     <div id="app-tvshows" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы</div>
-            <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
+            <div class="flex items-center gap-2">
+                <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button>
+                <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
+            </div>
         </div>
         <div class="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col justify-center items-center">
             <div class="w-full max-w-3xl">
@@ -2618,9 +2711,9 @@
                 <!-- Apple TV 2-video shelf -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
                     <!-- Video 1 -->
-                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Видеоэкскурсия по спавну и ключевым постройкам сервера от Гендальфа.')">
+                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Видеотур по Минорьевке', 'assets/video/minoryevka_tour.mp4', 'Видеоэкскурсия от Гендальфа: спавн, кварталы хрущёвок, особняк Кайзера и ключевые объекты инфраструктуры.')">
                         <div class="apple-tv-video-frame">
-                            <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур" class="w-full h-full object-cover">
+                            <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур по Минорьевке" class="w-full h-full object-cover">
                             <div class="apple-tv-video-gloss"></div>
                             <div class="apple-tv-play-btn"><i class="fas fa-play"></i></div>
                             <div class="apple-tv-badge">00:53</div>
@@ -2628,16 +2721,15 @@
                         <div class="apple-tv-video-reflection">
                             <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Reflection" class="w-full h-full object-cover">
                         </div>
-                        <div class="mt-2 text-left">
-                            <h4 class="text-sm font-semibold text-white tracking-wide group-hover:text-sky-400 transition">Видеотур по Минорьевке</h4>
-                            <span class="text-xs text-slate-500">Гендальф • 1080p</span>
+                        <div class="mt-3 text-center md:text-left">
+                            <h4 class="text-sm font-semibold text-white tracking-wide transition">Видеотур по Минорьевке</h4>
                         </div>
                     </div>
 
                     <!-- Video 2 -->
-                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года).')">
+                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Первый официальный видеоролик об эпохе основания сервера (июнь 2025 г.).')">
                         <div class="apple-tv-video-frame">
-                            <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись 2025" class="w-full h-full object-cover">
+                            <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись Минорьевки: 2025" class="w-full h-full object-cover">
                             <div class="apple-tv-video-gloss"></div>
                             <div class="apple-tv-play-btn"><i class="fas fa-play"></i></div>
                             <div class="apple-tv-badge">08:18</div>
@@ -2645,9 +2737,8 @@
                         <div class="apple-tv-video-reflection">
                             <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Reflection" class="w-full h-full object-cover">
                         </div>
-                        <div class="mt-2 text-left">
-                            <h4 class="text-sm font-semibold text-white tracking-wide group-hover:text-purple-400 transition">Летопись Минорьевки</h4>
-                            <span class="text-xs text-slate-500">Июнь 2025 • HD</span>
+                        <div class="mt-3 text-center md:text-left">
+                            <h4 class="text-sm font-semibold text-white tracking-wide transition">Летопись Минорьевки: 2025</h4>
                         </div>
                     </div>
                 </div>
@@ -2655,11 +2746,11 @@
         </div>
     </div>
 
-    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) --> (MUSIC PLACEHOLDER) -->
+    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) -->
     <div id="app-music" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-music"></i> Музыка</div>
-            <button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
+            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="music-spectrum">
@@ -2687,7 +2778,7 @@
     <div id="app-podcasts" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-podcast"></i> Подкасты</div>
-            <button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
+            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="wave-visualizer">
@@ -2710,7 +2801,7 @@
     <div id="app-radio" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
-            <button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
+            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="radio-beacon">
@@ -2730,7 +2821,7 @@
     <div id="app-computers" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-network-wired"></i> Домашняя Сеть и Файлы</div>
-            <button class="app-menu-btn" onclick="closeApp('app-computers')">Меню</button>
+            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-computers')">Меню</button>
         </div>
         <div class="comp-system-grid">
             <div class="comp-devices-list">
@@ -2832,7 +2923,7 @@
     <div id="app-settings" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-sliders"></i> Системные настройки</div>
-            <button class="app-menu-btn" onclick="closeApp('app-settings')">Меню</button>
+            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-settings')">Меню</button>
         </div>
         <div class="settings-container">
             <div class="settings-menu">
@@ -3174,6 +3265,7 @@
             playSnd(soundClick);
             const overlay = document.getElementById(appId);
             if (overlay) {
+                document.body.classList.add('app-active');
                 overlay.classList.add('active');
                 // Hide TV profile block and help trigger button inside apps
                 const tvProfile = document.getElementById('tv-profile-wrapper');
@@ -3188,6 +3280,8 @@
             const overlay = document.getElementById(appId);
             if (overlay) {
                 overlay.classList.remove('active');
+                const anyActive = Array.from(document.querySelectorAll('.app-overlay')).some(el => el.classList.contains('active'));
+                if (!anyActive) document.body.classList.remove('app-active');
                 // Show TV profile block and help trigger button when returning to shelf
                 const tvProfile = document.getElementById('tv-profile-wrapper');
                 if (tvProfile) tvProfile.style.display = 'flex';
@@ -3792,73 +3886,53 @@
                 {
                     name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-slate-500', children: [
                         {
-                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                { name: 'audit.log', id: 'audit_log', type: 'text', icon: 'fa-file-alt text-slate-500', content: '[2026-10-24 18:22:01.004] KERNEL_CORE: Memory integrity audit pass 1/3: 0x00000000 - 0x7FFFFFFF [OK]\n[2026-10-24 18:22:01.112] SEC_SUBSYSTEM: Initializing crypto providers (AES-256-GCM, RSA-4096, SHA-512)\n[2026-10-24 18:22:01.205] STORAGE_MGR: Mounted drive volume C: (NTFS / UUID: e48b-719a-9920)\n[2026-10-24 18:22:01.380] AUTH_SERVICE: User session spawned for operator \'egor_admin\'\n[2026-10-24 18:22:02.045] DRM_DAEMON: Media playback sandbox enforced under policy profile #4\n[2026-10-24 18:22:02.190] SEC_AUDIT: Generating emergency terminal bypass token...\n[2026-10-24 18:22:02.215] DEBUG_REGISTER_04:\n       0000: 4F 43 45 41 4E 5F 54 56  5F 54 4F 4B 45 4E 5F 52  OCEAN_TV_TOKEN_R\n       0010: 45 53 54 52 49 43 54 45  44 5F 41 55 54 48 5F 56  ESTRICTED_AUTH_V\n       0020: 30 36 32 31 00 00 00 00  A1 9F 3C 78 52 11 0B FE  0621....<xR..\n[2026-10-24 18:22:02.219] AUTH_CACHE: Stored fallback PIN [0621] in memory slot #7 (valid until kernel reset)\n[2026-10-24 18:22:03.001] NET_STACK: Eth0 link up (1000BASE-T, full duplex, IP 192.168.0.42)\n[2026-10-24 18:22:03.118] DAEMON_DISCOVERY: PUBLIC-NAS network share available at //192.168.0.100/share\n[2026-10-24 18:22:03.490] AUDIT_COMPLETE: System ready. 0 security faults logged.' },
-                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'Diagnostic: 0 errors found.' }
-                            ]
-                        },
-                        {
-                            name: 'Windows', id: 'Windows', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                            name: 'System', id: 'System', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                 {
-                                    name: 'System32', id: 'System32', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                        { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
-                                        { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
-                                        { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-slate-500' },
-                                        { name: 'ocean_drv.sys', id: 'ocean_drv', type: 'sys', icon: 'fa-cogs text-slate-500' }
-                                    ]
-                                },
-                                {
-                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                         {
-                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                                 {
-                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                                         { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-slate-500', content: '0621' }
                                                     ]
                                                 }
                                             ]
                                         }
                                     ]
-                                }
+                                },
+                                { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                { name: 'ocean_drv.sys', id: 'ocean_drv', type: 'sys', icon: 'fa-cogs text-slate-500' }
                             ]
                         },
                         {
-                            name: 'Program Files', id: 'Program Files', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                            name: 'Users', id: 'Users', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                 {
-                                    name: 'OceanTV', id: 'OceanTV', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                        { name: 'ocean_shell.exe', id: 'shell', type: 'sys', icon: 'fa-cogs text-slate-500' },
-                                        { name: 'theme.dll', id: 'theme', type: 'sys', icon: 'fa-cogs text-slate-500' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            name: 'Users', id: 'Users', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                {
-                                    name: 'admin', id: 'admin', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                    name: 'admin', id: 'admin', type: 'folder', icon: 'fa-user text-slate-500', children: [
                                         { name: 'settings.ini', id: 'settings', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'theme=ocean; lang=ru;' }
                                     ]
                                 }
+                            ]
+                        },
+                        {
+                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                { name: 'audit.log', id: 'audit_log', type: 'text', icon: 'fa-file-alt text-slate-500', content: '[2026-10-24 18:22:01.004] KERNEL_CORE: Memory integrity audit pass 1/3: 0x00000000 - 0x7FFFFFFF [OK]\n[2026-10-24 18:22:01.112] SEC_SUBSYSTEM: Initializing crypto providers (AES-256-GCM, RSA-4096, SHA-512)\n[2026-10-24 18:22:01.205] STORAGE_MGR: Mounted drive volume C: (NTFS / UUID: e48b-719a-9920)\n[2026-10-24 18:22:01.380] AUTH_SERVICE: User session spawned for operator \'egor_admin\'\n[2026-10-24 18:22:02.045] DRM_DAEMON: Media playback sandbox enforced under policy profile #4\n[2026-10-24 18:22:02.190] SEC_AUDIT: Generating emergency terminal bypass token...\n[2026-10-24 18:22:02.215] DEBUG_REGISTER_04:\n       0000: 4F 43 45 41 4E 5F 54 56  5F 54 4F 4B 45 4E 5F 52  OCEAN_TV_TOKEN_R\n       0010: 45 53 54 52 49 43 54 45  44 5F 41 55 54 48 5F 56  ESTRICTED_AUTH_V\n       0020: 30 36 32 31 00 00 00 00  A1 9F 3C 78 52 11 0B FE  0621....<xR..\n[2026-10-24 18:22:02.219] AUTH_CACHE: Stored fallback PIN [0621] in memory slot #7 (valid until kernel reset)\n[2026-10-24 18:22:03.001] NET_STACK: Eth0 link up (1000BASE-T, full duplex, IP 192.168.0.42)\n[2026-10-24 18:22:03.118] DAEMON_DISCOVERY: PUBLIC-NAS network share available at //192.168.0.100/share\n[2026-10-24 18:22:03.490] AUDIT_COMPLETE: System ready. 0 security faults logged.' },
+                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'Diagnostic: 0 errors found.' }
                             ]
                         }
                     ]
                 },
                 {
                     name: 'Локальный диск (E:)', id: 'E:', type: 'folder', icon: 'fa-hdd text-slate-500', children: [
-                        { name: 'locked', id: 'locked', type: 'locked_folder', icon: 'fa-folder text-amber-500' },
+                        { name: 'locked', id: 'locked', type: 'locked_folder', icon: 'fa-folder text-slate-500' },
                         {
-                            name: 'Archive', id: 'Arch', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                            name: 'Archive', id: 'Arch', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                 { name: 'data_01.dat', id: 'd1', type: 'sys', icon: 'fa-database text-slate-500' },
                                 { name: 'data_02.dat', id: 'd2', type: 'sys', icon: 'fa-database text-slate-500' }
                             ]
                         },
-                        { name: 'Temp', id: 'Temp', type: 'folder', icon: 'fa-folder text-amber-500', children: [] }
-                    ]
-                },
-                {
-                    name: 'Интерфейс', id: 'Interface', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                        { name: 'skin.bin', id: 'skin', type: 'sys', icon: 'fa-file-code text-slate-500' },
-                        { name: 'fonts.dat', id: 'fonts', type: 'sys', icon: 'fa-file-code text-slate-500' }
+                        { name: 'Temp', id: 'Temp', type: 'folder', icon: 'fa-folder text-slate-500', children: [] }
                     ]
                 }
             ]
@@ -4004,14 +4078,14 @@
                         </div>
                         
                         <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none relative" onclick="openNasMinoryevkaFolder()">
-                            <i class="fas fa-folder text-amber-500 text-4xl mb-3"></i>
+                            <i class="fas fa-folder text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Minoryevka</span>
                             ${!isUnlocked ? '<div class="absolute top-2 right-2 text-xs text-slate-400"><i class="fas fa-lock"></i></div>' : ''}
                         </div>
                     </div>
                 `;
             } else if (subfolder === 'minoryevka') {
-                titleEl.innerHTML = `<button onclick="renderNasExplorer()" class="text-slate-600 hover:underline mr-2 text-xs"><i class="fas fa-arrow-left"></i> Назад</button> <i class="fas fa-folder-open text-amber-500"></i> PUBLIC-NAS / Minoryevka`;
+                titleEl.innerHTML = `<button onclick="renderNasExplorer()" class="text-slate-600 hover:underline mr-2 text-xs"><i class="fas fa-arrow-left"></i> Назад</button> <i class="fas fa-folder-open text-slate-500"></i> PUBLIC-NAS / Minoryevka`;
                 
                 container.innerHTML = `
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -4283,6 +4357,7 @@
             playSnd(soundClick);
             const overlay = document.getElementById('help-modal-overlay');
             if (overlay) {
+                document.body.classList.add('app-active');
                 overlay.classList.add('active');
             }
             // Hide bottom-right notification while modal is active
@@ -4297,6 +4372,8 @@
             const overlay = document.getElementById('help-modal-overlay');
             if (overlay) {
                 overlay.classList.remove('active');
+                const anyActive = Array.from(document.querySelectorAll('.app-overlay')).some(el => el.classList.contains('active'));
+                if (!anyActive) document.body.classList.remove('app-active');
             }
 
             // Persistence storage for this session if checked
@@ -4425,12 +4502,14 @@
             const backBtn = document.getElementById('media-back-albums-btn');
             const titleEl = document.getElementById('media-app-title');
             const captionWrap = document.getElementById('tv-photo-caption-wrap');
+            const egorResWrap = document.getElementById('egor-resources-wrap');
 
             if (albumsView) albumsView.style.display = 'none';
             if (viewerView) viewerView.style.display = 'flex';
             if (backBtn) backBtn.style.display = 'inline-block';
             if (titleEl) titleEl.innerHTML = `<i class="fas fa-images"></i> Файлы Егора`;
             if (captionWrap) captionWrap.style.display = 'none';
+            if (egorResWrap) egorResWrap.style.display = 'flex';
 
             updateActivePhotoDisplay();
         }
@@ -4443,14 +4522,31 @@
             const backBtn = document.getElementById('media-back-albums-btn');
             const titleEl = document.getElementById('media-app-title');
             const captionWrap = document.getElementById('tv-photo-caption-wrap');
+            const egorResWrap = document.getElementById('egor-resources-wrap');
 
             if (albumsView) albumsView.style.display = 'none';
             if (viewerView) viewerView.style.display = 'flex';
             if (backBtn) backBtn.style.display = 'inline-block';
             if (titleEl) titleEl.innerHTML = `<i class="fas fa-landmark text-amber-400"></i> Архив Минорьевки`;
-            if (captionWrap) captionWrap.style.display = 'block';
+            if (captionWrap) captionWrap.style.display = 'flex';
+            if (egorResWrap) egorResWrap.style.display = 'none';
 
             updateActivePhotoDisplay();
+        }
+
+        function showMediaAlbums() {
+            playSnd(soundClick);
+            const albumsView = document.getElementById('media-albums-view');
+            const viewerView = document.getElementById('media-viewer-view');
+            const backBtn = document.getElementById('media-back-albums-btn');
+            const titleEl = document.getElementById('media-app-title');
+            const egorResWrap = document.getElementById('egor-resources-wrap');
+
+            if (albumsView) albumsView.style.display = 'flex';
+            if (viewerView) viewerView.style.display = 'none';
+            if (backBtn) backBtn.style.display = 'none';
+            if (titleEl) titleEl.innerHTML = `<i class="fas fa-images"></i> Медиатека`;
+            if (egorResWrap) egorResWrap.style.display = 'none';
         }
 
         function slideActivePhoto(dir) {
