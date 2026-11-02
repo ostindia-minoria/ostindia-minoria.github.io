@@ -2117,18 +2117,16 @@
             transform: translateY(-6px);
         }
 
-        /* Center stage layout for Ocean TV Home Screen */
+        /* Top stage layout for Ocean TV Home Screen */
         .tv-home-stage {
-            min-height: 100vh;
-            min-height: 100dvh;
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             position: relative;
             z-index: 10;
-            padding: 2.5rem 1rem;
+            padding-top: 45px;
+            padding-bottom: 2.5rem;
             box-sizing: border-box;
         }
 
@@ -2442,6 +2440,9 @@
                 <div class="tv-tile" onclick="openTvShowsApp()">
                     <i class="fas fa-tv"></i>
                     <span class="tv-tile-label">Фильмы</span>
+                    <div class="lock-badge" id="tvshows-lock-badge">
+                        <i class="fas fa-lock"></i>
+                    </div>
                 </div>
                 <div class="tv-tile" onclick="openMusicApp()">
                     <i class="fas fa-music"></i>
@@ -2533,21 +2534,21 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">3</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Компьютерах</div>
+                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти код в Компьютерах</div>
                         <p class="help-step-desc">
-                            После завершения джейлбрейка терминал запросит 4-значный код доступа. Код спрятан на диске локального ПК:
+                            После завершения джейлбрейка терминал запросит 4-значный защитный код:
                         </p>
                         <!-- Accordion for password -->
                         <div class="help-accordion-item">
                             <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
-                                <span>Инструкция по поиску пароля</span>
+                                <span>Инструкция по поиску кода</span>
                                 <i class="fas fa-chevron-down arrow-icon"></i>
                             </div>
                             <div class="help-accordion-content">
-                                <p class="mb-2">Откройте приложение <strong>Компьютеры (Computers)</strong> на главном экране приставки:</p>
+                                <p class="mb-2">Откройте приложение <strong>Компьютеры</strong> на главном экране:</p>
                                 <ul class="list-disc pl-5 space-y-1 text-slate-300">
-                                    <li>Каталог <code>Локальный диск (C:) &gt; System &gt; passwords &gt; 887.73 &gt; SpamEnergy &gt; pass.txt</code></li>
-                                    <li>Или журнал событий ядра <code>Локальный диск (C:) &gt; Logs &gt; audit.log</code> (ищите запись fallback PIN)</li>
+                                    <li>Перейдите в <code>Локальный диск (C:) &gt; Logs &gt; audit.log</code></li>
+                                    <li>Изучите журнал событий ядра и найдите аварийный токен (fallback PIN)</li>
                                 </ul>
                             </div>
                         </div>
@@ -2558,9 +2559,9 @@
                 <div class="help-step-item text-slate-400">
                     <div class="help-step-badge border-green-500/30 text-green-400"><i class="fas fa-check text-xs"></i></div>
                     <div class="flex-1">
-                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка Файлов Егора</div>
+                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка Медиатеки и Фильмов</div>
                         <p class="help-step-desc">
-                            Вернитесь в раздел <strong>Медиатека</strong>, введите 4-значный код <code>0621</code> на терминальной клавиатуре — после этого блокировка снимется, открывая фотоархив Егора, связанные ресурсы и закрытые каталоги.
+                            Введите 4-значный код <code>0621</code> на терминальной клавиатуре — после этого блокировка снимется, открывая доступ к разделам <strong>Медиатека</strong> и <strong>Фильмы</strong>, а также к закрытым сетевым хранилищам.
                         </p>
                     </div>
                 </div>
@@ -2665,17 +2666,17 @@
             </div>
 
             <!-- Unified info panel in standard flex flow (no absolute collision) -->
-            <div class="mt-5 flex flex-col items-center justify-center gap-2 text-center max-w-xl px-4 select-none">
-                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
-
+            <div class="mt-4 flex flex-col items-center justify-center gap-2 text-center max-w-2xl px-4 select-none">
                 <!-- Minoryevka caption info -->
                 <div id="tv-photo-caption-wrap" class="flex flex-col items-center gap-1" style="display: none;">
                     <div id="tv-photo-caption-title" class="text-sm md:text-base font-semibold text-white tracking-wide"></div>
                     <div id="tv-photo-caption-desc" class="text-xs text-slate-400 max-w-lg leading-relaxed"></div>
                 </div>
 
+                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
+
                 <!-- Egor Files Resource Links -->
-                <div id="egor-resources-wrap" class="mt-2 flex items-center justify-center gap-2.5 flex-wrap" style="display: none;">
+                <div id="egor-resources-wrap" class="mt-1 flex items-center justify-center gap-2.5 flex-wrap" style="display: none;">
                     <span class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Ссылки:</span>
                     <a href="https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk" target="_blank" rel="noopener noreferrer" class="egor-resource-link">
                         <i class="fab fa-youtube text-red-500 text-xs"></i>
@@ -2970,18 +2971,25 @@
             localStorage.setItem('om_tv_session_id', sessionToken);
         }
 
-        // Dynamic lock badge updater
-        function updateMediaLockBadge() {
-            const badge = document.getElementById('media-lock-badge');
-            if (badge) {
-                if (isJailbroken) {
+        // Dynamic lock badge updater for Media & Movies
+        function updateLockBadges() {
+            const isUnlocked = isJailbroken && isPasscodeUnlocked;
+            const mediaBadge = document.getElementById('media-lock-badge');
+            const tvshowsBadge = document.getElementById('tvshows-lock-badge');
+
+            [mediaBadge, tvshowsBadge].forEach(badge => {
+                if (!badge) return;
+                if (isUnlocked) {
                     badge.classList.add('unlocked');
                     setTimeout(() => { badge.style.display = 'none'; }, 300);
                 } else {
                     badge.style.display = 'flex';
                     badge.classList.remove('unlocked');
                 }
-            }
+            });
+        }
+        function updateMediaLockBadge() {
+            updateLockBadges();
         }
 
         // Sounds elements
@@ -3257,6 +3265,28 @@
             initBootEvents();
         }
 
+        // Global Escape key listener to close active overlays
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const videoOverlay = document.getElementById('tv-video-overlay');
+                if (videoOverlay && videoOverlay.classList.contains('active')) {
+                    closeTvVideo();
+                    return;
+                }
+                const passcodeModal = document.getElementById('tv-passcode-modal');
+                if (passcodeModal && passcodeModal.classList.contains('active')) {
+                    closePasscodeModal();
+                    return;
+                }
+                const helpModal = document.getElementById('help-modal-overlay');
+                if (helpModal && helpModal.classList.contains('active')) {
+                    closeHelpModal();
+                    return;
+                }
+            }
+        });
+
+
         // Cloud Sync disabled (offline only)
 
         // --- APP OVERLAYS DISPLAY CONTROLS ---
@@ -3306,18 +3336,21 @@
             }
         }
 
+        let passcodeTargetApp = 'media';
+
         // Media App unlock logic (Locked initially until jailbroken in settings)
         function openMediaApp() {
             if (!tvPowerState) return;
             
             if (!isJailbroken) {
-                showTvAlert("Система заблокирована", "Медиатека закрыта. Выполните Jailbreak в Настройках приставки.");
+                showTvAlert("Система защиты", "Медиатека заблокирована DRM. Выполните Jailbreak в Настройки > Система.");
                 return;
             }
             
             if (isPasscodeUnlocked) {
                 openApp('app-media'); showMediaAlbums();
             } else {
+                passcodeTargetApp = 'media';
                 openPasscodeModal();
             }
         }
@@ -3377,11 +3410,17 @@
                     d.className = "tv-passcode-dot success";
                 });
                 
+                updateLockBadges();
                 if (window.syncAccountData) window.syncAccountData();
                 
                 setTimeout(() => {
                     closePasscodeModal();
-                    openApp('app-media'); showMediaAlbums();
+                    if (passcodeTargetApp === 'tvshows') {
+                        openApp('app-tvshows');
+                    } else {
+                        openApp('app-media');
+                        showMediaAlbums();
+                    }
                 }, 400);
             } else {
                 dots.forEach(d => {
@@ -3433,7 +3472,63 @@
         let activeVideoIndex = 0;
 
         function openTvShowsApp() {
-            openApp('app-tvshows');
+            if (!tvPowerState) return;
+
+            if (!isJailbroken) {
+                showTvAlert("Система защиты", "Фильмы заблокированы DRM. Выполните Jailbreak в Настройки > Система.");
+                return;
+            }
+
+            if (isPasscodeUnlocked) {
+                openApp('app-tvshows');
+            } else {
+                passcodeTargetApp = 'tvshows';
+                openPasscodeModal();
+            }
+        }
+
+        function openTvVideo(title, src, caption) {
+            playSnd(soundClick);
+            const overlay = document.getElementById('tv-video-overlay');
+            const player = document.getElementById('tv-video-player');
+            const titleEl = document.getElementById('tv-video-title');
+            const captionEl = document.getElementById('tv-video-caption');
+
+            if (titleEl) {
+                titleEl.innerHTML = `<i class="fas fa-film text-purple-400 mr-2"></i> ${title}`;
+            }
+            if (captionEl) {
+                captionEl.textContent = caption || '';
+            }
+            if (player) {
+                player.pause();
+                player.src = src;
+                player.load();
+                const playPromise = player.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
+            }
+            if (overlay) {
+                document.body.classList.add('app-active');
+                overlay.classList.add('active');
+            }
+        }
+
+        function closeTvVideo() {
+            playSnd(soundClick);
+            const overlay = document.getElementById('tv-video-overlay');
+            const player = document.getElementById('tv-video-player');
+            if (player) {
+                player.pause();
+                player.removeAttribute('src');
+                player.load();
+            }
+            if (overlay) {
+                overlay.classList.remove('active');
+                const anyActive = Array.from(document.querySelectorAll('.app-overlay')).some(el => el.classList.contains('active'));
+                if (!anyActive) document.body.classList.remove('app-active');
+            }
         }
 
         function buildVideoPlaylistUI() {
@@ -3887,19 +3982,6 @@
                     name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-slate-500', children: [
                         {
                             name: 'System', id: 'System', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                {
-                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                        {
-                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                                {
-                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-slate-500', content: '0621' }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
                                 { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
                                 { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-slate-500' },
                                 { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
@@ -4480,19 +4562,6 @@
             { src: 'assets/images/minoryevka/map_hindenburg.jpg', title: 'Карта Гинденбурга', desc: 'Территориальная карта эпохи СОР.' },
             { src: 'assets/images/minoryevka/map_nikita.jpg', title: 'Карта спавна времён Никиты', desc: 'Историческая схема застройки.' }
         ];
-
-        function showMediaAlbums() {
-            playSnd(soundClick);
-            const albumsView = document.getElementById('media-albums-view');
-            const viewerView = document.getElementById('media-viewer-view');
-            const backBtn = document.getElementById('media-back-albums-btn');
-            const titleEl = document.getElementById('media-app-title');
-
-            if (albumsView) albumsView.style.display = 'flex';
-            if (viewerView) viewerView.style.display = 'none';
-            if (backBtn) backBtn.style.display = 'none';
-            if (titleEl) titleEl.innerHTML = `<i class="fas fa-images"></i> Медиатека`;
-        }
 
         function openEgorAlbum() {
             playSnd(soundClick);
