@@ -2556,7 +2556,7 @@
     <div id="tv-passcode-modal" class="tv-passcode-overlay">
         <div class="tv-passcode-box">
             <h3 class="text-lg font-semibold text-white mb-2">Введите пароль</h3>
-            <p class="text-xs text-gray-400 mb-4">Для разблокировки файлов Егора</p>
+            <p class="text-xs text-gray-400 mb-4">Для разблокировки Медиатеки и Фильмов</p>
             
             <div class="tv-passcode-dots">
                 <div class="tv-passcode-dot" id="dot-0"></div>
@@ -2593,7 +2593,7 @@
             <div class="app-title" id="media-app-title"><i class="fas fa-images"></i> Медиатека</div>
             <div class="flex items-center gap-2">
                 <button id="media-back-albums-btn" class="app-menu-btn" style="display: none;" onclick="showMediaAlbums()">Альбомы</button>
-                <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button>
+                
                 <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
             </div>
         </div>
@@ -2672,7 +2672,7 @@
         <div class="app-header">
             <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы</div>
             <div class="flex items-center gap-2">
-                <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button>
+                
                 <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
             </div>
         </div>
@@ -2725,7 +2725,7 @@
     <div id="app-music" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-music"></i> Музыка</div>
-            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
+            <button class="app-menu-btn" onclick="closeApp('app-music')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="music-spectrum">
@@ -2753,7 +2753,7 @@
     <div id="app-podcasts" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-podcast"></i> Подкасты</div>
-            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
+            <button class="app-menu-btn" onclick="closeApp('app-podcasts')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="wave-visualizer">
@@ -2776,7 +2776,7 @@
     <div id="app-radio" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
-            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
+            <button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center text-center">
             <div class="radio-beacon">
@@ -2796,7 +2796,7 @@
     <div id="app-computers" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-network-wired"></i> Домашняя Сеть и Файлы</div>
-            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-computers')">Меню</button>
+            <button class="app-menu-btn" onclick="closeApp('app-computers')">Меню</button>
         </div>
         <div class="comp-system-grid">
             <div class="comp-devices-list">
@@ -2898,7 +2898,7 @@
     <div id="app-settings" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-sliders"></i> Системные настройки</div>
-            <button class="app-menu-btn" onclick="toggleFullscreen()" title="Полный экран"><i class="fas fa-expand text-xs"></i></button><button class="app-menu-btn" onclick="closeApp('app-settings')">Меню</button>
+            <button class="app-menu-btn" onclick="closeApp('app-settings')">Меню</button>
         </div>
         <div class="settings-container">
             <div class="settings-menu">
@@ -3212,7 +3212,7 @@
 
             handleBootClick = () => {
                 cleanupBootEvents();
-                enterFullscreen(); startBootSequence();
+                if (!isFullscreen()) enterFullscreen(); startBootSequence();
             };
 
             if (bootModal) {
@@ -3226,7 +3226,7 @@
                     if (wrap && !wrap.classList.contains('zooming') && !tvPowerState) {
                         e.preventDefault();
                         cleanupBootEvents();
-                        enterFullscreen(); startBootSequence();
+                        if (!isFullscreen()) enterFullscreen(); startBootSequence();
                     }
                 }
             };
@@ -4539,6 +4539,7 @@
         }
 
         function enterFullscreen() {
+            if (isFullscreen()) return;
             const el = document.documentElement;
             if (el.requestFullscreen) {
                 el.requestFullscreen().catch(() => {});
