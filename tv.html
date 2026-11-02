@@ -2234,7 +2234,7 @@
         </button>
     </div>
 
-    <!-- CENTRAL INSTRUCTION MODAL (РУКОВОДСТВО) -->
+    <!-- CENTRAL INSTRUCTION MODAL -->
     <div id="help-modal-overlay" class="help-modal-overlay" onclick="if(event.target === this) closeHelpModal()">
         <div class="help-modal-box">
             <!-- Modal Header -->
@@ -2247,17 +2247,13 @@
 
             <!-- Scrollable Guide Content -->
             <div class="help-scroll-container">
-                <div class="p-4 rounded-xl bg-sky-950/40 border border-sky-500/20 mb-4 text-xs text-sky-200 leading-relaxed">
-                    <strong>Ocean TV</strong> — универсальный интерактивный медиацентр сообщества. Здесь собраны архивы чатов, видеохроники, фотодокументы, радио и локальные файлы.
-                </div>
-
                 <!-- Step 1 -->
                 <div class="help-step-item">
                     <div class="help-step-badge">1</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-bars text-slate-400"></i> Разделы меню</div>
+                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Доступ к Медиатеке</div>
                         <p class="help-step-desc">
-                            7 основных разделов: Медиатека, Фильмы, Музыка, Подкасты, Радио, Компьютеры и Настройки.
+                            Для полноценного использования приставки Ocean TV вам необходим доступ к приватной медиатеке (файлам Егора). По умолчанию этот раздел заблокирован защитой DRM.
                         </p>
                     </div>
                 </div>
@@ -2266,10 +2262,22 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">2</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Компьютеры и пароль</div>
+                        <div class="help-step-title"><i class="fas fa-syringe text-slate-400"></i> Сделать Jailbreak</div>
                         <p class="help-step-desc">
-                            В разделе <strong>«Компьютеры»</strong> перейдите в системную папку <code>logs</code> и откройте <code>system_access.log</code>, чтобы узнать код авторизации для закрытых разделов. На сетевом диске <strong>PUBLIC-NAS</strong> хранится архив сервера Минорьевка.
+                            Перейдите в приложение <strong>Настройки (Settings)</strong> на главном экране приставки, выберите пункт <strong>cyan1de Jailbreak</strong> и выполните инъекцию кастомного ядра.
                         </p>
+                        <!-- Accordion for jailbreak -->
+                        <div class="help-accordion-item">
+                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
+                                <span>Дополнительные инструкции по Jailbreak</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </div>
+                            <div class="help-accordion-content">
+                                <p class="mb-2">Выполнение jailbreak отключает встроенные системные проверки подписи приложений и обходит DRM песочницы.</p>
+                                <strong class="text-white block mt-2 mb-1">Что делать, если возникла ошибка при jailbreak?</strong>
+                                <p>В случае сбоя или появления экрана восстановления (Recovery Screen), следуйте инструкциям на экране для подтверждения запроса в Telegram или перезагрузки системы.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2277,20 +2285,31 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">3</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Медиатека (2 вкладки)</div>
+                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Computers</div>
                         <p class="help-step-desc">
-                            Введите полученный PIN-код для входа. Внутри доступны две вкладки: <strong>«Файлы Егора»</strong> (личный фотоархив) и <strong>«Архив Минорьевки»</strong> (историческая фотохроника).
+                            После завершения джейлбрейка вам потребуется ввести 4-значный код доступа в Медиатеке.
                         </p>
+                        <!-- Accordion for password -->
+                        <div class="help-accordion-item">
+                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
+                                <span>Инструкция по поиску пароля</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </div>
+                            <div class="help-accordion-content">
+                                <p class="mb-2">Чтобы ввести пароль, сначала перейдите в приложение <strong>Computers (Компьютеры)</strong> на главном экране приставки.</p>
+                                <p>Там вам предстоит самостоятельно исследовать локальные диски и системные журналы, чтобы найти код авторизации. После нахождения пароля его нужно ввести в Медиатеке для разблокировки доступа.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="help-step-item">
-                    <div class="help-step-badge">4</div>
+                <div class="help-step-item text-slate-400">
+                    <div class="help-step-badge border-green-500/30 text-green-400"><i class="fas fa-check text-xs"></i></div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-film text-slate-400"></i> Кинозал «Фильмы»</div>
+                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка доступа</div>
                         <p class="help-step-desc">
-                            Смотрите видеоэкскурсию от Гендальфа и исторический фильм летописи 2025 года прямо во встроенном видеоплеере.
+                            После успешного ввода кода, Медиатека приставки разблокируется, и вы получите полный и неограниченный доступ к скрытым медиаматериалам Егора, а в PUBLIC-NAS откроется закрытый архив.
                         </p>
                     </div>
                 </div>
@@ -2298,7 +2317,10 @@
 
             <!-- Footer Controls -->
             <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between z-10">
-                <span class="text-[11px] text-gray-500 font-mono">Ocean TV v2.4 Universal Media Center</span>
+                <label class="flex items-center gap-2.5 cursor-pointer text-xs text-slate-400 hover:text-white transition-colors select-none">
+                    <input type="checkbox" id="dont-show-help-session" class="rounded bg-black/40 border-white/10 text-sky-500 focus:ring-0 focus:ring-offset-0">
+                    <span>Больше не показывать в этой сессии</span>
+                </label>
                 <button class="app-menu-btn" onclick="closeHelpModal()">Понятно</button>
             </div>
         </div>
@@ -2339,118 +2361,71 @@
         </div>
     </div>
 
-    <!-- APP 1: MEDIA (TWO TABS: EGOR & MINORYEVKA) -->
+    <!-- APP 1: MEDIA (PHOTO STREAM) -->
     <div id="app-media" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-images text-sky-400"></i> Медиатека</div>
+            <div class="app-title"><i class="fas fa-images"></i> Файлы Егора</div>
             <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
         </div>
-        
-        <!-- Tab Selector -->
-        <div class="media-tabs-bar">
-            <button id="media-tab-egor" class="media-tab-btn active" onclick="switchMediaTab('egor')">
-                <i class="fas fa-folder-closed"></i> Файлы Егора
-            </button>
-            <button id="media-tab-minor" class="media-tab-btn" onclick="switchMediaTab('minor')">
-                <i class="fas fa-landmark"></i> Архив Минорьевки
-            </button>
-        </div>
-
-        <!-- View 1: Egor Files -->
-        <div id="media-egor-view" class="photo-stream-container flex-1 flex items-center justify-center">
+        <div class="photo-stream-container">
             <div class="tv-photo-frame">
                 <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slidePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
                 <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slidePhoto(1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="tv-photo-indicator" id="tv-photo-indicator">Фото 1</div>
-            </div>
-        </div>
-
-        <!-- View 2: Minoryevka Archive -->
-        <div id="media-minor-view" class="photo-stream-container flex-1 flex flex-col items-center justify-center" style="display: none;">
-            <div class="tv-photo-frame relative">
-                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideMinorPhoto(-1)"><i class="fas fa-chevron-left"></i></button>
-                <img id="tv-minor-photo-display" src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Архив Минорьевки" class="tv-photo-img">
-                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideMinorPhoto(1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="tv-photo-indicator" id="tv-minor-photo-indicator">Фото 1 из 7</div>
-            </div>
-            <div class="mt-3 text-center max-w-lg px-4">
-                <h4 id="tv-minor-photo-title" class="text-sm font-bold text-white tracking-wide">Легендарный первый состав сервера</h4>
-                <p id="tv-minor-photo-desc" class="text-xs text-gray-400 mt-1">Август 2024 года. Первые недели жизни сообщества, фото Еврея.</p>
+                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
             </div>
         </div>
     </div>
 
-    <!-- APP 2: TV SHOWS (КИНОЗАЛ СООБЩЕСТВА) -->
+    <!-- APP 2: TV SHOWS (КИНОЗАЛ) -->
     <div id="app-tvshows" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы и видеоархив</div>
+            <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы</div>
             <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
         </div>
-        <div class="flex-1 overflow-y-auto p-4 md:p-8 max-w-5xl mx-auto w-full flex flex-col justify-center">
-            <div class="text-center mb-6">
-                <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">Архивный кинозал</h3>
-                <p class="text-xs md:text-sm text-gray-400 mt-1">Оцифрованные видеозаписи и летописи сообщества в высоком качестве</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl mx-auto">
                 <!-- Film 1 -->
-                <div class="movie-card group bg-slate-900/80 border border-white/10 hover:border-sky-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-sky-500/10 flex flex-col">
-                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')">
+                <div class="bg-slate-900/80 border border-white/10 hover:border-white/30 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer group" onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Экскурсия по ключевым локациям сервера.')">
                         <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur border border-white/10 text-[10px] font-bold text-sky-400">1080p FULL HD</div>
-                        <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[11px] font-mono text-gray-300">00:53</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-gray-300">00:53</div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-sky-500 text-white flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
                                 <i class="fas fa-play text-sm ml-0.5"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-4 flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-semibold text-sky-400 uppercase tracking-wider mb-1">Экскурсия по серверу</div>
-                            <h4 class="text-lg font-bold text-white mb-2">Видеотур по Минорьевке</h4>
-                            <p class="text-xs text-gray-400 leading-relaxed">
-                                Видеоэкскурсия от Гендальфа: спавн, кварталы хрущёвок, особняк Кайзера и ключевые объекты инфраструктуры.
-                            </p>
+                            <h4 class="text-base font-bold text-white">Видеотур по Минорьевке</h4>
+                            <span class="text-xs text-gray-400">Гендальф</span>
                         </div>
-                        <div class="pt-4 mt-2 border-t border-white/5 flex items-center justify-between">
-                            <span class="text-[11px] text-gray-400"><i class="fas fa-user-circle mr-1"></i> Гендальф</span>
-                            <button onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
-                                <i class="fas fa-play text-[10px]"></i> Смотреть
-                            </button>
-                        </div>
+                        <button onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Экскурсия по ключевым локациям сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
+                            <i class="fas fa-play text-[10px]"></i> Смотреть
+                        </button>
                     </div>
                 </div>
 
                 <!-- Film 2 -->
-                <div class="movie-card group bg-slate-900/80 border border-white/10 hover:border-purple-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-purple-500/10 flex flex-col">
-                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="openTvVideo('Летопись Минорьевки (Июнь 2025)', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года). Документальная хроника жизни и развития сервера.')">
+                <div class="bg-slate-900/80 border border-white/10 hover:border-white/30 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer group" onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Историческое видео основания сервера.')">
                         <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись 2025" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur border border-white/10 text-[10px] font-bold text-purple-400">АРХИВ 2025</div>
-                        <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[11px] font-mono text-gray-300">08:18</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-gray-300">08:18</div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-purple-500 text-white flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
                                 <i class="fas fa-play text-sm ml-0.5"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-4 flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Историческая хроника</div>
-                            <h4 class="text-lg font-bold text-white mb-2">Летопись Минорьевки: 2025</h4>
-                            <p class="text-xs text-gray-400 leading-relaxed">
-                                Первый официальный видеоролик об эпохе основания сервера: строительство, первые конфликты и игроки сообщества.
-                            </p>
+                            <h4 class="text-base font-bold text-white">Летопись Минорьевки</h4>
+                            <span class="text-xs text-gray-400">Июнь 2025</span>
                         </div>
-                        <div class="pt-4 mt-2 border-t border-white/5 flex items-center justify-between">
-                            <span class="text-[11px] text-gray-400"><i class="fas fa-calendar-alt mr-1"></i> Июнь 2025</span>
-                            <button onclick="openTvVideo('Летопись Минорьевки (Июнь 2025)', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года). Документальная хроника жизни и развития сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
-                                <i class="fas fa-play text-[10px]"></i> Смотреть
-                            </button>
-                        </div>
+                        <button onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Историческое видео основания сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
+                            <i class="fas fa-play text-[10px]"></i> Смотреть
+                        </button>
                     </div>
                 </div>
             </div>
@@ -2665,7 +2640,7 @@
         let tvPowerState = false;
         let isPasscodeUnlocked = localStorage.getItem('om_tv_passcode_unlocked') === 'true';
         let currentPasscodeInput = "";
-        const PASSCODE_CORRECT = "4515";
+        const PASSCODE_CORRECT = "0621";
         
         let currentPhotoIndex = 1;
 
@@ -3581,39 +3556,22 @@
 
         // --- INTEGRATED LOCAL FILE SYSTEM ENGINE ---
         const tvFilesystem = {
-            name: 'Мой компьютер',
+            name: 'Локальный узел',
             id: 'root',
             type: 'folder',
             children: [
                 {
                     name: 'Рабочий стол', id: 'Desktop', type: 'folder', icon: 'fa-desktop text-slate-500', children: [
-                        { 
-                            name: 'logs', id: 'Desktop-logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                { 
-                                    name: 'system_access.log', 
-                                    id: 'desktop_system_access_log', 
-                                    type: 'text', 
-                                    icon: 'fa-file-alt text-amber-300', 
-                                    content: '[SYSTEM SECURITY REPORT]\nNode: OCEAN-TV-01 (Terminal)\nSecurity Status: Operational\n----------------------------------------\n[AUTHORIZATION CODES]\nMedia Vault PIN: 4515\nSecurity Level: Restricted / Administrator\n----------------------------------------\n[LOG ENTRY 2026-11-01]\nAll internal media services loaded.\nNetwork storage PUBLIC-NAS connected.' 
-                                }
-                            ] 
-                        },
-                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Добро пожаловать в Ocean TV Terminal v2.4.' },
-                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'Архивные видеозаписи #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nАрхивные видеозаписи #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
+                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Система инициализирована. Ожидание указаний.' },
+                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
                     ]
                 },
                 {
                     name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
                         {
-                            name: 'logs', id: 'C-logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
-                                { 
-                                    name: 'system_access.log', 
-                                    id: 'c_system_access_log', 
-                                    type: 'text', 
-                                    icon: 'fa-file-alt text-amber-300', 
-                                    content: '[SYSTEM SECURITY REPORT]\nNode: OCEAN-TV-01 (Terminal)\nSecurity Status: Operational\n----------------------------------------\n[AUTHORIZATION CODES]\nMedia Vault PIN: 4515\nSecurity Level: Restricted / Administrator\n----------------------------------------\n[LOG ENTRY 2026-11-01]\nAll internal media services loaded.\nNetwork storage PUBLIC-NAS connected.' 
-                                },
-                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Diagnostic: 0 errors found.\nSystem integrity: 100%.' }
+                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                { name: 'audit.log', id: 'audit_log', type: 'text', icon: 'fa-file-code text-amber-500', content: '[2026-10-24 18:22:01.004] KERNEL_CORE: Memory integrity audit pass 1/3: 0x00000000 - 0x7FFFFFFF [OK]\n[2026-10-24 18:22:01.112] SEC_SUBSYSTEM: Initializing crypto providers (AES-256-GCM, RSA-4096, SHA-512)\n[2026-10-24 18:22:01.205] STORAGE_MGR: Mounted drive volume C: (NTFS / UUID: e48b-719a-9920)\n[2026-10-24 18:22:01.380] AUTH_SERVICE: User session spawned for operator \'egor_admin\'\n[2026-10-24 18:22:02.045] DRM_DAEMON: Media playback sandbox enforced under policy profile #4\n[2026-10-24 18:22:02.190] SEC_AUDIT: Generating emergency terminal bypass token...\n[2026-10-24 18:22:02.215] DEBUG_REGISTER_04:\n       0000: 4F 43 45 41 4E 5F 54 56  5F 54 4F 4B 45 4E 5F 52  OCEAN_TV_TOKEN_R\n       0010: 45 53 54 52 49 43 54 45  44 5F 41 55 54 48 5F 56  ESTRICTED_AUTH_V\n       0020: 30 36 32 31 00 00 00 00  A1 9F 3C 78 52 11 0B FE  0621....<xR..\n[2026-10-24 18:22:02.219] AUTH_CACHE: Stored fallback PIN [0621] in memory slot #7 (valid until kernel reset)\n[2026-10-24 18:22:03.001] NET_STACK: Eth0 link up (1000BASE-T, full duplex, IP 192.168.0.42)\n[2026-10-24 18:22:03.118] DAEMON_DISCOVERY: PUBLIC-NAS network share available at //192.168.0.100/share\n[2026-10-24 18:22:03.490] AUDIT_COMPLETE: System ready. 0 security faults logged.' },
+                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Diagnostic: 0 errors found.' }
                             ]
                         },
                         {
@@ -3624,7 +3582,7 @@
                                             name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                                 {
                                                     name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-gray-500', content: '4515' }
+                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-gray-500', content: '0621' }
                                                     ]
                                                 }
                                             ]
@@ -3780,19 +3738,84 @@
             `;
         }
 
-        function renderNasExplorer() {
+        const minoryevkaDocs = {
+            chronicle: 'ХРОНИКА МИНОРЬЕВКИ (2024-2026)\n\nЭпоха 1: Основание (Август-Ноябрь 2024)\nОснователи: Еврей (хостинг) и Навуходоносор (ТГК). Легендарное первое фото состава игроков на Атерносе.\n\nЭпоха 2: Возрождение и расцвет (Декабрь 2024 - Февраль 2025)\nАзриэль (Майк Эрмантраут) берет управление сервером. Строительство склада, приток игроков (до 5-6 чел онлайн).\n\nЭпоха 3: Июньская эра и Золотой век (Июнь 2025)\nЗапуск сервера на Fabric 1.20.1 с войс-чатом. Голосования, выборы мэра (победа Сотарка 80%).\n\nЭпоха 4: Эра террора и диктатура Азриэля (Июль 2025)\nСудебная система, смертные казни, репрессии, 10-дневный бан Гендальфа. Нападение читеров, отставка Азриэля.\n\nЭпоха 5: Безвластие и Великое переселение (Август-Октябрь 2025)\nМэрство Гендальфа, уход на дальние координаты, монумент Французской революции, пожар хрущевок.\n\nЭпоха 6: Эпоха СОР и Новый порядок (2026)\nОснование Новоминорьевки в составе Содружества Объединенных Республик.',
+            iceberg: 'АЙСБЕРГ МИНОРЬЕВКИ: 6 СЛОЕВ ТАЙН\n\n1. Небеса (Поверхность): Первые игроки, легендарное фото Еврея, склад ресурсов, выборы мэра.\n2. Поднебесье: Войс-чат, хрущевки, кастомные напитки, особняк Кайзера.\n3. Верхушка: Судебная система Азриэля, ежедневный суд в 18:00, 10-дневный бан Гендальфа, читерские атаки.\n4. Середина: Тайный склад Навуходоносора, восстание против диктатуры, поджог спавна.\n5. Глубина: Архивы переписок администрации, секретные протоколы голосований, удаленные логи.\n6. Дно (Бездна): Исходный сид мира, нераскрытые тайны основания, истинные архивы СОР.',
+            rules: 'ПРАВИЛА СЕРВЕРА МИНОРЬЕВКА (Кодекс Азриэля)\n\nСтатья 1. Запрещен любой несанкционированный гриферство построек спавна.\nСтатья 2. Ежедневный суд проводится в 18:00 по МСК в здании трибунала.\nСтатья 3. Читерство карается вечной ссылкой и удалением инвентаря.\nСтатья 4. Правило 3-х мемов: лимит юмористического контента в день.\nСтатья 5. Все споры решает Верховный комиссариат.',
+            admin: 'КОДЕКС АДМИНИСТРАЦИИ\n\n1. Лимит 3 мемов в день на администратора.\n2. Никакого мата в официальных каналах объявлений.\n3. Соблюдение субординации и протоколов безопасности.\n4. Все изменения конфигурации фиксируются в системном аудите.'
+        };
+
+        function renderNasExplorer(subfolder) {
             const container = document.getElementById('tv-explorer-content');
             const titleEl = document.getElementById('tv-explorer-title');
-            titleEl.innerHTML = `<i class="fas fa-server text-slate-600"></i> PUBLIC-NAS Share`;
             
-            container.innerHTML = `
-                <div class="grid grid-cols-4 gap-4">
-                    <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('share.txt', 'Public share access granted. Egor\\'s home network server holds no extra private logs.')">
-                        <i class="fas fa-file-alt text-slate-600 text-4xl mb-3"></i>
-                        <span class="text-xs text-gray-700 font-semibold leading-tight">share.txt</span>
+            if (!subfolder) {
+                titleEl.innerHTML = `<i class="fas fa-server text-slate-600"></i> PUBLIC-NAS Share`;
+                
+                const isUnlocked = isJailbroken && isPasscodeUnlocked;
+                container.innerHTML = `
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('share.txt', 'Public share access granted. Egor\\'s home network server holds no extra private logs.')">
+                            <i class="fas fa-file-alt text-slate-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">share.txt</span>
+                        </div>
+                        
+                        <div class="p-4 rounded-xl border ${isUnlocked ? 'border-amber-400 bg-amber-50/30' : 'border-gray-200 bg-gray-50/50'} hover:border-amber-500 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none relative" onclick="openNasMinoryevkaFolder()">
+                            <i class="fas ${isUnlocked ? 'fa-folder-open text-amber-500' : 'fa-folder text-slate-400'} text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Минорьевка_Архив</span>
+                            ${!isUnlocked ? '<div class="absolute top-2 right-2 text-xs text-red-500"><i class="fas fa-lock"></i></div>' : ''}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else if (subfolder === 'minoryevka') {
+                titleEl.innerHTML = `<button onclick="renderNasExplorer()" class="text-sky-600 hover:underline mr-2"><i class="fas fa-arrow-left"></i> Назад</button> <i class="fas fa-folder-open text-amber-500"></i> PUBLIC-NAS / Минорьевка_Архив`;
+                
+                container.innerHTML = `
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-sky-500 hover:bg-sky-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Хроника_Минорьевки_2024-2026.txt', minoryevkaDocs.chronicle)">
+                            <i class="fas fa-scroll text-sky-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Хроника_2024-2026.txt</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-cyan-500 hover:bg-cyan-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Айсберг_сервера.txt', minoryevkaDocs.iceberg)">
+                            <i class="fas fa-icicles text-cyan-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Айсберг_сервера.txt</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-500 hover:bg-purple-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Правила_сервiра.txt', minoryevkaDocs.rules)">
+                            <i class="fas fa-gavel text-purple-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Правила_сервiра.txt</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-indigo-500 hover:bg-indigo-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Кодекс_администрации.txt', minoryevkaDocs.admin)">
+                            <i class="fas fa-shield-alt text-indigo-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Кодекс_админа.txt</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Первый состав сервера (2024)', 'assets/images/minoryevka/legendary_first_photo.jpg', 'Август 2024 года. Фото Еврея.')">
+                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Первый_состав_2024.jpg</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Хрущёвки Минорьевки', 'assets/images/minoryevka/khrushchevki.jpg', 'Жилой квартал спавна.')">
+                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Хрущёвки.jpg</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Особняк Кайзера', 'assets/images/minoryevka/kaiser_house.jpg', 'Историческое поместье Кайзера.')">
+                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Особняк_Кайзера.jpg</span>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Карта Гинденбурга', 'assets/images/minoryevka/map_hindenburg.jpg', 'Карта территории сервера.')">
+                            <i class="fas fa-map text-emerald-600 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Карта_Гинденбурга.jpg</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function openNasMinoryevkaFolder() {
+            playSnd(soundClick);
+            if (!isJailbroken || !isPasscodeUnlocked) {
+                showTvAlert("Доступ ограничен", "Сетевой каталог зашифрован. Требуется cyan1de Jailbreak и авторизация PIN-кодом в Медиатеке.");
+                return;
+            }
+            renderNasExplorer('minoryevka');
         }
 
         // TV Notepad handlers
@@ -4067,69 +4090,6 @@
         }
 
 
-        // --- TWO-TAB MEDIA VAULT CONTROLLER ---
-        let currentMediaTab = 'egor';
-        let currentMinorPhotoIndex = 0;
-
-        const minoryevkaMediaPhotos = [
-            { src: 'assets/images/minoryevka/legendary_first_photo.jpg', title: 'Легендарный первый состав сервера', desc: 'Август 2024 года. Первые две недели жизни сообщества, историческое фото Еврея.' },
-            { src: 'assets/images/minoryevka/khrushchevki.jpg', title: 'Хрущёвки Минорьевки', desc: 'Жилой квартал спавна и панорама первых построек сервера.' },
-            { src: 'assets/images/minoryevka/kaiser_house.jpg', title: 'Особняк Кайзера', desc: 'Монументальное историческое поместье эпохи расцвета.' },
-            { src: 'assets/images/minoryevka/birds_eye.jpg', title: 'Спавн с высоты птичьего полёта', desc: 'Центральная площадь, склады ресурсов и панорама инфраструктуры.' },
-            { src: 'assets/images/minoryevka/french_statue.jpg', title: 'Монумент Французской революции', desc: 'Культурный памятник и символ эпохи перемен.' },
-            { src: 'assets/images/minoryevka/map_hindenburg.jpg', title: 'Карта Гинденбурга', desc: 'Тактическая карта территории сервера времён основания СОР.' },
-            { src: 'assets/images/minoryevka/map_nikita.jpg', title: 'Карта спавна времён Никиты', desc: 'Историческая схема застройки спавна ранней эпохи.' }
-        ];
-
-        function switchMediaTab(tab) {
-            playSnd(soundClick);
-            currentMediaTab = tab;
-            const btnE = document.getElementById('media-tab-egor');
-            const btnM = document.getElementById('media-tab-minor');
-            const viewE = document.getElementById('media-egor-view');
-            const viewM = document.getElementById('media-minor-view');
-
-            if (tab === 'egor') {
-                if (btnE) btnE.classList.add('active');
-                if (btnM) btnM.classList.remove('active');
-                if (viewE) viewE.style.display = 'flex';
-                if (viewM) viewM.style.display = 'none';
-            } else {
-                if (btnE) btnE.classList.remove('active');
-                if (btnM) btnM.classList.add('active');
-                if (viewE) viewE.style.display = 'none';
-                if (viewM) viewM.style.display = 'flex';
-                updateMinorPhoto();
-            }
-        }
-
-        function slideMinorPhoto(dir) {
-            playSnd(soundClick);
-            currentMinorPhotoIndex += dir;
-            if (currentMinorPhotoIndex < 0) currentMinorPhotoIndex = minoryevkaMediaPhotos.length - 1;
-            if (currentMinorPhotoIndex >= minoryevkaMediaPhotos.length) currentMinorPhotoIndex = 0;
-            updateMinorPhoto();
-        }
-
-        function updateMinorPhoto() {
-            const item = minoryevkaMediaPhotos[currentMinorPhotoIndex];
-            const img = document.getElementById('tv-minor-photo-display');
-            const indicator = document.getElementById('tv-minor-photo-indicator');
-            const title = document.getElementById('tv-minor-photo-title');
-            const desc = document.getElementById('tv-minor-photo-desc');
-
-            if (img) {
-                img.style.opacity = '0';
-                setTimeout(() => {
-                    img.src = item.src;
-                    img.onload = () => { img.style.opacity = '1'; };
-                }, 150);
-            }
-            if (indicator) indicator.textContent = `Фото ${currentMinorPhotoIndex + 1} из ${minoryevkaMediaPhotos.length}`;
-            if (title) title.textContent = item.title;
-            if (desc) desc.textContent = item.desc;
-        }
-
-    </script>
+        </script>
 </body>
 </html>
