@@ -1826,6 +1826,201 @@
             color: #ffffff;
             border-bottom-color: rgba(255, 255, 255, 0.6);
         }
+
+        /* ========================================================
+           MEDIA TABS & MOVIE CARDS STYLING
+           ======================================================== */
+        .media-tabs-bar {
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: fit-content;
+            margin: 0.75rem auto;
+            z-index: 10;
+        }
+        .media-tab-btn {
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #94a3b8;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .media-tab-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .media-tab-btn.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .mobile-boot-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 9999px;
+            background: #0ea5e9;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+            margin-top: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .mobile-boot-btn:active {
+            transform: scale(0.96);
+            background: #0284c7;
+        }
+
+        /* ========================================================
+           MOBILE & RESPONSIVE ADAPTATIONS FOR OCEAN TV
+           ======================================================== */
+        @media (max-width: 1023px) {
+            .mobile-boot-btn {
+                display: inline-flex !important;
+            }
+            .brand-container {
+                margin-top: 60px !important;
+                margin-bottom: 10px !important;
+            }
+            .brand-logo {
+                font-size: 2.2rem !important;
+            }
+            .brand-reflection {
+                font-size: 2.2rem !important;
+            }
+            .shelf-container {
+                margin-top: 10px !important;
+                padding: 1rem 1rem 5rem 1rem !important;
+            }
+            .shelf-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(135px, 165px)) !important;
+                gap: 14px !important;
+                justify-content: center !important;
+                perspective: none !important;
+                max-width: 360px !important;
+                margin: 0 auto !important;
+            }
+            .tv-tile {
+                width: 100% !important;
+                height: 100px !important;
+                border-radius: 14px !important;
+                transform: none !important;
+            }
+            .tv-tile:active {
+                transform: scale(0.96) !important;
+                background: linear-gradient(to bottom, #333842 0%, #1e222b 100%) !important;
+            }
+            .tv-back-to-site-btn {
+                top: 14px !important;
+                left: 14px !important;
+                padding: 7px 14px !important;
+                font-size: 11px !important;
+            }
+            .app-header {
+                padding: 10px 16px !important;
+                min-height: 52px !important;
+            }
+            .app-title {
+                font-size: 14px !important;
+            }
+            .app-menu-btn {
+                padding: 6px 14px !important;
+                font-size: 12px !important;
+                min-height: 36px !important;
+            }
+            .comp-window {
+                width: 96vw !important;
+                height: 86vh !important;
+                max-height: 86vh !important;
+            }
+            .comp-body {
+                flex-direction: column !important;
+            }
+            .comp-sidebar {
+                width: 100% !important;
+                height: auto !important;
+                min-height: 48px !important;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                padding: 6px 8px !important;
+                gap: 6px !important;
+                flex-shrink: 0 !important;
+            }
+            .comp-device-item {
+                padding: 6px 12px !important;
+                margin-bottom: 0 !important;
+                border-radius: 8px !important;
+                white-space: nowrap !important;
+                font-size: 12px !important;
+            }
+            .comp-explorer-panel {
+                flex: 1 !important;
+                overflow-y: auto !important;
+            }
+            .tv-passcode-box {
+                width: 320px !important;
+                padding: 18px !important;
+            }
+            .tv-passcode-key {
+                height: 48px !important;
+                font-size: 16px !important;
+            }
+            .help-modal-box {
+                width: 95vw !important;
+                max-height: 90vh !important;
+                padding: 1rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .brand-logo {
+                font-size: 1.8rem !important;
+            }
+            .brand-reflection {
+                display: none !important;
+            }
+            .shelf-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                max-width: 310px !important;
+                gap: 10px !important;
+            }
+            .tv-tile {
+                height: 90px !important;
+            }
+            .tv-tile i {
+                font-size: 1.5rem !important;
+            }
+            .tv-tile-label {
+                font-size: 0.72rem !important;
+            }
+            .photo-stream-container {
+                padding: 0.5rem !important;
+            }
+            .tv-photo-frame {
+                max-width: 95vw !important;
+                max-height: 65vh !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -2039,7 +2234,7 @@
         </button>
     </div>
 
-    <!-- CENTRAL INSTRUCTION MODAL -->
+    <!-- CENTRAL INSTRUCTION MODAL (РУКОВОДСТВО) -->
     <div id="help-modal-overlay" class="help-modal-overlay" onclick="if(event.target === this) closeHelpModal()">
         <div class="help-modal-box">
             <!-- Modal Header -->
@@ -2052,13 +2247,17 @@
 
             <!-- Scrollable Guide Content -->
             <div class="help-scroll-container">
+                <div class="p-4 rounded-xl bg-sky-950/40 border border-sky-500/20 mb-4 text-xs text-sky-200 leading-relaxed">
+                    <strong>Ocean TV</strong> — универсальный интерактивный медиацентр сообщества. Здесь собраны архивы чатов, видеохроники, фотодокументы, радио и локальные файлы.
+                </div>
+
                 <!-- Step 1 -->
                 <div class="help-step-item">
                     <div class="help-step-badge">1</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Доступ к Медиатеке</div>
+                        <div class="help-step-title"><i class="fas fa-bars text-slate-400"></i> Разделы меню</div>
                         <p class="help-step-desc">
-                            Для полноценного использования приставки Ocean TV вам необходим доступ к приватной медиатеке (файлам Егора). По умолчанию этот раздел заблокирован защитой DRM.
+                            7 основных разделов: Медиатека, Фильмы, Музыка, Подкасты, Радио, Компьютеры и Настройки.
                         </p>
                     </div>
                 </div>
@@ -2067,22 +2266,10 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">2</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-syringe text-slate-400"></i> Сделать Jailbreak</div>
+                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Компьютеры и пароль</div>
                         <p class="help-step-desc">
-                            Перейдите в приложение <strong>Настройки (Settings)</strong> на главном экране приставки, выберите пункт <strong>cyan1de Jailbreak</strong> и выполните инъекцию кастомного ядра.
+                            В разделе <strong>«Компьютеры»</strong> перейдите в системную папку <code>logs</code> и откройте <code>system_access.log</code>, чтобы узнать код авторизации для закрытых разделов. На сетевом диске <strong>PUBLIC-NAS</strong> хранится архив сервера Минорьевка.
                         </p>
-                        <!-- Accordion for jailbreak -->
-                        <div class="help-accordion-item">
-                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
-                                <span>Дополнительные инструкции по Jailbreak</span>
-                                <i class="fas fa-chevron-down arrow-icon"></i>
-                            </div>
-                            <div class="help-accordion-content">
-                                <p class="mb-2">Выполнение jailbreak отключает встроенные системные проверки подписи приложений и обходит DRM песочницы.</p>
-                                <strong class="text-white block mt-2 mb-1">Что делать, если возникла ошибка при jailbreak?</strong>
-                                <p>В случае сбоя или появления экрана восстановления (Recovery Screen), следуйте инструкциям на экране для подтверждения запроса в Telegram или перезагрузки системы.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -2090,31 +2277,20 @@
                 <div class="help-step-item">
                     <div class="help-step-badge">3</div>
                     <div class="flex-1">
-                        <div class="help-step-title"><i class="fas fa-network-wired text-slate-400"></i> Найти пароль в Computers</div>
+                        <div class="help-step-title"><i class="fas fa-images text-slate-400"></i> Медиатека (2 вкладки)</div>
                         <p class="help-step-desc">
-                            После завершения джейлбрейка вам потребуется ввести 4-значный код доступа в Медиатеке.
+                            Введите полученный PIN-код для входа. Внутри доступны две вкладки: <strong>«Файлы Егора»</strong> (личный фотоархив) и <strong>«Архив Минорьевки»</strong> (историческая фотохроника).
                         </p>
-                        <!-- Accordion for password -->
-                        <div class="help-accordion-item">
-                            <div class="help-accordion-header" onclick="toggleHelpAccordion(this)">
-                                <span>Инструкция по поиску пароля</span>
-                                <i class="fas fa-chevron-down arrow-icon"></i>
-                            </div>
-                            <div class="help-accordion-content">
-                                <p class="mb-2">Чтобы ввести пароль, сначала перейдите в приложение <strong>Computers (Компьютеры)</strong> на главном экране приставки.</p>
-                                <p>Там вам предстоит самостоятельно исследовать локальные диски и найти, на каком из них лежит нужный путь к файлу с паролем. После нахождения пароля его нужно ввести в Медиатеке для разблокировки доступа.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="help-step-item text-slate-400">
-                    <div class="help-step-badge border-green-500/30 text-green-400"><i class="fas fa-check text-xs"></i></div>
+                <div class="help-step-item">
+                    <div class="help-step-badge">4</div>
                     <div class="flex-1">
-                        <div class="help-step-title text-green-400"><i class="fas fa-circle-check"></i> Разблокировка доступа</div>
+                        <div class="help-step-title"><i class="fas fa-film text-slate-400"></i> Кинозал «Фильмы»</div>
                         <p class="help-step-desc">
-                            После успешного ввода кода, Медиатека приставки разблокируется, и вы получите полный и неограниченный доступ к скрытым медиаматериалам Егора.
+                            Смотрите видеоэкскурсию от Гендальфа и исторический фильм летописи 2025 года прямо во встроенном видеоплеере.
                         </p>
                     </div>
                 </div>
@@ -2122,10 +2298,7 @@
 
             <!-- Footer Controls -->
             <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between z-10">
-                <label class="flex items-center gap-2.5 cursor-pointer text-xs text-slate-400 hover:text-white transition-colors select-none">
-                    <input type="checkbox" id="dont-show-help-session" class="rounded bg-black/40 border-white/10 text-sky-500 focus:ring-0 focus:ring-offset-0">
-                    <span>Больше не показывать в этой сессии</span>
-                </label>
+                <span class="text-[11px] text-gray-500 font-mono">Ocean TV v2.4 Universal Media Center</span>
                 <button class="app-menu-btn" onclick="closeHelpModal()">Понятно</button>
             </div>
         </div>
@@ -2166,45 +2339,120 @@
         </div>
     </div>
 
-    <!-- APP 1: MEDIA (PHOTO STREAM) -->
+    <!-- APP 1: MEDIA (TWO TABS: EGOR & MINORYEVKA) -->
     <div id="app-media" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-images"></i> Файлы Егора</div>
+            <div class="app-title"><i class="fas fa-images text-sky-400"></i> Медиатека</div>
             <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
         </div>
-        <div class="photo-stream-container">
+        
+        <!-- Tab Selector -->
+        <div class="media-tabs-bar">
+            <button id="media-tab-egor" class="media-tab-btn active" onclick="switchMediaTab('egor')">
+                <i class="fas fa-folder-closed"></i> Файлы Егора
+            </button>
+            <button id="media-tab-minor" class="media-tab-btn" onclick="switchMediaTab('minor')">
+                <i class="fas fa-landmark"></i> Архив Минорьевки
+            </button>
+        </div>
+
+        <!-- View 1: Egor Files -->
+        <div id="media-egor-view" class="photo-stream-container flex-1 flex items-center justify-center">
             <div class="tv-photo-frame">
                 <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slidePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
                 <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slidePhoto(1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
+                <div class="tv-photo-indicator" id="tv-photo-indicator">Фото 1</div>
+            </div>
+        </div>
+
+        <!-- View 2: Minoryevka Archive -->
+        <div id="media-minor-view" class="photo-stream-container flex-1 flex flex-col items-center justify-center" style="display: none;">
+            <div class="tv-photo-frame relative">
+                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideMinorPhoto(-1)"><i class="fas fa-chevron-left"></i></button>
+                <img id="tv-minor-photo-display" src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Архив Минорьевки" class="tv-photo-img">
+                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideMinorPhoto(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="tv-photo-indicator" id="tv-minor-photo-indicator">Фото 1 из 7</div>
+            </div>
+            <div class="mt-3 text-center max-w-lg px-4">
+                <h4 id="tv-minor-photo-title" class="text-sm font-bold text-white tracking-wide">Легендарный первый состав сервера</h4>
+                <p id="tv-minor-photo-desc" class="text-xs text-gray-400 mt-1">Август 2024 года. Первые недели жизни сообщества, фото Еврея.</p>
             </div>
         </div>
     </div>
 
-    <!-- APP 2: TV SHOWS (MOVIES PLACEHOLDER) -->
+    <!-- APP 2: TV SHOWS (КИНОЗАЛ СООБЩЕСТВА) -->
     <div id="app-tvshows" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-tv"></i> Фильмы</div>
+            <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы и видеоархив</div>
             <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
         </div>
-        <div class="flex-1 flex flex-col justify-center items-center text-center">
-            <div class="movie-monitor">
-                <div class="monitor-scanline"></div>
-                <div class="monitor-noise"></div>
-                <i class="fas fa-film text-slate-500 text-lg opacity-40"></i>
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 max-w-5xl mx-auto w-full flex flex-col justify-center">
+            <div class="text-center mb-6">
+                <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">Архивный кинозал</h3>
+                <p class="text-xs md:text-sm text-gray-400 mt-1">Оцифрованные видеозаписи и летописи сообщества в высоком качестве</p>
             </div>
-            <h4 class="text-xl font-bold text-slate-300">OCEAN VIDEO STREAM</h4>
-            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">
-                Сетевой сервер видеовещания отключен. Обнаружены сохранённые архивные видеозаписи:
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3 justify-center max-w-md">
-                <button onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-600 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-2 transition shadow">
-                    <i class="fas fa-play text-sky-400"></i> Видеотур сервера от Гендальфа (1080p)
-                </button>
-                <button onclick="openTvNotepad('Первое_видео_Минорьевки_2025.url', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года) на YouTube.', ['https://www.youtube.com/watch?v=uuY9NIbsNR0'])" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-600 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-2 transition shadow">
-                    <i class="fab fa-youtube text-red-400"></i> Первое видео (Июнь 2025)
-                </button>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+                <!-- Film 1 -->
+                <div class="movie-card group bg-slate-900/80 border border-white/10 hover:border-sky-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-sky-500/10 flex flex-col">
+                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')">
+                        <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur border border-white/10 text-[10px] font-bold text-sky-400">1080p FULL HD</div>
+                        <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[11px] font-mono text-gray-300">00:53</div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-sky-500 text-white flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
+                                <i class="fas fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-sky-400 uppercase tracking-wider mb-1">Экскурсия по серверу</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Видеотур по Минорьевке</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Видеоэкскурсия от Гендальфа: спавн, кварталы хрущёвок, особняк Кайзера и ключевые объекты инфраструктуры.
+                            </p>
+                        </div>
+                        <div class="pt-4 mt-2 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-[11px] text-gray-400"><i class="fas fa-user-circle mr-1"></i> Гендальф</span>
+                            <button onclick="openTvVideo('Видеотур по серверу Минорьевка от Гендальфа', 'assets/video/minoryevka_tour.mp4', 'Эксклюзивная видеоэкскурсия по ключевым локациям, постройкам спавна, хрущёвкам и фермам сервера, записанная Гендальфом.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
+                                <i class="fas fa-play text-[10px]"></i> Смотреть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Film 2 -->
+                <div class="movie-card group bg-slate-900/80 border border-white/10 hover:border-purple-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-purple-500/10 flex flex-col">
+                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="openTvVideo('Летопись Минорьевки (Июнь 2025)', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года). Документальная хроника жизни и развития сервера.')">
+                        <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись 2025" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur border border-white/10 text-[10px] font-bold text-purple-400">АРХИВ 2025</div>
+                        <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[11px] font-mono text-gray-300">08:18</div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-purple-500 text-white flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
+                                <i class="fas fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Историческая хроника</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Летопись Минорьевки: 2025</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Первый официальный видеоролик об эпохе основания сервера: строительство, первые конфликты и игроки сообщества.
+                            </p>
+                        </div>
+                        <div class="pt-4 mt-2 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-[11px] text-gray-400"><i class="fas fa-calendar-alt mr-1"></i> Июнь 2025</span>
+                            <button onclick="openTvVideo('Летопись Минорьевки (Июнь 2025)', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года). Документальная хроника жизни и развития сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
+                                <i class="fas fa-play text-[10px]"></i> Смотреть
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -3333,18 +3581,41 @@
 
         // --- INTEGRATED LOCAL FILE SYSTEM ENGINE ---
         const tvFilesystem = {
-            name: 'Локальный узел',
+            name: 'Мой компьютер',
             id: 'root',
             type: 'folder',
             children: [
                 {
                     name: 'Рабочий стол', id: 'Desktop', type: 'folder', icon: 'fa-desktop text-slate-500', children: [
-                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Система инициализирована. Ожидание указаний.' },
-                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
+                        { 
+                            name: 'logs', id: 'Desktop-logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                { 
+                                    name: 'system_access.log', 
+                                    id: 'desktop_system_access_log', 
+                                    type: 'text', 
+                                    icon: 'fa-file-alt text-amber-300', 
+                                    content: '[SYSTEM SECURITY REPORT]\nNode: OCEAN-TV-01 (Terminal)\nSecurity Status: Operational\n----------------------------------------\n[AUTHORIZATION CODES]\nMedia Vault PIN: 4515\nSecurity Level: Restricted / Administrator\n----------------------------------------\n[LOG ENTRY 2026-11-01]\nAll internal media services loaded.\nNetwork storage PUBLIC-NAS connected.' 
+                                }
+                            ] 
+                        },
+                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Добро пожаловать в Ocean TV Terminal v2.4.' },
+                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'Архивные видеозаписи #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nАрхивные видеозаписи #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
                     ]
                 },
                 {
                     name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
+                        {
+                            name: 'logs', id: 'C-logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                { 
+                                    name: 'system_access.log', 
+                                    id: 'c_system_access_log', 
+                                    type: 'text', 
+                                    icon: 'fa-file-alt text-amber-300', 
+                                    content: '[SYSTEM SECURITY REPORT]\nNode: OCEAN-TV-01 (Terminal)\nSecurity Status: Operational\n----------------------------------------\n[AUTHORIZATION CODES]\nMedia Vault PIN: 4515\nSecurity Level: Restricted / Administrator\n----------------------------------------\n[LOG ENTRY 2026-11-01]\nAll internal media services loaded.\nNetwork storage PUBLIC-NAS connected.' 
+                                },
+                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Diagnostic: 0 errors found.\nSystem integrity: 100%.' }
+                            ]
+                        },
                         {
                             name: 'System', id: 'System', type: 'folder', icon: 'fa-folder text-slate-500', children: [
                                 {
@@ -3373,11 +3644,6 @@
                                         { name: 'settings.ini', id: 'settings', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'theme=ocean; lang=ru;' }
                                     ]
                                 }
-                            ]
-                        },
-                        {
-                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'No errors.' }
                             ]
                         }
                     ]
@@ -3798,6 +4064,70 @@
                     item.classList.add('active');
                 }
             }
+        }
+
+
+        // --- TWO-TAB MEDIA VAULT CONTROLLER ---
+        let currentMediaTab = 'egor';
+        let currentMinorPhotoIndex = 0;
+
+        const minoryevkaMediaPhotos = [
+            { src: 'assets/images/minoryevka/legendary_first_photo.jpg', title: 'Легендарный первый состав сервера', desc: 'Август 2024 года. Первые две недели жизни сообщества, историческое фото Еврея.' },
+            { src: 'assets/images/minoryevka/khrushchevki.jpg', title: 'Хрущёвки Минорьевки', desc: 'Жилой квартал спавна и панорама первых построек сервера.' },
+            { src: 'assets/images/minoryevka/kaiser_house.jpg', title: 'Особняк Кайзера', desc: 'Монументальное историческое поместье эпохи расцвета.' },
+            { src: 'assets/images/minoryevka/birds_eye.jpg', title: 'Спавн с высоты птичьего полёта', desc: 'Центральная площадь, склады ресурсов и панорама инфраструктуры.' },
+            { src: 'assets/images/minoryevka/french_statue.jpg', title: 'Монумент Французской революции', desc: 'Культурный памятник и символ эпохи перемен.' },
+            { src: 'assets/images/minoryevka/map_hindenburg.jpg', title: 'Карта Гинденбурга', desc: 'Тактическая карта территории сервера времён основания СОР.' },
+            { src: 'assets/images/minoryevka/map_nikita.jpg', title: 'Карта спавна времён Никиты', desc: 'Историческая схема застройки спавна ранней эпохи.' }
+        ];
+
+        function switchMediaTab(tab) {
+            playSnd(soundClick);
+            currentMediaTab = tab;
+            const btnE = document.getElementById('media-tab-egor');
+            const btnM = document.getElementById('media-tab-minor');
+            const viewE = document.getElementById('media-egor-view');
+            const viewM = document.getElementById('media-minor-view');
+
+            if (tab === 'egor') {
+                if (btnE) btnE.classList.add('active');
+                if (btnM) btnM.classList.remove('active');
+                if (viewE) viewE.style.display = 'flex';
+                if (viewM) viewM.style.display = 'none';
+            } else {
+                if (btnE) btnE.classList.remove('active');
+                if (btnM) btnM.classList.add('active');
+                if (viewE) viewE.style.display = 'none';
+                if (viewM) viewM.style.display = 'flex';
+                updateMinorPhoto();
+            }
+        }
+
+        function slideMinorPhoto(dir) {
+            playSnd(soundClick);
+            currentMinorPhotoIndex += dir;
+            if (currentMinorPhotoIndex < 0) currentMinorPhotoIndex = minoryevkaMediaPhotos.length - 1;
+            if (currentMinorPhotoIndex >= minoryevkaMediaPhotos.length) currentMinorPhotoIndex = 0;
+            updateMinorPhoto();
+        }
+
+        function updateMinorPhoto() {
+            const item = minoryevkaMediaPhotos[currentMinorPhotoIndex];
+            const img = document.getElementById('tv-minor-photo-display');
+            const indicator = document.getElementById('tv-minor-photo-indicator');
+            const title = document.getElementById('tv-minor-photo-title');
+            const desc = document.getElementById('tv-minor-photo-desc');
+
+            if (img) {
+                img.style.opacity = '0';
+                setTimeout(() => {
+                    img.src = item.src;
+                    img.onload = () => { img.style.opacity = '1'; };
+                }, 150);
+            }
+            if (indicator) indicator.textContent = `Фото ${currentMinorPhotoIndex + 1} из ${minoryevkaMediaPhotos.length}`;
+            if (title) title.textContent = item.title;
+            if (desc) desc.textContent = item.desc;
         }
 
     </script>

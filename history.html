@@ -2176,92 +2176,12 @@
 
 
         // ==========================================
-        // ЛОГИКА ЗАПУСКА ПК
+        // ЛОГИКА ЗАПУСКА ПК (ОТКРЫТИЕ OCEAN TV)
         // ==========================================
         const pcLaunchBtn = document.getElementById('pc-launch-btn');
         if (pcLaunchBtn) {
             pcLaunchBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (window.innerWidth < 1024) {
-                    // Create overlay element
-                    const overlay = document.createElement('div');
-                    overlay.id = 'pc-warning-modal-overlay';
-                    overlay.style.position = 'fixed';
-                    overlay.style.inset = '0';
-                    overlay.style.zIndex = '999999';
-                    overlay.style.background = 'rgba(0, 0, 0, 0)';
-                    overlay.style.backdropFilter = 'blur(0px)';
-                    overlay.style.display = 'flex';
-                    overlay.style.alignItems = 'center';
-                    overlay.style.justifyContent = 'center';
-                    overlay.style.padding = '1.5rem';
-                    overlay.style.transition = 'all 0.3s ease-out';
-                    
-                    // Create modal content box
-                    const modalBox = document.createElement('div');
-                    modalBox.style.width = '100%';
-                    modalBox.style.maxWidth = '360px';
-                    modalBox.style.background = '#070b19';
-                    modalBox.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-                    modalBox.style.borderRadius = '16px';
-                    modalBox.style.padding = '1.75rem';
-                    modalBox.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.7)';
-                    modalBox.style.opacity = '0';
-                    modalBox.style.transform = 'scale(0.9) translateY(20px)';
-                    modalBox.style.transition = 'all 0.3s ease-out';
-                    modalBox.style.color = '#e2e8f0';
-                    modalBox.style.fontFamily = "'Inter', sans-serif";
-                    
-                    // Text wrapper inside modal
-                    modalBox.innerHTML = `
-    <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; text-align: center; color: #ffffff; line-height: 1.4;">
-        🖥️ Экран Ocean TV оптимизирован для ПК
-    </div>
-    <div style="font-size: 0.85rem; line-height: 1.6; color: #94a3b8; margin-bottom: 1.5rem; text-align: center;">
-        На мобильных устройствах интерактивный интерфейс системы и пульт управления могут отображаться некорректно.<br><br>
-        Чтобы получить доступ к полному функционалу, рекомендуется перейти по ссылке <a href="https://ostindia-minoria.github.io/tv.html" style="color: #3b82f6; text-decoration: underline; word-break: break-all;">https://ostindia-minoria.github.io/tv.html</a> и включить опцию «Версия для ПК» в настройках вашего мобильного браузера. Вы также можете воспользоваться десктопом.
-    </div>
-    <div style="display: flex; justify-content: center;">
-        <button id="pc-warning-close-btn" style="padding: 0.625rem 2.25rem; background: #eab308; color: #000000; border: none; border-radius: 8px; font-weight: 700; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.25);">
-            Понятно
-        </button>
-    </div>
-`;
-                    
-                    overlay.appendChild(modalBox);
-                    document.body.appendChild(overlay);
-                    
-                    // Trigger animations
-                    setTimeout(() => {
-                        overlay.style.background = 'rgba(0, 0, 0, 0.6)';
-                        overlay.style.backdropFilter = 'blur(8px)';
-                        modalBox.style.opacity = '1';
-                        modalBox.style.transform = 'scale(1) translateY(0)';
-                    }, 10);
-                    
-                    // Close event
-                    const closeBtn = modalBox.querySelector('#pc-warning-close-btn');
-                    closeBtn.addEventListener('click', () => {
-                        overlay.style.background = 'rgba(0, 0, 0, 0)';
-                        overlay.style.backdropFilter = 'blur(0px)';
-                        modalBox.style.opacity = '0';
-                        modalBox.style.transform = 'scale(0.9) translateY(20px)';
-                        setTimeout(() => {
-                            overlay.remove();
-                        }, 300);
-                    });
-                    
-                    // Close on clicking overlay background
-                    overlay.addEventListener('click', (ev) => {
-                        if (ev.target === overlay) {
-                            closeBtn.click();
-                        }
-                    });
-                    
-                    return;
-                }
-                
-                // If desktop, proceed to tv.html
                 window.location.href = 'tv.html';
             });
         }
