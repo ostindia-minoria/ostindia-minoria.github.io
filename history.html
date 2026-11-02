@@ -2182,6 +2182,11 @@
         if (pcLaunchBtn) {
             pcLaunchBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                try {
+                    const docEl = document.documentElement;
+                    if (docEl.requestFullscreen) docEl.requestFullscreen().catch(() => {});
+                    else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
+                } catch(err) {}
                 window.location.href = 'tv.html';
             });
         }

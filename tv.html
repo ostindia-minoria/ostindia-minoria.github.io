@@ -2021,9 +2021,188 @@
             }
         }
 
+
+        /* ========================================================
+           APPLE TV 2014 & MOBILE FULLSCREEN STYLING
+           ======================================================== */
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .tv-fullscreen-btn {
+            position: fixed;
+            top: 16px;
+            right: 18px;
+            z-index: 99999;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+        .tv-fullscreen-btn:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.08);
+        }
+        .tv-fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Apple TV 2014 Poster Cards for Albums */
+        .apple-tv-poster-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 250px;
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+        .apple-tv-poster-card:hover {
+            transform: translateY(-8px) scale(1.04);
+        }
+
+        .apple-tv-poster-frame {
+            position: relative;
+            width: 240px;
+            height: 155px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.3);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .apple-tv-poster-card:hover .apple-tv-poster-frame {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .apple-tv-poster-gloss {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .apple-tv-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 10px;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 0.5px;
+        }
+
+        .apple-tv-poster-reflection {
+            width: 240px;
+            height: 42px;
+            overflow: hidden;
+            transform: scaleY(-1);
+            opacity: 0.2;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 80%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 80%);
+            margin-top: 2px;
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        /* Apple TV 2014 Video Shelf in Movies */
+        .apple-tv-video-card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto;
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+        .apple-tv-video-card:hover {
+            transform: translateY(-6px) scale(1.03);
+        }
+
+        .apple-tv-video-frame {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .apple-tv-video-card:hover .apple-tv-video-frame {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .apple-tv-video-gloss {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .apple-tv-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.25);
+            color: #ffffff;
+            font-size: 1.4rem;
+            transition: all 0.2s ease;
+        }
+        .apple-tv-video-card:hover .apple-tv-play-btn {
+            background: rgba(0, 0, 0, 0.1);
+            transform: scale(1.1);
+        }
+
+        .apple-tv-video-reflection {
+            width: 100%;
+            height: 38px;
+            overflow: hidden;
+            transform: scaleY(-1);
+            opacity: 0.18;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 80%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 80%);
+            margin-top: 2px;
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- FULLSCREEN TOGGLE BUTTON -->
+    <button id="tv-fullscreen-btn" class="tv-fullscreen-btn" onclick="toggleFullscreen()" title="Полноэкранный режим">
+        <i class="fas fa-expand"></i>
+    </button>
 
     <!-- RETURN TO MAIN SITE BUTTON -->
     <a href="index.html" class="tv-back-to-site-btn" style="position: fixed; top: 18px; left: 22px; z-index: 99999; display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; background: rgba(10, 15, 30, 0.75); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 9999px; color: #cbd5e1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(12px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); transition: all 0.25s ease;" onmouseover="this.style.background='rgba(6, 182, 212, 0.2)'; this.style.borderColor='rgba(6, 182, 212, 0.6)'; this.style.color='#ffffff'; this.style.transform='scale(1.03)';" onmouseout="this.style.background='rgba(10, 15, 30, 0.75)'; this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='#cbd5e1'; this.style.transform='scale(1)';">
@@ -2361,78 +2540,122 @@
         </div>
     </div>
 
-    <!-- APP 1: MEDIA (PHOTO STREAM) -->
+    <!-- APP 1: MEDIA (APPLE TV 2014 ALBUMS & VIEWER) -->
     <div id="app-media" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-images"></i> Файлы Егора</div>
-            <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
+            <div class="app-title" id="media-app-title"><i class="fas fa-images"></i> Медиатека</div>
+            <div class="flex items-center gap-2">
+                <button id="media-back-albums-btn" class="app-menu-btn" style="display: none;" onclick="showMediaAlbums()">Альбомы</button>
+                <button class="app-menu-btn" onclick="closeApp('app-media')">Меню</button>
+            </div>
         </div>
-        <div class="photo-stream-container">
-            <div class="tv-photo-frame">
-                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slidePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
+
+        <!-- ALBUM SELECTION SCREEN (Apple TV 2014 Grid) -->
+        <div id="media-albums-view" class="flex-1 flex flex-col justify-center items-center p-6 overflow-y-auto">
+            <div class="w-full max-w-2xl flex flex-col sm:flex-row gap-8 justify-center items-center">
+                <!-- Album 1: Файлы Егора -->
+                <div class="apple-tv-poster-card cursor-pointer group" onclick="openEgorAlbum()">
+                    <div class="apple-tv-poster-frame">
+                        <img src="assets/images/computer/egor_files/1.jpg" alt="Файлы Егора" class="w-full h-full object-cover">
+                        <div class="apple-tv-poster-gloss"></div>
+                        <div class="apple-tv-badge">118 ФОТО</div>
+                    </div>
+                    <div class="apple-tv-poster-reflection">
+                        <img src="assets/images/computer/egor_files/1.jpg" alt="Reflection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-3 text-center">
+                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide group-hover:text-sky-400 transition">Файлы Егора</h4>
+                        <span class="text-xs text-slate-400">Личный фотопоток</span>
+                    </div>
+                </div>
+
+                <!-- Album 2: Архив Минорьевки -->
+                <div class="apple-tv-poster-card cursor-pointer group" onclick="openMinorAlbum()">
+                    <div class="apple-tv-poster-frame">
+                        <img src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Архив Минорьевки" class="w-full h-full object-cover">
+                        <div class="apple-tv-poster-gloss"></div>
+                        <div class="apple-tv-badge">7 ФОТО</div>
+                    </div>
+                    <div class="apple-tv-poster-reflection">
+                        <img src="assets/images/minoryevka/legendary_first_photo.jpg" alt="Reflection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-3 text-center">
+                        <h4 class="text-sm md:text-base font-semibold text-white tracking-wide group-hover:text-amber-400 transition">Архив Минорьевки</h4>
+                        <span class="text-xs text-slate-400">Историческая фотохроника</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHOTO STREAM VIEWER (Original Pure View) -->
+        <div id="media-viewer-view" class="photo-stream-container flex-1 flex flex-col justify-center items-center" style="display: none;">
+            <div class="tv-photo-frame relative">
+                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideActivePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
-                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slidePhoto(1)"><i class="fas fa-chevron-right"></i></button>
+                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideActivePhoto(1)"><i class="fas fa-chevron-right"></i></button>
                 <div class="tv-photo-indicator" id="tv-photo-indicator">Слайд 1</div>
+            </div>
+            <div id="tv-photo-caption-wrap" class="mt-4 text-center max-w-xl px-4 min-h-[30px]" style="display: none;">
+                <div id="tv-photo-caption-title" class="text-xs md:text-sm font-semibold text-white"></div>
+                <div id="tv-photo-caption-desc" class="text-[11px] text-gray-400 mt-0.5"></div>
             </div>
         </div>
     </div>
 
-    <!-- APP 2: TV SHOWS (КИНОЗАЛ) -->
+    <!-- APP 2: TV SHOWS (APPLE TV 2014 СТИЛЬ) -->
     <div id="app-tvshows" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-film text-purple-400"></i> Фильмы</div>
             <button class="app-menu-btn" onclick="closeApp('app-tvshows')">Меню</button>
         </div>
-        <div class="flex-1 overflow-y-auto p-4 md:p-8 flex items-center justify-center">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl mx-auto">
-                <!-- Film 1 -->
-                <div class="bg-slate-900/80 border border-white/10 hover:border-white/30 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer group" onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Экскурсия по ключевым локациям сервера.')">
-                        <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-gray-300">00:53</div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
-                                <i class="fas fa-play text-sm ml-0.5"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 flex items-center justify-between">
-                        <div>
-                            <h4 class="text-base font-bold text-white">Видеотур по Минорьевке</h4>
-                            <span class="text-xs text-gray-400">Гендальф</span>
-                        </div>
-                        <button onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Экскурсия по ключевым локациям сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
-                            <i class="fas fa-play text-[10px]"></i> Смотреть
-                        </button>
-                    </div>
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col justify-center items-center">
+            <div class="w-full max-w-3xl">
+                <!-- Section title in Apple TV 2014 style -->
+                <div class="mb-5 text-left border-b border-white/10 pb-2">
+                    <span class="text-xs md:text-sm font-medium tracking-[0.2em] text-slate-400 uppercase">Minoryevka</span>
                 </div>
 
-                <!-- Film 2 -->
-                <div class="bg-slate-900/80 border border-white/10 hover:border-white/30 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative aspect-video overflow-hidden bg-black cursor-pointer group" onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Историческое видео основания сервера.')">
-                        <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись 2025" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-gray-300">08:18</div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all group-hover:scale-110 shadow-lg">
-                                <i class="fas fa-play text-sm ml-0.5"></i>
-                            </div>
+                <!-- Apple TV 2-video shelf -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+                    <!-- Video 1 -->
+                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Видеотур по серверу Минорьевка', 'assets/video/minoryevka_tour.mp4', 'Видеоэкскурсия по спавну и ключевым постройкам сервера от Гендальфа.')">
+                        <div class="apple-tv-video-frame">
+                            <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Видеотур" class="w-full h-full object-cover">
+                            <div class="apple-tv-video-gloss"></div>
+                            <div class="apple-tv-play-btn"><i class="fas fa-play"></i></div>
+                            <div class="apple-tv-badge">00:53</div>
+                        </div>
+                        <div class="apple-tv-video-reflection">
+                            <img src="assets/images/computer/minoryevka_tour_poster.jpg" alt="Reflection" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-2 text-left">
+                            <h4 class="text-sm font-semibold text-white tracking-wide group-hover:text-sky-400 transition">Видеотур по Минорьевке</h4>
+                            <span class="text-xs text-slate-500">Гендальф • 1080p</span>
                         </div>
                     </div>
-                    <div class="p-4 flex items-center justify-between">
-                        <div>
-                            <h4 class="text-base font-bold text-white">Летопись Минорьевки</h4>
-                            <span class="text-xs text-gray-400">Июнь 2025</span>
+
+                    <!-- Video 2 -->
+                    <div class="apple-tv-video-card cursor-pointer group" onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Первый исторический видеоролик по серверу Минорьевка (Июнь 2025 года).')">
+                        <div class="apple-tv-video-frame">
+                            <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Летопись 2025" class="w-full h-full object-cover">
+                            <div class="apple-tv-video-gloss"></div>
+                            <div class="apple-tv-play-btn"><i class="fas fa-play"></i></div>
+                            <div class="apple-tv-badge">08:18</div>
                         </div>
-                        <button onclick="openTvVideo('Летопись Минорьевки: 2025', 'assets/video/minoryevka_2025.mp4', 'Историческое видео основания сервера.')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black text-xs font-semibold transition flex items-center gap-2">
-                            <i class="fas fa-play text-[10px]"></i> Смотреть
-                        </button>
+                        <div class="apple-tv-video-reflection">
+                            <img src="assets/images/computer/minoryevka_2025_poster.jpg" alt="Reflection" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-2 text-left">
+                            <h4 class="text-sm font-semibold text-white tracking-wide group-hover:text-purple-400 transition">Летопись Минорьевки</h4>
+                            <span class="text-xs text-slate-500">Июнь 2025 • HD</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) -->
+    <!-- APP 3: MUSIC PLAYER (MUSIC PLACEHOLDER) --> (MUSIC PLACEHOLDER) -->
     <div id="app-music" class="app-overlay">
         <div class="app-header">
             <div class="app-title"><i class="fas fa-music"></i> Музыка</div>
@@ -2916,7 +3139,7 @@
 
             handleBootClick = () => {
                 cleanupBootEvents();
-                startBootSequence();
+                enterFullscreen(); startBootSequence();
             };
 
             if (bootModal) {
@@ -2930,7 +3153,7 @@
                     if (wrap && !wrap.classList.contains('zooming') && !tvPowerState) {
                         e.preventDefault();
                         cleanupBootEvents();
-                        startBootSequence();
+                        enterFullscreen(); startBootSequence();
                     }
                 }
             };
@@ -2999,7 +3222,7 @@
             }
             
             if (isPasscodeUnlocked) {
-                openApp('app-media');
+                openApp('app-media'); showMediaAlbums();
             } else {
                 openPasscodeModal();
             }
@@ -3064,7 +3287,7 @@
                 
                 setTimeout(() => {
                     closePasscodeModal();
-                    openApp('app-media');
+                    openApp('app-media'); showMediaAlbums();
                 }, 400);
             } else {
                 dots.forEach(d => {
@@ -3562,44 +3785,58 @@
             children: [
                 {
                     name: 'Рабочий стол', id: 'Desktop', type: 'folder', icon: 'fa-desktop text-slate-500', children: [
-                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Система инициализирована. Ожидание указаний.' },
-                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-400', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
+                        { name: 'readme.txt', id: 'readme', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'Система инициализирована. Ожидание указаний.' },
+                        { name: 'links.txt', id: 'links', type: 'links_file', icon: 'fa-file-alt text-slate-500', content: 'МП с Егором #1\nhttps://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk\n\nМП с Егором #2\nhttps://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r', links: ['https://youtu.be/N6oYETLgrx8?si=Dm5pGO9BQfpS4jrk', 'https://youtu.be/DJpC81JinF0?si=a-1L1O1ZlbBpSY7r'] }
                     ]
                 },
                 {
-                    name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
+                    name: 'Локальный диск (C:)', id: 'C:', type: 'folder', icon: 'fa-hdd text-slate-500', children: [
                         {
-                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                { name: 'audit.log', id: 'audit_log', type: 'text', icon: 'fa-file-code text-amber-500', content: '[2026-10-24 18:22:01.004] KERNEL_CORE: Memory integrity audit pass 1/3: 0x00000000 - 0x7FFFFFFF [OK]\n[2026-10-24 18:22:01.112] SEC_SUBSYSTEM: Initializing crypto providers (AES-256-GCM, RSA-4096, SHA-512)\n[2026-10-24 18:22:01.205] STORAGE_MGR: Mounted drive volume C: (NTFS / UUID: e48b-719a-9920)\n[2026-10-24 18:22:01.380] AUTH_SERVICE: User session spawned for operator \'egor_admin\'\n[2026-10-24 18:22:02.045] DRM_DAEMON: Media playback sandbox enforced under policy profile #4\n[2026-10-24 18:22:02.190] SEC_AUDIT: Generating emergency terminal bypass token...\n[2026-10-24 18:22:02.215] DEBUG_REGISTER_04:\n       0000: 4F 43 45 41 4E 5F 54 56  5F 54 4F 4B 45 4E 5F 52  OCEAN_TV_TOKEN_R\n       0010: 45 53 54 52 49 43 54 45  44 5F 41 55 54 48 5F 56  ESTRICTED_AUTH_V\n       0020: 30 36 32 31 00 00 00 00  A1 9F 3C 78 52 11 0B FE  0621....<xR..\n[2026-10-24 18:22:02.219] AUTH_CACHE: Stored fallback PIN [0621] in memory slot #7 (valid until kernel reset)\n[2026-10-24 18:22:03.001] NET_STACK: Eth0 link up (1000BASE-T, full duplex, IP 192.168.0.42)\n[2026-10-24 18:22:03.118] DAEMON_DISCOVERY: PUBLIC-NAS network share available at //192.168.0.100/share\n[2026-10-24 18:22:03.490] AUDIT_COMPLETE: System ready. 0 security faults logged.' },
-                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'Diagnostic: 0 errors found.' }
+                            name: 'Logs', id: 'Logs', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                { name: 'audit.log', id: 'audit_log', type: 'text', icon: 'fa-file-alt text-slate-500', content: '[2026-10-24 18:22:01.004] KERNEL_CORE: Memory integrity audit pass 1/3: 0x00000000 - 0x7FFFFFFF [OK]\n[2026-10-24 18:22:01.112] SEC_SUBSYSTEM: Initializing crypto providers (AES-256-GCM, RSA-4096, SHA-512)\n[2026-10-24 18:22:01.205] STORAGE_MGR: Mounted drive volume C: (NTFS / UUID: e48b-719a-9920)\n[2026-10-24 18:22:01.380] AUTH_SERVICE: User session spawned for operator \'egor_admin\'\n[2026-10-24 18:22:02.045] DRM_DAEMON: Media playback sandbox enforced under policy profile #4\n[2026-10-24 18:22:02.190] SEC_AUDIT: Generating emergency terminal bypass token...\n[2026-10-24 18:22:02.215] DEBUG_REGISTER_04:\n       0000: 4F 43 45 41 4E 5F 54 56  5F 54 4F 4B 45 4E 5F 52  OCEAN_TV_TOKEN_R\n       0010: 45 53 54 52 49 43 54 45  44 5F 41 55 54 48 5F 56  ESTRICTED_AUTH_V\n       0020: 30 36 32 31 00 00 00 00  A1 9F 3C 78 52 11 0B FE  0621....<xR..\n[2026-10-24 18:22:02.219] AUTH_CACHE: Stored fallback PIN [0621] in memory slot #7 (valid until kernel reset)\n[2026-10-24 18:22:03.001] NET_STACK: Eth0 link up (1000BASE-T, full duplex, IP 192.168.0.42)\n[2026-10-24 18:22:03.118] DAEMON_DISCOVERY: PUBLIC-NAS network share available at //192.168.0.100/share\n[2026-10-24 18:22:03.490] AUDIT_COMPLETE: System ready. 0 security faults logged.' },
+                                { name: 'error.log', id: 'err', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'Diagnostic: 0 errors found.' }
                             ]
                         },
                         {
-                            name: 'System', id: 'System', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                            name: 'Windows', id: 'Windows', type: 'folder', icon: 'fa-folder text-amber-500', children: [
                                 {
-                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                    name: 'System32', id: 'System32', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                        { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                        { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                        { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                        { name: 'ocean_drv.sys', id: 'ocean_drv', type: 'sys', icon: 'fa-cogs text-slate-500' }
+                                    ]
+                                },
+                                {
+                                    name: 'passwords', id: 'passwords', type: 'folder', icon: 'fa-folder text-amber-500', children: [
                                         {
-                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                                            name: '887.73', id: '887.73', type: 'folder', icon: 'fa-folder text-amber-500', children: [
                                                 {
-                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-gray-500', content: '0621' }
+                                                    name: 'SpamEnergy', id: 'SpamEnergy', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                                        { name: 'pass.txt', id: 'pass.txt', type: 'text', icon: 'fa-file-alt text-slate-500', content: '0621' }
                                                     ]
                                                 }
                                             ]
                                         }
                                     ]
-                                },
-                                { name: 'config.sys', id: 'config.sys', type: 'sys', icon: 'fa-cogs text-gray-500' },
-                                { name: 'boot.dll', id: 'boot.dll', type: 'sys', icon: 'fa-cogs text-gray-500' },
-                                { name: 'kernel.sys', id: 'kernel.sys', type: 'sys', icon: 'fa-cogs text-gray-500' },
-                                { name: 'ocean_drv.sys', id: 'ocean_drv', type: 'sys', icon: 'fa-cogs text-gray-500' }
+                                }
                             ]
                         },
                         {
-                            name: 'Users', id: 'Users', type: 'folder', icon: 'fa-folder text-slate-500', children: [
+                            name: 'Program Files', id: 'Program Files', type: 'folder', icon: 'fa-folder text-amber-500', children: [
                                 {
-                                    name: 'admin', id: 'admin', type: 'folder', icon: 'fa-user text-gray-500', children: [
-                                        { name: 'settings.ini', id: 'settings', type: 'text', icon: 'fa-file-alt text-gray-500', content: 'theme=ocean; lang=ru;' }
+                                    name: 'OceanTV', id: 'OceanTV', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                        { name: 'ocean_shell.exe', id: 'shell', type: 'sys', icon: 'fa-cogs text-slate-500' },
+                                        { name: 'theme.dll', id: 'theme', type: 'sys', icon: 'fa-cogs text-slate-500' }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'Users', id: 'Users', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                {
+                                    name: 'admin', id: 'admin', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                        { name: 'settings.ini', id: 'settings', type: 'text', icon: 'fa-file-alt text-slate-500', content: 'theme=ocean; lang=ru;' }
                                     ]
                                 }
                             ]
@@ -3607,15 +3844,21 @@
                     ]
                 },
                 {
-                    name: 'Локальный диск (E:)', id: 'E:', type: 'folder', icon: 'fa-hdd text-gray-700', children: [
-                        { name: 'locked', id: 'locked', type: 'locked_folder', icon: 'fa-folder text-slate-500' },
+                    name: 'Локальный диск (E:)', id: 'E:', type: 'folder', icon: 'fa-hdd text-slate-500', children: [
+                        { name: 'locked', id: 'locked', type: 'locked_folder', icon: 'fa-folder text-amber-500' },
                         {
-                            name: 'Archive', id: 'Arch', type: 'folder', icon: 'fa-folder text-slate-500', children: [
-                                { name: 'data_01.dat', id: 'd1', type: 'sys', icon: 'fa-database text-gray-500' },
-                                { name: 'data_02.dat', id: 'd2', type: 'sys', icon: 'fa-database text-gray-500' }
+                            name: 'Archive', id: 'Arch', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                                { name: 'data_01.dat', id: 'd1', type: 'sys', icon: 'fa-database text-slate-500' },
+                                { name: 'data_02.dat', id: 'd2', type: 'sys', icon: 'fa-database text-slate-500' }
                             ]
                         },
-                        { name: 'Temp', id: 'Temp', type: 'folder', icon: 'fa-folder text-slate-500', children: [] }
+                        { name: 'Temp', id: 'Temp', type: 'folder', icon: 'fa-folder text-amber-500', children: [] }
+                    ]
+                },
+                {
+                    name: 'Интерфейс', id: 'Interface', type: 'folder', icon: 'fa-folder text-amber-500', children: [
+                        { name: 'skin.bin', id: 'skin', type: 'sys', icon: 'fa-file-code text-slate-500' },
+                        { name: 'fonts.dat', id: 'fonts', type: 'sys', icon: 'fa-file-code text-slate-500' }
                     ]
                 }
             ]
@@ -3739,9 +3982,9 @@
         }
 
         const minoryevkaDocs = {
-            chronicle: 'ХРОНИКА МИНОРЬЕВКИ (2024-2026)\n\nЭпоха 1: Основание (Август-Ноябрь 2024)\nОснователи: Еврей (хостинг) и Навуходоносор (ТГК). Легендарное первое фото состава игроков на Атерносе.\n\nЭпоха 2: Возрождение и расцвет (Декабрь 2024 - Февраль 2025)\nАзриэль (Майк Эрмантраут) берет управление сервером. Строительство склада, приток игроков (до 5-6 чел онлайн).\n\nЭпоха 3: Июньская эра и Золотой век (Июнь 2025)\nЗапуск сервера на Fabric 1.20.1 с войс-чатом. Голосования, выборы мэра (победа Сотарка 80%).\n\nЭпоха 4: Эра террора и диктатура Азриэля (Июль 2025)\nСудебная система, смертные казни, репрессии, 10-дневный бан Гендальфа. Нападение читеров, отставка Азриэля.\n\nЭпоха 5: Безвластие и Великое переселение (Август-Октябрь 2025)\nМэрство Гендальфа, уход на дальние координаты, монумент Французской революции, пожар хрущевок.\n\nЭпоха 6: Эпоха СОР и Новый порядок (2026)\nОснование Новоминорьевки в составе Содружества Объединенных Республик.',
+            chronicle: 'ХРОНИКА МИНОРЬЕВКИ (2024-2026)\n\nЭпоха 1: Основание (Август-Ноябрь 2024)\nОснователи: Еврей (хостинг) и Навуходоносор (ТГК). Легендарное первое фото состава игроков на Атерносе.\n\nЭпоха 2: Возрождение и расцвет (Декабрь 2024 - Февраль 2025)\nАзриэль (Майк Эрмантраут) берет управление сервером. Строительство склада, приток игроков.\n\nЭпоха 3: Июньская эра и Золотой век (Июнь 2025)\nЗапуск сервера на Fabric 1.20.1 с войс-чатом. Выборы мэра (победа Сотарка 80%).\n\nЭпоха 4: Эра террора и диктатура Азриэля (Июль 2025)\nСудебная система, 10-дневный бан Гендальфа. Нападение читеров, отставка Азриэля.\n\nЭпоха 5: Безвластие и Великое переселение (Август-Октябрь 2025)\nМэрство Гендальфа, уход на дальние координаты, монумент Французской революции.\n\nЭпоха 6: Эпоха СОР и Новый порядок (2026)\nОснование Новоминорьевки в составе Содружества Объединенных Республик.',
             iceberg: 'АЙСБЕРГ МИНОРЬЕВКИ: 6 СЛОЕВ ТАЙН\n\n1. Небеса (Поверхность): Первые игроки, легендарное фото Еврея, склад ресурсов, выборы мэра.\n2. Поднебесье: Войс-чат, хрущевки, кастомные напитки, особняк Кайзера.\n3. Верхушка: Судебная система Азриэля, ежедневный суд в 18:00, 10-дневный бан Гендальфа, читерские атаки.\n4. Середина: Тайный склад Навуходоносора, восстание против диктатуры, поджог спавна.\n5. Глубина: Архивы переписок администрации, секретные протоколы голосований, удаленные логи.\n6. Дно (Бездна): Исходный сид мира, нераскрытые тайны основания, истинные архивы СОР.',
-            rules: 'ПРАВИЛА СЕРВЕРА МИНОРЬЕВКА (Кодекс Азриэля)\n\nСтатья 1. Запрещен любой несанкционированный гриферство построек спавна.\nСтатья 2. Ежедневный суд проводится в 18:00 по МСК в здании трибунала.\nСтатья 3. Читерство карается вечной ссылкой и удалением инвентаря.\nСтатья 4. Правило 3-х мемов: лимит юмористического контента в день.\nСтатья 5. Все споры решает Верховный комиссариат.',
+            rules: 'ПРАВИЛА СЕРВЕРА МИНОРЬЕВКА\n\nСтатья 1. Запрещен любой несанкционированный гриферство построек спавна.\nСтатья 2. Ежедневный суд проводится в 18:00 по МСК в здании трибунала.\nСтатья 3. Читерство карается вечной ссылкой и удалением инвентаря.\nСтатья 4. Правило 3-х мемов: лимит юмористического контента в день.\nСтатья 5. Все споры решает Верховный комиссариат.',
             admin: 'КОДЕКС АДМИНИСТРАЦИИ\n\n1. Лимит 3 мемов в день на администратора.\n2. Никакого мата в официальных каналах объявлений.\n3. Соблюдение субординации и протоколов безопасности.\n4. Все изменения конфигурации фиксируются в системном аудите.'
         };
 
@@ -3750,58 +3993,58 @@
             const titleEl = document.getElementById('tv-explorer-title');
             
             if (!subfolder) {
-                titleEl.innerHTML = `<i class="fas fa-server text-slate-600"></i> PUBLIC-NAS Share`;
+                titleEl.innerHTML = `<i class="fas fa-server text-slate-500"></i> PUBLIC-NAS Share`;
                 
                 const isUnlocked = isJailbroken && isPasscodeUnlocked;
                 container.innerHTML = `
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('share.txt', 'Public share access granted. Egor\\'s home network server holds no extra private logs.')">
-                            <i class="fas fa-file-alt text-slate-600 text-4xl mb-3"></i>
+                            <i class="fas fa-file-alt text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">share.txt</span>
                         </div>
                         
-                        <div class="p-4 rounded-xl border ${isUnlocked ? 'border-amber-400 bg-amber-50/30' : 'border-gray-200 bg-gray-50/50'} hover:border-amber-500 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none relative" onclick="openNasMinoryevkaFolder()">
-                            <i class="fas ${isUnlocked ? 'fa-folder-open text-amber-500' : 'fa-folder text-slate-400'} text-4xl mb-3"></i>
-                            <span class="text-xs text-gray-700 font-semibold leading-tight">Минорьевка_Архив</span>
-                            ${!isUnlocked ? '<div class="absolute top-2 right-2 text-xs text-red-500"><i class="fas fa-lock"></i></div>' : ''}
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none relative" onclick="openNasMinoryevkaFolder()">
+                            <i class="fas fa-folder text-amber-500 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Minoryevka</span>
+                            ${!isUnlocked ? '<div class="absolute top-2 right-2 text-xs text-slate-400"><i class="fas fa-lock"></i></div>' : ''}
                         </div>
                     </div>
                 `;
             } else if (subfolder === 'minoryevka') {
-                titleEl.innerHTML = `<button onclick="renderNasExplorer()" class="text-sky-600 hover:underline mr-2"><i class="fas fa-arrow-left"></i> Назад</button> <i class="fas fa-folder-open text-amber-500"></i> PUBLIC-NAS / Минорьевка_Архив`;
+                titleEl.innerHTML = `<button onclick="renderNasExplorer()" class="text-slate-600 hover:underline mr-2 text-xs"><i class="fas fa-arrow-left"></i> Назад</button> <i class="fas fa-folder-open text-amber-500"></i> PUBLIC-NAS / Minoryevka`;
                 
                 container.innerHTML = `
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-sky-500 hover:bg-sky-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Хроника_Минорьевки_2024-2026.txt', minoryevkaDocs.chronicle)">
-                            <i class="fas fa-scroll text-sky-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Хроника_2024-2026.txt', minoryevkaDocs.chronicle)">
+                            <i class="fas fa-file-alt text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Хроника_2024-2026.txt</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-cyan-500 hover:bg-cyan-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Айсберг_сервера.txt', minoryevkaDocs.iceberg)">
-                            <i class="fas fa-icicles text-cyan-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Айсберг_сервера.txt', minoryevkaDocs.iceberg)">
+                            <i class="fas fa-file-alt text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Айсберг_сервера.txt</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-500 hover:bg-purple-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Правила_сервiра.txt', minoryevkaDocs.rules)">
-                            <i class="fas fa-gavel text-purple-600 text-4xl mb-3"></i>
-                            <span class="text-xs text-gray-700 font-semibold leading-tight">Правила_сервiра.txt</span>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Правила_сервера.txt', minoryevkaDocs.rules)">
+                            <i class="fas fa-file-alt text-slate-500 text-4xl mb-3"></i>
+                            <span class="text-xs text-gray-700 font-semibold leading-tight">Правила_сервера.txt</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-indigo-500 hover:bg-indigo-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Кодекс_администрации.txt', minoryevkaDocs.admin)">
-                            <i class="fas fa-shield-alt text-indigo-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvNotepad('Кодекс_администрации.txt', minoryevkaDocs.admin)">
+                            <i class="fas fa-file-alt text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Кодекс_админа.txt</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Первый состав сервера (2024)', 'assets/images/minoryevka/legendary_first_photo.jpg', 'Август 2024 года. Фото Еврея.')">
-                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Первый состав сервера (2024)', 'assets/images/minoryevka/legendary_first_photo.jpg', 'Август 2024 года. Фото Еврея.')">
+                            <i class="fas fa-file-image text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Первый_состав_2024.jpg</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Хрущёвки Минорьевки', 'assets/images/minoryevka/khrushchevki.jpg', 'Жилой квартал спавна.')">
-                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Хрущёвки Минорьевки', 'assets/images/minoryevka/khrushchevki.jpg', 'Жилой квартал спавна.')">
+                            <i class="fas fa-file-image text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Хрущёвки.jpg</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Особняк Кайзера', 'assets/images/minoryevka/kaiser_house.jpg', 'Историческое поместье Кайзера.')">
-                            <i class="fas fa-image text-emerald-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Особняк Кайзера', 'assets/images/minoryevka/kaiser_house.jpg', 'Историческое поместье Кайзера.')">
+                            <i class="fas fa-file-image text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Особняк_Кайзера.jpg</span>
                         </div>
-                        <div class="p-4 rounded-xl border border-gray-200 hover:border-emerald-500 hover:bg-emerald-50/30 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Карта Гинденбурга', 'assets/images/minoryevka/map_hindenburg.jpg', 'Карта территории сервера.')">
-                            <i class="fas fa-map text-emerald-600 text-4xl mb-3"></i>
+                        <div class="p-4 rounded-xl border border-gray-200 hover:border-slate-500 hover:bg-slate-50/50 cursor-pointer flex flex-col items-center text-center transition-all hover:scale-105 duration-200 select-none" onclick="openTvPhoto('Карта Гинденбурга', 'assets/images/minoryevka/map_hindenburg.jpg', 'Карта территории сервера.')">
+                            <i class="fas fa-file-image text-slate-500 text-4xl mb-3"></i>
                             <span class="text-xs text-gray-700 font-semibold leading-tight">Карта_Гинденбурга.jpg</span>
                         </div>
                     </div>
@@ -3812,7 +4055,7 @@
         function openNasMinoryevkaFolder() {
             playSnd(soundClick);
             if (!isJailbroken || !isPasscodeUnlocked) {
-                showTvAlert("Доступ ограничен", "Сетевой каталог зашифрован. Требуется cyan1de Jailbreak и авторизация PIN-кодом в Медиатеке.");
+                showTvAlert("Доступ ограничен", "Сетевой ресурс защищён политикой безопасности домена. Требуется cyan1de Jailbreak и авторизация PIN-кодом в Медиатеке.");
                 return;
             }
             renderNasExplorer('minoryevka');
@@ -4089,6 +4332,176 @@
             }
         }
 
+
+
+        // ==========================================
+        // FULLSCREEN CONTROLLER FOR MOBILE & DESKTOP
+        // ==========================================
+        function isFullscreen() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+        }
+
+        function enterFullscreen() {
+            const el = document.documentElement;
+            if (el.requestFullscreen) {
+                el.requestFullscreen().catch(() => {});
+            } else if (el.webkitRequestFullscreen) {
+                el.webkitRequestFullscreen();
+            } else if (el.webkitEnterFullscreen) {
+                el.webkitEnterFullscreen();
+            } else if (el.msRequestFullscreen) {
+                el.msRequestFullscreen();
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+
+        function toggleFullscreen() {
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+            setTimeout(updateFullscreenBtn, 100);
+        }
+
+        function updateFullscreenBtn() {
+            const btn = document.getElementById('tv-fullscreen-btn');
+            if (!btn) return;
+            if (isFullscreen()) {
+                btn.innerHTML = '<i class="fas fa-compress"></i>';
+                btn.title = "Выйти из полноэкранного режима";
+            } else {
+                btn.innerHTML = '<i class="fas fa-expand"></i>';
+                btn.title = "Полноэкранный режим";
+            }
+        }
+
+        document.addEventListener('fullscreenchange', updateFullscreenBtn);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenBtn);
+
+        // ==========================================
+        // APPLE TV 2014 MEDIA ALBUMS & VIEWER LOGIC
+        // ==========================================
+        let currentActiveAlbum = 'egor'; // 'egor' or 'minor'
+        let currentMinorIndex = 0;
+
+        const minoryevkaMediaPhotos = [
+            { src: 'assets/images/minoryevka/legendary_first_photo.jpg', title: 'Легендарный первый состав сервера', desc: 'Август 2024 года. Фото Еврея.' },
+            { src: 'assets/images/minoryevka/khrushchevki.jpg', title: 'Хрущёвки Минорьевки', desc: 'Жилой квартал спавна.' },
+            { src: 'assets/images/minoryevka/kaiser_house.jpg', title: 'Особняк Кайзера', desc: 'Историческое поместье Кайзера.' },
+            { src: 'assets/images/minoryevka/birds_eye.jpg', title: 'Спавн с высоты птичьего полёта', desc: 'Панорама спавна и инфраструктуры.' },
+            { src: 'assets/images/minoryevka/french_statue.jpg', title: 'Монумент Французской революции', desc: 'Символ культурного наследия.' },
+            { src: 'assets/images/minoryevka/map_hindenburg.jpg', title: 'Карта Гинденбурга', desc: 'Территориальная карта эпохи СОР.' },
+            { src: 'assets/images/minoryevka/map_nikita.jpg', title: 'Карта спавна времён Никиты', desc: 'Историческая схема застройки.' }
+        ];
+
+        function showMediaAlbums() {
+            playSnd(soundClick);
+            const albumsView = document.getElementById('media-albums-view');
+            const viewerView = document.getElementById('media-viewer-view');
+            const backBtn = document.getElementById('media-back-albums-btn');
+            const titleEl = document.getElementById('media-app-title');
+
+            if (albumsView) albumsView.style.display = 'flex';
+            if (viewerView) viewerView.style.display = 'none';
+            if (backBtn) backBtn.style.display = 'none';
+            if (titleEl) titleEl.innerHTML = `<i class="fas fa-images"></i> Медиатека`;
+        }
+
+        function openEgorAlbum() {
+            playSnd(soundClick);
+            currentActiveAlbum = 'egor';
+            const albumsView = document.getElementById('media-albums-view');
+            const viewerView = document.getElementById('media-viewer-view');
+            const backBtn = document.getElementById('media-back-albums-btn');
+            const titleEl = document.getElementById('media-app-title');
+            const captionWrap = document.getElementById('tv-photo-caption-wrap');
+
+            if (albumsView) albumsView.style.display = 'none';
+            if (viewerView) viewerView.style.display = 'flex';
+            if (backBtn) backBtn.style.display = 'inline-block';
+            if (titleEl) titleEl.innerHTML = `<i class="fas fa-images"></i> Файлы Егора`;
+            if (captionWrap) captionWrap.style.display = 'none';
+
+            updateActivePhotoDisplay();
+        }
+
+        function openMinorAlbum() {
+            playSnd(soundClick);
+            currentActiveAlbum = 'minor';
+            const albumsView = document.getElementById('media-albums-view');
+            const viewerView = document.getElementById('media-viewer-view');
+            const backBtn = document.getElementById('media-back-albums-btn');
+            const titleEl = document.getElementById('media-app-title');
+            const captionWrap = document.getElementById('tv-photo-caption-wrap');
+
+            if (albumsView) albumsView.style.display = 'none';
+            if (viewerView) viewerView.style.display = 'flex';
+            if (backBtn) backBtn.style.display = 'inline-block';
+            if (titleEl) titleEl.innerHTML = `<i class="fas fa-landmark text-amber-400"></i> Архив Минорьевки`;
+            if (captionWrap) captionWrap.style.display = 'block';
+
+            updateActivePhotoDisplay();
+        }
+
+        function slideActivePhoto(dir) {
+            playSnd(soundClick);
+            if (currentActiveAlbum === 'egor') {
+                currentPhotoIndex += dir;
+                if (currentPhotoIndex < 1) currentPhotoIndex = 1;
+                updateActivePhotoDisplay();
+            } else {
+                currentMinorIndex += dir;
+                if (currentMinorIndex < 0) currentMinorIndex = minoryevkaMediaPhotos.length - 1;
+                if (currentMinorIndex >= minoryevkaMediaPhotos.length) currentMinorIndex = 0;
+                updateActivePhotoDisplay();
+            }
+        }
+
+        function updateActivePhotoDisplay() {
+            const displayImg = document.getElementById('tv-photo-display');
+            const indicator = document.getElementById('tv-photo-indicator');
+            if (!displayImg) return;
+
+            displayImg.style.opacity = '0';
+            setTimeout(() => {
+                if (currentActiveAlbum === 'egor') {
+                    displayImg.src = `assets/images/computer/egor_files/${currentPhotoIndex}.jpg`;
+                    displayImg.onload = () => {
+                        displayImg.style.opacity = '1';
+                        if (indicator) indicator.textContent = `Слайд ${currentPhotoIndex}`;
+                    };
+                    displayImg.onerror = () => {
+                        if (currentPhotoIndex > 1) {
+                            currentPhotoIndex--;
+                            displayImg.src = `assets/images/computer/egor_files/${currentPhotoIndex}.jpg`;
+                            displayImg.style.opacity = '1';
+                            if (indicator) indicator.textContent = `Слайд ${currentPhotoIndex}`;
+                        }
+                    };
+                } else {
+                    const item = minoryevkaMediaPhotos[currentMinorIndex];
+                    displayImg.src = item.src;
+                    displayImg.onload = () => {
+                        displayImg.style.opacity = '1';
+                        if (indicator) indicator.textContent = `Фото ${currentMinorIndex + 1} из ${minoryevkaMediaPhotos.length}`;
+                    };
+                    const title = document.getElementById('tv-photo-caption-title');
+                    const desc = document.getElementById('tv-photo-caption-desc');
+                    if (title) title.textContent = item.title;
+                    if (desc) desc.textContent = item.desc;
+                }
+            }, 150);
+        }
 
         </script>
 </body>
