@@ -1009,7 +1009,7 @@
                                     В конце декабря 2024 года <strong>Минор Минорыч</strong> (<code>@estonia78</code>) перезапустил сервер, а <strong>Майк Эрмантраут</strong> (будущий <strong>Азриэль</strong>) начал масштабное развитие спавна: был возведён центральный склад ресурсов и налажена внутренняя логистика.
                                 </p>
                                 <p class="text-gray-300 leading-relaxed">
-                                    В январе 2025 года онлайн достиг пика в 5–6 игроков. Были построены знаменитые кварталы хрущёвок Минора Минорыча, особняк Кайзера, общая ферма железа и разветвлённая дорожная сеть.
+                                    В январе 2025 года онлайн достиг пика в 5–6 игроков. Были построены знаменитые кварталы хрущёвок Минора Минорыча, особняк Кайзера, общая ферма железа и разветвлённая дорожная сеть. По рассказу Гендальфа, в январе и феврале участники также построили ферму опыта на эндерменах и совместно выровняли территорию до 64-й высоты.
                                 </p>
                             </div>
 
@@ -1021,7 +1021,7 @@
                                     Весной 2025 года руководство проектом перешло к <strong>Arsherr18</strong> и <strong>Куртуко</strong>. Именно тогда было утверждено официальное название <strong>Минорьевка</strong>. Проект активно исследовал новые направления развития и расширял карту.
                                 </p>
                                 <p class="text-gray-300 leading-relaxed">
-                                    После возвращения Майка в администрацию координация сервера сосредоточилась на сохранении построек и обеспечении комфортной игры для всех участников.
+                                    По рассказу Гендальфа, после ухода Майка в марте сервер пережил нестабильный период. Arsherr18 и Куртуко рассматривали развитие через модификации, однако подписка Arsherr18 закончилась, и сервер перестал работать. В мае Майк вернулся; вскоре между ним и Arsherr18 возник конфликт, завершившийся уходом последнего.
                                 </p>
                             </div>
 
@@ -1033,7 +1033,7 @@
                                     Летом 2025 года Майк (взявший никнейм <strong>Азриэль</strong>) при поддержке игроков приобрёл стабильный платный хостинг. Были утверждены официальные правила против гриферства и нечестной игры, а также введены открытые судебные заседания в 18:00 по московскому времени.
                                 </p>
                                 <p class="text-gray-300 leading-relaxed">
-                                    Этот период запомнился стабильностью: Гинденбург создал первую подробную политическую карту территорий сервера, а между поселениями наладилась торговля.
+                                    Правила предусматривали наказания за разрушение построек, кражи и читы. Спорные нарушения рассматривались на суде: потерпевшие могли попросить прощения или наказания, а окончательное решение оставалось за ведущим заседание. Гинденбург создал политическую карту территорий сервера, а между поселениями наладилась торговля.
                                 </p>
                             </div>
 
@@ -1051,40 +1051,24 @@
                         </div>
 
                         <!-- Интерактивный Айсберг Новоминорьевки в стилистике Ocean TV -->
-                        <div class="iceberg-ocean-card mt-8 p-5 md:p-6 rounded-2xl bg-[#08090d] border border-white/10 transition-all duration-300 hover:border-sky-500/40 hover:shadow-[0_0_25px_rgba(56,189,248,0.12)]">
-                            <div class="flex items-center justify-between cursor-pointer select-none group" onclick="toggleIceberg(this)">
+                        <div class="iceberg-ocean-card mt-8 p-5 md:p-6 rounded-2xl bg-gray-900/60 border border-white/10 transition-colors hover:border-white/20">
+                            <div class="flex items-center justify-between cursor-pointer select-none group" role="button" tabindex="0" aria-expanded="false" onclick="toggleIceberg(this)" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleIceberg(this); }">
                                 <div class="flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 group-hover:bg-sky-500/20 group-hover:border-sky-400/50 transition">
-                                        <i class="fas fa-layer-group text-base"></i>
+                                        <svg aria-hidden="true" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3 13 9 4l3 4 2-2 7 7H3Z"/><path d="m4 13 4 7h8l4-7M1 16c2-1 3-1 5 0m12 0c2-1 3-1 5 0"/></svg>
                                     </div>
                                     <div>
-                                        <h5 class="text-base font-bold text-white group-hover:text-sky-300 transition">Айсберг Новой Минорьевки</h5>
+                                        <h5 class="text-base font-bold text-white">Айсберг Новой Минорьевки</h5>
                                         <p class="text-xs text-gray-400">Архивная классификация хроник и ключевых событий сервера от Виталия Пипенко</p>
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:bg-sky-500/20 group-hover:border-sky-500/40 transition-all duration-300">
-                                    <i class="fas fa-chevron-down text-xs transition-transform duration-300 iceberg-arrow"></i>
+                                <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white transition-colors duration-300">
+                                    <i class="fas fa-chevron-down text-xs transition-transform duration-500 ease-in-out iceberg-arrow"></i>
                                 </div>
                             </div>
                             
                             <div class="iceberg-collapse-body mt-0 max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
                                 <div class="pt-5 border-t border-white/10 space-y-3 text-xs leading-relaxed mt-4">
-                                    <!-- Официальный видеоролик сервера / Хроника -->
-                                    <div class="mb-5 rounded-xl overflow-hidden border border-white/15 bg-black/80 shadow-2xl">
-                                        <div class="relative group">
-                                            <video controls poster="assets/images/computer/minoryevka_2025_poster.jpg" class="w-full max-h-72 object-cover">
-                                                <source src="assets/video/minoryevka_2025.mp4" type="video/mp4">
-                                                Ваш браузер не поддерживает видео.
-                                            </video>
-                                        </div>
-                                        <div class="p-3 bg-black/90 flex items-center justify-between text-xs text-slate-300 border-t border-white/10">
-                                            <span class="font-medium text-white flex items-center gap-2">
-                                                <i class="fas fa-play-circle text-sky-400 text-sm"></i> Летопись Минорьевки: 2025 (Официальный фильм)
-                                            </span>
-                                            <span class="text-[11px] text-gray-400 font-mono">08:18 • 1080p Full HD</span>
-                                        </div>
-                                    </div>
-
                                     <!-- Уровень 1: Небеса -->
                                     <div class="p-3.5 rounded-xl bg-sky-950/20 border border-sky-500/25 transition hover:border-sky-500/50 hover:bg-sky-950/30">
                                         <strong class="text-sky-400 block mb-1 font-semibold flex items-center gap-2">
@@ -1218,7 +1202,7 @@
                             <div class="relative pl-10 mb-8">
                                 <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
                                 <h3 class="text-xl font-semibold text-purple-300 mb-3">Основание и множественные чаты</h3>
-                                <p class="text-gray-300">Самый первый чат был основан в ноябре 2024. Его владельцем был Кар кар, но актив в нем был очень низким и впоследствии чат был удален самим овнером. В это же время параллельно существовали другие чаты с теми же людьми, но с ещё более низким активом.</p>
+                                <p class="text-gray-300">Самый первый чат был основан в ноябре 2024. Его владельцем был Кар кар, но актив в нем был очень низким и впоследствии чат был удален самим овнером. В это же время параллельно существовали другие чаты с теми же людьми, но с ещё более низким активом. Позднее участники этих чатов собрались в «Профессиональных хойщиках», из которых выросла Вест-Индия.</p>
                             </div>
                             <div class="relative pl-10 mb-8">
                                 <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
@@ -1273,7 +1257,7 @@
                             <div class="relative pl-10 mb-8">
                                 <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
                                 <h3 class="text-xl font-semibold text-purple-300 mb-3">Раннее время</h3>
-                                <p class="text-gray-300">Первые ост-индийцы стали заходить в чат в конце августа — начале сентября 2025, а массовое переселение продолжалось всю осень. Чат стал Вест-Индией 13 ноября 2025; всю осень он находился под старым названием, хотя большинство людей в чате было из Ост-Индии.</p>
+                                <p class="text-gray-300">Первые ост-индийцы стали заходить в чат в конце августа — начале сентября 2025, а массовое переселение продолжалось всю осень. Среди пришедших оказался и Сотарк, перешедший к «Профессиональным хойщикам» после бана в Ост-Индии 23 сентября. Чат стал Вест-Индией 13 ноября 2025; всю осень он находился под старым названием, хотя большинство людей в чате было из Ост-Индии.</p>
                             </div>
                             <div class="relative pl-10 mb-8">
                                 <div class="absolute w-3 h-3 bg-purple-500 rounded-full left-2 top-1/2 -translate-y-1/2"></div>
@@ -1973,7 +1957,7 @@
                     <div class="w-full md:w-1/2 text-center md:text-left space-y-4">
                         <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Ocean TV</h3>
                         <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-                            Интерактивный медиацентр, аудиозаписи, радиоэфир и архивные материалы.
+                            Интерактивный медиацентр, аудиозаписи и архивные материалы.
                         </p>
                         <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3">
                             <button id="pc-launch-btn" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-200 transition-colors shadow">
@@ -2400,11 +2384,6 @@
         if (pcLaunchBtn) {
             pcLaunchBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                try {
-                    const docEl = document.documentElement;
-                    if (docEl.requestFullscreen) docEl.requestFullscreen().catch(() => {});
-                    else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
-                } catch(err) {}
                 window.location.href = 'tv.html';
             });
         }
@@ -2570,6 +2549,7 @@
             if (!body) return;
             
             const isOpen = body.classList.contains('is-open');
+            el.setAttribute('aria-expanded', String(!isOpen));
             if (isOpen) {
                 body.style.maxHeight = '0px';
                 body.style.opacity = '0';

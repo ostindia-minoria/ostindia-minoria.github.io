@@ -506,6 +506,19 @@
             pointer-events: auto;
         }
 
+        #tv-video-overlay { overflow-y: auto; padding: clamp(12px, 3vw, 3rem); }
+        #tv-video-overlay .video-content { min-height: 0; }
+        #tv-video-player { max-height: 65dvh; object-fit: contain; }
+        .movie-frame { position: relative; }
+        .movie-controls { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 18px 12px 7px; background: linear-gradient(transparent, rgba(0,0,0,.78)); color: white; }
+        .movie-controls button { flex: none; width: 32px; height: 32px; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 14px; }
+        .movie-controls button:focus-visible, .movie-controls input:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .movie-controls input { accent-color: #fff; min-width: 0; }
+        .movie-controls .movie-progress { flex: 1; }
+        .movie-controls .movie-volume { width: 80px; }
+        .movie-controls .movie-time { flex: none; font-size: 12px; white-space: nowrap; }
+        @media (max-width: 480px) { .movie-controls { gap: 4px; padding: 18px 6px 5px; } .movie-controls .movie-volume { width: 45px; } .movie-controls .movie-time { font-size: 10px; } }
+
         .app-header {
             display: flex;
             justify-content: space-between;
@@ -2772,101 +2785,17 @@
         </div>
     </div>
 
-    <!-- APP 5: RADIO (COMMUNITY RADIO PLAYER) -->
+    <!-- APP 5: RADIO (RADIO PLACEHOLDER) -->
     <div id="app-radio" class="app-overlay">
         <div class="app-header">
-            <div class="app-title"><i class="fas fa-radio text-sky-400"></i> Радио Ocean TV</div>
+            <div class="app-title"><i class="fas fa-radio"></i> Радио</div>
             <button class="app-menu-btn" onclick="closeApp('app-radio')">Меню</button>
         </div>
-        
-        <div class="flex-1 flex flex-col md:flex-row items-stretch p-4 md:p-6 max-w-5xl mx-auto w-full gap-6 overflow-hidden">
-            <!-- Left: Player Deck -->
-            <div class="w-full md:w-1/2 flex flex-col justify-between p-5 md:p-6 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl shadow-2xl">
-                <!-- Station Tuner Bar -->
-                <div>
-                    <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-                        <span class="text-xs font-semibold text-sky-400 font-mono tracking-wider flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span> ПРЯМОЙ ЭФИР
-                        </span>
-                        <div class="flex gap-1.5" id="tv-radio-stations">
-                            <button class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 hover:bg-sky-500/30 transition active" onclick="switchRadioStation('91.5 FM')">91.5 FM</button>
-                            <button class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 transition" onclick="switchRadioStation('96.8 FM')">96.8 FM</button>
-                            <button class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 transition" onclick="switchRadioStation('101.2 FM')">101.2 FM</button>
-                        </div>
-                    </div>
-
-                    <!-- Beacon & Visualizer -->
-                    <div class="h-28 rounded-xl bg-gradient-to-b from-sky-950/20 to-black/80 border border-white/5 flex flex-col items-center justify-center relative overflow-hidden mb-4">
-                        <div class="flex items-end justify-center gap-1.5 h-10" id="tv-radio-bars">
-                            <div class="w-1.5 bg-sky-400 rounded-full h-3 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-8 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-5 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-10 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-6 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-9 transition-all duration-150"></div>
-                            <div class="w-1.5 bg-sky-400 rounded-full h-4 transition-all duration-150"></div>
-                        </div>
-                        <div class="text-[11px] font-mono text-slate-400 mt-2" id="tv-radio-freq-label">91.5 FM • Эхо Океана</div>
-                    </div>
-
-                    <!-- Track Info -->
-                    <div class="text-center md:text-left">
-                        <h3 class="text-lg font-bold text-white tracking-wide truncate" id="tv-radio-title">Загрузка плейлиста...</h3>
-                        <p class="text-xs text-slate-400 truncate mt-0.5" id="tv-radio-artist">Ocean TV Radio</p>
-                    </div>
-                </div>
-
-                <!-- Controls & Progress -->
-                <div class="mt-4 space-y-3">
-                    <!-- Progress Bar -->
-                    <div>
-                        <div class="h-1.5 w-full bg-white/10 rounded-full cursor-pointer overflow-hidden" id="tv-radio-progress-wrap" onclick="seekRadio(event)">
-                            <div class="h-full bg-sky-400 rounded-full w-0 transition-all duration-100" id="tv-radio-progress-bar"></div>
-                        </div>
-                        <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
-                            <span id="tv-radio-time">0:00</span>
-                            <span id="tv-radio-duration">0:00</span>
-                        </div>
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="flex items-center justify-center gap-4">
-                        <button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition active:scale-95" onclick="prevRadioTrack()" title="Предыдущий трек">
-                            <i class="fas fa-step-backward text-xs"></i>
-                        </button>
-                        <button class="w-13 h-13 px-4 py-3 rounded-full bg-white text-black hover:bg-gray-200 flex items-center justify-center shadow-lg transition active:scale-95" id="tv-radio-play-btn" onclick="toggleRadioPlay()" title="Воспроизведение / Пауза">
-                            <i class="fas fa-play text-base ml-0.5"></i>
-                        </button>
-                        <button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition active:scale-95" onclick="nextRadioTrack()" title="Следующий трек">
-                            <i class="fas fa-step-forward text-xs"></i>
-                        </button>
-                    </div>
-
-                    <!-- Volume slider -->
-                    <div class="flex items-center gap-2 pt-1 px-2">
-                        <i class="fas fa-volume-low text-xs text-slate-400"></i>
-                        <input type="range" id="tv-radio-volume" min="0" max="100" value="70" class="w-full accent-sky-400 h-1 bg-white/10 rounded cursor-pointer" oninput="setRadioVolume(this.value)">
-                        <i class="fas fa-volume-high text-xs text-slate-400"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Community Playlist -->
-            <div class="w-full md:w-1/2 flex flex-col p-4 md:p-5 rounded-2xl bg-black/40 border border-white/10 overflow-hidden">
-                <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
-                    <h4 class="text-sm font-semibold text-white flex items-center gap-2">
-                        <i class="fas fa-list-ul text-sky-400"></i> Плейлист эфира
-                    </h4>
-                    <span class="text-[11px] font-mono text-slate-400" id="tv-radio-count">0 треков</span>
-                </div>
-                
-                <div class="flex-1 overflow-y-auto space-y-1.5 pr-1 max-h-[340px] custom-scrollbar" id="tv-radio-playlist">
-                    <!-- Populated dynamically via JS -->
-                </div>
-            </div>
+        <div class="flex-1 flex flex-col justify-center items-center text-center">
+            <div class="radio-beacon"><div class="beacon-pulse"></div><div class="beacon-pulse"></div><div class="beacon-pulse"></div><div class="beacon-dot"></div></div>
+            <h4 class="text-xl font-bold text-slate-300">OCEAN RADIO STREAM</h4>
+            <p class="text-sm text-gray-500 max-w-sm mt-3 leading-relaxed">Сетевой сервер радиовещания отключен. Инъекция прошивки не обнаружила активных эфирных синдикатов.</p>
         </div>
-        
-        <audio id="tv-radio-audio" preload="metadata"></audio>
     </div>
 
     <!-- APP 6: COMPUTERS (FULL FILE EXPLORER MAPPED) -->
@@ -2943,12 +2872,17 @@
             <div class="app-title" id="tv-video-title"><i class="fas fa-film text-purple-400"></i> Видеозапись</div>
             <button class="app-menu-btn" onclick="closeTvVideo()">Закрыть</button>
         </div>
-        <div class="flex-1 flex flex-col justify-center items-center p-2 md:p-4">
+        <div class="video-content flex-1 flex flex-col justify-center items-center p-2 md:p-4">
             <div class="w-[850px] max-w-[95vw] bg-black border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
-                <div class="aspect-video w-full bg-black">
-                    <video id="tv-video-player" controls preload="metadata" class="w-full h-full">
-                        <source src="assets/video/minoryevka_tour.mp4" type="video/mp4">
-                    </video>
+                <div class="movie-frame aspect-video w-full bg-black">
+                    <video id="tv-video-player" playsinline preload="metadata" class="w-full h-full"></video>
+                <div class="movie-controls" role="group" aria-label="Управление видео">
+                    <button id="movie-play" type="button" aria-label="Воспроизвести"><i class="fas fa-play" aria-hidden="true"></i></button>
+                    <input id="movie-progress" class="movie-progress" type="range" min="0" max="1000" value="0" aria-label="Позиция видео">
+                    <span id="movie-time" class="movie-time">0:00 / 0:00</span>
+                    <button id="movie-mute" type="button" aria-label="Выключить звук"><i class="fas fa-volume-up" aria-hidden="true"></i></button>
+                    <input id="movie-volume" class="movie-volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Громкость">
+                </div>
                 </div>
                 <div class="p-4 bg-slate-900/95 text-xs text-gray-300 leading-relaxed" id="tv-video-caption">
                     Видеотур по серверу Минорьевка от Гендальфа (1080p).
@@ -3289,7 +3223,8 @@
 
             handleBootClick = () => {
                 cleanupBootEvents();
-                if (!isFullscreen()) enterFullscreen(); startBootSequence();
+                if (!isFullscreen()) enterFullscreen();
+                startBootSequence();
             };
 
             if (bootModal) {
@@ -3303,7 +3238,8 @@
                     if (wrap && !wrap.classList.contains('zooming') && !tvPowerState) {
                         e.preventDefault();
                         cleanupBootEvents();
-                        if (!isFullscreen()) enterFullscreen(); startBootSequence();
+                        if (!isFullscreen()) enterFullscreen();
+                        startBootSequence();
                     }
                 }
             };
@@ -3319,6 +3255,7 @@
         // Global Escape key listener to close active overlays
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                if (isFullscreen() || document.webkitCurrentFullScreenElement) return;
                 const videoOverlay = document.getElementById('tv-video-overlay');
                 if (videoOverlay && videoOverlay.classList.contains('active')) {
                     closeTvVideo();
@@ -3380,9 +3317,6 @@
                 }
                 if (appId === 'app-music') {
                     stopMusicPlayback();
-                }
-                if (appId === 'app-radio') {
-                    stopRadioNoise();
                 }
             }
         }
@@ -3538,8 +3472,44 @@
             }
         }
 
+        const moviePlayer = document.getElementById('tv-video-player');
+        const moviePlay = document.getElementById('movie-play');
+        const movieProgress = document.getElementById('movie-progress');
+        const movieTime = document.getElementById('movie-time');
+        const movieMute = document.getElementById('movie-mute');
+        const movieVolume = document.getElementById('movie-volume');
+        function movieFormatTime(seconds) {
+            if (!Number.isFinite(seconds)) return '0:00';
+            return Math.floor(seconds / 60) + ':' + String(Math.floor(seconds % 60)).padStart(2, '0');
+        }
+        function updateMovieControls() {
+            moviePlay.innerHTML = moviePlayer.paused ? '<i class="fas fa-play" aria-hidden="true"></i>' : '<i class="fas fa-pause" aria-hidden="true"></i>';
+            moviePlay.setAttribute('aria-label', moviePlayer.paused ? 'Воспроизвести' : 'Пауза');
+            const duration = Number.isFinite(moviePlayer.duration) ? moviePlayer.duration : 0;
+            movieProgress.value = duration ? String(Math.round(moviePlayer.currentTime / duration * 1000)) : '0';
+            movieTime.textContent = movieFormatTime(moviePlayer.currentTime) + ' / ' + movieFormatTime(duration);
+            movieMute.innerHTML = moviePlayer.muted || moviePlayer.volume === 0 ? '<i class="fas fa-volume-mute" aria-hidden="true"></i>' : '<i class="fas fa-volume-up" aria-hidden="true"></i>';
+            movieMute.setAttribute('aria-label', moviePlayer.muted ? 'Включить звук' : 'Выключить звук');
+            movieVolume.value = String(moviePlayer.muted ? 0 : moviePlayer.volume);
+        }
+        moviePlay.addEventListener('click', () => {
+            if (moviePlayer.paused) moviePlayer.play().catch(() => {});
+            else moviePlayer.pause();
+        });
+        movieProgress.addEventListener('input', () => {
+            if (Number.isFinite(moviePlayer.duration)) moviePlayer.currentTime = Number(movieProgress.value) / 1000 * moviePlayer.duration;
+        });
+        movieMute.addEventListener('click', () => { moviePlayer.muted = !moviePlayer.muted; });
+        movieVolume.addEventListener('input', () => { moviePlayer.volume = Number(movieVolume.value); moviePlayer.muted = false; });
+        ['play', 'pause', 'timeupdate', 'durationchange', 'volumechange', 'emptied'].forEach(event => moviePlayer.addEventListener(event, updateMovieControls));
+        updateMovieControls();
+
+        let videoReturnTarget = null;
         function openTvVideo(title, src, caption) {
             playSnd(soundClick);
+            const source = window.event && window.event.target;
+            videoReturnTarget = source && source.closest ? source.closest('.apple-tv-video-card, [onclick*="openTvVideo"]') : document.activeElement;
+            if (videoReturnTarget && !videoReturnTarget.hasAttribute('tabindex')) videoReturnTarget.setAttribute('tabindex', '-1');
             const overlay = document.getElementById('tv-video-overlay');
             const player = document.getElementById('tv-video-player');
             const titleEl = document.getElementById('tv-video-title');
@@ -3580,6 +3550,8 @@
                 const anyActive = Array.from(document.querySelectorAll('.app-overlay')).some(el => el.classList.contains('active'));
                 if (!anyActive) document.body.classList.remove('app-active');
             }
+            if (videoReturnTarget && videoReturnTarget.isConnected) videoReturnTarget.focus({ preventScroll: true });
+            videoReturnTarget = null;
         }
 
         function buildVideoPlaylistUI() {
@@ -3843,174 +3815,8 @@
             }
         }
 
-        // --- HIGH-FIDELITY RADIO TUNING JS SYSTEM ---
-        let currentRadioFrequency = 96.8;
-        let radioStationAudio = null;
-        let activeRadioStation = null;
-        
-        const radioStations = [
-            { freq: 91.5, name: "Эхо Истории", track: "assets/music/20260214_153209_Марш_сс_ост_Индии.mp3", artist: "Historical Brass Band" },
-            { freq: 96.8, name: "Ретро Волна", track: "assets/music/20260228_182720_Late_Goodbye.mp3", artist: "Poets of the Fall" },
-            { freq: 101.2, name: "Свободный Эфир", track: "assets/music/20260207_222530_Замай.mp3", artist: "Замай OST" },
-            { freq: 105.4, name: "Егор FM", track: "assets/music/20260224_155110_С_отцом.mp3", artist: "Егор Лог Архив" }
-        ];
-
-        // --- TRUE WEB AUDIO CRT STATIC NOISE SYNTHESIZER ---
-        let webAudioCtx = null;
-        let audioNoiseNode = null;
-        let audioFilterNode = null;
-        let noiseGainNode = null;
-        let staticAnimationId = null;
-
         function openRadioApp() {
-            if (!tvPowerState) return;
-            openApp('app-radio');
-            
-            try {
-                animateRadioStaticOverlay();
-                updateRadioUI();
-            } catch (e) {
-                console.error("Radio initialization failed:", e);
-            }
-        }
-
-        function stopRadioNoise() {
-            if (radioStationAudio) {
-                try {
-                    radioStationAudio.pause();
-                } catch(e) {}
-                radioStationAudio = null;
-            }
-            
-            cancelAnimationFrame(staticAnimationId);
-        }
-
-        function animateRadioStaticOverlay() {
-            const canvas = document.getElementById('crt-static');
-            if (!canvas) return;
-            
-            let toggle = false;
-            function step() {
-                toggle = !toggle;
-                canvas.style.opacity = toggle ? '0.05' : '0.12';
-                canvas.style.backgroundPosition = `${Math.random() * 80}px ${Math.random() * 80}px`;
-                staticAnimationId = requestAnimationFrame(step);
-            }
-            step();
-        }
-
-        function tuneRadio(diff) {
-            playSnd(soundClick);
-            currentRadioFrequency += diff;
-            if (currentRadioFrequency < 88.0) currentRadioFrequency = 108.0;
-            if (currentRadioFrequency > 108.0) currentRadioFrequency = 88.0;
-            updateRadioUI();
-        }
-
-        function setRadioFrequency(freq) {
-            playSnd(soundClick);
-            currentRadioFrequency = freq;
-            updateRadioUI();
-        }
-        
-        function autoTuneRadio() {
-            playSnd(soundClick);
-            const spinner = document.getElementById('radio-auto-tune');
-            spinner.innerHTML = '<i class="fas fa-sync animate-spin mr-1"></i> Поиск...';
-            
-            let current = currentRadioFrequency;
-            let sorted = [...radioStations].sort((a,b) => a.freq - b.freq);
-            let found = sorted.find(st => st.freq > current + 0.1);
-            if (!found) found = sorted[0]; // loop back to first
-            
-            setTimeout(() => {
-                spinner.innerHTML = '<i class="fas fa-circle-dot mr-1"></i> Автопоиск';
-                currentRadioFrequency = found.freq;
-                updateRadioUI();
-                showTvAlert("Радио Захвачено", `Найдена станция на частоте ${found.freq} FM!`);
-            }, 1200);
-        }
-
-        function updateRadioUI() {
-            // Update needle position (range 88.0 to 108.0 = 20 MHz)
-            const pct = ((currentRadioFrequency - 88.0) / 20.0) * 100;
-            const needle = document.getElementById('radio-dial-needle');
-            if (needle) needle.style.left = `${pct}%`;
-            
-            // Update frequency display
-            const freqDisp = document.getElementById('radio-frequency-display');
-            if (freqDisp) freqDisp.innerHTML = `${currentRadioFrequency.toFixed(1)} <span class="text-lg font-normal">MHz</span>`;
-            
-            // Check for nearest station
-            let nearest = null;
-            let minDiff = 999;
-            for (const st of radioStations) {
-                const diff = Math.abs(currentRadioFrequency - st.freq);
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    nearest = st;
-                }
-            }
-            
-            // Lock factor & volumes
-            let noiseVolume = 1.0;
-            let stationVolume = 0.0;
-            let isStereo = false;
-            
-            if (nearest && minDiff < 0.6) {
-                const factor = minDiff / 0.6; // 0 at station, 1 at boundary
-                noiseVolume = factor;
-                stationVolume = 1.0 - factor;
-                
-                if (minDiff < 0.2) {
-                    isStereo = true;
-                }
-                
-                document.getElementById('radio-station-title').textContent = `${nearest.name} — ${nearest.artist}`;
-                document.getElementById('radio-signal-strength').textContent = minDiff < 0.15 ? "СИГНАЛ: ОТЛИЧНЫЙ" : "СИГНАЛ: СЛАБЫЙ";
-                document.getElementById('radio-signal-strength').className = minDiff < 0.15 
-                    ? "px-2 py-0.5 bg-green-900/40 text-[9px] rounded uppercase font-bold text-green-300 animate-pulse"
-                    : "px-2 py-0.5 bg-yellow-900/40 text-[9px] rounded uppercase font-bold text-yellow-300";
-            } else {
-                document.getElementById('radio-station-title').textContent = "Поиск частоты...";
-                document.getElementById('radio-signal-strength').textContent = "НЕТ СИГНАЛА";
-                document.getElementById('radio-signal-strength').className = "px-2 py-0.5 bg-sky-900/40 text-[9px] rounded uppercase font-bold text-sky-300";
-            }
-            
-            const staticCanvas = document.getElementById('crt-static');
-            if (staticCanvas) {
-                // If signal is locked, fade the visual static canvas opacity completely
-                staticCanvas.style.opacity = (noiseVolume * 0.12).toFixed(3);
-            }
-            
-            document.getElementById('radio-noise-level').textContent = `ШУМ: ${Math.round(noiseVolume * 100)}%`;
-            document.getElementById('radio-stereo-indicator').textContent = isStereo ? "STEREO" : "MONO";
-            document.getElementById('radio-stereo-indicator').className = isStereo ? "text-green-400 font-bold" : "text-sky-500/80 font-mono";
-            
-            // Connect and adjust Audio volumes
-            if (webAudioCtx && noiseGainNode) {
-                noiseGainNode.gain.setValueAtTime(noiseVolume * 0.22, webAudioCtx.currentTime);
-            }
-            
-            if (stationVolume > 0 && nearest) {
-                if (!radioStationAudio || radioStationAudio.getAttribute('data-freq') !== String(nearest.freq)) {
-                    if (radioStationAudio) {
-                        radioStationAudio.pause();
-                    }
-                    radioStationAudio = new Audio(nearest.track);
-                    radioStationAudio.loop = true;
-                    radioStationAudio.setAttribute('data-freq', String(nearest.freq));
-                    radioStationAudio.volume = 0;
-                    radioStationAudio.play().catch(() => {});
-                }
-                
-                radioStationAudio.volume = stationVolume * 0.65;
-            } else {
-                if (radioStationAudio) {
-                    radioStationAudio.pause();
-                    radioStationAudio = null;
-                }
-            }
+            if (tvPowerState) openApp('app-radio');
         }
 
         function openPodcastsApp() {
@@ -4786,403 +4592,6 @@
 
         
         // ==========================================
-        // OCEAN TV COMMUNITY RADIO ENGINE
-        // ==========================================
-        const tvRadioTracks = [
-{
-  title: "Я ГИДРОЦЕФАЛ",
-  artist: "KAMZ0NER",
-  src: "assets/music/track1.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Арбитраж",
-  artist: "KAMZ0NER",
-  src: "assets/music/track3.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "ГРАТАТАТА",
-  artist: "KAMZ0NER",
-  src: "assets/music/track5.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Саддам Хусейн",
-  artist: "Мистер Кредо",
-  src: "assets/music/track6.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Serbia Strong",
-  artist: "Unknown",
-  src: "assets/music/track8.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Я люблю",
-  artist: "Anacondaz",
-  src: "assets/music/track9.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Гимн Ост-Индии",
-  artist: "History Music",
-  src: "assets/music/track10.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "План убийства Лукашенко",
-  artist: "Unknown",
-  src: "assets/music/track11.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "MOSKAU",
-  artist: "Unknown",
-  src: "assets/music/track12.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Рулетка",
-  artist: "Unknown",
-  src: "assets/music/track13.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "70 лет октября",
-  artist: "Unknown",
-  src: "assets/music/track14.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Рыцари чести и долга",
-  artist: "Unknown",
-  src: "assets/music/track18.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Burgundian Lullaby",
-  artist: "Unknown",
-  src: "assets/music/track19.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Лето и арбалеты",
-  artist: "Unknown",
-  src: "assets/music/track21.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "juice (СВО Remix)",
-  artist: "Unknown",
-  src: "assets/music/track22.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Свобода",
-  artist: "Unknown",
-  src: "assets/music/track30.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Порвал штаны freestyle",
-  artist: "Unknown",
-  src: "assets/music/track31.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Руны и свастики",
-  artist: "Unknown",
-  src: "assets/music/track33.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Verify Your Clock",
-  artist: "Unknown",
-  src: "assets/music/track35.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Боже, отдай нам царя",
-  artist: "Unknown",
-  src: "assets/music/track36.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Teufelslied",
-  artist: "Unknown",
-  src: "assets/music/track37.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "13:56",
-  artist: "Unknown",
-  src: "assets/music/track38.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "New World Order",
-  artist: "Michaelanthony",
-  src: "assets/music/track40.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Замай",
-  artist: "Замай",
-  src: "assets/music/20260207_222530_Замай.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "ТВИЧ",
-  artist: "KAMZ0NER",
-  src: "assets/music/20260208_124853_ТВИЧ.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Новый Год",
-  artist: "Д///ИХАД",
-  src: "assets/music/20260208_130936_Новый_Год.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Барабан",
-  artist: "Poнни, Spttchhouse",
-  src: "assets/music/20260208_152412_Барабан.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Rumble",
-  artist: "Rumble",
-  src: "assets/music/20260210_200551_Rumble.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Комиксы Макса Пейна",
-  artist: "Картси Хатакка, Киммо Каясто",
-  src: "assets/music/20260224_154423_Комиксы_Макса_Пейна.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Speed с отцом",
-  artist: "KAMZ0NER",
-  src: "assets/music/20260224_155625_Speed_с_отцом.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Mi general Augusto Pinochet",
-  artist: "Луис Гонсалес",
-  src: "assets/music/20260309_053951_Mi_general_Augusto_Pinochet.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Обоюдно",
-  artist: "Gazan",
-  src: "assets/music/20260309_123933_Обоюдно.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Бархатные Тяги",
-  artist: "Gazan",
-  src: "assets/music/20260309_124418_Бархатные_Тяги.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "Six Seven",
-  artist: "Gazan",
-  src: "assets/music/20260309_124649_Six_Seven.mp3",
-  cover: "assets/images/.png"
-},
-{
-  title: "OCG",
-  artist: "FRIENDLY THUG 52 NGG",
-  src: "assets/music/20260609_015711_FRIENDLY_THUG_52_NGG_OCG.mp3",
-  cover: "assets/images/default.png"
-}
-];
-        let currentRadioIndex = 0;
-        let isRadioPlaying = false;
-        let radioEqInterval = null;
-
-        function initRadioPlayer() {
-            const audio = document.getElementById('tv-radio-audio');
-            const countEl = document.getElementById('tv-radio-count');
-            if (countEl) countEl.textContent = tvRadioTracks.length + ' треков';
-            
-            renderRadioPlaylist();
-            loadRadioTrack(0, false);
-            
-            if (audio) {
-                audio.volume = 0.7;
-                audio.addEventListener('timeupdate', updateRadioProgress);
-                audio.addEventListener('ended', function() { nextRadioTrack(); });
-            }
-        }
-
-        function renderRadioPlaylist() {
-            const listEl = document.getElementById('tv-radio-playlist');
-            if (!listEl) return;
-            listEl.innerHTML = '';
-            
-            tvRadioTracks.forEach(function(t, i) {
-                const item = document.createElement('div');
-                const isCur = (i === currentRadioIndex);
-                item.className = 'p-2.5 rounded-xl border flex items-center justify-between cursor-pointer transition select-none ' + 
-                    (isCur ? 'bg-sky-500/20 border-sky-500/40 text-white' : 'bg-white/5 border-white/5 hover:border-white/20 text-slate-300 hover:text-white');
-                item.onclick = function() { loadRadioTrack(i, true); };
-                
-                const iconClass = (isCur && isRadioPlaying) ? 'fa-volume-high text-sky-400 animate-pulse' : 'fa-play text-[10px] opacity-40';
-                item.innerHTML = '<div class="flex items-center gap-2.5 truncate">' +
-                    '<span class="w-5 text-[11px] font-mono opacity-60">' + (i + 1) + '</span>' +
-                    '<div class="truncate">' +
-                        '<div class="text-xs font-semibold truncate">' + t.title + '</div>' +
-                        '<div class="text-[10px] opacity-60 truncate">' + t.artist + '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<i class="fas ' + iconClass + '"></i>';
-                listEl.appendChild(item);
-            });
-        }
-
-        function loadRadioTrack(index, autoplay) {
-            currentRadioIndex = index;
-            const track = tvRadioTracks[currentRadioIndex];
-            const audio = document.getElementById('tv-radio-audio');
-            const titleEl = document.getElementById('tv-radio-title');
-            const artistEl = document.getElementById('tv-radio-artist');
-            
-            if (titleEl) titleEl.textContent = track.title;
-            if (artistEl) artistEl.textContent = track.artist;
-            if (audio) {
-                audio.src = track.src;
-                if (autoplay) {
-                    audio.play().then(function() {
-                        isRadioPlaying = true;
-                        updateRadioPlayBtn();
-                        startRadioEqualizer();
-                    }).catch(function() {});
-                }
-            }
-            renderRadioPlaylist();
-        }
-
-        function toggleRadioPlay() {
-            const audio = document.getElementById('tv-radio-audio');
-            if (!audio) return;
-            
-            if (isRadioPlaying) {
-                audio.pause();
-                isRadioPlaying = false;
-                stopRadioEqualizer();
-            } else {
-                audio.play().then(function() {
-                    isRadioPlaying = true;
-                    startRadioEqualizer();
-                }).catch(function() {});
-            }
-            updateRadioPlayBtn();
-            renderRadioPlaylist();
-        }
-
-        function updateRadioPlayBtn() {
-            const btn = document.getElementById('tv-radio-play-btn');
-            if (!btn) return;
-            btn.innerHTML = isRadioPlaying ? '<i class="fas fa-pause text-base"></i>' : '<i class="fas fa-play text-base ml-0.5"></i>';
-        }
-
-        function nextRadioTrack() {
-            let next = currentRadioIndex + 1;
-            if (next >= tvRadioTracks.length) next = 0;
-            loadRadioTrack(next, true);
-        }
-
-        function prevRadioTrack() {
-            let prev = currentRadioIndex - 1;
-            if (prev < 0) prev = tvRadioTracks.length - 1;
-            loadRadioTrack(prev, true);
-        }
-
-        function updateRadioProgress() {
-            const audio = document.getElementById('tv-radio-audio');
-            const bar = document.getElementById('tv-radio-progress-bar');
-            const curEl = document.getElementById('tv-radio-time');
-            const durEl = document.getElementById('tv-radio-duration');
-            
-            if (!audio || !audio.duration) return;
-            
-            const pct = (audio.currentTime / audio.duration) * 100;
-            if (bar) bar.style.width = pct + '%';
-            if (curEl) curEl.textContent = formatRadioTime(audio.currentTime);
-            if (durEl) durEl.textContent = formatRadioTime(audio.duration);
-        }
-
-        function formatRadioTime(s) {
-            if (isNaN(s)) return '0:00';
-            const m = Math.floor(s / 60);
-            const sec = Math.floor(s % 60);
-            return m + ':' + (sec < 10 ? '0' : '') + sec;
-        }
-
-        function seekRadio(e) {
-            const audio = document.getElementById('tv-radio-audio');
-            const wrap = document.getElementById('tv-radio-progress-wrap');
-            if (!audio || !wrap || !audio.duration) return;
-            const rect = wrap.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            audio.currentTime = (clickX / rect.width) * audio.duration;
-        }
-
-        function setRadioVolume(val) {
-            const audio = document.getElementById('tv-radio-audio');
-            if (audio) audio.volume = val / 100;
-        }
-
-        function switchRadioStation(freq) {
-            const freqLabel = document.getElementById('tv-radio-freq-label');
-            const btns = document.querySelectorAll('#tv-radio-stations button');
-            btns.forEach(function(b) {
-                if (b.textContent.indexOf(freq) !== -1) {
-                    b.className = 'px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 hover:bg-sky-500/30 transition active';
-                } else {
-                    b.className = 'px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 transition';
-                }
-            });
-            if (freqLabel) {
-                const names = {
-                    '91.5 FM': '91.5 FM • Эхо Океана',
-                    '96.8 FM': '96.8 FM • Радио Осень',
-                    '101.2 FM': '101.2 FM • Ночной Маяк'
-                };
-                freqLabel.textContent = names[freq] || (freq + ' • Ocean TV');
-            }
-            playSnd(soundClick);
-        }
-
-        function startRadioEqualizer() {
-            if (radioEqInterval) clearInterval(radioEqInterval);
-            const bars = document.querySelectorAll('#tv-radio-bars div');
-            radioEqInterval = setInterval(function() {
-                if (!isRadioPlaying) return;
-                bars.forEach(function(b) {
-                    const h = Math.floor(Math.random() * 32) + 6;
-                    b.style.height = h + 'px';
-                });
-            }, 180);
-        }
-
-        function stopRadioEqualizer() {
-            if (radioEqInterval) clearInterval(radioEqInterval);
-            const bars = document.querySelectorAll('#tv-radio-bars div');
-            bars.forEach(function(b) { b.style.height = '6px'; });
-        }
-
-        // Initialize radio engine on load
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initRadioPlayer);
-        } else {
-            initRadioPlayer();
-        }
-
 </script>
 </body>
 </html>
