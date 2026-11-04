@@ -723,6 +723,7 @@
 
         .tv-photo-arrow-left { left: -65px; }
         .tv-photo-arrow-right { right: -65px; }
+        .tv-photo-navigation { display: contents; }
 
         .tv-photo-indicator {
             display: inline-flex;
@@ -2169,6 +2170,9 @@
             .settings-menu-item { padding: 8px 10px; font-size: 0.8rem; }
             .settings-details { width: 100%; flex: 1; min-height: 0; padding: 1rem; }
             .tv-passcode-box { max-width: calc(100vw - 24px); }
+            .tv-photo-navigation { display: flex; justify-content: center; gap: 16px; margin-top: 8px; }
+            .tv-photo-frame .tv-photo-arrow { position: static; width: 44px; height: 44px; transform: none; }
+            .tv-photo-img { touch-action: pan-y; }
         }
 
         /* Apple TV 2014 Poster Cards for Albums */
@@ -2675,9 +2679,11 @@
         <!-- PHOTO STREAM VIEWER (Natural Flow, Zero Overlap, Egor Resource Links) -->
         <div id="media-viewer-view" class="photo-stream-container flex-1 flex flex-col justify-center items-center px-4 py-6" style="display: none;">
             <div class="tv-photo-frame relative">
-                <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideActivePhoto(-1)"><i class="fas fa-chevron-left"></i></button>
                 <img id="tv-photo-display" src="assets/images/computer/egor_files/1.jpg" alt="Photo stream" class="tv-photo-img">
-                <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideActivePhoto(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="tv-photo-navigation">
+                    <button class="tv-photo-arrow tv-photo-arrow-left" onclick="slideActivePhoto(-1)" aria-label="Предыдущее фото"><i class="fas fa-chevron-left"></i></button>
+                    <button class="tv-photo-arrow tv-photo-arrow-right" onclick="slideActivePhoto(1)" aria-label="Следующее фото"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
 
             <!-- Unified info panel in standard flex flow (no absolute collision) -->
@@ -4581,6 +4587,21 @@
                 updateActivePhotoDisplay();
             }
         }
+
+        const mediaPhoto = document.getElementById('tv-photo-display');
+        let mediaTouchStart = null;
+        mediaPhoto.addEventListener('touchstart', event => {
+            if (event.touches.length === 1) mediaTouchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+            else mediaTouchStart = null;
+        }, { passive: true });
+        mediaPhoto.addEventListener('touchend', event => {
+            if (!mediaTouchStart || event.changedTouches.length !== 1) { mediaTouchStart = null; return; }
+            const dx = event.changedTouches[0].clientX - mediaTouchStart.x;
+            const dy = event.changedTouches[0].clientY - mediaTouchStart.y;
+            mediaTouchStart = null;
+            if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5) slideActivePhoto(dx < 0 ? 1 : -1);
+        }, { passive: true });
+        mediaPhoto.addEventListener('touchcancel', () => { mediaTouchStart = null; }, { passive: true });
 
         function updateActivePhotoDisplay() {
             const displayImg = document.getElementById('tv-photo-display');
