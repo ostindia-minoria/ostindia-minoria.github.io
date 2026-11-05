@@ -910,6 +910,10 @@
                     currentTrackIndex = index;
                     loadTrack(index);
                     if (!isPlaying) togglePlay();
+                    else audio.play().catch(() => {
+                        isPlaying = false;
+                        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    });
                 };
                 playlistEl.appendChild(item);
             });

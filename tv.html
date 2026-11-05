@@ -1341,6 +1341,8 @@
             align-items: center;
             gap: 12px;
             opacity: 0;
+            pointer-events: none;
+            max-width: calc(100vw - 24px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -1534,6 +1536,7 @@
             transform: translateY(0) scale(1);
             pointer-events: auto;
         }
+        body.app-active .help-notification-container { opacity: 0; pointer-events: none; }
         .help-trigger-btn {
             width: 54px;
             height: 54px;
@@ -1934,6 +1937,7 @@
             }
             .shelf-grid {
                 display: grid !important;
+                width: 100%;
                 grid-template-columns: repeat(2, minmax(135px, 165px)) !important;
                 gap: 14px !important;
                 justify-content: center !important;
@@ -2169,7 +2173,7 @@
             .settings-menu { width: 100%; flex-direction: row; flex-wrap: wrap; flex-shrink: 0; padding: 8px; }
             .settings-menu-item { padding: 8px 10px; font-size: 0.8rem; }
             .settings-details { width: 100%; flex: 1; min-height: 0; padding: 1rem; }
-            .tv-passcode-box { max-width: calc(100vw - 24px); }
+            .tv-passcode-box { max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
             .tv-photo-navigation { display: flex; justify-content: center; gap: 16px; margin-top: 8px; }
             .tv-photo-frame .tv-photo-arrow { position: static; width: 44px; height: 44px; transform: none; }
             .tv-photo-img { touch-action: pan-y; }
@@ -3237,7 +3241,7 @@
                 if (sessionStorage.getItem('om_tv_hide_help') !== 'true') {
                     setTimeout(() => {
                         const notif = document.getElementById('help-notification-container');
-                        if (notif) {
+                        if (notif && !document.body.classList.contains('app-active') && !document.getElementById('tv-passcode-modal').classList.contains('active')) {
                             notif.classList.add('show');
                         }
                     }, 2000);
@@ -3377,6 +3381,7 @@
         // Passcode Popup handlers
         function openPasscodeModal() {
             playSnd(soundClick);
+            document.getElementById('help-notification-container').classList.remove('show');
             currentPasscodeInput = "";
             updatePasscodeDots();
             document.getElementById('tv-passcode-modal').classList.add('active');
@@ -3385,6 +3390,11 @@
         function closePasscodeModal() {
             playSnd(soundClick);
             document.getElementById('tv-passcode-modal').classList.remove('active');
+            setTimeout(() => {
+                if (!document.body.classList.contains('app-active') && !document.getElementById('tv-passcode-modal').classList.contains('active') && sessionStorage.getItem('om_tv_hide_help') !== 'true') {
+                    document.getElementById('help-notification-container').classList.add('show');
+                }
+            }, 0);
         }
 
         function pressPasscodeKey(num) {
@@ -4425,7 +4435,7 @@
                 // Show back on the home screen if not explicitly hidden for the session
                 if (notif) {
                     setTimeout(() => {
-                        notif.classList.add('show');
+                        if (!document.body.classList.contains('app-active') && !document.getElementById('tv-passcode-modal').classList.contains('active')) notif.classList.add('show');
                     }, 300);
                 }
             }
