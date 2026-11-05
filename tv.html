@@ -518,6 +518,10 @@
         .movie-controls .movie-volume { width: 80px; }
         .movie-controls .movie-time { flex: none; font-size: 12px; white-space: nowrap; }
         @media (max-width: 480px) { .movie-controls { gap: 4px; padding: 18px 6px 5px; } .movie-controls .movie-volume { width: 45px; } .movie-controls .movie-time { font-size: 10px; } }
+        @media (max-width: 1023px) and (orientation: landscape) {
+            #tv-video-overlay .video-content { justify-content: flex-start; padding: 0; }
+            #tv-video-overlay .video-content > div { max-width: min(95vw, 90vh); }
+        }
 
         .app-header {
             display: flex;
@@ -2169,6 +2173,9 @@
             .comp-devices-list { width: 100%; flex-direction: row; overflow-x: auto; flex-shrink: 0; padding: 8px; }
             .comp-devices-list .comp-device-item { flex: 0 0 auto; }
             .comp-explorer-panel { width: 100%; flex: 1; min-height: 0; overflow: hidden !important; }
+            #tv-notepad-overlay > .flex-1 { min-height: 0; }
+            #tv-notepad-overlay > .flex-1 > div { max-height: 100%; min-height: 0; padding: 1rem; }
+            #tv-notepad-text { min-height: 0; }
             .settings-container { flex-direction: column; gap: 10px; min-height: 0; }
             .settings-menu { width: 100%; flex-direction: row; flex-wrap: wrap; flex-shrink: 0; padding: 8px; }
             .settings-menu-item { padding: 8px 10px; font-size: 0.8rem; }
